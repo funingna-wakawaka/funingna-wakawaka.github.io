@@ -2,7 +2,7 @@
 
 .about-page {
   min-height: calc(100vh - 60px);
-  background: var(--background-color, #fff); /* 增加默认背景色防止透明 */
+  background: var(--background-color, #fff);
   padding: 60px 0 40px;
   position: relative;
   overflow: hidden;
@@ -210,10 +210,22 @@
   gap: 15px;
 }
 
+/* 【关键修复】个人信息小方块样式 */
 .profile-item {
   background: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  /* 必须有这一行，动画才会平滑 */
+  transition: all 0.3s ease;
+  cursor: default; /* 鼠标放上去变指针 */
+}
+
+/* 【关键修复】鼠标悬停时往上飘 */
+.profile-item:hover {
+  transform: translateY(-5px); /* 往上飘 5px */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 阴影加深 */
+  background: #fff; /* 背景变白 */
 }
 
 .contact-info {
@@ -222,6 +234,7 @@
   gap: 15px;
 }
 
+/* 联系方式小方块也加上同样的动画 */
 .contact-item {
   flex: 1;
   min-width: 200px;
@@ -232,6 +245,13 @@
   border-radius: 8px;
   text-decoration: none;
   color: #333;
+  transition: all 0.3s ease; /* 动画过渡 */
+}
+
+.contact-item:hover {
+  transform: translateY(-5px); /* 往上飘 */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background: #fff;
 }
 
 .contact-item i {
@@ -246,31 +266,4 @@
     max-width: 350px;
     height: 300px !important;
   }
-}
-
-/* ===== 修复：个人信息小卡片悬停上浮效果 ===== */
-.profile-item {
-  /* 确保有过渡动画 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* 确保有初始阴影，立体感更强 */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.profile-item:hover {
-  /* 鼠标放上去：往上飘 5px */
-  transform: translateY(-5px);
-  /* 鼠标放上去：阴影加深 */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  /* 鼠标放上去：背景稍微变白一点 */
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.contact-item {
-  /* 联系方式卡片也加上同样的效果 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
