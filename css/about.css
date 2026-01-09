@@ -258,6 +258,12 @@
   transform: translateY(0);
 }
 
+/* 鼠标悬停时，背景图片模糊 */
+.interest-card:hover .card-bg {
+  filter: blur(4px); /* 数值越大越模糊 */
+  transform: scale(1.1); /* 同时放大一点点，效果更好 */
+}
+
 .card-hover-content p {
   margin: 0;
   font-size: 1rem;
