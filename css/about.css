@@ -247,3 +247,30 @@
     height: 300px !important;
   }
 }
+
+/* ===== 修复：个人信息小卡片悬停上浮效果 ===== */
+.profile-item {
+  /* 确保有过渡动画 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* 确保有初始阴影，立体感更强 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-item:hover {
+  /* 鼠标放上去：往上飘 5px */
+  transform: translateY(-5px);
+  /* 鼠标放上去：阴影加深 */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  /* 鼠标放上去：背景稍微变白一点 */
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.contact-item {
+  /* 联系方式卡片也加上同样的效果 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
