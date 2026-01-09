@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 尽早应用暗色模式，防止闪烁
+  var savedDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (savedDarkMode) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/null">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+<!-- 条件加载关于页面样式-->
+<link rel="stylesheet" href="/css/about.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item active" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><div class="nav-item has-submenu"><span class="nav-link">网站</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><main class="about-page"><div class="about-container"><div class="about-header"><div class="about-avatar"><img src="/images/0.png" alt="个人头像"/></div><h1 class="about-name">胡杨怕火</h1><p class="about-bio">传递笑容魔法的Ciallo～(∠・ω&lt; )⌒☆</p></div><div class="interests-showcase"></div><div class="about-details"><div class="about-section"><h2>关于我</h2><div class="profile-info"><div class="profile-item"><div class="profile-label">称呼</div><div class="profile-value">胡杨怕火</div></div><div class="profile-item"><div class="profile-label">年龄</div><div class="profile-value">19岁</div></div><div class="profile-item"><div class="profile-label">大学</div><div class="profile-value">河南师范大学软件工程</div></div><div class="profile-item"><div class="profile-label">爱好</div><div class="profile-value">做游戏和绘画</div></div><div class="profile-item"><div class="profile-label">擅长</div><div class="profile-value">吃饱睡睡饱吃</div></div><div class="profile-item"><div class="profile-label">身份</div><div class="profile-value">二次元爱好者 </div></div></div></div><div class="about-section"><h2>我的技能点</h2><div class="bio-content"><style>.skill-tag {
+  display: inline-block;
+  background: #f0f2f5;
+  padding: 4px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  border: 1px solid #e1e4e8;
+  transition: all 0.3s ease;
+}
+.skill-tag:hover {
+  background: #e1e4e8;
+  transform: translateY(-2px);
+}</style><div class="skills-list"><span class="skill-tag">摄影和剪辑</span><span class="skill-tag">像素画和二次元绘画</span><span class="skill-tag">Logo和矢量图设计</span><span class="skill-tag">各种计算机语言</span><span class="skill-tag">Blender建模</span><span class="skill-tag">Linux</span><span class="skill-tag">计算机图形学</span><span class="skill-tag">微信小程序</span><span class="skill-tag">AI</span><span class="skill-tag">游戏制作</span><span class="skill-tag">写小说</span><span class="skill-tag">我的世界模组制作</span><span class="skill-tag">英语</span><span class="skill-tag">日语</span><span class="skill-tag">前端和数据库</span><span class="skill-tag">安卓应用制作</span></div></div></div><div class="about-section"><h2>碎碎念</h2><div class="bio-content" style="white-space: pre-wrap;"><h1 id="大家好-欢迎来到我的个人Blog空间"><a href="#大家好-欢迎来到我的个人Blog空间" class="headerlink" title="大家好! 欢迎来到我的个人Blog空间"></a>大家好! 欢迎来到我的个人Blog空间</h1><h2 id="我会不定期的分享一些有关各个学科的知识的-当然我也是各个领域的彩笔-同时游戏开发的一些想法也会写进去"><a href="#我会不定期的分享一些有关各个学科的知识的-当然我也是各个领域的彩笔-同时游戏开发的一些想法也会写进去" class="headerlink" title="我会不定期的分享一些有关各个学科的知识的(当然我也是各个领域的彩笔),同时游戏开发的一些想法也会写进去"></a>我会不定期的分享一些有关各个学科的知识的(当然我也是各个领域的彩笔),同时游戏开发的一些想法也会写进去</h2><h2 id="包括"><a href="#包括" class="headerlink" title="包括:"></a>包括:</h2><h3 id="①英语-主要是美和英-和日语的学习分享-其实法语俄语我也很感兴趣"><a href="#①英语-主要是美和英-和日语的学习分享-其实法语俄语我也很感兴趣" class="headerlink" title="①	英语(主要是美和英)和日语的学习分享(其实法语俄语我也很感兴趣)"></a>①	<font color='Turquoise'>英语</font>(主要是美和英)和<font color='Turquoise'>日语</font>的学习分享(其实法语俄语我也很感兴趣)</h3><h3 id="②AI绘画大模型工具使用-其实日常根本用不上-计算机神经网络什么的确实难-而且烧电脑和大脑"><a href="#②AI绘画大模型工具使用-其实日常根本用不上-计算机神经网络什么的确实难-而且烧电脑和大脑" class="headerlink" title="②	AI绘画大模型工具使用(其实日常根本用不上,计算机神经网络什么的确实难,而且烧电脑和大脑)"></a>②	<font color='Turquoise'>AI绘画大模型</font>工具使用(其实日常根本用不上,计算机神经网络什么的确实难,而且烧电脑和大脑)</h3><h3 id="③游戏算法与数学运算和数据结构-可能学一点发一点-可能使用不同的计算机语言来表示"><a href="#③游戏算法与数学运算和数据结构-可能学一点发一点-可能使用不同的计算机语言来表示" class="headerlink" title="③	游戏算法与数学运算和数据结构(可能学一点发一点,可能使用不同的计算机语言来表示)"></a>③	<font color='Turquoise'>游戏算法</font>与<font color='Turquoise'>数学运算</font>和<font color='Turquoise'>数据结构</font>(可能学一点发一点,可能使用不同的计算机语言来表示)</h3><h3 id="④绘画和AI绘画还有像素画-我是画渣捏-画像素的话还是没有问题的-非常想画-2d-动画但是没什么天赋-唉"><a href="#④绘画和AI绘画还有像素画-我是画渣捏-画像素的话还是没有问题的-非常想画-2d-动画但是没什么天赋-唉" class="headerlink" title="④	绘画和AI绘画还有像素画(我是画渣捏,画像素的话还是没有问题的),非常想画  2d  动画但是没什么天赋, 唉"></a>④	<font color='Turquoise'>绘画</font>和<font color='Turquoise'>AI绘画</font>还有<font color='Turquoise'>像素画</font>(我是画渣捏,画像素的话还是没有问题的),非常想画  2d  动画但是没什么天赋, 唉</h3><h3 id="⑤未来如果有好一点的电脑和显卡的话我想学学Blender动画-毕竟之前学了很多也不想半途而废o-≧口≦-o"><a href="#⑤未来如果有好一点的电脑和显卡的话我想学学Blender动画-毕竟之前学了很多也不想半途而废o-≧口≦-o" class="headerlink" title="⑤	未来如果有好一点的电脑和显卡的话我想学学Blender动画,毕竟之前学了很多也不想半途而废o(≧口≦)o"></a>⑤	未来如果有好一点的电脑和显卡的话我想学学<font color='Turquoise'>Blender动画</font>,毕竟之前学了很多也不想半途而废o(≧口≦)o</h3><h3 id="⑥写日记写小说编故事脑洞大开-中二病发牢骚正常行为-但人是有感情的动物发泄一下也不是不行"><a href="#⑥写日记写小说编故事脑洞大开-中二病发牢骚正常行为-但人是有感情的动物发泄一下也不是不行" class="headerlink" title="⑥	写日记写小说编故事脑洞大开(中二病发牢骚正常行为,但人是有感情的动物发泄一下也不是不行)"></a>⑥	写<font color='Turquoise'>日记</font>写<font color='Turquoise'>小说</font>编<font color='Turquoise'>故事</font>脑洞大开(中二病发牢骚正常行为,但人是有感情的动物发泄一下也不是不行)</h3><h3 id="⑦我的世界-Minecraft-Java版本的模组开发以及各种mc游戏知识和特性玩法以及红石科技的搭建还有mc服务器相关"><a href="#⑦我的世界-Minecraft-Java版本的模组开发以及各种mc游戏知识和特性玩法以及红石科技的搭建还有mc服务器相关" class="headerlink" title="⑦	我的世界(Minecraft) Java版本的模组开发以及各种mc游戏知识和特性玩法以及红石科技的搭建还有mc服务器相关"></a>⑦	<font color='Turquoise'>我的世界</font>(Minecraft) Java版本的模组开发以及各种mc游戏知识和特性玩法以及红石科技的搭建还有<font color='Turquoise'>mc服务器</font>相关</h3><h3 id="⑧逃离后室-EscapeTheBackrooms-小丑牌-Balatro-还有很多知名3A-和大型游戏-以及独立开发者制作的的小众游戏-游戏玩法分享"><a href="#⑧逃离后室-EscapeTheBackrooms-小丑牌-Balatro-还有很多知名3A-和大型游戏-以及独立开发者制作的的小众游戏-游戏玩法分享" class="headerlink" title="⑧	逃离后室(EscapeTheBackrooms)  小丑牌(Balatro)   还有很多知名3A 和大型游戏 以及独立开发者制作的的小众游戏  游戏玩法分享"></a>⑧	<font color='Turquoise'>逃离后室</font>(EscapeTheBackrooms)  <font color='Turquoise'>小丑牌</font>(Balatro)   还有很多知名3A 和大型游戏 以及独立开发者制作的的小众游戏  游戏玩法分享</h3><h3 id="⑨Java-Python-C-JSON-C-Kotlin-Rust-都会一点但不多"><a href="#⑨Java-Python-C-JSON-C-Kotlin-Rust-都会一点但不多" class="headerlink" title="⑨	Java  ,Python  ,C  ,JSON  ,C++  ,Kotlin  ,Rust(都会一点但不多)"></a>⑨	<font color='Turquoise'>Java</font>  ,<font color='Turquoise'>Python</font>  ,<font color='Turquoise'>C</font>  ,<font color='Turquoise'>JSON</font>  ,<font color='Turquoise'>C++</font>  ,<font color='Turquoise'>Kotlin</font>  ,<font color='Turquoise'>Rust</font>(都会一点但不多)</h3><h3 id="⑩前端-HTML-JavaScript-CSS-三件套-以后再学学其他的几个吧比如Vue-nodejs还有React-tailwindcss什么杂七杂八的-反正学这些也只是为了个人Blog"><a href="#⑩前端-HTML-JavaScript-CSS-三件套-以后再学学其他的几个吧比如Vue-nodejs还有React-tailwindcss什么杂七杂八的-反正学这些也只是为了个人Blog" class="headerlink" title="⑩	前端(HTML  ,JavaScript  ,CSS)  三件套,以后再学学其他的几个吧比如Vue ,nodejs还有React,tailwindcss什么杂七杂八的(反正学这些也只是为了个人Blog)"></a>⑩	<font color='Turquoise'>前端</font>(HTML  ,JavaScript  ,CSS)  三件套,以后再学学其他的几个吧比如Vue ,nodejs还有React,tailwindcss什么杂七杂八的(反正学这些也只是为了个人Blog)</h3><h3 id="⑪数据库MySQL-MongoDB-和-sql-语言等等-其实学的鸡毛蒜皮-而且目前不知道在游戏开发中有什么用"><a href="#⑪数据库MySQL-MongoDB-和-sql-语言等等-其实学的鸡毛蒜皮-而且目前不知道在游戏开发中有什么用" class="headerlink" title="⑪	数据库MySQL,MongoDB 和    sql  语言等等(其实学的鸡毛蒜皮,而且目前不知道在游戏开发中有什么用)"></a>⑪	<font color='Turquoise'>数据库</font>MySQL,MongoDB 和    <font color='Turquoise'>sql</font>  语言等等(其实学的鸡毛蒜皮,而且目前不知道在游戏开发中有什么用)</h3><h3 id="⑫Unity-以及-unityshader-还有-C-主攻这方面-主要是我喜欢做游戏"><a href="#⑫Unity-以及-unityshader-还有-C-主攻这方面-主要是我喜欢做游戏" class="headerlink" title="⑫	Unity  以及  unityshader   还有  C#(主攻这方面,主要是我喜欢做游戏)"></a>⑫	<font color='Turquoise'>Unity</font>  以及  <font color='Turquoise'>unityshader </font>  还有 <font color='Turquoise'> C#</font>(主攻这方面,主要是我喜欢做游戏)</h3><h3 id="⑬Godot-和-gdshader-还有-gdscript-随便玩玩啦-godot毕竟没有Unity成熟是真的"><a href="#⑬Godot-和-gdshader-还有-gdscript-随便玩玩啦-godot毕竟没有Unity成熟是真的" class="headerlink" title="⑬	Godot  和  gdshader   还有  gdscript(随便玩玩啦,godot毕竟没有Unity成熟是真的)"></a>⑬	<font color='Turquoise'>Godot</font>  和  <font color='Turquoise'>gdshader</font>   还有  <font color='Turquoise'>gdscript</font>(随便玩玩啦,godot毕竟没有Unity成熟是真的)</h3><h3 id="⑭LOVE2d-和Lua-随便玩玩-这东西教程太少了是真的"><a href="#⑭LOVE2d-和Lua-随便玩玩-这东西教程太少了是真的" class="headerlink" title="⑭	LÖVE2d 和Lua(随便玩玩,这东西教程太少了是真的)"></a>⑭	<font color='Turquoise'>LÖVE2d</font> 和<font color='Turquoise'>Lua</font>(随便玩玩,这东西教程太少了是真的)</h3><h3 id="⑮视频剪辑技巧以及影视拍摄手法还有高级叙事手段"><a href="#⑮视频剪辑技巧以及影视拍摄手法还有高级叙事手段" class="headerlink" title="⑮	视频剪辑技巧以及影视拍摄手法还有高级叙事手段"></a>⑮	视频<font color='Turquoise'>剪辑</font>技巧以及影视<font color='Turquoise'>拍摄</font>手法还有高级<font color='Turquoise'>叙事</font>手段</h3><h3 id="⑯Ps-Pr-Ae-Au-An-Ai-Figma的使用技巧-这玩意只是工具而已-真正的大佬不会像我这样挑工具的"><a href="#⑯Ps-Pr-Ae-Au-An-Ai-Figma的使用技巧-这玩意只是工具而已-真正的大佬不会像我这样挑工具的" class="headerlink" title="⑯	Ps  Pr  Ae  Au  An  Ai  Figma的使用技巧(这玩意只是工具而已,真正的大佬不会像我这样挑工具的)"></a>⑯	<font color='Turquoise'>Ps  Pr  Ae  Au  An  Ai  Figma</font>的使用技巧(这玩意只是工具而已,真正的大佬不会像我这样挑工具的)</h3><h3 id="⑰Blender-Live2D-Spine-DrangonBones-作品分享-emmm-骨骼绑定什么的确实难的"><a href="#⑰Blender-Live2D-Spine-DrangonBones-作品分享-emmm-骨骼绑定什么的确实难的" class="headerlink" title="⑰	Blender  , Live2D  ,Spine  ,DrangonBones   作品分享(emmm,骨骼绑定什么的确实难的)"></a>⑰	<font color='Turquoise'>Blender  , Live2D  ,Spine  ,DrangonBones</font>   作品分享(emmm,骨骼绑定什么的确实难的)</h3><h3 id="⑱Github和Gitee仓库包括git命令什么的"><a href="#⑱Github和Gitee仓库包括git命令什么的" class="headerlink" title="⑱	Github和Gitee仓库包括git命令什么的"></a>⑱	<font color='Turquoise'>Github</font>和<font color='Turquoise'>Gitee</font>仓库包括<font color='Turquoise'>git</font>命令什么的</h3><h3 id="⑲Hexo和Astro框架以及github-page和Vercel-网站部署相关"><a href="#⑲Hexo和Astro框架以及github-page和Vercel-网站部署相关" class="headerlink" title="⑲	Hexo和Astro框架以及github page和Vercel 网站部署相关"></a>⑲	<font color='Turquoise'>Hexo</font>和<font color='Turquoise'>Astro</font>框架以及<font color='Turquoise'>github page</font>和<font color='Turquoise'>Vercel</font> 网站部署相关</h3><h3 id="⑳Kali-Linux-CentOS-Ubantu相关-Linux真的不好用的-体验一波而已啦"><a href="#⑳Kali-Linux-CentOS-Ubantu相关-Linux真的不好用的-体验一波而已啦" class="headerlink" title="⑳	Kali Linux    ,CentOS  ,Ubantu相关(Linux真的不好用的,体验一波而已啦"></a>⑳	<font color='Turquoise'>Kali Linux </font>   ,<font color='Turquoise'>CentOS</font>  ,<font color='Turquoise'>Ubantu</font>相关(Linux真的不好用的,体验一波而已啦</h3><h3 id="㉑可能还会分享一些小众软件和转载的视频资源和个人想法哦"><a href="#㉑可能还会分享一些小众软件和转载的视频资源和个人想法哦" class="headerlink" title="㉑	可能还会分享一些小众软件和转载的视频资源和个人想法哦"></a>㉑	可能还会分享一些<font color='Turquoise'>小众软件</font>和转载的<font color='Turquoise'>视频资源</font>和<font color='Turquoise'>个人想法</font>哦</h3><h3 id="㉒以后有时间会学习FL-Studio和MuseScore游戏音乐的制作"><a href="#㉒以后有时间会学习FL-Studio和MuseScore游戏音乐的制作" class="headerlink" title="㉒	以后有时间会学习FL Studio和MuseScore游戏音乐的制作"></a>㉒	以后有时间会学习<font color='Turquoise'>FL Studio</font>和<font color='Turquoise'>MuseScore</font>游戏音乐的制作</h3><h3 id="㉓还有用AndroidStudio制作安卓小软件什么的"><a href="#㉓还有用AndroidStudio制作安卓小软件什么的" class="headerlink" title="㉓	还有用AndroidStudio制作安卓小软件什么的"></a>㉓	还有用<font color='Turquoise'>AndroidStudio</font>制作安卓小软件什么的</h3><h3 id="㉔以及学学计算机图形学OpenGL、Vulkan、DirectX什么的还有比如raylib和imGUI这些库看看能不能自己搓一个不依靠任何引擎的小游戏-这不过重复造轮子的难度可想而知-–"><a href="#㉔以及学学计算机图形学OpenGL、Vulkan、DirectX什么的还有比如raylib和imGUI这些库看看能不能自己搓一个不依靠任何引擎的小游戏-这不过重复造轮子的难度可想而知-–" class="headerlink" title="㉔	以及学学计算机图形学OpenGL、Vulkan、DirectX什么的还有比如raylib和imGUI这些库看看能不能自己搓一个不依靠任何引擎的小游戏(这不过重复造轮子的难度可想而知   \ --_– &#x2F; )"></a>㉔	以及学学<font color='Turquoise'>计算机图形学</font>OpenGL、Vulkan、DirectX什么的还有比如<font color='Turquoise'>raylib</font>和<font color='Turquoise'>imGUI</font>这些库看看能不能自己搓一个不依靠任何引擎的小游戏(这不过重复造轮子的难度可想而知   \ --_– &#x2F; )</h3><h3 id="㉕微信小程序什么的我也很感兴趣"><a href="#㉕微信小程序什么的我也很感兴趣" class="headerlink" title="㉕	微信小程序什么的我也很感兴趣"></a>㉕	<font color='Turquoise'>微信小程序</font>什么的我也很感兴趣</h3><h3 id="㉖因为我比较懒所以有时候会用-Autohotkey-和-Autojs-写自动化脚本"><a href="#㉖因为我比较懒所以有时候会用-Autohotkey-和-Autojs-写自动化脚本" class="headerlink" title="㉖	因为我比较懒所以有时候会用 Autohotkey 和 Autojs 写自动化脚本"></a>㉖	因为我比较懒所以有时候会用 <font color='Turquoise'>Autohotkey</font> 和 <font color='Turquoise'>Autojs </font>写自动化脚本</h3><h2 id="本人没什么实力只会当CV小白捏-完全是啥也不懂的半吊子-离不开GPT-Gemini还有Claude三个大神"><a href="#本人没什么实力只会当CV小白捏-完全是啥也不懂的半吊子-离不开GPT-Gemini还有Claude三个大神" class="headerlink" title="本人没什么实力只会当CV小白捏,完全是啥也不懂的半吊子,离不开GPT,Gemini还有Claude三个大神   @_@"></a>本人没什么实力只会当CV小白捏,完全是啥也不懂的半吊子,离不开GPT,Gemini还有Claude三个大神   @_@</h2></div></div><div class="about-section"><h2>联系方式</h2><div class="contact-info"><a class="contact-item" href="mailto:3930088367@qq.com"><i class="fas fa-envelope"></i><div class="contact-detail"><div class="contact-label">邮箱</div><div class="contact-value">3930088367@qq.com</div></div></a><a class="contact-item" target="_blank" rel="noopener" href="https://github.com/huyangpahuo"><i class="fab fa-github"></i><div class="contact-detail"><div class="contact-label">GitHub</div><div class="contact-value">huyangpahuo</div></div></a><a class="contact-item" target="_blank" rel="noopener" href="https://space.bilibili.com/3546621941910044"><i class="fas fa-tv"></i><div class="contact-detail"><div class="contact-label">哔哩哔哩</div><div class="contact-value">胡杨怕火</div></div></a></div></div></div></div></main><!-- 添加交互式卡片样式--><style>.interests-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin: 40px 0;
+  position: relative;
+}
+
+.interest-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.interest-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+// 不同卡片的大小
+.interest-life {
+  width: 320px;
+  height: 380px;
+}
+
+.interest-art {
+  width: 280px;
+  height: 340px;
+}
+
+.interest-sport {
+  width: 300px;
+  height: 360px;
+}
+
+.interest-create {
+  width: 340px;
+  height: 400px;
+}
+
+// 卡片背景
+.card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.interest-life .card-bg {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+}
+
+.interest-art .card-bg {
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.interest-sport .card-bg {
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.interest-create .card-bg {
+  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+// 卡片内容
+.card-content {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.interest-card:hover .card-content {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.card-content h3 {
+  font-size: 2.5rem;
+  margin: 0 0 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-description {
+  margin-bottom: 20px;
+}
+
+.card-description p {
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.card-hover-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.interest-card:hover .card-hover-content {
+  transform: translateY(0);
+}
+
+.card-hover-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+// 其他部分样式
+.about-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-section {
+  margin-bottom: 30px;
+}
+
+.about-section h2 {
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.profile-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.profile-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.profile-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.bio-content {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 200px;
+}
+
+.contact-item:hover {
+  background: #f0f0f0;
+  transform: translateY(-3px);
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #555;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contact-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.about-quote {
+  max-width: 800px;
+  margin: 40px auto 20px;
+  text-align: center;
+}
+
+.about-quote blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #666;
+  margin: 0;
+  padding: 0 20px;
+  position: relative;
+}
+
+.about-quote blockquote:before {
+  content: '"';
+  font-size: 3rem;
+  color: #ddd;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+}
+
+.about-quote blockquote:after {
+  content: '"';
+  font-size: 3rem;
+  color: #ddd;
+  position: absolute;
+  right: -10px;
+  bottom: -30px;
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .interests-showcase {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .interest-card {
+    width: 100% !important;
+    max-width: 350px;
+    height: 300px !important;
+  }
+
+  .profile-info {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info {
+    flex-direction: column;
+  }
+}</style></main><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. All rights reserved.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div><div class="footer-badges"><a target="_blank" rel="noopener" href="https://hexo.io/" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="本站已在粤网管局备案"><img src="https://img.shields.io/badge/粤ICP备-2022157092号-yellow.svg?logo=data:image/png;base64,UklGRjgCAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSJgAAAABgKpt//nn+RvZ89KuNVcbR6C6pBNYW12zl61oO23Vtu2/v59TiIgJILircnOrKgLlzL4Pj8fj+RkuUTB7FE0hIuZVxs1B4r88yudxAakeYQIQsSiZiYVaj7ge2mS9cCbbgTfZIYzJmmFVtgQ/slsolaUB5Y9qtzkAmRdqN0EmPMKBAGvjq8pRnTYAbBVdK9unpytTDQVaAFZQOCB6AQAAEAgAnQEqFAAUAD6RQJhJpaOiISgKqLASCWwAnTKEeZ+Z8UG4b3S8Uuxj0APK49jD9jvRsJlHSAAk4peJdT29v1IEVadPwR6oAAD+BVzylNKb2DP80JoQLtKM1HYe/A2NwP2FBXtSNypNu+PttP+EadMJsrmm/ULTvb6jEqpziSt//sRMcbrAVYftaY1KNWWudr1AdlUv5D5HRoEfwcV0Pu9dhsXZ3ojpXwjGWWBJfv4puUOV9aczt7uvE8SHYSo33C18yNeqL9sZ211bKOY/rjT8Wzi9Wg+hj7Xvi/3NC1proBfzmpWysW6y3/63VcYMlVBx6v5o9WNvzL1XLvbR7wTooDXtSEjt6rJoaazbMoXie0mzg0G+evKLZ8vz/yKv/u4RDK0EF+ejNfOOU0ZhepG6b/Ewbk1BofcYZC8JB4a2NPUtwhHtqE3tVT8PlHEvlf+xYFbG7Wms4JVHiSMfc36K5LOwcwC89RYMLn0jFD1wQF2/QrJAAAAA" alt="本站已在粤网管局备案"/></a><a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 检查本地存储中的暗色模式设置
+  const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+  // 如果设置为暗色模式，立即应用到body
+  if (savedDarkMode) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script></body></html>
