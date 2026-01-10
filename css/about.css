@@ -80,6 +80,11 @@
 }
 
 .interest-card {
+  /* 【修改点】新增 display 和 text-decoration，防止 a 标签样式错乱 */
+  display: block; 
+  text-decoration: none;
+  color: inherit; /* 确保字体颜色不变成蓝色链接色 */
+  
   position: relative;
   border-radius: 20px;
   overflow: hidden;
