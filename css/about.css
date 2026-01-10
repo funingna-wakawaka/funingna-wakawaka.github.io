@@ -1,12 +1,6 @@
-/* About Page Styles - 最终无敌修复版 */
+/* About Page Styles - 最终复刻无敌版 */
 
-/* 这是一个全局修复，防止 padding 把盒子撑大，
-   确保黑条宽度 width:100% 能完美匹配父容器 */
-* {
-  box-sizing: border-box; 
-}
-
-/* ===== About Main Container ===== */
+/* ===== 基础容器 ===== */
 .about-page {
   min-height: calc(100vh - 60px);
   background: var(--background-color, #fff);
@@ -24,8 +18,7 @@
   height: 100%;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(255, 154, 158, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(161, 196, 253, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 50% 50%, rgba(132, 250, 176, 0.05) 0%, transparent 30%);
+    radial-gradient(circle at 90% 80%, rgba(161, 196, 253, 0.05) 0%, transparent 20%);
   z-index: 0;
 }
 
@@ -37,11 +30,10 @@
   z-index: 1;
 }
 
-/* ===== About Header Section ===== */
+/* ===== 头部信息 ===== */
 .about-header {
   text-align: center;
   margin-bottom: 50px;
-  position: relative;
 }
 
 .about-avatar {
@@ -52,100 +44,71 @@
   overflow: hidden;
   border: 5px solid #fff;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 2;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .about-avatar:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
 .about-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.about-avatar:hover img {
-  transform: scale(1.05);
 }
 
 .about-name {
   font-size: 2.8rem;
   margin-bottom: 15px;
-  color: #2c3e50;
   font-weight: 700;
-  position: relative;
-  display: inline-block;
+  color: #2c3e50;
 }
 
 .about-bio {
   font-size: 1.3rem;
   color: #5d6d7e;
   max-width: 700px;
-  margin: 15px auto 0;
-  line-height: 1.6;
+  margin: 0 auto;
 }
 
-/* ===== Interests Showcase Section (核心卡片区) ===== */
+/* ===== 核心卡片展示区 (完全复刻原作者 Pug 内联样式) ===== */
 .interests-showcase {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
-  margin: 50px 0;
+  gap: 25px; /* 原作者是 25px */
+  margin: 40px 0;
   position: relative;
 }
 
 .interest-card {
+  /* 你的布局修正 */
   display: block; 
   text-decoration: none;
   color: inherit; 
-  
-  position: relative; /* 必须是 relative，这样绝对定位的黑条才不会跑出去 */
-  border-radius: 20px;
-  overflow: hidden; /* 关键：这会裁掉超出圆角的黑条，保证吻合 */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  position: relative;
+  border-radius: 15px; /* 原作者是 15px */
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  /* 原作者的动画曲线 */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   z-index: 1;
-  transform-origin: center bottom;
 }
 
 .interest-card:hover {
-  transform: translateY(-15px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  /* 原作者的悬停效果 */
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
 
-/* 遮罩层 */
-.interest-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
-  z-index: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.interest-card:hover::before {
-  opacity: 0.8;
-}
-
-/* 尺寸定义 */
+/* 尺寸定义 (保留你的尺寸设置，因为你的图和他的不一样) */
 .card-landscape { width: 380px; height: 240px; }
 .card-landscape.card-large { width: 460px; height: 280px; }
 .card-landscape.card-medium { width: 380px; height: 240px; }
 .card-landscape.card-small { width: 300px; height: 200px; }
-
 .card-portrait { width: 280px; height: 360px; }
 .card-portrait.card-large { width: 320px; height: 400px; }
 .card-portrait.card-medium { width: 280px; height: 340px; }
@@ -160,13 +123,13 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: all 0.8s ease; 
+  transition: all 0.5s ease; /* 原作者是 0.5s */
   z-index: -1;
 }
 
+/* 你的版本加了 hover 放大背景，原作者其实没加 transform scale，但我建议保留，好看 */
 .interest-card:hover .card-bg {
   transform: scale(1.1);
-  filter: blur(2px); 
 }
 
 /* 卡片内容层 */
@@ -179,85 +142,72 @@
   color: #fff;
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2px); 
+  /* 原作者的半透明遮罩参数 */
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
 
 .interest-card:hover .card-content {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.4); /* 悬停变黑一点 */
 }
 
 .card-title {
-  font-size: 2.2rem;
-  margin: 0 0 10px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  font-weight: 700;
+  font-size: 2.2rem; /* 稍微调小一点适配中文 */
+  margin: 0 0 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
 }
 
 .card-description p {
   font-size: 1.1rem;
-  line-height: 1.4;
   margin: 0;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .card-icon {
   font-size: 2rem;
+  margin-top: 20px;
   align-self: flex-end;
-  margin-top: auto; 
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
-  /* 确保图标不会被黑条挡住太严重，或者你可以让他被挡住 */
-  margin-bottom: 10px; 
 }
 
-/* 【关键修复】底部滑出黑条 */
+/* 【关键修复】底部黑条动画 - 完全照搬原作者 */
 .card-hover-content {
   position: absolute;
-  /* 确保紧贴底部 */
-  bottom: 0; 
+  bottom: 0;
   left: 0;
-  /* 确保宽度填满 */
-  width: 100%; 
-  /* 稍微减小 padding，防止太厚 */
-  padding: 15px 25px; 
+  width: 100%;
+  /* 必须加上 box-sizing，否则 padding 会撑大宽度导致黑条比卡片宽 */
+  box-sizing: border-box; 
+  padding: 20px 30px;
   
-  background: rgba(0, 0, 0, 0.8); /* 稍微加深一点颜色 */
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  /* 原作者是纯色半透明黑，没有毛玻璃，没有边框 */
+  background: rgba(0, 0, 0, 0.7); 
   
-  /* 初始位置：往下移 100% (完全藏到底部外面) */
   transform: translateY(100%);
-  
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 3;
+  transition: transform 0.3s ease; /* 原作者这里的黑条用的是简单的 ease，不是弹簧 */
 }
 
-/* 悬停状态：回到原位 (0) */
 .interest-card:hover .card-hover-content {
   transform: translateY(0);
 }
 
 .card-hover-content p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 0.95rem; /* 原作者是 0.95rem */
+  color: #fff;
 }
 
-
-/* ===== About Details Section ===== */
+/* ===== 个人信息区 (保留你的魔改版) ===== */
 .about-details {
   max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
-  position: relative;
-  z-index: 1;
 }
 
 .about-section {
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 30px;
   margin-bottom: 30px;
@@ -265,10 +215,10 @@
 }
 
 .about-section h2 {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
   color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .profile-info {
@@ -277,13 +227,13 @@
   gap: 15px;
 }
 
+/* 你的上浮小方块 */
 .profile-item {
   background: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
-  cursor: default;
 }
 
 .profile-item:hover {
@@ -294,14 +244,21 @@
 
 .profile-label {
   font-size: 0.9rem;
-  color: #7f8c8d;
+  color: #666;
   margin-bottom: 5px;
 }
 
 .profile-value {
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #2c3e50;
+  font-weight: bold;
+  color: #333;
+}
+
+.bio-content {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 1.6;
 }
 
 .contact-info {
@@ -311,8 +268,6 @@
 }
 
 .contact-item {
-  flex: 1;
-  min-width: 200px;
   display: flex;
   align-items: center;
   background: #f9f9f9;
@@ -321,21 +276,34 @@
   text-decoration: none;
   color: #333;
   transition: all 0.3s ease;
+  flex: 1;
+  min-width: 200px;
 }
 
 .contact-item:hover {
+  background: #fff;
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  background: #fff;
 }
 
 .contact-item i {
-  margin-right: 15px;
   font-size: 1.5rem;
-  color: #3498db;
+  margin-right: 15px;
+  color: #555;
 }
 
-/* 技能点标签样式 (从 pug 移过来的) */
+.contact-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contact-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 技能标签 */
 .skill-tag { 
   display: inline-block; 
   background: #f0f2f5; 
@@ -347,11 +315,11 @@
   border: 1px solid #e1e4e8; 
   transition: all 0.3s ease; 
 }
+
 .skill-tag:hover { 
   background: #e1e4e8; 
   transform: translateY(-2px); 
 }
-
 
 /* 移动端适配 */
 @media (max-width: 768px) {
@@ -359,14 +327,5 @@
     width: 100% !important;
     max-width: 350px;
     height: 300px !important;
-  }
-  
-  .about-avatar {
-    width: 140px;
-    height: 140px;
-  }
-  
-  .about-name {
-    font-size: 2.2rem;
   }
 }
