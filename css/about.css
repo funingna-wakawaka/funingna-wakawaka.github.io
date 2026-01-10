@@ -128,10 +128,10 @@
   z-index: -1;
 }
 
-/* 【保留】你喜欢的模糊逻辑 */
+/* 鼠标悬停时的模糊特效 - 加回高斯模糊 */
 .interest-card:hover .card-bg {
-  filter: blur(4px); /* 模糊 */
-  transform: scale(1.1); /* 放大 */
+  transform: scale(1.1); /* 保持微放大 */
+  filter: blur(4px);     /* 加回模糊效果 */
 }
 
 /* 内容层 */
@@ -193,6 +193,7 @@
 .interest-card:hover .card-hover-content {
   transform: translateY(0); /* 归位 */
 }
+
 
 .card-hover-content p {
   margin: 0;
@@ -299,3 +300,4 @@
     height: 300px !important;
   }
 }
+
