@@ -1,4 +1,4 @@
-/* About Page Styles - 最终防抖修正版 (v14) */
+/* About Page Styles - Steam 3D 完美贴合版 (v18) */
 
 .about-page {
   min-height: calc(100vh - 60px);
@@ -77,6 +77,9 @@
   justify-content: center;
   gap: 30px;
   margin: 50px 0;
+  
+  /* 3D 空间 */
+  perspective: 1000px; 
 }
 
 .interest-card {
@@ -87,35 +90,36 @@
   position: relative;
   border-radius: 20px;
   
-  /* 【核心修改 1】去掉 overflow: hidden，为了让下面的 ::after 生效 */
-  /* overflow: hidden; <--- 删除了这行 */
-  
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   
-  /* 保持 v13 速度 */
-  transition: all 0.3s ease;
+  /* 针对 JS 变换使用快速响应 */
+  transition: transform 0.1s ease-out, box-shadow 0.3s ease;
   
   cursor: pointer;
   z-index: 1;
+
+  /* 开启 3D，但内容不分层 */
+  transform-style: preserve-3d;
+  /* 确保中心旋转 */
+  transform-origin: center center;
 }
 
-/* 【核心修改 2】模仿 main.css 增加“隐形下巴”防抖 */
+/* 防抖动补丁 */
 .interest-card::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -20px; /* 向下延伸 20px，覆盖上浮的 16px 空隙 */
-  height: 20px;
+  bottom: -40px; 
+  height: 40px;
   background: transparent;
   z-index: -1;
 }
 
+/* 悬停时的基础样式 (位移和旋转交由 JS 控制) */
 .interest-card:hover {
-  /* 保持 v13 大上浮 */
-  transform: translateY(-16px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
-  z-index: 10;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); 
+  z-index: 100;
 }
 
 /* 尺寸定义 */
@@ -140,15 +144,16 @@
   background-position: center;
   transition: all 0.3s ease;
   z-index: -1;
-  
-  /* 【核心修改 3】因为父元素去掉了 overflow: hidden，这里必须自己加圆角 */
   border-radius: 20px;
+  
+  /* 【修正】移除 Z 轴位移，确保严丝合缝 */
+  transform: translateZ(0); 
 }
 
 .interest-card:hover .card-bg {
-  /* 保持 v13 大模糊 */
   filter: blur(8px);
-  transform: scale(1.1);
+  /* 仅放大，不位移 */
+  transform: scale(1.1); 
 }
 
 /* 内容层 */
@@ -161,30 +166,29 @@
   color: #fff;
   position: relative;
   z-index: 2;
-  
-  /* 【核心修改 4】因为父元素去掉了 overflow: hidden，这里必须加圆角和隐藏溢出 */
-  /* 否则滑下去的黑条会露出来 */
   border-radius: 20px;
   overflow: hidden;
   
-  /* 保持 v13 完美渐变 (底部 0.8 透明度) */
+  /* 完美渐变 */
   background: linear-gradient(
     to bottom, 
-    rgba(0, 0, 0, 0.1) 0%, 
-    rgba(0, 0, 0, 0.6) 60%, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.6) 50%, 
     #000000 100%
   );
   
   backdrop-filter: blur(2px);
   transition: background 0.3s ease;
+  
+  /* 【修正】移除 Z 轴位移，确保严丝合缝 */
+  transform: translateZ(0);
 }
 
 .interest-card:hover .card-content {
-  /* 悬停时加重，底部保持纯黑 */
   background: linear-gradient(
     to bottom, 
-    rgba(0, 0, 0, 0.3) 0%, 
-    rgba(0, 0, 0, 0.7) 60%, 
+    rgba(0, 0, 0, 0.2) 0%, 
+    rgba(0, 0, 0, 0.7) 50%, 
     #000000 100%
   );
 }
@@ -193,41 +197,44 @@
   font-size: 2.2rem;
   margin: 0 0 10px;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  /* 文字可以稍微突起一点点，不会影响蒙版对齐 */
+  transform: translateZ(20px);
 }
 
 .card-description p {
   font-size: 1.1rem;
   line-height: 1.4;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  transform: translateZ(10px);
 }
 
 .card-icon {
   font-size: 2rem;
   align-self: flex-end;
+  transform: translateZ(10px);
 }
 
+/* 黑条 */
 .card-hover-content {
   position: absolute;
-  
-  /* 保持 v13 边缘修复 */
   width: 102%;
   left: -1%;
   bottom: -1px;
-  
   padding: 20px 30px;
   
-  /* 保持 v13 黑条透明度 (0.8) */
   background: rgba(0, 0, 0, 0.8);
   
-  transform: translateY(100%);
+  /* 【修正】移除 Z 轴大位移，只保留 1px 防止穿模 */
+  transform: translateY(100%) translateZ(1px);
   transition: transform 0.3s ease;
   
   box-sizing: border-box; 
   border-radius: 0 0 20px 20px;
+  z-index: 3;
 }
 
 .interest-card:hover .card-hover-content {
-  transform: translateY(0);
+  transform: translateY(0) translateZ(1px);
 }
 
 .card-hover-content p {
@@ -235,101 +242,17 @@
   color: #fff;
 }
 
-/* 个人信息区 (完全不变) */
-.about-details {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.about-section {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  padding: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.about-section h2 {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.profile-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.profile-item {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-  cursor: default;
-}
-
-.profile-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-.contact-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.contact-item {
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #333;
-  transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-.contact-item i {
-  margin-right: 15px;
-  font-size: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .interest-card {
-    width: 100% !important;
-    max-width: 350px;
-    height: 300px !important;
-  }
-}
-
-/* Skill Tags */
-.skill-tag {
-  display: inline-block;
-  background: #f0f2f5;
-  padding: 4px 12px;
-  margin: 5px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  color: #4a4a4a;
-  border: 1px solid #e1e4e8;
-  transition: all 0.3s ease;
-}
-
-.skill-tag:hover {
-  background: #e1e4e8;
-  transform: translateY(-2px);
-}
+/* 个人信息区 (保持不变) */
+.about-details { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.about-section { background: rgba(255, 255, 255, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.about-section h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; color: #333; }
+.profile-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.profile-item { background: #f9f9f9; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s ease; cursor: default; }
+.profile-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
+.contact-info { display: flex; flex-wrap: wrap; gap: 15px; }
+.contact-item { flex: 1; min-width: 200px; display: flex; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px; text-decoration: none; color: #333; transition: all 0.3s ease; }
+.contact-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; }
+.contact-item i { margin-right: 15px; font-size: 1.5rem; }
+@media (max-width: 768px) { .interest-card { width: 100% !important; max-width: 350px; height: 300px !important; } }
+.skill-tag { display: inline-block; background: #f0f2f5; padding: 4px 12px; margin: 5px; border-radius: 20px; font-size: 0.9rem; color: #4a4a4a; border: 1px solid #e1e4e8; transition: all 0.3s ease; }
+.skill-tag:hover { background: #e1e4e8; transform: translateY(-2px); }
