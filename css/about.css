@@ -1,9 +1,4 @@
-/* About Page Styles - 最终稳定版 */
-
-/* 全局盒模型修复，确保 padding 不会撑大盒子，解决黑条对不齐的问题 */
-* {
-  box-sizing: border-box;
-}
+/* About Page Styles - 最终防抖修正版 (v14) */
 
 .about-page {
   min-height: calc(100vh - 60px);
@@ -75,7 +70,7 @@
   margin: 0 auto;
 }
 
-/* Interests Cards - 卡片核心样式 */
+/* Interests Cards */
 .interests-showcase {
   display: flex;
   flex-wrap: wrap;
@@ -87,20 +82,39 @@
 .interest-card {
   display: block; 
   text-decoration: none;
-  color: inherit; 
+  color: inherit;
+  
   position: relative;
   border-radius: 20px;
-  /* 关键：隐藏溢出，保证黑条滑到底部时被切断，不会显示在圆角外面 */
-  overflow: hidden; 
+  
+  /* 【核心修改 1】去掉 overflow: hidden，为了让下面的 ::after 生效 */
+  /* overflow: hidden; <--- 删除了这行 */
+  
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease; /* 回归简单顺滑的过渡 */
+  
+  /* 保持 v13 速度 */
+  transition: all 0.3s ease;
+  
   cursor: pointer;
   z-index: 1;
 }
 
+/* 【核心修改 2】模仿 main.css 增加“隐形下巴”防抖 */
+.interest-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -20px; /* 向下延伸 20px，覆盖上浮的 16px 空隙 */
+  height: 20px;
+  background: transparent;
+  z-index: -1;
+}
+
 .interest-card:hover {
-  transform: translateY(-10px); /* 稍微上浮 */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  /* 保持 v13 大上浮 */
+  transform: translateY(-16px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
   z-index: 10;
 }
 
@@ -115,7 +129,7 @@
 .card-portrait.card-medium { width: 280px; height: 340px; }
 .card-portrait.card-small { width: 240px; height: 300px; }
 
-/* 背景图片 */
+/* 背景图片样式 */
 .card-bg {
   position: absolute;
   top: 0;
@@ -124,14 +138,17 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
   z-index: -1;
+  
+  /* 【核心修改 3】因为父元素去掉了 overflow: hidden，这里必须自己加圆角 */
+  border-radius: 20px;
 }
 
-/* 鼠标悬停时的模糊特效 - 加回高斯模糊 */
 .interest-card:hover .card-bg {
-  transform: scale(1.1); /* 保持微放大 */
-  filter: blur(4px);     /* 加回模糊效果 */
+  /* 保持 v13 大模糊 */
+  filter: blur(8px);
+  transform: scale(1.1);
 }
 
 /* 内容层 */
@@ -144,65 +161,81 @@
   color: #fff;
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.15); /* 稍微加深一点初始背景，字更清晰 */
-  transition: all 0.3s ease;
+  
+  /* 【核心修改 4】因为父元素去掉了 overflow: hidden，这里必须加圆角和隐藏溢出 */
+  /* 否则滑下去的黑条会露出来 */
+  border-radius: 20px;
+  overflow: hidden;
+  
+  /* 保持 v13 完美渐变 (底部 0.8 透明度) */
+  background: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 0.1) 0%, 
+    rgba(0, 0, 0, 0.6) 60%, 
+    #000000 100%
+  );
+  
+  backdrop-filter: blur(2px);
+  transition: background 0.3s ease;
 }
 
 .interest-card:hover .card-content {
-  background: rgba(0, 0, 0, 0.2);
+  /* 悬停时加重，底部保持纯黑 */
+  background: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 0.3) 0%, 
+    rgba(0, 0, 0, 0.7) 60%, 
+    #000000 100%
+  );
 }
 
 .card-title {
   font-size: 2.2rem;
   margin: 0 0 10px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
 .card-description p {
   font-size: 1.1rem;
   line-height: 1.4;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
 .card-icon {
   font-size: 2rem;
   align-self: flex-end;
-  /* 给图标留点位置，防止被黑条挡住 */
-  margin-bottom: 10px; 
 }
 
-/* 【回归】最稳的黑条逻辑 */
 .card-hover-content {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%; /* 因为有 box-sizing: border-box，这里 100% 就是 100% */
-  padding: 15px 25px;
   
-  background: rgba(0, 0, 0, 0.8); /* 纯黑半透明背景 */
-  backdrop-filter: blur(5px);
+  /* 保持 v13 边缘修复 */
+  width: 102%;
+  left: -1%;
+  bottom: -1px;
   
-  /* 初始位置：完全藏在底部下面 */
+  padding: 20px 30px;
+  
+  /* 保持 v13 黑条透明度 (0.8) */
+  background: rgba(0, 0, 0, 0.8);
+  
   transform: translateY(100%);
+  transition: transform 0.3s ease;
   
-  /* 使用 ease-out，滑出来很顺滑，不会跳 */
-  transition: transform 0.3s ease-out;
-  z-index: 3;
+  box-sizing: border-box; 
+  border-radius: 0 0 20px 20px;
 }
 
 .interest-card:hover .card-hover-content {
-  transform: translateY(0); /* 归位 */
+  transform: translateY(0);
 }
-
 
 .card-hover-content p {
   margin: 0;
   color: #fff;
-  font-size: 0.95rem;
-  line-height: 1.5;
 }
 
-/* 个人信息区 */
+/* 个人信息区 (完全不变) */
 .about-details {
   max-width: 900px;
   margin: 40px auto;
@@ -236,13 +269,13 @@
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
-  cursor: default; 
+  cursor: default;
 }
 
 .profile-item:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-  background: #fff; 
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background: #fff;
 }
 
 .contact-info {
@@ -261,11 +294,11 @@
   border-radius: 8px;
   text-decoration: none;
   color: #333;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   background: #fff;
 }
@@ -275,24 +308,6 @@
   font-size: 1.5rem;
 }
 
-/* 技能标签 (从 pug 移过来的) */
-.skill-tag { 
-  display: inline-block; 
-  background: #f0f2f5; 
-  padding: 4px 12px; 
-  margin: 5px; 
-  border-radius: 20px; 
-  font-size: 0.9rem; 
-  color: #4a4a4a; 
-  border: 1px solid #e1e4e8; 
-  transition: all 0.3s ease; 
-}
-.skill-tag:hover { 
-  background: #e1e4e8; 
-  transform: translateY(-2px); 
-}
-
-/* 移动端适配 */
 @media (max-width: 768px) {
   .interest-card {
     width: 100% !important;
@@ -301,3 +316,20 @@
   }
 }
 
+/* Skill Tags */
+.skill-tag {
+  display: inline-block;
+  background: #f0f2f5;
+  padding: 4px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  border: 1px solid #e1e4e8;
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: #e1e4e8;
+  transform: translateY(-2px);
+}
