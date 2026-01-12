@@ -25,7 +25,6 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  overflow: hidden; /* 防止放大后的图片撑大容器出现滚动条 */
 }
 
 .image-viewer.active {
@@ -37,8 +36,8 @@
   position: relative;
   max-width: 90%;
   max-height: 90%;
-  /* 移除 overflow:hidden，让图片可以溢出容器显示 */
-  display: flex;
+  /* 确保容器也能响应点击关闭，避免图片遮挡全部区域 */
+  display: flex; 
   justify-content: center;
   align-items: center;
 }
@@ -51,18 +50,16 @@
   border: 2px solid #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   
-  /* 新增/修改的关键属性 */
-  transform-origin: center center; /* 确保缩放从中心开始，JS中可能会动态修改这个值 */
-  cursor: grab; /* 默认显示手型，提示可拖拽 */
-  user-select: none; /* 防止拖拽时选中图片 */
-  -webkit-user-drag: none; /* 防止原生拖拽图片行为 */
-  transition: transform 0.1s ease-out; /* 缩放时更平滑，但拖拽时可能需要移除此过渡以免延迟 */
+  /* 关键属性：禁止浏览器默认触摸行为，交给JS处理 */
+  touch-action: none; 
+  /* 鼠标手势提示 */
+  cursor: grab;
+  /* 移除 transition，保证拖拽和缩放的实时跟手性 */
+  transition: none;
 }
 
-/* 当处于拖拽状态时的样式（需要在JS中配合 mousedown 添加此类） */
-.view-image.grabbing {
+.view-image:active {
   cursor: grabbing;
-  transition: none; /* 拖拽时取消过渡，实现跟手效果 */
 }
 
 .close-viewer {
@@ -73,7 +70,7 @@
   color: #fff;
   cursor: pointer;
   transition: color 0.3s ease;
-  z-index: 10000; /* 确保关闭按钮在最上层 */
+  z-index: 10001;
 }
 
 .close-viewer:hover {
@@ -91,8 +88,10 @@
   }
 
   .close-viewer {
-    top: -30px;
-    font-size: 24px;
+    top: -40px;
+    right: 0;
+    font-size: 28px;
+    padding: 10px; /* 增加点击区域 */
   }
 
   /* 在更窄屏幕上进一步调整按钮位置 */
