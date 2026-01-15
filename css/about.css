@@ -177,6 +177,8 @@
     #000000 100%
   );
   
+  
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   transition: background 0.3s ease;
   
