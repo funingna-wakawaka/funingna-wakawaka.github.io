@@ -211,7 +211,7 @@ function initPostShare() {
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(() => {
-          showNotification("Link copied to clipboard!");
+          showNotification("链接已复制到剪切板!");
         });
       } else {
         // Fallback for older browsers
@@ -221,7 +221,7 @@ function initPostShare() {
         textArea.select();
         document.execCommand("copy");
         document.body.removeChild(textArea);
-        showNotification("Link copied to clipboard!");
+        showNotification("链接已复制到剪切板!");
       }
     });
   }
@@ -597,6 +597,8 @@ function initCodeBlockFolding() {
       // Create toggle button
       const toggleButton = document.createElement("button");
       toggleButton.className = "code-toggle";
+      // ★★★ 1. 设置初始文字属性 (中文) ★★★
+      toggleButton.setAttribute("data-text", "展开代码");
 
       // Add toggle button to wrapper
       wrapper.appendChild(toggleButton);
@@ -606,6 +608,17 @@ function initCodeBlockFolding() {
         e.preventDefault();
         wrapper.classList.toggle("collapsed");
         wrapper.classList.toggle("expanded");
+
+        // ★★★ 2. 动态切换并翻译 ★★★
+        // 获取翻译函数 (如果已经有 window.i18n)
+        const t = (text) =>
+          window.i18n && window.i18n.get ? window.i18n.get(text) : text;
+
+        if (wrapper.classList.contains("expanded")) {
+          toggleButton.setAttribute("data-text", t("折叠代码"));
+        } else {
+          toggleButton.setAttribute("data-text", t("展开代码"));
+        }
       });
     }
   });

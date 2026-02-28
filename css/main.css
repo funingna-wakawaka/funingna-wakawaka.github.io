@@ -1040,11 +1040,15 @@ p {
 }
 
 .code-toggle::before {
-  content: '展开代码';
+  /* content: '展开代码';  <-- 删除或注释掉原来的这行 */
+  content: attr(data-text);
+  /* ★★★ 改成这一行，让它读取 data-text 属性 */
 }
 
 .code-block-wrapper.expanded .code-toggle::before {
-  content: '折叠代码';
+  /* content: '折叠代码';  <-- 删除或注释掉原来的这行 */
+  content: attr(data-text);
+  /* ★★★ 改成这一行，保持一致 */
 }
 
 .post-content pre code {
@@ -2880,5 +2884,100 @@ body.dark-mode #article-container pre::-webkit-scrollbar-thumb:hover {
   .code pre {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+}
+
+/* ===== Article Image Overlay Effect (点击阅读特效) ===== */
+
+/* 1. 确保父容器是相对定位 */
+.article-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* 关键：为了让遮罩层绝对定位 */
+}
+
+/* 2. 遮罩层样式 */
+.read-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(225, 96, 96, 0.85);
+  /* 225, 96, 96 半透明 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  /* 默认隐藏 */
+  transform: translateX(-100%);
+  /* 默认在左边外面 */
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* 平滑过渡 */
+  z-index: 10;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  /* 可选：加一点模糊更有质感 */
+}
+
+/* 3. 鼠标悬停时显示遮罩 */
+.article-image:hover .read-overlay {
+  opacity: 1;
+  transform: translateX(0);
+  /* 滑动归位 */
+}
+
+/* 4. 文字样式 */
+.read-text {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: var(--font-secondary);
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 30px;
+  transform: scale(0.9);
+  transition: transform 0.2s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 5. 文字出现的动画 (随遮罩层出现时稍微放大) */
+.article-image:hover .read-text {
+  transform: scale(1);
+}
+
+/* 6. 鼠标碰到文字时的调皮抖动动画 */
+.read-text:hover {
+  animation: playfulShake 0.5s ease-in-out infinite;
+  background: white;
+  color: #e16060;
+  /* 悬停文字变色 */
+  cursor: pointer;
+}
+
+/* 7. 定义抖动关键帧 */
+@keyframes playfulShake {
+  0% {
+    transform: scale(1.1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  100% {
+    transform: scale(1.1) rotate(0deg);
   }
 }

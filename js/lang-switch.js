@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. 定义翻译字典 (你可以随时加词)
+  // 1. 定义翻译字典
   const translations = {
     // 主界面
     胡杨怕火: "Huyangpahuo",
@@ -142,6 +142,10 @@ document.addEventListener("DOMContentLoaded", function () {
     我的Gitee: "My Gitee",
     我的CDSN: "My CSDN",
 
+    // 隐藏内容
+    点击查看隐藏内容: "Click to reveal hidden content",
+    " (点击恢复)": " (Click to hide again)",
+
     // AI摘要
     阿罗娜: "Alona",
     介绍自己: "Introduce",
@@ -150,25 +154,54 @@ document.addEventListener("DOMContentLoaded", function () {
     "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊":
       "Hello Sensei! I am Alona, powered by OpenAI GPT-4o. How can I help you today? 😊",
     "生成中. . .": "Generating...",
+    "请等待. . .": "Please wait...",
     "Alona请求AI出错了，请稍后再试。":
       "Alona encountered an error while requesting AI. Please try again later.",
 
     // 文章
+    "点击阅读->": "Click to Read ->",
     目录: "Directory",
+    无目录: "No Directory",
     "← 上一篇": "← Previous",
     "下一篇 →": "Next →",
-    分享这篇文章到: "Share this article",
     加载更多文章: "Load More Articles",
     " 加载中...": "Loading...",
     "没有了哦~": "No more articles~",
     加载文章失败: "Error loading articles",
+    分钟: "min",
+    字: "words",
+
+    // 搜索
     "搜索文章...": "Search Articles...",
+    搜索索引未加载: "Search index not loaded",
+    没有找到相关结果: "No results found",
+
+    // 图片
+    上一张: "Previous",
+    下一张: "Next",
+    "旋转90°": "Rotate 90°",
+    锁定方向: "Lock Orientation",
+    保存图片: "Save Image",
+
+    // 分享文章
+    分享这篇文章到: "Share this article",
     推特: "Twitter",
     脸书: "Facebook",
     领英: "LinkedIn",
     微信: "WeChat",
     微博: "Weibo",
     点击复制链接: "Copy Link",
+    "已复制!": "Copied!",
+    微信扫一扫分享: "WeChat Scan to Share",
+    '打开微信，点击底部的"发现"，使用"扫一扫"即可将网页分享至朋友圈。':
+      "Open WeChat, tap 'Discover', use 'Scan' to share this page to Moments.",
+
+    // 代码折叠
+    展开代码: "Expand Code",
+    折叠代码: "Collapse Code",
+    复制成功: "Copy successful!",
+    复制失败: "Copy failed",
+    未找到代码内容: "Code content not found",
   };
 
   // ==========================================
@@ -178,28 +211,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 通用节点翻译函数
   function translateNode(node) {
+    if (!node) return;
+
     // 1. 处理纯文本节点
     if (node.nodeType === Node.TEXT_NODE) {
       const text = node.nodeValue.trim();
-      // 这里必须严格匹配字典的 key
       if (text && translations[text]) {
         node.nodeValue = translations[text];
       }
-      // 不 return，因为某些情况下文本节点可能有兄弟节点需要处理（虽然在递归里通常由父级控制）
       return;
     }
 
     // 2. 处理元素节点
     if (node.nodeType === Node.ELEMENT_NODE) {
-      // -----------------------------------------------------
-      // [新增] 检查并翻译 data-label 属性
-      // -----------------------------------------------------
+      // (A) 翻译 data-label
       const label = node.getAttribute("data-label");
       if (label && translations[label]) {
         node.setAttribute("data-label", translations[label]);
       }
 
-      // 如果是输入框，翻译 placeholder
+      // (B) ★★★ 关键修复：翻译 data-title ★★★
+      const dataTitle = node.getAttribute("data-title");
+      if (dataTitle && translations[dataTitle]) {
+        node.setAttribute("data-title", translations[dataTitle]);
+      }
+
+      // (C) 翻译 title 属性
+      const title = node.getAttribute("title");
+      if (title && translations[title]) {
+        node.setAttribute("title", translations[title]);
+      }
+
+      // (D) 翻译 placeholder
       if (["INPUT", "TEXTAREA"].includes(node.tagName)) {
         const placeholder = node.getAttribute("placeholder");
         if (placeholder && translations[placeholder]) {
@@ -207,54 +250,106 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
+      // (E) 翻译 data-text (用于 CSS content)
+      const dataText = node.getAttribute("data-text");
+      if (dataText && translations[dataText]) {
+        node.setAttribute("data-text", translations[dataText]);
+      }
+
       // 递归处理子节点
       Array.from(node.childNodes).forEach(translateNode);
     }
   }
 
-  // 全页翻译 (静态内容)
-  function translatePage() {
-    translateNode(document.body);
+  // ★★★ 新增：日期翻译辅助函数 (还原原味中文) ★★★
+  function translateDates() {
+    const dateElements = document.querySelectorAll(
+      ".archive-date time, .article-date, .post-date time, .related-date time",
+    );
+
+    dateElements.forEach((el) => {
+      // 1. 如果没有保存过原始文本，先存起来（这就是你 Hexo 生成的默认中文格式）
+      if (!el.hasAttribute("data-original-text")) {
+        el.setAttribute("data-original-text", el.textContent.trim());
+      }
+
+      // 2. 获取标准日期用于英文转换
+      const dateStr =
+        el.getAttribute("data-date-standard") || el.getAttribute("datetime");
+      if (!dateStr) return;
+
+      const dateObj = new Date(dateStr);
+      if (isNaN(dateObj.getTime())) return;
+
+      if (currentLang === "en") {
+        // === 英文模式：转换格式 ===
+        if (el.parentElement.classList.contains("archive-date")) {
+          // 归档页: Feb 24
+          el.textContent = dateObj.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          });
+        } else {
+          // 其他页: Jan 28, 2026
+          el.textContent = dateObj.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+        }
+      } else {
+        // === 中文模式：还原原本的样子 ===
+        // 直接从属性里拿回最初的文本，不再自己拼格式
+        const originalText = el.getAttribute("data-original-text");
+        if (originalText) {
+          el.textContent = originalText;
+        }
+      }
+    });
   }
 
-  // ==========================================
-  // 3. AI 摘要 & 动态内容监听器 (重点!)
-  // ==========================================
+  // ★ 暴露给全局
+  window.i18n = {
+    get: function (key) {
+      if (currentLang === "en" && translations[key]) {
+        return translations[key];
+      }
+      return key;
+    },
+    isEn: function () {
+      return currentLang === "en";
+    },
+    translateNode: function (node) {
+      if (currentLang === "en") {
+        translateNode(node);
+      }
+    },
+  };
+
+  function translatePage() {
+    translateNode(document.body);
+    // 翻译日期
+    translateDates();
+  }
+
   function setupObservers() {
     if (currentLang !== "en") return;
-
-    // 创建一个观察者，专门盯着 #post-ai-container
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        // 1. 处理新添加的节点 (比如刚生成的按钮)
         mutation.addedNodes.forEach(translateNode);
-
-        // 2. 处理文字内容的变化 (比如 "生成中..." 变成 "正文内容")
-        if (mutation.type === "characterData") {
-          translateNode(mutation.target);
-        }
-
-        // 3. 处理子元素列表变化 (比如 AI 输出了新的回答)
+        if (mutation.type === "characterData") translateNode(mutation.target);
         if (mutation.type === "childList") {
           mutation.target.childNodes.forEach(translateNode);
         }
       });
     });
-
-    // 开始监听
-    // 我们尝试监听整个文章容器，或者直接监听 body (稍微耗性能但最稳)
-    // 这里为了稳妥，我们监听 document.body，但加一个过滤器只处理 ai 相关的
-    const targetNode = document.body;
-    observer.observe(targetNode, {
+    observer.observe(document.body, {
       childList: true,
       subtree: true,
-      characterData: true, // 关键：监听文字变化
+      characterData: true,
     });
   }
 
-  // ==========================================
-  // 4. 语言切换按钮逻辑
-  // ==========================================
   function setupLanguageButton() {
     const buttons = document.querySelectorAll('a[href*="#lang-switch"]');
     buttons.forEach((btn) => {
@@ -270,18 +365,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ==========================================
-  // 5. 初始化执行
-  // ==========================================
+  // 即使是中文模式，也要运行 translateDates 来保存原始文本
+  // 这样当用户点击切换时，我们才有东西可以还原
   if (currentLang === "en") {
-    // 1. 先翻译静态内容
     translatePage();
-
-    // 2. 启动监听器，搞定动态内容
     setupObservers();
+  } else {
+    // 如果当前是中文，只需扫描一遍把原始日期存进属性里，不改内容
+    translateDates();
   }
 
-  // 初始化按钮 (延迟一点以防按钮还没加载)
   setupLanguageButton();
-  setTimeout(setupLanguageButton, 500);
 });
