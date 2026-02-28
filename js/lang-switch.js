@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "Ciallo, the Smiling Magician~ (∠・ω< )⌒☆",
     关于我: "About Me",
     首页: "Home",
-    加载更多文章: "Load More Articles",
-    "搜索文章...": "Search Articles...",
+    "© 2025 胡杨怕火. 保留所有权利.":
+      "© 2025 Huyangpahuo. All rights reserved.",
 
     // 关于
     暂无数据: "No Data",
@@ -69,17 +69,25 @@ document.addEventListener("DOMContentLoaded", function () {
     分类: "Categories",
     所有分类: "All Categories",
     暂无分类: "No Categories",
+    阅读全文: "Read More",
     开始为您的文章添加分类: "Start Adding Categories to Your Posts",
     返回首页: "Back to Home",
+    共有: "Total",
+    篇文章: "Posts",
 
     // 标签
     标签: "Tags",
     暂无标签: "No Tags",
     开始为您的文章添加标签: "Start Adding Tags to Your Posts",
+    探索与: "Discover",
+    相关的所有文章: "related posts",
+    返回所有标签: "Back to All Tags",
 
     // 友链
     友链: "Links",
     传送门: "Portals",
+    "暂无友链数据，请在 source/_data/link.yml 中添加友链信息":
+      "No link data found. Please add entries to source/_data/link.yml",
     有志者事竟成多么美好的世界呀:
       "Where there's a will there's a way kind of beautiful",
     添加友链: "Add Link",
@@ -91,6 +99,24 @@ document.addEventListener("DOMContentLoaded", function () {
       "Use the template below and leave your info in the comments 😃 I’ll definitely check it out!",
     "我会一直视奸你们的哈哈哈  o(￣ヘ￣o＃) ~":
       "I’ll be watching all of you from the shadows haha o(￣ヘ￣o＃) ~",
+
+    摄影和剪辑: "Photography & Video Editing",
+    像素画和二次元绘画: "Pixel Art & Anime-style Illustration",
+    Logo和矢量图设计: "Logo & Vector Design",
+    各种计算机语言: "Programming Languages",
+    Blender建模: "Blender Modeling",
+    计算机图形学: "Computer Graphics",
+    微信小程序: "WeChat Mini Program Development",
+    游戏制作: "Game Development",
+    写小说: "Novel Writing",
+    我的世界模组制作: "Minecraft Modding",
+    英语: "English",
+    日语: "Japanese",
+    前端和数据库: "Frontend & Database Development",
+    安卓应用制作: "Android App Development",
+
+    // 评论区
+    评论区: "Comments",
     昵称: "Nickname",
     网址: "URL",
     必填: "Required",
@@ -98,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     预览: "Preview",
     发送: "Submit",
     没有评论: "No Comments",
+    Twikoo评论加载成功: "Twikoo comments loaded successfully",
 
     // 浏览器插件推荐
     浏览器插件推荐: "Plugins",
@@ -120,73 +147,141 @@ document.addEventListener("DOMContentLoaded", function () {
     介绍自己: "Introduce",
     来点灵感: "Inspiration",
     生成AI简介: "Generate Summary",
+    "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊":
+      "Hello Sensei! I am Alona, powered by OpenAI GPT-4o. How can I help you today? 😊",
+    "生成中. . .": "Generating...",
+    "Alona请求AI出错了，请稍后再试。":
+      "Alona encountered an error while requesting AI. Please try again later.",
+
+    // 文章
+    目录: "Directory",
+    "← 上一篇": "← Previous",
+    "下一篇 →": "Next →",
+    分享这篇文章到: "Share this article",
+    加载更多文章: "Load More Articles",
+    " 加载中...": "Loading...",
+    "没有了哦~": "No more articles~",
+    加载文章失败: "Error loading articles",
+    "搜索文章...": "Search Articles...",
+    推特: "Twitter",
+    脸书: "Facebook",
+    领英: "LinkedIn",
+    微信: "WeChat",
+    微博: "Weibo",
+    点击复制链接: "Copy Link",
   };
 
-  // 2. 初始化语言状态
+  // ==========================================
+  // 2. 核心逻辑
+  // ==========================================
   let currentLang = localStorage.getItem("site_lang") || "zh";
 
-  // 3. 核心翻译函数
-  function translatePage() {
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false,
-    );
-    let node;
-    while ((node = walker.nextNode())) {
+  // 通用节点翻译函数
+  function translateNode(node) {
+    // 1. 处理纯文本节点
+    if (node.nodeType === Node.TEXT_NODE) {
       const text = node.nodeValue.trim();
-      if (translations[text]) {
+      // 这里必须严格匹配字典的 key
+      if (text && translations[text]) {
         node.nodeValue = translations[text];
       }
+      // 不 return，因为某些情况下文本节点可能有兄弟节点需要处理（虽然在递归里通常由父级控制）
+      return;
     }
 
-    // 替换 placeholder
-    document.querySelectorAll("input, textarea").forEach((el) => {
-      if (translations[el.placeholder])
-        el.placeholder = translations[el.placeholder];
+    // 2. 处理元素节点
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      // -----------------------------------------------------
+      // [新增] 检查并翻译 data-label 属性
+      // -----------------------------------------------------
+      const label = node.getAttribute("data-label");
+      if (label && translations[label]) {
+        node.setAttribute("data-label", translations[label]);
+      }
+
+      // 如果是输入框，翻译 placeholder
+      if (["INPUT", "TEXTAREA"].includes(node.tagName)) {
+        const placeholder = node.getAttribute("placeholder");
+        if (placeholder && translations[placeholder]) {
+          node.setAttribute("placeholder", translations[placeholder]);
+        }
+      }
+
+      // 递归处理子节点
+      Array.from(node.childNodes).forEach(translateNode);
+    }
+  }
+
+  // 全页翻译 (静态内容)
+  function translatePage() {
+    translateNode(document.body);
+  }
+
+  // ==========================================
+  // 3. AI 摘要 & 动态内容监听器 (重点!)
+  // ==========================================
+  function setupObservers() {
+    if (currentLang !== "en") return;
+
+    // 创建一个观察者，专门盯着 #post-ai-container
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        // 1. 处理新添加的节点 (比如刚生成的按钮)
+        mutation.addedNodes.forEach(translateNode);
+
+        // 2. 处理文字内容的变化 (比如 "生成中..." 变成 "正文内容")
+        if (mutation.type === "characterData") {
+          translateNode(mutation.target);
+        }
+
+        // 3. 处理子元素列表变化 (比如 AI 输出了新的回答)
+        if (mutation.type === "childList") {
+          mutation.target.childNodes.forEach(translateNode);
+        }
+      });
+    });
+
+    // 开始监听
+    // 我们尝试监听整个文章容器，或者直接监听 body (稍微耗性能但最稳)
+    // 这里为了稳妥，我们监听 document.body，但加一个过滤器只处理 ai 相关的
+    const targetNode = document.body;
+    observer.observe(targetNode, {
+      childList: true,
+      subtree: true,
+      characterData: true, // 关键：监听文字变化
     });
   }
 
-  // 4. 【关键】处理切换按钮 (精准定位 href="#lang-switch")
+  // ==========================================
+  // 4. 语言切换按钮逻辑
+  // ==========================================
   function setupLanguageButton() {
-    // 查找所有 href 属性包含 "#lang-switch" 的 A 标签
     const buttons = document.querySelectorAll('a[href*="#lang-switch"]');
-
     buttons.forEach((btn) => {
-      // 设置按钮文字
-      // 如果当前是英文，按钮显示“中文”；如果当前是中文，按钮显示“English”
       btn.innerText = currentLang === "en" ? "🇨🇳 中文" : "🇺🇸 English";
-
-      // 移除原本的 href，防止页面跳转
       btn.removeAttribute("href");
-      btn.style.cursor = "pointer"; // 变成小手图标
-
-      // 绑定点击事件
-      btn.onclick = function (e) {
-        e.preventDefault(); // 阻止默认点击行为
-        toggleLanguage();
+      btn.style.cursor = "pointer";
+      btn.onclick = (e) => {
+        e.preventDefault();
+        const newLang = currentLang === "en" ? "zh" : "en";
+        localStorage.setItem("site_lang", newLang);
+        location.reload();
       };
     });
   }
 
-  // 5. 切换语言动作
-  function toggleLanguage() {
-    currentLang = currentLang === "en" ? "zh" : "en";
-    localStorage.setItem("site_lang", currentLang);
-    location.reload(); // 刷新页面应用新语言
-  }
-
-  // --- 执行逻辑 ---
-
-  // 1. 如果是英文模式，先翻译页面
+  // ==========================================
+  // 5. 初始化执行
+  // ==========================================
   if (currentLang === "en") {
+    // 1. 先翻译静态内容
     translatePage();
+
+    // 2. 启动监听器，搞定动态内容
+    setupObservers();
   }
 
-  // 2. 无论什么模式，都要把按钮改造成切换键
-  // 为了防止主题 JS 还没加载完，我们尝试多次执行
+  // 初始化按钮 (延迟一点以防按钮还没加载)
   setupLanguageButton();
-  setTimeout(setupLanguageButton, 500); // 延迟 0.5 秒再执行一次，确保抓到
-  setTimeout(setupLanguageButton, 1500); // 延迟 1.5 秒再执行一次，以防万一
+  setTimeout(setupLanguageButton, 500);
 });
