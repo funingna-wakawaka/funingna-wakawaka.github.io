@@ -74,6 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
     返回首页: "Back to Home",
     共有: "Total",
     篇文章: "Posts",
+    相关分类: "Category",
+    返回所有分类: "Back to All Categories",
 
     // 标签
     标签: "Tags",
