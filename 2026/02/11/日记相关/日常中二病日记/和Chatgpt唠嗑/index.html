@@ -3408,32 +3408,17 @@ window.tocConfig = {
 }
 
 /* ===== 动画 ===== */
-
-/* 汗水粒子 */
 @keyframes pet-sweat-anim {
   0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
   50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
   100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
 }
 
-/* 烟雾粒子 */
 @keyframes pet-smoke-anim {
   0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
   100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
 }
-</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">// 【修复】防重检测：确保页面只有一个桌宠（解决 Pjax 页面切换出现双宠的问题）
-const existingRoots = document.querySelectorAll('#pet-root');
-if (existingRoots.length > 1) {
-  for (let i = 0; i < existingRoots.length - 1; i++) {
-    existingRoots[i].remove();
-  }
-}
-
-if (window.petMainLoopId) {
-  cancelAnimationFrame(window.petMainLoopId);
-}
-
-import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
 import { PetStateMachine }    from '/images/pet/js/pet-state.js';
 import { PetHair }            from '/images/pet/js/pet-hair.js';
 import { PetLayers }          from '/images/pet/js/pet-layers.js';
@@ -3442,139 +3427,146 @@ import { PetOutline }         from '/images/pet/js/pet-outline.js';
 import { PetChat }            from '/images/pet/js/pet-chat.js';
 import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
 
-// ===== 常量 =====
-const IMG_PATH = '/images/pet/';
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
 
-// 角色整体缩放 0.3 倍
-const VISUAL_SCALE = 0.3;
-const BASE_SCALE   = 4;                    
-const SCALE        = BASE_SCALE * VISUAL_SCALE; 
-const RAW_W        = 32;
-const RAW_H        = 32;
-const W            = RAW_W * SCALE;         
-const H            = RAW_H * SCALE;         
-const MAX_SPEED    = 60;                    
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
 
-// ===== DOM =====
-const elRoot       = document.getElementById('pet-root');
-const elInner      = document.getElementById('pet-inner');
-const elSprite     = document.getElementById('pet-sprite');
-const elDebugZone  = document.getElementById('pet-debug-zone');
-const elHalo       = document.getElementById('pet-halo');
-const elShadow     = document.getElementById('pet-shadow');
-const elSweat      = document.getElementById('pet-sweat-container');
-const elSmoke      = document.getElementById('pet-smoke-container');
-const elHairCanvas = document.getElementById('pet-hair-canvas');
-const elChatBubble = document.getElementById('pet-chat-bubble'); 
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
 
-// ===== 布局 =====
-elInner.style.width  = W + 'px';
-elInner.style.height = H + 'px';
-elInner.style.left   = (-W / 2) + 'px';
-elInner.style.top    = (-H) + 'px';
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
 
-// 头发画布
-const HAIR_CANVAS_SIZE = 384;
-elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
-elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
-elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
-elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
-elChatBubble.style.top = (-H - 10) + 'px';
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
 
-// ===== 模块实例化 =====
-const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
 
-const stateMachine = new PetStateMachine({
-  rootEl:      elRoot,
-  innerEl:     elInner,
-  spriteEl:    elSprite,
-  debugZoneEl: elDebugZone,
-  sprite:      sprite,
-  spriteW:     W,
-  spriteH:     H,
-  onStateChange: () => {},
-});
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
 
-const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
 
-const layers = new PetLayers({
-  haloEl:         elHalo,
-  shadowEl:       elShadow,
-  sweatContainer: elSweat,
-  smokeContainer: elSmoke,
-}, IMG_PATH);
-
-// 音效
-const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
-
-// 描边
-const outline = new PetOutline(elInner);
-
-// 聊天气泡模块
-const chat = new PetChat(
-  document.getElementById('pet-chat-bubble'), 
-  document.getElementById('pet-chat-text'), 
-  elInner
-);
-
-// 音乐播放器模块 (内置几首歌曲演示---注意名字是随便写的,其实并不是这些歌的版权信息,这里使用的是免费音乐库中的曲子链接，纯粹为了演示功能,大家可以挑选自己喜欢的二次元音乐替换链接和封面图！)
-  // 扩充的二次元音乐歌单
-const musicPlaylist = [
-  { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
-  { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
-  { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
-  { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
-  { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
-  { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
-  { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
-  { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
-  { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
-  { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
-];
-
-const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
-if (sound.menuEl) {
-  musicPlayer.mountToMenu(sound.menuEl); 
-}
-
-// ===== 主循环 =====
-let lastTime = 0;
-
-function mainLoop(timestamp) {
-  if (!lastTime) lastTime = timestamp;
-  const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
-  lastTime = timestamp;
-
-  stateMachine.update(dt);
-
-  const state       = stateMachine.getState();
-  const pos         = stateMachine.getPos();
-  const velocity    = stateMachine.getVelocity();
-  const facingRight = stateMachine.isFacingRight();
-  const rotation    = stateMachine.getRotation();
-  const spriteOfsY  = stateMachine.getSpriteOffsetY();
-  const fallTargetY = stateMachine.getFallTargetY();
-
-  hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
-
-  layers.update({
-    dt, state, facingRight,
-    posX: pos.x,
-    posY: pos.y,
-    spriteOffsetY: spriteOfsY,
-    fallTargetY: fallTargetY,
-    scale: SCALE,
-  });
-
-  sound.update(state);
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
   
-  // 更新聊天模块状态检测
-  chat.update(dt, state);
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
 
-  window.petMainLoopId = requestAnimationFrame(mainLoop);
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
 }
 
-window.petMainLoopId = requestAnimationFrame(mainLoop);</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
