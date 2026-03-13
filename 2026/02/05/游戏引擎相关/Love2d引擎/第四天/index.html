@@ -68,16 +68,16 @@
 <li><strong>select(n, …)</strong> 用于返回从起点 <strong>n</strong> 开始到结束位置的所有参数列表</li>
 </ul>
 </blockquote>
-<p>​	<style>.camlwlgtmdgs{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205233440605.png" class="camlwlgtmdgs" alt="image-20260205233440605"></p>
+<p>​	<style>.yldbslozpqzu{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205233440605.png" class="yldbslozpqzu" alt="image-20260205233440605"></p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">local</span> args = &#123; ... &#125;;</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #args <span class="keyword">do</span> <span class="comment">--for循环遍历表</span></span><br><span class="line">        sum = sum + args[i];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> #args, sum; <span class="comment">--返回参数个数和总和</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> count, total = numberAdd(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="literal">nil</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数个数为&quot;</span> .. count .. <span class="string">&quot;，总和为&quot;</span> .. total) <span class="comment">-- 输出 参数个数为3，总和为6</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="select-“-”-…-或select-‘-’-…-统计传入参数总数"><a href="#select-“-”-…-或select-‘-’-…-统计传入参数总数" class="headerlink" title="select(“#”,…)或select(‘#’,…)统计传入参数总数"></a>select(“#”,…)或select(‘#’,…)统计传入参数总数</h3><p>这时候我们可以使用<code>select(&quot;#&quot;,...)</code>或者<code>select(&#39;#&#39;,...)</code>,就可以返回可变参数的真实数量了包括nil</p>
-<p>​	<style>.bynfnmisapji{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205234158826.png" class="bynfnmisapji" alt="image-20260205234158826"></p>
+<p>​	<style>.ekecvfljidml{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205234158826.png" class="ekecvfljidml" alt="image-20260205234158826"></p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">local</span> args = &#123; ... &#125;;</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #args <span class="keyword">do</span> <span class="comment">--for循环遍历表</span></span><br><span class="line">        sum = sum + args[i];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">select</span>(<span class="string">&quot;#&quot;</span>, ...), sum; <span class="comment">--返回参数个数和总和</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> count, total = numberAdd(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="literal">nil</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数个数为&quot;</span> .. count .. <span class="string">&quot;，总和为&quot;</span> .. total) <span class="comment">-- 输出 参数个数为4，总和为6</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="select-n-…-返回从第n个参数和其后的所有参数"><a href="#select-n-…-返回从第n个参数和其后的所有参数" class="headerlink" title="select(n,…)返回从第n个参数和其后的所有参数"></a>select(n,…)返回从第n个参数和其后的所有参数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">select</span>(<span class="number">2</span>, ...))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args1</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> a=<span class="built_in">select</span>(<span class="number">2</span>, ...)<span class="comment">--结果只有原神,因为这个select(2, ...)是多返回值,但是只有a一个变量接收</span></span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args1(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args2</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> a,b=<span class="built_in">select</span>(<span class="number">2</span>, ...)</span><br><span class="line">    <span class="built_in">print</span>(a,b)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args2(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args3</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> <span class="built_in">table</span> = &#123;<span class="built_in">select</span>(<span class="number">2</span>, ...)&#125;</span><br><span class="line">    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">print</span>(v)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args3(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.ybcdemdchftr{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205235452574.png" class="ybcdemdchftr" alt="image-20260205235452574"></p>
+<p>​	<style>.jznlrfmmbnlq{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205235452574.png" class="jznlrfmmbnlq" alt="image-20260205235452574"></p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t = &#123;<span class="built_in">select</span>(<span class="number">1</span>, ...)&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>所以可变参数就是</p>
@@ -227,11 +227,11 @@
 <p>Lua 中,要计算字符串的长度(即字符串中字符的个数),可以使用 <strong>string.len</strong> 函数或 <strong>utf8.len</strong> 函数</p>
 <p>计算包含中文的字符串一般用 <strong>utf8.len</strong>,</p>
 <p>计算只包含 ASCII 字符串的长度用 <strong>string.len</strong>,UTF-8 中文 &#x3D; 3字节</p>
-<p>​	 <style>.jpzipbfocxec{zoom:33%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207171744032.png" class="jpzipbfocxec" alt="image-20260207171744032"></p>
+<p>​	 <style>.ctmxozteotwo{zoom:33%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207171744032.png" class="ctmxozteotwo" alt="image-20260207171744032"></p>
 <p>可以看出string.len是按照字节数计算的,而utf8.len是按照字符的个数计算的</p>
 <h3 id="②-字符串英文大小写转换"><a href="#②-字符串英文大小写转换" class="headerlink" title="② 字符串英文大小写转换"></a>② 字符串英文大小写转换</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">upper</span>() 小写转大写</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">lower</span>() 大写转小写</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.ufuaavsqniqy{zoom:33%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207173754106.png" class="ufuaavsqniqy" alt="image-20260207173754106"></p>
+<p>​	<style>.dligdsqdjjjr{zoom:33%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207173754106.png" class="dligdsqdjjjr" alt="image-20260207173754106"></p>
 <h3 id="③-替换字符串里的元素"><a href="#③-替换字符串里的元素" class="headerlink" title="③ 替换字符串里的元素"></a>③ 替换字符串里的元素</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(main, <span class="built_in">find</span>, replace, num)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -244,15 +244,15 @@
 </ul>
 </blockquote>
 <p>这么说你们可能看不懂</p>
-<p>​	<style>.cdnzyojywenv{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205302321.png" class="cdnzyojywenv" alt="image-20260207205302321"></p>
+<p>​	<style>.utenysfjywhv{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205302321.png" class="utenysfjywhv" alt="image-20260207205302321"></p>
 <p>这下你们理解了吧,可以看到返回值有两个</p>
 <blockquote>
 <p>返回值1：新字符串</p>
 <p>返回值2：替换次数</p>
 </blockquote>
-<p>​	<style>.xqgfjerkjegv{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205732441.png" class="xqgfjerkjegv" alt="image-20260207205732441"></p>
+<p>​	<style>.kkitkoyqmbdj{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205732441.png" class="kkitkoyqmbdj" alt="image-20260207205732441"></p>
 <p>我们还可以这么玩,就是利用模式匹配,%d为数字</p>
-<p>​	<style>.bspyccbnbpju{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207210200583.png" class="bspyccbnbpju" alt="image-20260207210200583"> </p>
+<p>​	<style>.clnphxvpafso{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207210200583.png" class="clnphxvpafso" alt="image-20260207210200583"> </p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;2026-02-10&quot;</span>, <span class="string">&quot;(%d+)%-(%d+)%-(%d+)&quot;</span>, <span class="string">&quot;%3/%2/%1&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;10/02/2026&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;%d&quot;</span>, <span class="string">&quot;#&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc###&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>这个后面会细说这个模式匹配的事</p>
@@ -273,7 +273,7 @@
 </li>
 </ul>
 </blockquote>
-<p>​	<style>.anipjmeqapfv{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207212128549.png" class="anipjmeqapfv" alt="image-20260207212128549"></p>
+<p>​	<style>.vjbhlcsgmfjr{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207212128549.png" class="vjbhlcsgmfjr" alt="image-20260207212128549"></p>
 <blockquote>
 <p>返回值1: 要查找的字符串在原字符串中的开始位置</p>
 <p>返回值2:要查找的字符串在原字符串中的结束位置</p>
@@ -284,11 +284,11 @@
 
 <h3 id="⑤-字符串反转-只支持ASCII符号"><a href="#⑤-字符串反转-只支持ASCII符号" class="headerlink" title="⑤  字符串反转(只支持ASCII符号)"></a>⑤  字符串反转(只支持ASCII符号)</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">reverse</span>()    </span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.rryjvpzhyhuf{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208141648374.png" class="rryjvpzhyhuf" alt="image-20260208141648374"></p>
+<p>​	<style>.sfefqgctetts{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208141648374.png" class="sfefqgctetts" alt="image-20260208141648374"></p>
 <h3 id="⑥-字符串格式化"><a href="#⑥-字符串格式化" class="headerlink" title="⑥ 字符串格式化"></a>⑥ 字符串格式化</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>()</span><br></pre></td></tr></table></figure>
 
 <p>这个之前说过了,和C语言printf类似,就不细说了</p>
-<p>​	<style>.qmegfedqwjbl{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208145712219.png" class="qmegfedqwjbl" alt="image-20260208145712219"></p>
+<p>​	<style>.nzvmunetrrfh{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208145712219.png" class="nzvmunetrrfh" alt="image-20260208145712219"></p>
 <p>常用格式符：</p>
 <table>
 <thead>
@@ -347,18 +347,18 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">① 正负符号<span class="string">&quot;+&quot;</span>和<span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%+d&quot;</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">-- &quot;+5&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">-- &quot;5&quot; ,正数默认不显示+号</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%+d&quot;</span>, <span class="number">-5</span>)</span><br><span class="line"><span class="comment">-- &quot;-5&quot; ,负数默认显示-号</span></span><br><span class="line"></span><br><span class="line">② 占位符<span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;   42&quot;  (前面是空格)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%05d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;00042&quot;, 用 0 填充空位（默认是空格）</span></span><br><span class="line"></span><br><span class="line">③ 对齐标识<span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;   42&quot;  (默认右对齐)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%-5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;42   &quot;  (左对齐)</span></span><br><span class="line"></span><br><span class="line">④ 宽度数值</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5s&quot;</span>, <span class="string">&quot;Lua&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;  Lua&quot;,即最少占用多少字符宽度,少的话空格填补</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5s&quot;</span>, <span class="string">&quot;HelloLua&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;HelloLua&quot; ,多的话也不会截断</span></span><br><span class="line"></span><br><span class="line">⑤ 精度</span><br><span class="line">(<span class="number">1</span>) 对于浮点型</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.2f&quot;</span>, <span class="number">3.14159</span>)</span><br><span class="line"><span class="comment">-- &quot;3.14&quot; ,2是保留两位小数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%6.2f&quot;</span>, <span class="number">3.14159</span>)</span><br><span class="line"><span class="comment">-- &quot;  3.14&quot; ,6是总宽度</span></span><br><span class="line">(<span class="number">2</span>)对于字符串</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.3s&quot;</span>, <span class="string">&quot;Hello&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;Hel&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5.3s&quot;</span>, <span class="string">&quot;Hello&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;  Hel&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>我们可以用来打印角色信息</p>
-<p>​	<style>.sikjrprarnys{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001053002.png" class="sikjrprarnys" alt="image-20260209001053002"></p>
+<p>​	<style>.khxpjpvulwbe{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001053002.png" class="khxpjpvulwbe" alt="image-20260209001053002"></p>
 <p>也可以输出游戏时间和评分</p>
-<p>​	<style>.mqojwgasnqoq{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001513906.png" class="mqojwgasnqoq" alt="image-20260209001513906"></p>
+<p>​	<style>.dpplowwomwjd{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001513906.png" class="dpplowwomwjd" alt="image-20260209001513906"></p>
 <h3 id="⑦-数字和字符转换"><a href="#⑦-数字和字符转换" class="headerlink" title="⑦  数字和字符转换"></a>⑦  数字和字符转换</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">char</span>() <span class="comment">--数字 → 字符（ASCII/UTF8编码）</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">byte</span>(s, [i])  <span class="comment">--字符 → 数字编码 ,第二个参数是索引值</span></span><br></pre></td></tr></table></figure>
 
 <p>char 将整型数字转成字符并连接， byte 转换字符为整数值(可以指定某个字符，默认第一个字符)</p>
- <style>.billzbfbdwmt{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151409611.png" class="billzbfbdwmt" alt="image-20260208151409611">
+ <style>.vudovvoknzqq{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151409611.png" class="vudovvoknzqq" alt="image-20260208151409611">
 
-<p>​		<style>.pxkgkfbwyvxw{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151746772.png" class="pxkgkfbwyvxw" alt="image-20260208151746772"></p>
+<p>​		<style>.prtncdhtowfy{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151746772.png" class="prtncdhtowfy" alt="image-20260208151746772"></p>
 <h3 id="⑧-重复字符串"><a href="#⑧-重复字符串" class="headerlink" title="⑧ 重复字符串"></a>⑧ 重复字符串</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">rep</span>(<span class="built_in">string</span>, n)</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.qjesevmkavbn{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208234817461.png" class="qjesevmkavbn" alt="image-20260208234817461"></p>
+<p>​	<style>.lkewiniwjjls{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208234817461.png" class="lkewiniwjjls" alt="image-20260208234817461"></p>
 <h3 id="⑨-字符串截取"><a href="#⑨-字符串截取" class="headerlink" title="⑨ 字符串截取"></a>⑨ 字符串截取</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">sub</span>(s, i, j)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -386,7 +386,7 @@
 <p>​	这些是可以互相组合的,例如</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;Hello Lua user&quot;</span>, <span class="string">&quot;%a+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(word)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--%a = 字母（a-zA-Z）</span></span><br><span class="line"><span class="comment">--+ = 连续多个</span></span><br><span class="line"><span class="comment">--%a+ = 连续的字母</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;a1b22c333&quot;</span>, <span class="string">&quot;%d+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;.&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(ch)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;Hello   Lua&quot;</span>, <span class="string">&quot;%s+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;space:&quot;</span>, s)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.cdhhpdcoqvld{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210160644931.png" class="cdhhpdcoqvld" alt="image-20260210160644931"></p>
+<p>​	<style>.enkipxbyhmfo{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210160644931.png" class="enkipxbyhmfo" alt="image-20260210160644931"></p>
 <h3 id="⑪-首次匹配-单次扫描"><a href="#⑪-首次匹配-单次扫描" class="headerlink" title="⑪ 首次匹配 (单次扫描)"></a>⑪ 首次匹配 (单次扫描)</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(str, pattern, init)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -474,7 +474,7 @@
 <p>例如</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%a+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%a+%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%w+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc 1234&quot;</span>, <span class="string">&quot;%a+%s+%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc 1234&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.xtsbvnrxehei{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210170230710.png" class="xtsbvnrxehei" alt="image-20260210170230710"></p>
+<p>​	<style>.zeqqttcigqmh{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210170230710.png" class="zeqqttcigqmh" alt="image-20260210170230710"></p>
 <h4 id="2-取反（大写字母）"><a href="#2-取反（大写字母）" class="headerlink" title="(2)取反（大写字母）"></a>(2)取反（大写字母）</h4><table>
 <thead>
 <tr>
@@ -557,7 +557,7 @@
 <p><code>*</code> &#x3D; 贪婪<br><code>-</code> &#x3D; 非贪婪</p>
 <h4 id="5-字符集合"><a href="#5-字符集合" class="headerlink" title="(5)字符集合 [ ]"></a>(5)字符集合 <code>[ ]</code></h4><p>类似正则的字符集</p>
 <p>例如[abc] 表示a 或 b 或 c,那么[ ^ abc ]表示除了abc以外的的字符</p>
-<p>​	<style>.fooptjcysslv{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210162649514.png" class="fooptjcysslv" alt="image-20260210162649514"></p>
+<p>​	<style>.pkbllthpofnx{zoom:25%;}</style><img src="/2026/02/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210162649514.png" class="pkbllthpofnx" alt="image-20260210162649514"></p>
 <blockquote>
 <p>范围为 </p>
 <ul>
@@ -1133,7 +1133,257 @@ window.tocConfig = {
   onCommentLoaded: function () {
     console.log('Twikoo评论加载成功');
   }
-});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+
+/* 汗水粒子 */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+/* 烟雾粒子 */
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">// 【修复】防重检测：确保页面只有一个桌宠（解决 Pjax 页面切换出现双宠的问题）
+const existingRoots = document.querySelectorAll('#pet-root');
+if (existingRoots.length > 1) {
+  for (let i = 0; i < existingRoots.length - 1; i++) {
+    existingRoots[i].remove();
+  }
+}
+
+if (window.petMainLoopId) {
+  cancelAnimationFrame(window.petMainLoopId);
+}
+
+import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+// ===== 常量 =====
+const IMG_PATH = '/images/pet/';
+
+// 角色整体缩放 0.3 倍
+const VISUAL_SCALE = 0.3;
+const BASE_SCALE   = 4;                    
+const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+const RAW_W        = 32;
+const RAW_H        = 32;
+const W            = RAW_W * SCALE;         
+const H            = RAW_H * SCALE;         
+const MAX_SPEED    = 60;                    
+
+// ===== DOM =====
+const elRoot       = document.getElementById('pet-root');
+const elInner      = document.getElementById('pet-inner');
+const elSprite     = document.getElementById('pet-sprite');
+const elDebugZone  = document.getElementById('pet-debug-zone');
+const elHalo       = document.getElementById('pet-halo');
+const elShadow     = document.getElementById('pet-shadow');
+const elSweat      = document.getElementById('pet-sweat-container');
+const elSmoke      = document.getElementById('pet-smoke-container');
+const elHairCanvas = document.getElementById('pet-hair-canvas');
+const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+// ===== 布局 =====
+elInner.style.width  = W + 'px';
+elInner.style.height = H + 'px';
+elInner.style.left   = (-W / 2) + 'px';
+elInner.style.top    = (-H) + 'px';
+
+// 头发画布
+const HAIR_CANVAS_SIZE = 384;
+elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+elChatBubble.style.top = (-H - 10) + 'px';
+
+// ===== 模块实例化 =====
+const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+
+const stateMachine = new PetStateMachine({
+  rootEl:      elRoot,
+  innerEl:     elInner,
+  spriteEl:    elSprite,
+  debugZoneEl: elDebugZone,
+  sprite:      sprite,
+  spriteW:     W,
+  spriteH:     H,
+  onStateChange: () => {},
+});
+
+const hair = new PetHair(elHairCanvas, BASE_SCALE);
+
+const layers = new PetLayers({
+  haloEl:         elHalo,
+  shadowEl:       elShadow,
+  sweatContainer: elSweat,
+  smokeContainer: elSmoke,
+}, IMG_PATH);
+
+// 音效
+const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+
+// 描边
+const outline = new PetOutline(elInner);
+
+// 聊天气泡模块
+const chat = new PetChat(
+  document.getElementById('pet-chat-bubble'), 
+  document.getElementById('pet-chat-text'), 
+  elInner
+);
+
+// 音乐播放器模块 (内置几首歌曲演示---注意名字是随便写的,其实并不是这些歌的版权信息,这里使用的是免费音乐库中的曲子链接，纯粹为了演示功能,大家可以挑选自己喜欢的二次元音乐替换链接和封面图！)
+  // 扩充的二次元音乐歌单
+const musicPlaylist = [
+  { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+  { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+  { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+  { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+  { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+  { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+  { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+  { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+  { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+  { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+];
+
+const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+if (sound.menuEl) {
+  musicPlayer.mountToMenu(sound.menuEl); 
+}
+
+// ===== 主循环 =====
+let lastTime = 0;
+
+function mainLoop(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+  lastTime = timestamp;
+
+  stateMachine.update(dt);
+
+  const state       = stateMachine.getState();
+  const pos         = stateMachine.getPos();
+  const velocity    = stateMachine.getVelocity();
+  const facingRight = stateMachine.isFacingRight();
+  const rotation    = stateMachine.getRotation();
+  const spriteOfsY  = stateMachine.getSpriteOffsetY();
+  const fallTargetY = stateMachine.getFallTargetY();
+
+  hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+
+  layers.update({
+    dt, state, facingRight,
+    posX: pos.x,
+    posY: pos.y,
+    spriteOffsetY: spriteOfsY,
+    fallTargetY: fallTargetY,
+    scale: SCALE,
+  });
+
+  sound.update(state);
+  
+  // 更新聊天模块状态检测
+  chat.update(dt, state);
+
+  window.petMainLoopId = requestAnimationFrame(mainLoop);
+}
+
+window.petMainLoopId = requestAnimationFrame(mainLoop);</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';

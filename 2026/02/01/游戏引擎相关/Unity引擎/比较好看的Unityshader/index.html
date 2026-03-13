@@ -91,12 +91,12 @@
 <h3 id="②-带SDF效果"><a href="#②-带SDF效果" class="headerlink" title="② 带SDF效果"></a>② 带SDF效果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Unlit/BtnClickWaveSDFShader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (&quot;Texture&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">        _ColorLeft (&quot;ColorLeft&quot;, Color) = (0,1,0,1)</span><br><span class="line">        _ColorRight (&quot;ColorRight&quot;, Color) = (0,0,1,1)</span><br><span class="line">        [hideInInspector] _CircleScaleOffset (&quot;CircleScaleOffset&quot;, Float) = 1 // Width / Height</span><br><span class="line">        [hideInInspector] _CirclePosOffset (&quot;CirclePosOffset&quot;, Vector) = (0,0,0,0)</span><br><span class="line">        _Radius (&quot;Radius&quot;, Float) = 1.5</span><br><span class="line">        _RadiusThickness (&quot;RadiusThickness&quot;, Float) = 0.2</span><br><span class="line">        [HDR] _WaveColor (&quot;WaveColor&quot;, Color) = (1,1,1,1)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; &quot;RenderType&quot;=&quot;Transparent&quot; &quot;Queue&quot;=&quot;Transparent&quot;&#125;</span><br><span class="line">        Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            #pragma vertex vert</span><br><span class="line">            #pragma fragment frag</span><br><span class="line"></span><br><span class="line">            #include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">            struct appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line">            float4 _ColorLeft;</span><br><span class="line">            float4 _ColorRight;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                return o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                fixed4 shape = tex2D(_MainTex, i.uv);</span><br><span class="line">                fixed4 col = fixed4(lerp(_ColorLeft, _ColorRight, i.uv.x).rgb, shape.a);</span><br><span class="line">                return col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            #pragma vertex vert</span><br><span class="line">            #pragma fragment frag</span><br><span class="line"></span><br><span class="line">            #include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">            struct appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line">            float _CircleScaleOffset;</span><br><span class="line">            float _Radius;</span><br><span class="line">            float4 _CirclePosOffset;</span><br><span class="line">            float _RadiusThickness;</span><br><span class="line">            float4 _WaveColor;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                return o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            float sdCircle(float2 p, float r)</span><br><span class="line">            &#123;</span><br><span class="line">                return length(p) - r;</span><br><span class="line">            &#125;</span><br><span class="line">            float opAnnular(float sdf, float r)</span><br><span class="line">            &#123;</span><br><span class="line">                return abs(sdf) - r;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                fixed4 shape = tex2D(_MainTex, i.uv);</span><br><span class="line">                // 全象限</span><br><span class="line">                i.uv -= _CirclePosOffset.xy;</span><br><span class="line">                i.uv.y = 1.0 - i.uv.y;</span><br><span class="line">                i.uv = i.uv * 2 - 1;</span><br><span class="line">                // 消除屏幕拉伸影响</span><br><span class="line">                float w = _ScreenParams.x;</span><br><span class="line">                float h = _ScreenParams.y;</span><br><span class="line">                half co = w/h * _CircleScaleOffset;</span><br><span class="line">                i.uv = float2(i.uv.x * co, i.uv.y);</span><br><span class="line"></span><br><span class="line">                float step = 1.0 / w;</span><br><span class="line">                fixed4 circle = smoothstep(step, -step, opAnnular(sdCircle(i.uv, _Radius) , _RadiusThickness));</span><br><span class="line"></span><br><span class="line">                fixed4 col = fixed4(circle.rgb, shape.a);</span><br><span class="line">                col.rgb = col.rgb * _WaveColor.rgb;</span><br><span class="line">                col.a *= col.r;</span><br><span class="line">                col.a = _WaveColor.a * col.a;</span><br><span class="line">                </span><br><span class="line">                return col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果图</p>
-<p>​	<style>.yluvvojqvxve{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/image-20260201233916124.png" class="yluvvojqvxve" alt="image-20260201233916124"></p>
+<p>​	<style>.sdhtmgpyzmmd{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/image-20260201233916124.png" class="sdhtmgpyzmmd" alt="image-20260201233916124"></p>
 <h2 id="二-圆角窗口"><a href="#二-圆角窗口" class="headerlink" title="二,圆角窗口"></a>二,圆角窗口</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Unlit/ImageRoundCorner&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        [PerRendererData]_MainTex (&quot;Texture&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">        _Color (&quot;Tint&quot;, Color) = (1,1,1,1)</span><br><span class="line"></span><br><span class="line">        // 四个角的半径</span><br><span class="line">        _Radius (&quot;Corner Radius (LTRB)&quot;, Vector) = (0.1, 0.1, 0.1, 0.1)</span><br><span class="line"></span><br><span class="line">        // 边框</span><br><span class="line">        _BorderWidth (&quot;Border Width&quot;, Float) = 0.0</span><br><span class="line">        _BorderColor (&quot;Border Color&quot;, Color) = (1,1,1,1)</span><br><span class="line"></span><br><span class="line">        // 全局透明度</span><br><span class="line">        _Alpha (&quot;Alpha&quot;, Range(0,1)) = 1.0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;Queue&quot;=&quot;Transparent&quot;</span><br><span class="line">            &quot;IgnoreProjector&quot;=&quot;True&quot;</span><br><span class="line">            &quot;RenderType&quot;=&quot;Transparent&quot;</span><br><span class="line">            &quot;PreviewType&quot;=&quot;Plane&quot;</span><br><span class="line">            &quot;CanUseSpriteAtlas&quot;=&quot;True&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Cull Off</span><br><span class="line">        Lighting Off</span><br><span class="line">        ZWrite Off</span><br><span class="line">        Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            #pragma vertex vert</span><br><span class="line">            #pragma fragment frag</span><br><span class="line">            #include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">            struct appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float4 color : COLOR;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                float4 color : COLOR;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            float4 _MainTex_TexelSize;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line"></span><br><span class="line">            float4 _Radius; // 左上、右上、右下、左下 半径</span><br><span class="line">            float _BorderWidth;</span><br><span class="line">            fixed4 _BorderColor;</span><br><span class="line">            float _Alpha;</span><br><span class="line"></span><br><span class="line">            v2f vert(appdata v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                o.color = v.color * _Color;</span><br><span class="line">                return o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag(v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                fixed4 col = tex2D(_MainTex, i.uv) * i.color;</span><br><span class="line">                float2 uv = i.uv;</span><br><span class="line">                float width = 1.0;</span><br><span class="line">                float height = 1.0;</span><br><span class="line"></span><br><span class="line">                float rL = _Radius.x; // 左上</span><br><span class="line">                float rR = _Radius.y; // 右上</span><br><span class="line">                float rB = _Radius.z; // 右下</span><br><span class="line">                float rBL = _Radius.w; // 左下</span><br><span class="line"></span><br><span class="line">                float b = _BorderWidth;</span><br><span class="line"></span><br><span class="line">                // 四个角圆角+边框处理</span><br><span class="line">                float2 p = uv;</span><br><span class="line"></span><br><span class="line">                // 左下角</span><br><span class="line">                if (p.x &lt; rBL &amp;&amp; p.y &lt; rBL)</span><br><span class="line">                &#123;</span><br><span class="line">                    float d = distance(p, float2(rBL, rBL));</span><br><span class="line">                    if (d &gt; rBL) col.a = 0;</span><br><span class="line">                    else if (b &gt; 0 &amp;&amp; d &gt; rBL - b) col = _BorderColor;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // 左上角</span><br><span class="line">                if (p.x &lt; rL &amp;&amp; p.y &gt; 1 - rL)</span><br><span class="line">                &#123;</span><br><span class="line">                    float d = distance(p, float2(rL, 1 - rL));</span><br><span class="line">                    if (d &gt; rL) col.a = 0;</span><br><span class="line">                    else if (b &gt; 0 &amp;&amp; d &gt; rL - b) col = _BorderColor;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // 右下角</span><br><span class="line">                if (p.x &gt; 1 - rB &amp;&amp; p.y &lt; rB)</span><br><span class="line">                &#123;</span><br><span class="line">                    float d = distance(p, float2(1 - rB, rB));</span><br><span class="line">                    if (d &gt; rB) col.a = 0;</span><br><span class="line">                    else if (b &gt; 0 &amp;&amp; d &gt; rB - b) col = _BorderColor;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // 右上角</span><br><span class="line">                if (p.x &gt; 1 - rR &amp;&amp; p.y &gt; 1 - rR)</span><br><span class="line">                &#123;</span><br><span class="line">                    float d = distance(p, float2(1 - rR, 1 - rR));</span><br><span class="line">                    if (d &gt; rR) col.a = 0;</span><br><span class="line">                    else if (b &gt; 0 &amp;&amp; d &gt; rR - b) col = _BorderColor;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // 透明度控制</span><br><span class="line">                col.a *= _Alpha;</span><br><span class="line"></span><br><span class="line">                return col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果图</p>
-<p>​	<style>.wkvagxrpuqvv{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/image-20260201234237217.png" class="wkvagxrpuqvv" alt="image-20260201234237217"></p>
-<p>我去,感觉自己对shader的理解程度不到百分之0.01,实锤了我是菜逼看也看不懂改也改不了只会用,听说这玩意的本质是数学,好像是线性代数还是什么,但是我之前线性代数和高等数学差点就挂了……so,数学这种抽象东西还是给AI来吧,人类一败涂地<style>.rnafehsduunq{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="rnafehsduunq" alt="1f436"><style>.glgijbpoxhqh{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="glgijbpoxhqh" alt="1f436"><style>.dinvyvxfxdco{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="dinvyvxfxdco" alt="1f436"></p>
+<p>​	<style>.lyhsmlklvokd{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/image-20260201234237217.png" class="lyhsmlklvokd" alt="image-20260201234237217"></p>
+<p>我去,感觉自己对shader的理解程度不到百分之0.01,实锤了我是菜逼看也看不懂改也改不了只会用,听说这玩意的本质是数学,好像是线性代数还是什么,但是我之前线性代数和高等数学差点就挂了……so,数学这种抽象东西还是给AI来吧,人类一败涂地<style>.ikuxyramjesv{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="ikuxyramjesv" alt="1f436"><style>.ncafucxwsaed{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="ncafucxwsaed" alt="1f436"><style>.idjtcrgvllid{zoom:25%;}</style><img src="/2026/02/01/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9C%8B%E7%9A%84Unityshader/1f436.png" class="idjtcrgvllid" alt="1f436"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -132,7 +132,257 @@ window.tocConfig = {
   onCommentLoaded: function () {
     console.log('Twikoo评论加载成功');
   }
-});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+
+/* 汗水粒子 */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+/* 烟雾粒子 */
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">// 【修复】防重检测：确保页面只有一个桌宠（解决 Pjax 页面切换出现双宠的问题）
+const existingRoots = document.querySelectorAll('#pet-root');
+if (existingRoots.length > 1) {
+  for (let i = 0; i < existingRoots.length - 1; i++) {
+    existingRoots[i].remove();
+  }
+}
+
+if (window.petMainLoopId) {
+  cancelAnimationFrame(window.petMainLoopId);
+}
+
+import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+// ===== 常量 =====
+const IMG_PATH = '/images/pet/';
+
+// 角色整体缩放 0.3 倍
+const VISUAL_SCALE = 0.3;
+const BASE_SCALE   = 4;                    
+const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+const RAW_W        = 32;
+const RAW_H        = 32;
+const W            = RAW_W * SCALE;         
+const H            = RAW_H * SCALE;         
+const MAX_SPEED    = 60;                    
+
+// ===== DOM =====
+const elRoot       = document.getElementById('pet-root');
+const elInner      = document.getElementById('pet-inner');
+const elSprite     = document.getElementById('pet-sprite');
+const elDebugZone  = document.getElementById('pet-debug-zone');
+const elHalo       = document.getElementById('pet-halo');
+const elShadow     = document.getElementById('pet-shadow');
+const elSweat      = document.getElementById('pet-sweat-container');
+const elSmoke      = document.getElementById('pet-smoke-container');
+const elHairCanvas = document.getElementById('pet-hair-canvas');
+const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+// ===== 布局 =====
+elInner.style.width  = W + 'px';
+elInner.style.height = H + 'px';
+elInner.style.left   = (-W / 2) + 'px';
+elInner.style.top    = (-H) + 'px';
+
+// 头发画布
+const HAIR_CANVAS_SIZE = 384;
+elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+elChatBubble.style.top = (-H - 10) + 'px';
+
+// ===== 模块实例化 =====
+const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+
+const stateMachine = new PetStateMachine({
+  rootEl:      elRoot,
+  innerEl:     elInner,
+  spriteEl:    elSprite,
+  debugZoneEl: elDebugZone,
+  sprite:      sprite,
+  spriteW:     W,
+  spriteH:     H,
+  onStateChange: () => {},
+});
+
+const hair = new PetHair(elHairCanvas, BASE_SCALE);
+
+const layers = new PetLayers({
+  haloEl:         elHalo,
+  shadowEl:       elShadow,
+  sweatContainer: elSweat,
+  smokeContainer: elSmoke,
+}, IMG_PATH);
+
+// 音效
+const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+
+// 描边
+const outline = new PetOutline(elInner);
+
+// 聊天气泡模块
+const chat = new PetChat(
+  document.getElementById('pet-chat-bubble'), 
+  document.getElementById('pet-chat-text'), 
+  elInner
+);
+
+// 音乐播放器模块 (内置几首歌曲演示---注意名字是随便写的,其实并不是这些歌的版权信息,这里使用的是免费音乐库中的曲子链接，纯粹为了演示功能,大家可以挑选自己喜欢的二次元音乐替换链接和封面图！)
+  // 扩充的二次元音乐歌单
+const musicPlaylist = [
+  { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+  { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+  { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+  { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+  { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+  { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+  { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+  { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+  { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+  { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+];
+
+const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+if (sound.menuEl) {
+  musicPlayer.mountToMenu(sound.menuEl); 
+}
+
+// ===== 主循环 =====
+let lastTime = 0;
+
+function mainLoop(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+  lastTime = timestamp;
+
+  stateMachine.update(dt);
+
+  const state       = stateMachine.getState();
+  const pos         = stateMachine.getPos();
+  const velocity    = stateMachine.getVelocity();
+  const facingRight = stateMachine.isFacingRight();
+  const rotation    = stateMachine.getRotation();
+  const spriteOfsY  = stateMachine.getSpriteOffsetY();
+  const fallTargetY = stateMachine.getFallTargetY();
+
+  hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+
+  layers.update({
+    dt, state, facingRight,
+    posX: pos.x,
+    posY: pos.y,
+    spriteOffsetY: spriteOfsY,
+    fallTargetY: fallTargetY,
+    scale: SCALE,
+  });
+
+  sound.update(state);
+  
+  // 更新聊天模块状态检测
+  chat.update(dt, state);
+
+  window.petMainLoopId = requestAnimationFrame(mainLoop);
+}
+
+window.petMainLoopId = requestAnimationFrame(mainLoop);</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
