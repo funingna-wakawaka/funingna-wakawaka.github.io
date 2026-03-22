@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><a class="nav-item" target="_blank" rel="noopener" href="https://www.pizzint.watch/polyglobe">全球动态检测</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/11.png" alt="一些我感觉很有意思的心理学效应"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E5%BF%83%E7%90%86%E5%AD%A6/">心理学</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-01-04T09:07:38.000Z">2026-01-04</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>2.9k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>9</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">一些我感觉很有意思的心理学效应</h1><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近B站总是刷到一些营销号讲心理学-原本我是统统屏蔽了-但是后来又开始好奇他们讲的的心理学效应是真是假-于是我就去查了几个记忆深刻的几个"><a href="#最近B站总是刷到一些营销号讲心理学-原本我是统统屏蔽了-但是后来又开始好奇他们讲的的心理学效应是真是假-于是我就去查了几个记忆深刻的几个" class="headerlink" title="最近B站总是刷到一些营销号讲心理学,原本我是统统屏蔽了,但是后来又开始好奇他们讲的的心理学效应是真是假,于是我就去查了几个记忆深刻的几个"></a>最近B站总是刷到一些营销号讲心理学,原本我是统统屏蔽了,但是后来又开始好奇他们讲的的心理学效应是真是假,于是我就去查了几个记忆深刻的几个</h1><h2 id="一-韦斯特马克效应-Westermarck-effect"><a href="#一-韦斯特马克效应-Westermarck-effect" class="headerlink" title="一  : 韦斯特马克效应    (Westermarck effect)"></a>一  : 韦斯特马克效应    (Westermarck effect)</h2><p>由芬兰人类学家<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%88%B1%E5%BE%B7%E5%8D%8E%C2%B7%E9%9F%A6%E6%96%AF%E7%89%B9%E9%A9%AC%E5%85%8B/15630741?fromModule=lemma_inlink"><font color='Red'>爱德华·韦斯特马克</font></a>在他的著作《The History of Human Marriage》（人类婚姻史）中提出，两个早年共同长大的儿童在成年后通常不会对彼此产生性吸引力；有血缘关系者也会存在亲缘监测机制（亲缘监测机制异常除外，血缘关系越近越明显。）来保护；无血缘关系者由于生活在一起后可不会成年后产生性吸引,出生后六年的成长环境是一个关键时间点，其间生活在一起二者性吸引几率全会大大降低。</p>
+<p>这种现象产生也是刻在人类DNA里面的,毕竟哺乳动物近亲繁殖多半后代因隐形基因发力导致先天患病或者夭折</p>
+<p>感觉没有任何毛病,所以各位哥布林们,少看点有关青梅竹马和兄妹姐弟的动漫,电视剧,漫画或者小片片吧  <font color='Gold'>狗头  狗头  狗头</font></p>
+<p><strong>前提条件非常明确：</strong></p>
+<blockquote>
+<p><strong>在幼年关键期（约 0–6 岁）长期共同生活 → 自动去性化</strong></p>
+</blockquote>
+<p>重点不是“血缘”，而是</p>
+<ul>
+<li>是否 <strong>幼年长期共处</strong></li>
+<li>是否形成 <strong>亲属模板</strong></li>
+</ul>
+<p>像《缘之空》里的这种德国骨科剧情不满足这种心理学效应, 而是另一个反转的对立效应—– <strong>遗传性性吸引</strong></p>
+<h2 id="二-遗传性性吸引-Genetic-sexual-attraction，GSA"><a href="#二-遗传性性吸引-Genetic-sexual-attraction，GSA" class="headerlink" title="二: 遗传性性吸引 (Genetic sexual attraction，GSA)"></a>二: 遗传性性吸引 (Genetic sexual attraction，GSA)</h2><p>指因遗传基因相似、长期分离的近亲成年后首次相遇时产生的本能性吸引力，常见于平辈、亲子或隔代亲属间。该现象与亲缘检测机制相悖，血缘越近吸引力越强，但共同成长的亲属因韦斯特马克效应通常不会产生性吸引 。</p>
+<p>其机制与早期亲密关系缺失相关，成年后重聚可能试图弥补情感缺失进而发展为性吸引 。1995年《英国医学心理学期刊》超50%寄养儿童与家人重聚时出现强烈性冲动。血缘相近者基因相似度高，外貌、性格等相似性易引发异性间性吸引力</p>
+<p>所以再回头看看  <strong>春日野悠</strong>  和  <strong>春日野穹</strong> 是不是满足该效应的所有条件呢—–俩苦命鸳鸯长得一模一样,小的时候俩人分居过很长时间</p>
+<h2 id="三-破窗效应-Broken-windows-theory"><a href="#三-破窗效应-Broken-windows-theory" class="headerlink" title="三: 破窗效应 (Broken windows theory)"></a>三: 破窗效应 (Broken windows theory)</h2><p>是犯罪学的一个理论，该理论由詹姆士·威尔逊（James Q. Wilson）及乔治·凯林（George L. Kelling）提出，并刊于《The Atlantic Monthly》1982年3月版的一篇题为《Broken Windows》的文章。</p>
+<p>该理论认为如果一扇窗被打破却无人修理，人们会推断：<br>这里没人管、规则不重要、越界成本很低</p>
+<p>此理论认为任何可见的混乱、忽视与犯罪的迹象，例如破窗（这也是一这一理论的名称来源）、破坏公物、乞丐、酒鬼等，可能会鼓励一个地区进一步的犯罪和反社会行为。因为以上的迹象表明，该地区的秩序已被破坏，且缺少执法</p>
+<p>这里可以用一个直观的例子—– 比如旷课只有0次和无数次  或者 一个人开始发龙图和奶龙图,整个QQ群都逐渐开始抽象起来<font color='Gold'>滑稽  滑稽  滑稽</font></p>
+<h2 id="四-责任分担效应-responsibility-sharing"><a href="#四-责任分担效应-responsibility-sharing" class="headerlink" title="四:  责任分担效应 (responsibility sharing)"></a>四:  责任分担效应 (responsibility sharing)</h2><p>最早解释冒险转移的理论。认为群体比个体更富于冒险精神的原因是群体决策冒险的结果将由群体承担，责任将由于分散到各个成员身上而减小，因而个体减少了对失败的恐惧</p>
+<p>这种现象不能仅仅说是众人的冷酷无情，或道德日益沦丧的表现。因为在不同的场合，人们的援助行为确实是不同的。当一个人遇到紧急情境时，如果只有他一个人能提供帮助，他会清醒地意识到自己的责任，对受难者给予帮助。如果他见死不救会产生罪恶感、内疚感，这需要付出很高的心理代价。而如果有许多人在场的话，帮助求助者的责任就由大家来分担，造成责任分散，每个人分担的责任很少，旁观者甚至可能连他自己的那一份责任也意识不到，从而产生一种“我不去救，由别人去救”的心理，造成“集体冷漠”的局面。</p>
+<p>我举个例子(狗头狗头狗头):假如你的全班平均分年级倒数第一或者公司里小组业绩倒数第一  ,班主任或者你的老板把所有人都骂一遍,但是你八成觉得无所谓,反正骂的是所有人又不是你一个,但是假如就骂你一个,你八成觉得非常不爽</p>
+<h2 id="五-孤独（loneliness）"><a href="#五-孤独（loneliness）" class="headerlink" title="五: 孤独（loneliness）"></a>五: 孤独（loneliness）</h2><p>这也是我正在经历的比较痛苦的一件事吧,不过手机和电脑暂时冲散了我这种感觉,感谢现代科技    <font color='Gold'>狗头 狗头 狗头</font></p>
+<p>孤独（loneliness）在现实生活中经常被人所提及，孤独就是一种主观上的社交孤立状态，伴有个人知觉到自己与他人隔离或缺乏接触而产生的不被接纳的痛苦体验  ,是一种不愉快的，令人痛苦的主观体验或心理感，大多数人都体验过孤独的痛苦。有关统计资料表明、孤独感已成为现代人的通病。估计随着社会变得越来越富有，这种对孤独感和人与人之间关系的关注将继续增长</p>
+<p>在青少年时期，自我意识开始觉醒并逐渐建立，产生了了解别人内心世界并被其他同龄人接受的需要。他们很关心自己在他人心目中的地位和形象，重视他人的评价。正因为这样，他们会将自己隐藏起来。一方面他们觉得自己心中有很多秘密，不愿告诉别人，有一种封闭心理；另一方面他们又特渴望别人能真正了解自己。这种需要得不到满足时，便会陷入惆怅和苦恼，产生孤独感</p>
+<p>希望我快点战胜这种感觉吧,唉,我也是越来越不会与人社交了,一天到晚只会和AI沟通游戏开发相关的知识(吐槽一下,ChatCPT就像奴才一样恭维,Gemini一用中文就降智,Deepseek服务器像土豆一样回答速度慢的离谱,Kimi就像聪明一点的浏览器的SB,豆包?我只是单纯不喜欢字节跳动的产品)</p>
+<p>毕竟是写到我们的DNA里面的,但是在现代社会,现实中的社交有的时候也不是这么重要,所以抖音 快手 小红书 B站 QQ Youtube Facebook Discord这些虚拟社交平台才会迅速火爆来打消人们的空虚寂寞感,但我觉得这些反而会加剧人与人之间的隔阂</p>
+<p>这个起源于远古时期古人类的生存法则 </p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>实际含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>被群体接纳</td>
+<td>食物、防御、繁殖机会</td>
+</tr>
+<tr>
+<td>被群体忽视</td>
+<td>受伤无人救</td>
+</tr>
+<tr>
+<td>被群体排斥</td>
+<td><strong>高概率直接死亡</strong></td>
+</tr>
+</tbody></table>
+<h2 id="六-操作性条件反射（Operant-Conditioning）"><a href="#六-操作性条件反射（Operant-Conditioning）" class="headerlink" title="六: 操作性条件反射（Operant Conditioning）"></a>六: 操作性条件反射（Operant Conditioning）</h2><p>亦称“工具性条件反射”。是由美国行为主义心理学家斯金纳20世纪30年代在经典条件反射的基础上创立的实验方法。他为研究动物的学习行为，采用精确的测量习得反应技术，设计了一种由动物进行操作活动的实验箱（通常称斯金纳箱），用来测定动物完成压杆或按键活动的特定反应。除了可训练大鼠，还可训练猫、家兔和猕猴等实验动物进行该项操作。可分为食物性和防御性两种形式</p>
+<p>其中 ,他还做了一个实验——在这个实验中，斯金纳用了8只鸽子作为实验对象，把它们单独放进实验箱里。当鸽子按下箱子内的遥控杆时，15秒后会掉落食物。他观察到，在这15秒钟内，鸽子会出现一些随机行为，比如逆时针转圈、摇头晃脑等等。有趣的是，有6只鸽子会在每一次食物掉落时重复这些迷信行为。</p>
+<p>接下来，斯金纳把食物掉落的时间间隔延长至1分钟，结果这些鸽子对这些行为的重复变得更加频繁。为什么会出现这种情况呢？鸽子不知道食物会延迟掉落，而是以为自己的随机行为带来了食物。每一次食物掉落，都强化了它们的这些行为。斯金纳把这种情况称为“非关联性强化”</p>
+<p>像不像玩 原神 鸣潮 崩坏 崩铁 绝区零 方舟 战双帕弥什  重返未来还有蔚蓝档案 抽卡前双手合十默默祈祷十连三金的各位兄弟们  <font color='Gold'>狗头狗头狗头</font></p>
+<h2 id="七-那什均衡-Nash-Equilibrium"><a href="#七-那什均衡-Nash-Equilibrium" class="headerlink" title="七: 那什均衡 ( Nash Equilibrium )"></a>七: 那什均衡 ( Nash Equilibrium )</h2><p>严格来说这个并不算是心理学效应更像是社会效应,这个本质就是一个博弈论</p>
+<blockquote>
+<p>在博弈中，当每个参与者都选择了自己的最优策略，<br>且没有任何人可以通过单方面改变策略而获得更大利益时，<br>就达到了纳什均衡。</p>
+</blockquote>
+<p>说人话就是敌不动我不动</p>
+<p>很多老商业竞争对手之间就存在这样的效应比如可口可乐和百事可乐,肯德基和麦当劳</p>
+<p>就是双方都明白搞死对方对自己反而没有好处,只能明争暗斗互相制衡,比如可口可乐和百事可乐塑料瓶装都是3块从来不涨价就是因为这个,肯德基旁边必定有麦当劳,蜜雪冰城附近必定有其他饮料店,众多手游网游里大氪金基本上都是类似的价钱比如128,648这些离谱的价格</p>
+<p>这个还有一个经典的例子,比如囚徒困境（Prisoner’s Dilemma）,不过我们用现实中的例子来说吧:王老吉和加多宝,反正我现在再也没看到超市里卖这两个饮料了,以前广告打的飞起,两个之前相当于都想搞死对方总是互相起诉,结果就是都逐渐消失在饮料市场</p>
+<br>
+
+<br>
+
+<p>这些效应太多了,不过这是我觉得比较有意思的几个,还有其他的你们可以选择自己查或看视频了解   不过我说白了,无非这些人类情感是咱们的DNA发力了,激素调节出来的罢了 比如我放几个瑟图,刚看完看这些干巴巴的理论的你八成瞬间来精神了,你说对吧(如果你只对现实中的真人感兴趣当我没说)</p>
+<style>.ghczjoxzhqlr{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/17674089961868672.jpeg" class="ghczjoxzhqlr" alt="3k碧蓝档案少女壁纸｜制服背景图片 - 坐姿「哲风壁纸」">
+
+<style>.rfyvyqrqbdjm{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/17674090138488192.jpeg" class="rfyvyqrqbdjm" alt="8k碧蓝档案壁纸｜少女背景图片 - 学生制服「哲风壁纸」">
+
+<style>.ttdvdcowbvgo{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/16275633157426560.jpeg" class="ttdvdcowbvgo" alt="3k碧蓝档案美少女壁纸｜可爱少女背景图片 - 碧蓝档案「哲风壁纸」">
+
+<style>.rofnhdogrilu{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/17327741277818240.jpeg" class="rofnhdogrilu" alt="3k卡提希娅壁纸｜动漫背景图片 - 金发「哲风壁纸」">
+
+<style>.qsvcunsgqpqc{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/17674099686493568.jpeg" class="qsvcunsgqpqc" alt="4k碧蓝档案壁纸｜银发少女背景图片 - 粉色沙发「哲风壁纸」">
+
+<style>.bnwuplrrmwmv{}</style><img src="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/15946454747565440.jpeg" class="bnwuplrrmwmv" alt="4k白丝壁纸-碧蓝背景图片 - 精选壁纸「哲风壁纸」"></div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/01/05/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/Resource%20Hacker%E8%BD%AF%E4%BB%B6/"><span class="nav-label">← 上一篇</span><span class="nav-title">Resource Hacker软件推荐</span></a></div><div class="post-nav next"><a href="/2026/01/02/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/04-%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/"><span class="nav-label">下一篇 →</span><span class="nav-title">04-一些思考</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E6%95%88%E5%BA%94&amp;url=%2F2026%2F01%2F04%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25BA%259B%25E6%2588%2591%25E6%2584%259F%25E8%25A7%2589%25E5%25BE%2588%25E6%259C%2589%25E6%2584%258F%25E6%2580%259D%25E7%259A%2584%25E5%25BF%2583%25E7%2590%2586%25E5%25AD%25A6%25E7%2590%2586%25E8%25AE%25BA%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F01%2F04%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25BA%259B%25E6%2588%2591%25E6%2584%259F%25E8%25A7%2589%25E5%25BE%2588%25E6%259C%2589%25E6%2584%258F%25E6%2580%259D%25E7%259A%2584%25E5%25BF%2583%25E7%2590%2586%25E5%25AD%25A6%25E7%2590%2586%25E8%25AE%25BA%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F01%2F04%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25BA%259B%25E6%2588%2591%25E6%2584%259F%25E8%25A7%2589%25E5%25BE%2588%25E6%259C%2589%25E6%2584%258F%25E6%2580%259D%25E7%259A%2584%25E5%25BF%2583%25E7%2590%2586%25E5%25AD%25A6%25E7%2590%2586%25E8%25AE%25BA%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F01%2F04%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25BA%259B%25E6%2588%2591%25E6%2584%259F%25E8%25A7%2589%25E5%25BE%2588%25E6%259C%2589%25E6%2584%258F%25E6%2580%259D%25E7%259A%2584%25E5%25BF%2583%25E7%2590%2586%25E5%25AD%25A6%25E7%2590%2586%25E8%25AE%25BA%2F&amp;title=%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E6%95%88%E5%BA%94" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F01%2F04%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25BA%259B%25E6%2588%2591%25E6%2584%259F%25E8%25A7%2589%25E5%25BE%2588%25E6%259C%2589%25E6%2584%258F%25E6%2580%259D%25E7%259A%2584%25E5%25BF%2583%25E7%2590%2586%25E5%25AD%25A6%25E7%2590%2586%25E8%25AE%25BA%2F&amp;title=%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E6%95%88%E5%BA%94" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/01/04/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%88%91%E6%84%9F%E8%A7%89%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%BF%83%E7%90%86%E5%AD%A6%E7%90%86%E8%AE%BA/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
