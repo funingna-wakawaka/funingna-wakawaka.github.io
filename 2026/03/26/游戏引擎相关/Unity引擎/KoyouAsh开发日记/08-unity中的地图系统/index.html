@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/1.png" alt="unity中的地图系统"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-03-26T03:22:33.000Z">2026-03-26</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>6</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">unity中的地图系统</h1><div class="post-tags"><a class="tag" href="/tags/Unity/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Unity</a><a class="tag" href="/tags/koyouAsh/"><i class="fas fa-tag" style="margin-right: 3px"> </i>koyouAsh</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来了解一下地图系统-这个相对简单"><a href="#今天来了解一下地图系统-这个相对简单" class="headerlink" title="今天来了解一下地图系统,这个相对简单"></a>今天来了解一下地图系统,这个相对简单</h1><p>​	<style>.xjxfkvthddot{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112434254.png" class="xjxfkvthddot" alt="image-20260326112434254"></p>
+<p>首先我们在Hierarchy(层级)窗口里右键</p>
+<p>然后2D object(二维对象)-&gt;tilemap(瓦片地图)-&gt;rectangular(矩形瓦片)</p>
+<p>这里我们管2D游戏里的地图统称tilemap即瓦片,这个在其他游戏引擎里也是相同的定义,瓦片就是附着在游戏地图上的“贴图”</p>
+<p>创建完成之后就会看到层级窗口出现了这个东西,不管你选择什么类型的瓦片都是以Grid(网格) 作为父对象的</p>
+<p>​	<style>.fjxdcbyhuptg{zoom: 25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112939546.png" class="fjxdcbyhuptg" alt="image-20260326112939546"></p>
+<p>但是有什么用呢?这时候就需要一个东西了—–那就是瓦片面板 tile palette</p>
+<p>​	<style>.czanozljabcc{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113100791.png" class="czanozljabcc" alt="image-20260326113100791"></p>
+<p>众所周知,在游戏引擎中,如果场景中充满了不同资源,那么将会占用非常巨大的内存(很多大厂的游戏动辄100G  200G就是因为里面充满了美术和建模资源),然而如果场景中都是相同的资源,比如NPC小怪都是一样的,采用的都是相同的贴图资源,那么其实所有小怪贴图占用的存储空间其实只有一张贴图的存储空间,这里就体现地图系统的优点了—–在场景中轻而易举的复用贴图资源而非一张一张的手动调整</p>
+<p>首先第一步,选中一张贴图</p>
+<p>​	<style>.iicsgoorwpti{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113922955.png" class="iicsgoorwpti" alt="image-20260326113922955"></p>
+<p>然后左键长按拖到右边面板中</p>
+<p>​	<style>.taxyxaiqfigx{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114008462.png" class="taxyxaiqfigx" alt="image-20260326114008462"></p>
+<p>然后你就可以看到右边的面板出现了这个贴图</p>
+<p>然后我们就可以像使用油画盘蘸颜料一样在Scene场景中使用这些贴图</p>
+<p>当我们选中一张贴图时,就可以看到上面自动切换到这个画笔模式</p>
+<p>​	<style>.mffifwrhqfou{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114400352.png" class="mffifwrhqfou" alt="image-20260326114400352"></p>
+<p>然后在scene场景里按住左键画几笔就会发现,贴图就像颜料一样附着在游戏场景中</p>
+<p>​	<style>.ipoprlyqxfql{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114552239.png" class="ipoprlyqxfql" alt="image-20260326114552239"></p>
+<p>这里还可以批量框选填充</p>
+<p>就是选择画笔形状旁边的那个fill填充模式</p>
+<p>​	<style>.tzwxflyducow{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114702852.png" class="tzwxflyducow" alt="image-20260326114702852"></p>
+<p>以此类推,我们就画好地图了</p>
+<p>​	<style>.hunkkuowvrgj{zoom: 25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326115222320.png" class="hunkkuowvrgj" alt="image-20260326115222320"></p>
+<p>然而现实没有这么“轻而易举”,这种确实很适合制作传说之下星露谷物语这种类型的游戏,但是玩家更喜欢地图是变化的,可破坏的,或者卷轴滚动的,就先不说这个了</p>
+<p>哦对了,忘记说怎么制作瓦片地图了,这个也很简单,不过在此之前我们学一下怎么删除不小心放进入的多余的瓦片</p>
+<p>首先在tile palette中选择这个多余的瓦片,然后查看右侧的inspector检查器窗口</p>
+<p>​	<style>.jcicxvyshllj{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120846757.png" class="jcicxvyshllj" alt="image-20260326120846757"></p>
+<p>可以看到已经删掉了</p>
+<p>​	<style>.svfvtsfoneuj{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120701704.png" class="svfvtsfoneuj" alt="image-20260326120701704"></p>
+<p>瓦片的制作分为两种,第一种就是不切割整个放进去适合小瓦片,例如我们刚才放的人物</p>
+<p>​	这种直接把png图片拖入unity的asset文件夹里,然后拖到tile palette即可</p>
+<p>​	但是这种不适合大图片,不然就会创造出巨大无比的瓦片</p>
+<p>​	<style>.ymknrenesafj{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121501537.png" class="ymknrenesafj" alt="image-20260326121501537"></p>
+<p>所以我们需要切割瓦片</p>
+<p>首先选中图片,然后在inspector里注意选择这两个选项—–sprite mode选择多张图mulyiple,为我们切割图片做准备</p>
+<p>filter mode 选择 point(no filter)邻点差值采样,不然放进入的图片糊的一批</p>
+<p>​	<style>.kvsrmurbdedx{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121844173.png" class="kvsrmurbdedx" alt="image-20260326121844173"></p>
+<p>然后点击apply 应用设置,并点击sprite editor精灵图编辑器</p>
+<p>​	<style>.qdcypplanzbz{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122451764.png" class="qdcypplanzbz" alt="image-20260326122451764"></p>
+<p>好的,我们刚才的瓦片地图的大小是16×16的,所以切割时可以选择16×16</p>
+<p>​	<style>.wwdukvuniyva{zoom:25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122756124.png" class="wwdukvuniyva" alt="image-20260326122756124"></p>
+<p>这里我们选择64×64吧</p>
+<p>​	<style>.rhrtorurnkru{zoom: 25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122941128.png" class="rhrtorurnkru" alt="image-20260326122941128"></p>
+<p>然后就会看到蓝发娘被我们“碎尸”了</p>
+<p>​	<style>.hbgqjopimubd{zoom:25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123120700.png" class="hbgqjopimubd" alt="image-20260326123120700"></p>
+<p>使用的话可以按住shift加选(而按住ctrl是减选)</p>
+<p>​	<style>.scnmtqlnksmo{zoom:25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123406515.png" class="scnmtqlnksmo" alt="image-20260326123406515"></p>
+<p>然后就可以看到</p>
+<p>​	<style>.htleisstmrlr{zoom:25%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326131854826.png" class="htleisstmrlr" alt="image-20260326131854826"></p>
+<p>当然为了避免素材之间出现鱼龙混杂的情况,我们可以对于每一个场景都创建一个瓦片面板</p>
+<p>​	<style>.ygrcquxdmwlv{zoom:50%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326132808554.png" class="ygrcquxdmwlv" alt="image-20260326132808554"></p>
+<p>好地图讲完了,其实还有一个东西就是地图碰撞体组件,也就是地图空气墙,这里由于用不上就不说了</p>
+<p>然后就是完善我们的人物,上次我说了这是跟着教程做的半成品,这次来完善角色的枪械发射功能\</p>
+<h2 id="角色枪械发射功能"><a href="#角色枪械发射功能" class="headerlink" title="角色枪械发射功能"></a>角色枪械发射功能</h2><p>上次我们的角色的脚本是这个</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Player_Controller</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 玩家移动相关变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> playerSpeed = <span class="number">5f</span>;<span class="comment">//玩家速度</span></span><br><span class="line">    <span class="keyword">private</span> Rigidbody2D playerRigidbody;<span class="comment">//玩家刚体</span></span><br><span class="line">    <span class="keyword">private</span> Animator playerAnimator;<span class="comment">//玩家动画</span></span><br><span class="line">    <span class="keyword">private</span> Vector2 movementInput;<span class="comment">//玩家输入,用于移动</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//武器相关变量</span></span><br><span class="line">    <span class="keyword">public</span> GameObject[] weapons;<span class="comment">//武器数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> currentWeaponIndex;<span class="comment">//当前武器索引</span></span><br><span class="line">    <span class="keyword">private</span> Vector2 mousePosition;<span class="comment">//鼠标位置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        GetComponents();<span class="comment">//获取组件引用</span></span><br><span class="line"></span><br><span class="line">        weapons[<span class="number">0</span>].SetActive(<span class="literal">true</span>);<span class="comment">//默认激活第一把武器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        MovementLogic();<span class="comment">//玩家控制行为</span></span><br><span class="line">        SwitchWeapon();<span class="comment">//切换武器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取组件引用</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">GetComponents</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        playerRigidbody = GetComponent&lt;Rigidbody2D&gt;();</span><br><span class="line">        playerAnimator = GetComponent&lt;Animator&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//玩家控制行为</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MovementLogic</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//获取玩家输入</span></span><br><span class="line">        movementInput.x = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line">        movementInput.y = Input.GetAxisRaw(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//移动玩家的刚体而非直接移动Transform</span></span><br><span class="line">        playerRigidbody.velocity = movementInput.normalized * playerSpeed;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取鼠标在世界坐标中的位置</span></span><br><span class="line">        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据鼠标位置调整玩家朝向</span></span><br><span class="line">        <span class="keyword">if</span> (mousePosition.x &gt; transform.position.x)</span><br><span class="line">        &#123;</span><br><span class="line">            transform.rotation = Quaternion.Euler(<span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            transform.rotation = Quaternion.Euler(<span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据角色移动状态切换动画</span></span><br><span class="line">        <span class="keyword">if</span> (movementInput != Vector2.zero)</span><br><span class="line">        &#123;</span><br><span class="line">            playerAnimator.SetBool(<span class="string">&quot;isMoving&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            playerAnimator.SetBool(<span class="string">&quot;isMoving&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//切换武器</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SwitchWeapon</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown(KeyCode.Q))</span><br><span class="line">        &#123;</span><br><span class="line">            weapons[currentWeaponIndex].SetActive(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (--currentWeaponIndex &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                currentWeaponIndex = weapons.Length - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            weapons[currentWeaponIndex].SetActive(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown(KeyCode.E))</span><br><span class="line">        &#123;</span><br><span class="line">            weapons[currentWeaponIndex].SetActive(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (++currentWeaponIndex &gt; weapons.Length - <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                currentWeaponIndex = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            weapons[currentWeaponIndex].SetActive(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>已经是实现了武器的切换功能</p>
+<p>但是发射功能的话就需要给武器写一个脚本,</p>
+<blockquote>
+<p>这里你可能会疑问为什么武器切换逻辑放到玩家脚本中,因为切换武器这个行为属于玩家,不是武器自己切换</p>
+</blockquote>
+<p>因为是面向对象,则与对象相关的所有内容需要放到对象相关的类中</p>
+<p>后面会涉及面向对象的继承,不过我们先把精力全部放到单个武器上(为什么需要继承? 因为狙击枪,霰弹枪,手枪都属于枪,如果给每一个枪都写一个独立脚本浪费资源,但让所有枪都继承“枪”这个脚本就会节省代码量还便于管理)</p>
+<p>​	<style>.njtlvatisrwd{zoom: 80%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135108071.png" class="njtlvatisrwd" alt="image-20260326135108071"></p>
+<p>对了,你可能不知道这个蓝色的条是什么,这个其实就是当预制体配置发生改变时就会出现</p>
+<p>只需要在inspector检查器窗口里覆盖实现更改就行</p>
+<p>​	<style>.feuwjlvpxghg{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135311665.png" class="feuwjlvpxghg" alt="image-20260326135311665"></p>
+<p>不过也可以斩断这个对象与文件夹中的预制体的联系,通过unpack解除联系,这样对这个对象的修改就不会影响到预制体了</p>
+<p>​	<style>.onyyrfmmdljl{zoom:33%;}</style><img src="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135416682.png" class="onyyrfmmdljl" alt="image-20260326135416682"></p>
+<p>这里是pistol手枪的脚本</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/03/26/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/"><span class="nav-label">← 上一篇</span><span class="nav-title">一些实用的网站</span></a></div><div class="post-nav next"><a href="/2026/03/25/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/07-%E4%B8%A4%E4%B8%AA%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C/"><span class="nav-label">下一篇 →</span><span class="nav-title">两个脚本效果</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F&amp;url=%2F2026%2F03%2F26%2F%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2595%25E6%2593%258E%25E7%259B%25B8%25E5%2585%25B3%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F03%2F26%2F%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2595%25E6%2593%258E%25E7%259B%25B8%25E5%2585%25B3%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F03%2F26%2F%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2595%25E6%2593%258E%25E7%259B%25B8%25E5%2585%25B3%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F03%2F26%2F%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2595%25E6%2593%258E%25E7%259B%25B8%25E5%2585%25B3%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F03%2F26%2F%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2595%25E6%2593%258E%25E7%259B%25B8%25E5%2585%25B3%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

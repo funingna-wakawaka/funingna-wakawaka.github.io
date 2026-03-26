@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "AixDownloader(可以批量下载图片)": "AixDownloader (Batch Download Images)",
 
     // 其他工具
-    全球动态检测: "Global Outage Detection",
 
     // 更多
     更多: "More",
