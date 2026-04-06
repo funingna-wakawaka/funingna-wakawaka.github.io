@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/21.png" alt="一个消逝的山村"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-05T14:10:20.000Z">2026-04-05</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.2k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>10</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">一个消逝的山村</h1><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我爷去世了-不过也是预料之内的"><a href="#我爷去世了-不过也是预料之内的" class="headerlink" title="我爷去世了,不过也是预料之内的"></a>我爷去世了,不过也是预料之内的</h1><p>过年放寒假的时候,我爸把他接过来,接过来就算了,还总是不做饭他吃,那时候冰箱里有很多肉,而我又是究极懒人,一般吃外卖或方便面</p>
+<p>我爷以前是厨子,不是你们想象的那种城市里的饭店厨师,而是专门为农村红白事几百人做饭的,也就是俗称吃席</p>
+<p>但是他老糊涂了,连饭都不会做了,我爸妈觉得他是懒,总是指责他不学东西</p>
+<p>确实,他什么都不会,不像我姥姥姥爷在我大舅指导下学会了刷抖音,他连饮水机都不会用,更别说天然气灶和微波炉,老年机也是不会接电话</p>
+<p>他总是坐在阳台上,啥都不干,就盯着远方的车流,有一次我说爷你在看啥呢,他说“你瞧那底下的那些小乌龟是什么东西”,我看了半天不知道他说的乌龟在哪,然后他指了指楼下高架桥的车流,才明白原来说的是汽车</p>
+<p>当然他也会好奇现代科技,每次我打开电脑时,都会凑过来看,不过他是不认识字的,只能看懂图像,然后在旁边叽叽喳喳,我也懒得听</p>
+<p>然后每当我沉浸在虚拟世界时,他冷不丁的开始讲他过去的往事,因为他经历过大跃进,文化大革命还有农村生产合作社,听他说他以前是生产队的队长,每次他讲到自己干了什么什么都满脸得意,还讲了自己年轻时利用职务之便给自己人多分一点米 面 油这些破事,当然我是很不理解的,也不喜欢听,然后我说别讲了,这都是什么破事,然后他就很少再提往事了</p>
+<p>然后就是闲的没事干的时候他就开始提起我奶,因为我奶在我初三的时候就肺癌去世了,听我弟说,我奶最后根本就不吃东西,变得和干尸一样枯瘦,十分吓人,因为当时我在学校准备中考,她去世没人通知我,等我回去时已经火化了,她去世前把自己珍藏的几个大洋和银戒指分给了我爸妈,我爷总是说自己梦到我奶,梦到我奶指着他骂说后悔嫁到他家,搞得他人心惶惶</p>
+<p>假期早上我一般10-12点起床,而十点的时候他会打开我的房门说煮饭吧,我不会弄(电饭煲),你过来弄,然后我就爬起来打开冰箱空空如也,就一些葱和小白菜还有冻了不知道多少年的肉,后来我就是每天切一长块瘦肉解冻,然后先放油和料酒给肉将肉炒一遍捞出来,然后炸两个鸡蛋,直接放水,烧开,下面条,放肉,放青菜白菜,放盐,那一个月都是重复这个动作,我老弟说都快吃吐了,(那没办法,冰箱的菜只适合下面条),但是我爷倒是吃的津津有味,我说你多吃一点,锅里还有,他就倔强的说:”不吃!!!”,然后又跑到阳台坐着,有的时候我回去买肯德基麦当劳和路边的炒饭烧烤什么的,他也没吃过这些东西,而且奇葩的是,他只要吃完这种东西就吐得一塌糊涂,估计和他做的食道手术有关</p>
+<p>而且我发现他老了之后就变得很贪吃,比如桌子上放的糖,瓜子,花生什么的,能一天炫完,有的时候我怕他无聊,就把液晶电视打开,播放西游记三国演义水浒传这些东西给他看,但是他不像我奶,我一开电视他就开始睡觉打瞌睡,我奶就是只要播放那种老电影和动物世界就会拿个杯子,站在那,一看就是几个小时,直到腰酸才反应过来</p>
+<p>老头很护财,天天说自己的几千块被我们偷了,寒假的时候还和我爸吵一架说我爸偷了他的钱,他甚至把家里柜子都翻了一遍,衣服都拖到地上到处都是,最后我爸在他自己的兜里翻出一个红塑料袋,里面装满了人民币,他支支吾吾说不出来,在那生闷气</p>
+<p>当我爸妈不在家时,他会戴上一个不知道从哪翻出来的老花镜,我笑他戴这个搞什么,他说眼睛看不清了数钱数不明白,然后我不理他了,他就一直念我爸妈对他怎么怎么滴不好,我大爷大奶(就是他哥一家)对他怎么怎么滴不好,村里的大队干部对他怎么怎么滴不好,我奶对他怎么这么不好,然后反复唠叨——怎么样才能回去呢?(指的是会农村老家)</p>
+<p>说实话,如果单独把他放在老家,我爸怕他出事了没人发现,但是把他接到城里又太孤独了,没有老头老太和他闲聊</p>
+<p>我是3月31日打高铁回家的,然后又做了两小时车回老家,等到回家时已经六点了,我快速进门,他已经躺在那了,双眼紧闭,喉咙里全是黄绿色的痰,胳膊乱动,我看了监控,是突发性脑溢血倒下去的,当时我还很生气,我说这怎么看都能救治好吧,这明显是痰太多了堵住了气管,医院里有那种抽痰机,注射点葡萄糖和盐水,我爸妈还有其他的几个亲戚说脑溢血没救了</p>
+<p>我不甘心,我也不信邪,虽然我听说过网上的医学生说如果人嘴张大大的就是已经死了,但是前几个小时我都是在反复的用卫生纸把口水和浓痰从嗓子里吸出来,不知道是我爷对我爸和姑妈有恨意还是怎么回事,只要他们来用纸吸的时候,老头就用牙死死咬住卫生纸,没办法,只能我来做这种事,他也心甘情愿让我做这个,于是几个小时我都重复这个动作——在他嘴唇上抹水避免直接喂水呛到他,用筷子卷着卫生纸强忍着恶心吸他嘴里的痰和口水,他的喉咙一直在发出声音(临终喉鸣),胳膊无意识乱动</p>
+<p>那时候我还幻想着明天该怎么处理他的肺里的痰时,在当天晚上9点23分的时候,他的嘴突然张得大大的,眼睛往上翻,呼吸频率越来越低,我吓一跳,赶紧把他们喊过来,他们在那哭,我哭不出来,我也不知道为什么要哭,只觉得心里就像乱麻一样,我妈说:”赶紧喊你爷,别让你爷走了!!!”,你知道吗,我几乎一刹那想起了鲁迅写的这个片段就是自己在父亲临终前喊父亲名字让父亲痛苦而亡的场景</p>
+<p>我让他们都统统闭嘴,都不许哭,都保持安静,把灯关掉,握着他的脉搏,直到他呼吸停止,我老爹(就是我爷他哥的儿子)抱着他放到草垫子上,然后我们把棺材抬进来,在里面垫上床单把他放进去</p>
+<p>​	<style>.gjsaebkyoyie{zoom:67%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005821.jpg" class="gjsaebkyoyie" alt="IMG_20260401_005821"></p>
+<p>接下来的三天是我最痛苦的,不是因为他死了,而是这些农村丧事的繁文缛节真的折磨人</p>
+ <style>.oycpnletneaa{zoom: 25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_231822.jpg" class="oycpnletneaa" alt="IMG_20260331_231822">
+
+ <style>.vpwxxoitjkuf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_235522.jpg" class="vpwxxoitjkuf" alt="IMG_20260331_235522">
+
+<p>这个东西,我不知道叫什么,这个还是他教我用的,当时我奶去世后,他教我用这个东西将黄纸打上圆形图案(铜钱)给我奶烧纸,他说,以后他死了也给他烧点,现在轮到我了</p>
+<style>.qwhoesrzlkqs{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005246.jpg" class="qwhoesrzlkqs" alt="IMG_20260401_005246">
+
+<p>我实在受不了了屋子里的他们的哀嚎,就出来透透气,那天晚上的春天的夜晚月光很皎洁,但是第二天就开始下春雨了,天气总是变换无常,人生也是</p>
+<p>于是亲戚们连夜把仅存的5个老道士请了过来,老道士们换上了法衣,开始做法,吹唢呐,敲锣打鼓,敲木鱼</p>
+<p>反正都是我看不懂的仪式,我记得以前看西游记的时候了解过这个就叫<font color='#FF1493'>超度</font>或者<font color='#FF1493'>水陆大会</font></p>
+<p>他们在家里挂上三清的画像还有地藏王菩萨画像,然后研究我们的族谱,然后开始<font color='#FF1493'>唱道</font></p>
+<p><img src="/IMG_20260402_204310.jpg" alt="IMG_20260402_204310"></p>
+<p>唱的内容听不懂,大概就是我爷的生平事迹和整个家族的成员关系还有神仙话什么的,他们提前用毛笔写唱词然后背下来用我们老家的方言加上独特的风格唱出来,写的都是繁体字和文言文,唱词特别多,整整一本书那么厚,其中大部分都是我们家族的成员的名字以及对太上老君什么的说的话</p>
+<p>唱道的一个老头笑着对我说,等他们死了,这些道教的东西就失传了,因为年轻人不愿意学这种东西,没人信这种东西了</p>
+<p>不得不说老头们的记忆力真的强,那两天他们的嘴都没有停过,一直连续唱6小时,我们在前面烧纸,共洒五杯酒,连续唱了两天,从中文12点一直唱到晚上12点</p>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">唱词内容片段</div>
+    <div class="hide-toggle-content"><style>.xfinlojpjgcl{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_122740.jpg" class="xfinlojpjgcl" alt="IMG_20260403_122740">
+
+<style>.nlsmpsafumwd{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123042.jpg" class="nlsmpsafumwd" alt="IMG_20260403_123042">
+
+<style>.bvufpwmufqtn{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123436.jpg" class="bvufpwmufqtn" alt="IMG_20260403_123436">
+
+ <style>.encrlkncxeao{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123516.jpg" class="encrlkncxeao" alt="IMG_20260403_123516">
+
+<style>.mgpqjjjtamcr{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132721.jpg" class="mgpqjjjtamcr" alt="IMG_20260403_132721">
+
+<style>.boimjybgedph{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132646.jpg" class="boimjybgedph" alt="IMG_20260403_132646">
+
+<style>.qmefdoqryltp{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132830.jpg" class="qmefdoqryltp" alt="IMG_20260403_132830">
+
+<style>.ofpymbencozk{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123935.jpg" class="ofpymbencozk" alt="IMG_20260403_123935">
+</div>
+  </div>
+
+<p>来看望的亲戚非常多,第二天就开席了,两天差不多来了两百个亲戚,但是我从来没有见过他们在老头活着的时候看望过他</p>
+<p>虽然老头对他们来说确实德高望重,对我来说就是一个老傻子</p>
+<p><img src="/IMG_20260402_211640.jpg" alt="IMG_20260402_211640"></p>
+<p>农村的席就是在这种简陋的环境下做出来的,一共二十几桌,每桌20道菜,分两波客人,厨子也都是我爷的以前的老伙计,现在轮到给他做饭了</p>
+<p><img src="/IMG_20260402_212721.jpg" alt="IMG_20260402_212721"></p>
+<p>然后就是把堆成山的纸钱(真的是堆成山,每个亲戚都送一捆纸,200多捆纸,800斤左右)纸人纸马什么的和他的衣服都烧掉</p>
+<p><img src="/IMG_20260402_215522.jpg" alt="IMG_20260402_215522"></p>
+<p><img src="/IMG_20260402_215702.jpg" alt="IMG_20260402_215702"></p>
+<p>我前面三个就是老道士,和普通的老头没有任何区别,也不像电视剧里的那样穿的仙风道骨,都是中山装</p>
+<p>我通宵了两天,烧了两天的香,烧了三天的纸,老头唱道时我还得跪在旁边烧纸</p>
+<p>我爸说等他们死了不要给他们搞这些东西,因为他们现在搞这些东西是因为活着的人在看,那些亲戚朋友在看,如果不这么做他们会指责,他说等他们死了就把骨灰埋了就行,也别搞什么吃席请道士了,到时候老道士死了就没有道士了</p>
+<p>至少我爷死了也是一种解脱,他自己常年胃病,吃一点油腻的就吐,还总是消极抑郁,在我面前吐露苦水和怨言(但是从来不敢给我爸妈讲)</p>
+<p>我没有感到任何悲伤难过,包括他死掉时我是盯着他死的,只是觉得有一种奇妙的感觉,就像感受到一个时间线,看到了历史和未来,但是无力改变</p>
+<p>我想起之前看三体的时候,里面描写了一个这样的场景: 一个爸爸带着儿子前往一个墓地,走到一个墓碑前,坟墓里埋的是因为文化大革命死掉的红卫兵,孩子问父亲:”他们是英雄吗?” 父亲说:”不是”,孩子又说:”他们是敌人吗?”,父亲说:”也不是” 孩子说:”那他们是什么?” 父亲说:”他们是历史”</p>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">春天</div>
+    <div class="hide-toggle-content"><style>.icrdhchhmqfq{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124729.jpg" class="icrdhchhmqfq" alt="IMG_20260401_124729">
+
+<style>.idbhtxtaorws{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_125441.jpg" class="idbhtxtaorws" alt="IMG_20260401_125441">
+
+<style>.hjjfisbkagqt{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132226.jpg" class="hjjfisbkagqt" alt="IMG_20260401_132226">
+
+<style>.veihehkeetwg{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133624.jpg" class="veihehkeetwg" alt="IMG_20260401_133624">
+
+<style>.pdjvdhybnkzd{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133635.jpg" class="pdjvdhybnkzd" alt="IMG_20260401_133635">
+
+<style>.hmweynjdbhsj{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134251.jpg" class="hmweynjdbhsj" alt="IMG_20260404_134251">
+
+<style>.gdmuqasbdnfp{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_105836.jpg" class="gdmuqasbdnfp" alt="IMG_20260405_105836">
+
+<style>.qzepeutcjloy{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092856.jpg" class="qzepeutcjloy" alt="IMG_20260405_092856">
+
+<style>.jsvteygjnake{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093217.jpg" class="jsvteygjnake" alt="IMG_20260405_093217">
+</div>
+  </div>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">春天</div>
+    <div class="hide-toggle-content"><style>.pbhvfjwpmfzt{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093524.jpg" class="pbhvfjwpmfzt" alt="IMG_20260405_093524">
+
+ <style>.fyuccgqasofi{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_172246.jpg" class="fyuccgqasofi" alt="IMG_20260404_172246">
+
+<style>.uuaftkmpbpsb{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_104140.jpg" class="uuaftkmpbpsb" alt="IMG_20260404_104140">
+
+<style>.ymknngtybwox{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_085815.jpg" class="ymknngtybwox" alt="IMG_20260404_085815">
+
+<style>.aqrzpzhjfslo{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124424.jpg" class="aqrzpzhjfslo" alt="IMG_20260401_124424">
+
+<style>.dxwjbnxssfew{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132454.jpg" class="dxwjbnxssfew" alt="IMG_20260401_132454">
+
+<style>.byvahoxtpokf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132914.jpg" class="byvahoxtpokf" alt="IMG_20260401_132914">
+
+<style>.lgzxgzsrcdcv{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092435.jpg" class="lgzxgzsrcdcv" alt="IMG_20260405_092435">
+
+<style>.hkuntyywtcyf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_191118.jpg" class="hkuntyywtcyf" alt="IMG_20260403_191118">
+</div>
+  </div>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">春天</div>
+    <div class="hide-toggle-content"><style>.opeixfqkqpbc{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_194359.jpg" class="opeixfqkqpbc" alt="IMG_20260403_194359">
+
+ <style>.efriksxvaypk{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134143.jpg" class="efriksxvaypk" alt="IMG_20260404_134143">
+
+ <style>.vohjnflionuk{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_105515.jpg" class="vohjnflionuk" alt="IMG_20260404_105515">
+
+ <style>.oqddpkolplop{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_120709.jpg" class="oqddpkolplop" alt="IMG_20260404_120709">
+
+<style>.byuyherkmqci{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_170052.jpg" class="byuyherkmqci" alt="IMG_20260404_170052">
+
+<style>.vcwicjpljewk{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093702.jpg" class="vcwicjpljewk" alt="IMG_20260405_093702">
+
+<style>.lucjpklkwnmn{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_163002.jpg" class="lucjpklkwnmn" alt="IMG_20260405_163002">
+</div>
+  </div></div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/06/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/BBDown%E7%9A%84%E4%BE%BF%E6%8D%B7%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span class="nav-label">← 上一篇</span><span class="nav-title">BBDown的便捷使用方法</span></a></div><div class="post-nav next"><a href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E5%92%8CChatgpt%E5%8F%88%E4%B8%80%E6%AC%A1%E5%94%A0%E5%97%91/"><span class="nav-label">下一篇 →</span><span class="nav-title">和Chatgpt又一次唠嗑</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91&amp;url=%2F2026%2F04%2F05%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25B8%25AA%25E6%25B6%2588%25E9%2580%259D%25E7%259A%2584%25E5%25B1%25B1%25E6%259D%2591%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F05%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25B8%25AA%25E6%25B6%2588%25E9%2580%259D%25E7%259A%2584%25E5%25B1%25B1%25E6%259D%2591%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F05%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25B8%25AA%25E6%25B6%2588%25E9%2580%259D%25E7%259A%2584%25E5%25B1%25B1%25E6%259D%2591%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F05%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25B8%25AA%25E6%25B6%2588%25E9%2580%259D%25E7%259A%2584%25E5%25B1%25B1%25E6%259D%2591%2F&amp;title=%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F05%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E4%25B8%2580%25E4%25B8%25AA%25E6%25B6%2588%25E9%2580%259D%25E7%259A%2584%25E5%25B1%25B1%25E6%259D%2591%2F&amp;title=%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
