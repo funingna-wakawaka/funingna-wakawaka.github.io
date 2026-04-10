@@ -329,6 +329,8 @@ document.addEventListener("DOMContentLoaded", function () {
         translateNode(node);
       }
     },
+     // ★★★ 新增：将日期翻译函数也暴露出来供外部调用 ★★★
+    translateDates: translateDates
   };
 
   function translatePage() {

@@ -227,6 +227,10 @@ function initLoadMore() {
             isEnglish()
           ) {
             window.i18n.translateNode(articlesGrid);
+            // ★★★ 新增：调用日期翻译函数，处理新加载文章的日期 ★★★
+            if (typeof window.i18n.translateDates === "function") {
+              window.i18n.translateDates();
+            }
           }
         } else {
           btn.innerHTML = getText("noMore");
