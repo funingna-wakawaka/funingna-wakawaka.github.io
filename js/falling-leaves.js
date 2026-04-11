@@ -126,19 +126,22 @@
   };
 
   Leaf.prototype.draw = function () {
+    // 获取全局主题色（如果没有获取到，降级为黑色）
+    let accentColor =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent-color")
+        .trim() || "#ff6b6b";
+
     ctx.save();
-    // 1. 保留原本的平移、旋转、缩放，这部分完全不变
     ctx.translate(this.x, this.y);
     ctx.rotate(this.rotation);
     ctx.scale(this.scale, this.scale);
     ctx.globalAlpha = this.opacity;
 
-    // 2. 设置颜色
-    ctx.fillStyle = "rgb(255, 107, 107)";
+    // 将原本的 "rgb(255, 107, 107)" 替换掉
+    ctx.fillStyle = accentColor;
 
-    // 3. 删掉原本几十行的 forEach 画点代码，直接用现成的印章填充
     ctx.fill(leafPath);
-
     ctx.restore();
   };
 
