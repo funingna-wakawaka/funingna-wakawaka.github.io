@@ -49,7 +49,7 @@
   --tag-background-color: #ffffff;
   --card-background-color: #ffffff;
 }
-</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span>开始你的旅行</span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
   
@@ -110,6 +110,7 @@
   position: absolute; bottom: 50px; display: flex; flex-direction: column;
   align-items: center; color: #fff; cursor: pointer; z-index: 10;
   transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
 }
 .cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
 .cover-start-btn span {
@@ -129,10 +130,17 @@
   60% { transform: translateY(-7px); }
 }
 
+/* ★★★ 手机端适配修改 ★★★ */
 @media (max-width: 768px) {
   .cover-title { font-size: 2rem; letter-spacing: 2px; }
   .cover-author { font-size: 1.2rem; margin-top: 15px; }
   .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
 }
 </style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
 const cover = document.getElementById('blog-cover');
@@ -184,7 +192,9 @@ if (cover && cover.style.display !== 'none') {
       }, 5000); 
     }
 
-    startBtn.addEventListener('click', function() {
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
       cover.classList.add('slide-up');
       sessionStorage.setItem('hasSeenCover', 'true');
       document.body.style.overflow = '';
@@ -195,23 +205,17 @@ if (cover && cover.style.display !== 'none') {
         if (app1.dispose) app1.dispose();
         if (app2.dispose) app2.dispose();
       }, 800);
-    });
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
   });
 
   // =======================
-  // 文字内容和动画初始化 (标题与作者)
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
   // =======================
-  const currentLang = localStorage.getItem("site_lang") || "zh";
-  let titleStr = "欢迎来到我的奇妙世界";
-  let authorStr = "胡杨怕火";
-  
-  if (currentLang === "en") {
-    titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(titleStr) : "Welcome to my wonderful world";
-    authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(authorStr) : "Huyangpahuo";
-  }
-
-  // ★ 同步波浪关键修改 ★
   const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
     text.split('').forEach((char, index) => {
       if (char === ' ') {
         const space = document.createElement('span');
@@ -233,8 +237,16 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
-  splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
-  splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#50C878"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -323,55 +335,55 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>我不甘心,我也不信邪,虽然我听说过网上的医学生说如果人嘴张大大的就是已经死了,但是前几个小时我都是在反复的用卫生纸把口水和浓痰从嗓子里吸出来,不知道是我爷对我爸和姑妈有恨意还是怎么回事,只要他们来用纸吸的时候,老头就用牙死死咬住卫生纸,没办法,只能我来做这种事,他也心甘情愿让我做这个,于是几个小时我都重复这个动作——在他嘴唇上抹水避免直接喂水呛到他,用筷子卷着卫生纸强忍着恶心吸他嘴里的痰和口水,他的喉咙一直在发出声音(临终喉鸣),胳膊无意识乱动</p>
 <p>那时候我还幻想着明天该怎么处理他的肺里的痰时,在当天晚上9点23分的时候,他的嘴突然张得大大的,眼睛往上翻,呼吸频率越来越低,我吓一跳,赶紧把他们喊过来,他们在那哭,我哭不出来,我也不知道为什么要哭,只觉得心里就像乱麻一样,我妈说:”赶紧喊你爷,别让你爷走了!!!”,你知道吗,我几乎一刹那想起了鲁迅写的这个片段就是自己在父亲临终前喊父亲名字让父亲痛苦而亡的场景</p>
 <p>我让他们都统统闭嘴,都不许哭,都保持安静,把灯关掉,握着他的脉搏,直到他呼吸停止,我老爹(就是我爷他哥的儿子)抱着他放到草垫子上,然后我们把棺材抬进来,在里面垫上床单把他放进去</p>
-<p>​	<style>.imqmwofytgky{zoom:67%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005821.jpg" class="imqmwofytgky" alt="IMG_20260401_005821"></p>
+<p>​	<style>.dhcdcgwkuwss{zoom:67%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005821.jpg" class="dhcdcgwkuwss" alt="IMG_20260401_005821"></p>
 <p>接下来的三天是我最痛苦的,不是因为他死了,而是这些农村丧事的繁文缛节真的折磨人</p>
- <style>.kmiznigytpex{zoom: 25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_231822.jpg" class="kmiznigytpex" alt="IMG_20260331_231822">
+ <style>.ituezsjkpmzy{zoom: 25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_231822.jpg" class="ituezsjkpmzy" alt="IMG_20260331_231822">
 
- <style>.scylqggnbzhj{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_235522.jpg" class="scylqggnbzhj" alt="IMG_20260331_235522">
+ <style>.gqyxljiucekh{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260331_235522.jpg" class="gqyxljiucekh" alt="IMG_20260331_235522">
 
 <p>这个东西,我不知道叫什么,这个还是他教我用的,当时我奶去世后,他教我用这个东西将黄纸打上圆形图案(铜钱)给我奶烧纸,他说,以后他死了也给他烧点,现在轮到我了</p>
-<style>.sscsqfudwfeq{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005246.jpg" class="sscsqfudwfeq" alt="IMG_20260401_005246">
+<style>.wvxsmebncgyk{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_005246.jpg" class="wvxsmebncgyk" alt="IMG_20260401_005246">
 
 <p>我实在受不了了屋子里的他们的哀嚎,就出来透透气,那天晚上的春天的夜晚月光很皎洁,但是第二天就开始下春雨了,天气总是变换无常,人生也是</p>
 <p>于是亲戚们连夜把仅存的5个老道士请了过来,老道士们换上了法衣,开始做法,吹唢呐,敲锣打鼓,敲木鱼</p>
 <p>反正都是我看不懂的仪式,我记得以前看西游记的时候了解过这个就叫<font color='#FF1493'>超度</font>或者<font color='#FF1493'>水陆大会</font></p>
 <p>他们在家里挂上三清的画像还有地藏王菩萨画像,然后研究我们的族谱,然后开始<font color='#FF1493'>唱道</font></p>
-<style>.ymdksuhxkytj{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_204310.jpg" class="ymdksuhxkytj" alt="IMG_20260402_204310">
+<style>.kjtdnfhtowez{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_204310.jpg" class="kjtdnfhtowez" alt="IMG_20260402_204310">
 
 <p>唱的内容听不懂,大概就是我爷的生平事迹和整个家族的成员关系还有神仙话什么的,他们提前用毛笔写唱词然后背下来用我们老家的方言加上独特的风格唱出来,写的都是繁体字和文言文,唱词特别多,整整一本书那么厚,其中大部分都是我们家族的成员的名字以及对太上老君什么的说的话</p>
 <p>唱道的一个老头笑着对我说,等他们死了,这些道教的东西就失传了,因为年轻人不愿意学这种东西,没人信这种东西了</p>
 <p>不得不说老头们的记忆力真的强,那两天他们的嘴都没有停过,一直连续唱6小时,我们在前面烧纸,共洒五杯酒,连续唱了两天,从中文12点一直唱到晚上12点</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">唱词内容片段</div>
-    <div class="hide-toggle-content"><style>.eextovtukswx{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_122740.jpg" class="eextovtukswx" alt="IMG_20260403_122740">
+    <div class="hide-toggle-content"><style>.wqcuptfdvrjg{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_122740.jpg" class="wqcuptfdvrjg" alt="IMG_20260403_122740">
 
-<style>.jqnmmgmuboru{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123042.jpg" class="jqnmmgmuboru" alt="IMG_20260403_123042">
+<style>.jbvssumgwexy{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123042.jpg" class="jbvssumgwexy" alt="IMG_20260403_123042">
 
-<style>.pisrjbamlkxo{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123436.jpg" class="pisrjbamlkxo" alt="IMG_20260403_123436">
+<style>.yscriyfvqfoz{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123436.jpg" class="yscriyfvqfoz" alt="IMG_20260403_123436">
 
- <style>.tnchwiyjhqvu{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123516.jpg" class="tnchwiyjhqvu" alt="IMG_20260403_123516">
+ <style>.poysdipdomou{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123516.jpg" class="poysdipdomou" alt="IMG_20260403_123516">
 
-<style>.nohifsurepsd{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132721.jpg" class="nohifsurepsd" alt="IMG_20260403_132721">
+<style>.ebxldcxbkxif{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132721.jpg" class="ebxldcxbkxif" alt="IMG_20260403_132721">
 
-<style>.yidfsibjurkp{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132646.jpg" class="yidfsibjurkp" alt="IMG_20260403_132646">
+<style>.sryzeenjhgfb{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132646.jpg" class="sryzeenjhgfb" alt="IMG_20260403_132646">
 
-<style>.notmpmoldlce{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132830.jpg" class="notmpmoldlce" alt="IMG_20260403_132830">
+<style>.yyieofopyqgo{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_132830.jpg" class="yyieofopyqgo" alt="IMG_20260403_132830">
 
-<style>.riyavrrlbljg{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123935.jpg" class="riyavrrlbljg" alt="IMG_20260403_123935">
+<style>.hvqqdjieovqi{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_123935.jpg" class="hvqqdjieovqi" alt="IMG_20260403_123935">
 </div>
   </div>
 
 <p>来看望的亲戚非常多,第二天就开席了,两天差不多来了两百个亲戚,但是我从来没有见过他们在老头活着的时候看望过他</p>
 <p>虽然老头对他们来说确实德高望重,对我来说就是一个老傻子</p>
-<style>.hdrspsaaisfo{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_211640.jpg" class="hdrspsaaisfo" alt="IMG_20260402_211640">
+<style>.bdkfrhewogsn{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_211640.jpg" class="bdkfrhewogsn" alt="IMG_20260402_211640">
 
 <p>农村的席就是在这种简陋的环境下做出来的,一共二十几桌,每桌20道菜,分两波客人,厨子也都是我爷的以前的老伙计,现在轮到给他做饭了</p>
-<style>.fbklklsmteqn{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_212721.jpg" class="fbklklsmteqn" alt="IMG_20260402_212721">
+<style>.ynnhegmmkfvy{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_212721.jpg" class="ynnhegmmkfvy" alt="IMG_20260402_212721">
 
 <p>然后就是把堆成山的纸钱(真的是堆成山,每个亲戚都送一捆纸,200多捆纸,800斤左右)纸人纸马什么的和他的衣服都烧掉</p>
-<style>.vgsddrqeyyyo{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_215522.jpg" class="vgsddrqeyyyo" alt="IMG_20260402_215522">
+<style>.iesiwwfvsefh{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_215522.jpg" class="iesiwwfvsefh" alt="IMG_20260402_215522">
 
-<style>.dplohwtvyfsd{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_215702.jpg" class="dplohwtvyfsd" alt="IMG_20260402_215702">
+<style>.pbhtnfeepnem{zoom:80%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260402_215702.jpg" class="pbhtnfeepnem" alt="IMG_20260402_215702">
 
 <p>我前面三个就是老道士,和普通的老头没有任何区别,也不像电视剧里的那样穿的仙风道骨,都是中山装</p>
 <p>我通宵了两天,烧了两天的香,烧了三天的纸,老头唱道时我还得跪在旁边烧纸</p>
@@ -381,63 +393,63 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>我想起之前看三体的时候,里面描写了一个这样的场景: 一个爸爸带着儿子前往一个墓地,走到一个墓碑前,坟墓里埋的是因为文化大革命死掉的红卫兵,孩子问父亲:”他们是英雄吗?” 父亲说:”不是”,孩子又说:”他们是敌人吗?”,父亲说:”也不是” 孩子说:”那他们是什么?” 父亲说:”他们是历史”</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">春天</div>
-    <div class="hide-toggle-content"><style>.eoqdzrrssnns{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124729.jpg" class="eoqdzrrssnns" alt="IMG_20260401_124729">
+    <div class="hide-toggle-content"><style>.evtxxjzpxdjn{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124729.jpg" class="evtxxjzpxdjn" alt="IMG_20260401_124729">
 
-<style>.qetwehlevcwo{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_125441.jpg" class="qetwehlevcwo" alt="IMG_20260401_125441">
+<style>.kjltpmrntmtx{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_125441.jpg" class="kjltpmrntmtx" alt="IMG_20260401_125441">
 
-<style>.uxvkajgwllxe{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132226.jpg" class="uxvkajgwllxe" alt="IMG_20260401_132226">
+<style>.nbyilfkhtcad{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132226.jpg" class="nbyilfkhtcad" alt="IMG_20260401_132226">
 
-<style>.frtqgxodwmcn{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133624.jpg" class="frtqgxodwmcn" alt="IMG_20260401_133624">
+<style>.ohobgglrnjiu{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133624.jpg" class="ohobgglrnjiu" alt="IMG_20260401_133624">
 
-<style>.ksuvvmqibcme{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133635.jpg" class="ksuvvmqibcme" alt="IMG_20260401_133635">
+<style>.kwvkijxpdpod{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_133635.jpg" class="kwvkijxpdpod" alt="IMG_20260401_133635">
 
-<style>.olmjsdxmiqxx{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134251.jpg" class="olmjsdxmiqxx" alt="IMG_20260404_134251">
+<style>.otlupdywlbhf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134251.jpg" class="otlupdywlbhf" alt="IMG_20260404_134251">
 
-<style>.tkqkzsguvgtl{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_105836.jpg" class="tkqkzsguvgtl" alt="IMG_20260405_105836">
+<style>.vxqpfhltnvif{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_105836.jpg" class="vxqpfhltnvif" alt="IMG_20260405_105836">
 
-<style>.gvdhfjzggdqq{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092856.jpg" class="gvdhfjzggdqq" alt="IMG_20260405_092856">
+<style>.dsgqgiixponf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092856.jpg" class="dsgqgiixponf" alt="IMG_20260405_092856">
 
-<style>.sqwrulwyosgr{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093217.jpg" class="sqwrulwyosgr" alt="IMG_20260405_093217">
+<style>.ctdwyeolrqfj{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093217.jpg" class="ctdwyeolrqfj" alt="IMG_20260405_093217">
 </div>
   </div>
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">春天</div>
-    <div class="hide-toggle-content"><style>.xciytiwqvlge{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093524.jpg" class="xciytiwqvlge" alt="IMG_20260405_093524">
+    <div class="hide-toggle-content"><style>.pdwraybsewfc{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093524.jpg" class="pdwraybsewfc" alt="IMG_20260405_093524">
 
- <style>.qmbboskrvbbt{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_172246.jpg" class="qmbboskrvbbt" alt="IMG_20260404_172246">
+ <style>.nryyxlpggzfu{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_172246.jpg" class="nryyxlpggzfu" alt="IMG_20260404_172246">
 
-<style>.tzqdhmomkarr{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_104140.jpg" class="tzqdhmomkarr" alt="IMG_20260404_104140">
+<style>.grsohbxfdypy{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_104140.jpg" class="grsohbxfdypy" alt="IMG_20260404_104140">
 
-<style>.pndbepsxkqcv{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_085815.jpg" class="pndbepsxkqcv" alt="IMG_20260404_085815">
+<style>.muknbuihfvjf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_085815.jpg" class="muknbuihfvjf" alt="IMG_20260404_085815">
 
-<style>.ynjxslffmhef{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124424.jpg" class="ynjxslffmhef" alt="IMG_20260401_124424">
+<style>.rjmveoxzeqyh{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_124424.jpg" class="rjmveoxzeqyh" alt="IMG_20260401_124424">
 
-<style>.qaemyghomsup{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132454.jpg" class="qaemyghomsup" alt="IMG_20260401_132454">
+<style>.dugndpspxvrf{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132454.jpg" class="dugndpspxvrf" alt="IMG_20260401_132454">
 
-<style>.nwqrvsqnpvfx{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132914.jpg" class="nwqrvsqnpvfx" alt="IMG_20260401_132914">
+<style>.mfdwvofxkvdh{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260401_132914.jpg" class="mfdwvofxkvdh" alt="IMG_20260401_132914">
 
-<style>.imajcqvueank{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092435.jpg" class="imajcqvueank" alt="IMG_20260405_092435">
+<style>.ptfvqitiemjl{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_092435.jpg" class="ptfvqitiemjl" alt="IMG_20260405_092435">
 
-<style>.svnptyunkutg{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_191118.jpg" class="svnptyunkutg" alt="IMG_20260403_191118">
+<style>.frwrnfkowgrt{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_191118.jpg" class="frwrnfkowgrt" alt="IMG_20260403_191118">
 </div>
   </div>
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">春天</div>
-    <div class="hide-toggle-content"><style>.miseiquajgqu{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_194359.jpg" class="miseiquajgqu" alt="IMG_20260403_194359">
+    <div class="hide-toggle-content"><style>.uknxkgknamee{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260403_194359.jpg" class="uknxkgknamee" alt="IMG_20260403_194359">
 
- <style>.jtnylqxqivgi{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134143.jpg" class="jtnylqxqivgi" alt="IMG_20260404_134143">
+ <style>.nywzqczoeezv{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_134143.jpg" class="nywzqczoeezv" alt="IMG_20260404_134143">
 
- <style>.nmhigttcqeem{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_105515.jpg" class="nmhigttcqeem" alt="IMG_20260404_105515">
+ <style>.zvvfbpprzcad{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_105515.jpg" class="zvvfbpprzcad" alt="IMG_20260404_105515">
 
- <style>.tbvkublelhjz{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_120709.jpg" class="tbvkublelhjz" alt="IMG_20260404_120709">
+ <style>.nqsxjifopyvp{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_120709.jpg" class="nqsxjifopyvp" alt="IMG_20260404_120709">
 
-<style>.jnfksnycclps{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_170052.jpg" class="jnfksnycclps" alt="IMG_20260404_170052">
+<style>.jbunrxvslxro{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260404_170052.jpg" class="jbunrxvslxro" alt="IMG_20260404_170052">
 
-<style>.nkfqvlsuhgej{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093702.jpg" class="nkfqvlsuhgej" alt="IMG_20260405_093702">
+<style>.bjesyacwwyef{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_093702.jpg" class="bjesyacwwyef" alt="IMG_20260405_093702">
 
-<style>.jiqnaimwpprh{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_163002.jpg" class="jiqnaimwpprh" alt="IMG_20260405_163002">
+<style>.wrvxebagsnyw{zoom:25%;}</style><img src="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/IMG_20260405_163002.jpg" class="wrvxebagsnyw" alt="IMG_20260405_163002">
 </div>
   </div></div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {

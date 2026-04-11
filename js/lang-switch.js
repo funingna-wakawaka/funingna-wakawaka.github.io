@@ -207,6 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
     复制成功: "Copy successful!",
     复制失败: "Copy failed",
     未找到代码内容: "Code content not found",
+
+    //封面
+    欢迎来到我的奇妙世界: "Welcome to my wonderful world",
+    开始你的旅行: "Start Your Journey",
   };
 
   // ==========================================
@@ -329,8 +333,8 @@ document.addEventListener("DOMContentLoaded", function () {
         translateNode(node);
       }
     },
-     // ★★★ 新增：将日期翻译函数也暴露出来供外部调用 ★★★
-    translateDates: translateDates
+    // ★★★ 新增：将日期翻译函数也暴露出来供外部调用 ★★★
+    translateDates: translateDates,
   };
 
   function translatePage() {

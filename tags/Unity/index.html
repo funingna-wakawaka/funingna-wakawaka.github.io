@@ -49,7 +49,7 @@
   --tag-background-color: #ffffff;
   --card-background-color: #ffffff;
 }
-</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span>开始你的旅行</span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
   
@@ -110,6 +110,7 @@
   position: absolute; bottom: 50px; display: flex; flex-direction: column;
   align-items: center; color: #fff; cursor: pointer; z-index: 10;
   transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
 }
 .cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
 .cover-start-btn span {
@@ -129,10 +130,17 @@
   60% { transform: translateY(-7px); }
 }
 
+/* ★★★ 手机端适配修改 ★★★ */
 @media (max-width: 768px) {
   .cover-title { font-size: 2rem; letter-spacing: 2px; }
   .cover-author { font-size: 1.2rem; margin-top: 15px; }
   .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
 }
 </style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
 const cover = document.getElementById('blog-cover');
@@ -184,7 +192,9 @@ if (cover && cover.style.display !== 'none') {
       }, 5000); 
     }
 
-    startBtn.addEventListener('click', function() {
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
       cover.classList.add('slide-up');
       sessionStorage.setItem('hasSeenCover', 'true');
       document.body.style.overflow = '';
@@ -195,23 +205,17 @@ if (cover && cover.style.display !== 'none') {
         if (app1.dispose) app1.dispose();
         if (app2.dispose) app2.dispose();
       }, 800);
-    });
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
   });
 
   // =======================
-  // 文字内容和动画初始化 (标题与作者)
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
   // =======================
-  const currentLang = localStorage.getItem("site_lang") || "zh";
-  let titleStr = "欢迎来到我的奇妙世界";
-  let authorStr = "胡杨怕火";
-  
-  if (currentLang === "en") {
-    titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(titleStr) : "Welcome to my wonderful world";
-    authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(authorStr) : "Huyangpahuo";
-  }
-
-  // ★ 同步波浪关键修改 ★
   const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
     text.split('').forEach((char, index) => {
       if (char === ' ') {
         const space = document.createElement('span');
@@ -233,8 +237,16 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
-  splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
-  splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item active" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#50C878"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -306,14 +318,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">Tags</h1><div class="post-subtitle"><span>探索与</span> "Unity" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> Unity</h2><div class="tag-description"> <span>共有</span> 10 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">unity中的地图系统</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一下地图系统,这个相对简单​	.kdzardzihvhp{zoom:33%;}
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">Tags</h1><div class="post-subtitle"><span>探索与</span> "Unity" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> Unity</h2><div class="tag-description"> <span>共有</span> 10 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">unity中的地图系统</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一下地图系统,这个相对简单​	.xuioyjummeds{zoom:33%;}
 首先我们在Hierarchy(层级)窗口里右键
 然后2D object(二维对象)-&gt;tilemap(瓦片地图)-&gt;rectangular(矩形瓦片)
 这里我们管2D游戏里的地图统称tilemap即瓦片,这个在其他游戏引擎里也是相同的定义,瓦片就是附着在游戏地图上的“贴图”
 创建完成之后就会看到层级窗口出现了这个东西,不管你选择什么类型的瓦片都是以Grid(网格) 作为父对象的
-​	.lcmxczmwvgqk{zoom: 25%;}
+​	.hngebssogckh{zoom: 25%;}
 但是有什么用呢?这时候就需要一个东西了—–那就是瓦片面板 t...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-26</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/25/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/07-%E4%B8%A4%E4%B8%AA%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C/">两个脚本效果</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>虽然之前的Button相关的脚本写的确实是屎山,但是我在Earthhitting场景里仍然复用了这些脚本因为当时为了确保实现脚本的解耦合,我做了一些放到Framework命名空间标明这是可以复用的脚本...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-25</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/25/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/07-%E4%B8%A4%E4%B8%AA%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/23/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/06-%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%89%8D%E5%81%9A%E7%9A%84%E4%B8%9C%E8%A5%BF/">复习之前做的东西</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天打开我尘封的项目,发现我居然有点看不懂了而且我的专业版许可证退化成了个人版  (⊙︿⊙)  太可恶了(不过影响不亚于没吃早饭)
-​	.nhxeqokdqxtw{zoom:33%;}
+​	.fxqtkyhfiyxh{zoom:33%;}
 没办法,重新捋...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-23</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/23/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/06-%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%89%8D%E5%81%9A%E7%9A%84%E4%B8%9C%E8%A5%BF/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/23/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/05-%E5%86%B3%E5%AE%9A%E6%8D%A1%E8%B5%B7%E6%9D%A5unity%E9%A1%B9%E7%9B%AE/">决定捡起来unity项目</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>堕落了我去,我怎么干什么都半途而废之前雄心壮志想发布游戏到steam和itch上,每天都看大佬分享的游戏开发的教学视频
 然后我就开始三天打鱼两天晒网了
 我思考了为什么会这样?
