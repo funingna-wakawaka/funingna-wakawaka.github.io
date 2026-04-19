@@ -1,0 +1,1492 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    app1.loadImage(coverImages[0]);
+    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/18.png" alt="flutter第一天---了解flutter和基本类型"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-15T07:42:29.000Z">2026-04-15</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>5.5k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>26</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">flutter第一天---了解flutter和基本类型</h1><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我觉得我还是学学flutter吧-听说这个可以制作出跨平台应用-感觉挺新奇的"><a href="#我觉得我还是学学flutter吧-听说这个可以制作出跨平台应用-感觉挺新奇的" class="headerlink" title="我觉得我还是学学flutter吧,听说这个可以制作出跨平台应用,感觉挺新奇的"></a>我觉得我还是学学flutter吧,听说这个可以制作出跨平台应用,感觉挺新奇的</h1><p>我还是继续制作我的终末地聊天APP吧,因为之前使用html js css这些制作的</p>
+<p>当然,我还是先学学怎么做出好看的应用</p>
+<p>​	<style>.dfzkhpggnfxm{zoom: 25%;}</style><img src="/2026/04/15/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260415155821048.png" class="dfzkhpggnfxm" alt="image-20260415155821048"></p>
+<p>先<a target="_blank" rel="noopener" href="https://docs.flutter.dev/install/quick"><font color='#FF1493'>下载dartsdk</font></a></p>
+<p>下载完成后终端输入检测是否下载成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dart --version</span><br><span class="line">flutter</span><br></pre></td></tr></table></figure>
+
+<h2 id="dart语言"><a href="#dart语言" class="headerlink" title="dart语言"></a>dart语言</h2><p>因为我学过很多语言,而这些语言基本上差不多,dart给我的感觉很像java和C#,包括C#里的很多概念dart里都有(估计是开发dart的照抄C#这种的)</p>
+<p>和C#一样,这个必须在main函数中运行</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><table>
+<thead>
+<tr>
+<th>关键字 &#x2F; 类型</th>
+<th>是否可重新赋值</th>
+<th>是否可变类型</th>
+<th>是否必须初始化</th>
+<th>是否编译时常量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>var</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>自动推断类型（最常用）</td>
+</tr>
+<tr>
+<td><code>int / String / num / double / bool</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>显式类型（推荐规范写法）</td>
+</tr>
+<tr>
+<td><code>dynamic</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>动态类型（不安全，慎用）</td>
+</tr>
+<tr>
+<td><code>Object</code></td>
+<td>✅</td>
+<td>❌（需强转）</td>
+<td>❌</td>
+<td>❌</td>
+<td>所有类型父类（更安全）</td>
+</tr>
+<tr>
+<td><code>final</code></td>
+<td>❌（只能一次）</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>运行时常量</td>
+</tr>
+<tr>
+<td><code>const</code></td>
+<td>❌（完全不可变）</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>编译时常量</td>
+</tr>
+<tr>
+<td><code>late</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌（可延迟）</td>
+<td>❌</td>
+<td>延迟初始化（常用于Flutter）</td>
+</tr>
+<tr>
+<td><code>late final</code></td>
+<td>❌（只能一次）</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>延迟 + 单次赋值</td>
+</tr>
+</tbody></table>
+<p>其中var  int String double bool Object  const这些我们已经相当熟悉了,其中num表示整数或小数</p>
+<p>但是这里面的其他的一些我们是第一次见</p>
+<h3 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h3><p>num (父类)<br>├── int (整型)<br>└── double (浮点型)</p>
+<table>
+<thead>
+<tr>
+<th>赋值方向</th>
+<th>是否允许</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int</code> → <code>num</code></td>
+<td>✅ 允许</td>
+<td>子类赋值给父类（向上转型）</td>
+</tr>
+<tr>
+<td><code>double</code> → <code>num</code></td>
+<td>✅ 允许</td>
+<td>子类赋值给父类（向上转型）</td>
+</tr>
+<tr>
+<td><code>num</code> → <code>int</code></td>
+<td>❌ 不允许</td>
+<td>父类不能隐式转为子类</td>
+</tr>
+<tr>
+<td><code>num</code> → <code>double</code></td>
+<td>❌ 不允许</td>
+<td>父类不能隐式转为子类</td>
+</tr>
+<tr>
+<td><code>int</code> → <code>double</code></td>
+<td>❌ 不允许</td>
+<td>不同类型，不能隐式转换</td>
+</tr>
+<tr>
+<td><code>double</code> → <code>int</code></td>
+<td>❌ 不允许</td>
+<td>不同类型，不能隐式转换</td>
+</tr>
+</tbody></table>
+<p>这里我们知道隐式转换和显示转换</p>
+<p>对于隐式转换</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">int</span> i = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">double</span> d = <span class="number">3.14</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// int 可以赋值给 num</span></span><br><span class="line">  <span class="built_in">num</span> n1 = i;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;n1: <span class="subst">$n1</span>, 类型: <span class="subst">$&#123;n1.runtimeType&#125;</span>&#x27;</span>); <span class="comment">// n1: 10, 类型: int</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// double 可以赋值给 num</span></span><br><span class="line">  <span class="built_in">num</span> n2 = d;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;n2: <span class="subst">$n2</span>, 类型: <span class="subst">$&#123;n2.runtimeType&#125;</span>&#x27;</span>); <span class="comment">// n2: 3.14, 类型: double</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// num 变量可以接受任意数字</span></span><br><span class="line">  <span class="built_in">num</span> n3 = <span class="number">100</span>; <span class="comment">// 存 int</span></span><br><span class="line">  n3 = <span class="number">2.718</span>; <span class="comment">// 改存 double</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;n3: <span class="subst">$n3</span>&#x27;</span>); <span class="comment">// n3: 2.718</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于显示转换(其实就是调用方法比如to…()这种方法)</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">num</span> n = <span class="number">10</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ✅ 显式转 int</span></span><br><span class="line">  <span class="built_in">int</span> i = n.toInt();</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;i: <span class="subst">$i</span>&#x27;</span>);  <span class="comment">// i: 10</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ✅ 显式转 double</span></span><br><span class="line">  <span class="built_in">double</span> d = n.toDouble();</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;d: <span class="subst">$d</span>&#x27;</span>);  <span class="comment">// d: 10.0</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// int 转 double</span></span><br><span class="line">  <span class="built_in">int</span> i2 = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">double</span> d2 = i2.toDouble();  <span class="comment">// ✅ 10 → 10.0</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;d2: <span class="subst">$d2</span>&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// double 转 int（截断小数）</span></span><br><span class="line">  <span class="built_in">double</span> d3 = <span class="number">3.99</span>;</span><br><span class="line">  <span class="built_in">int</span> i3 = d3.toInt();  <span class="comment">// ✅ 3.99 → 3（不是四舍五入！）</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;i3: <span class="subst">$i3</span>&#x27;</span>);     <span class="comment">// i3: 3</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// double 四舍五入</span></span><br><span class="line">  <span class="built_in">int</span> i4 = d3.round();  <span class="comment">// ✅ 3.99 → 4</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;i4: <span class="subst">$i4</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>当需要存储一个不变的数据，但是在运时才确定，需要使final声明常量</p>
+<blockquote>
+<p>编译时常量：当需要存储一个不变的数据，且在编译时就确定，需要使const声明常量</p>
+</blockquote>
+ <style>.tvuslvesisxm{zoom:25%;}</style><img src="/2026/04/15/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260415165147420.png" class="tvuslvesisxm" alt="image-20260415165147420">
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">  <span class="comment">// final 实例变量必须在声明时或构造函数中初始化</span></span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">double</span> radius;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">double</span> pi = <span class="number">3.14159</span>; <span class="comment">// 声明时初始化</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造函数初始化列表</span></span><br><span class="line">  Circle(<span class="keyword">this</span>.radius);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">double</span> <span class="keyword">get</span> area =&gt; pi * radius * radius;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="keyword">final</span> circle = Circle(<span class="number">5.0</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;面积: <span class="subst">$&#123;circle.area&#125;</span>&#x27;</span>); <span class="comment">// 78.53975</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// circle.radius = 10.0;  // ❌ 错误：不能修改 final 字段</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个也是和const常量一样赋值之后不可以再次修改</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String-基础"><a href="#String-基础" class="headerlink" title="String 基础"></a>String 基础</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// 三种创建方式</span></span><br><span class="line">  <span class="built_in">String</span> s1 = <span class="string">&#x27;单引号&#x27;</span>;</span><br><span class="line">  <span class="built_in">String</span> s2 = <span class="string">&quot;双引号&quot;</span>;</span><br><span class="line">  <span class="built_in">String</span> s3 = <span class="string">&#x27;&#x27;&#x27;多行</span></span><br><span class="line"><span class="string">  字符串</span></span><br><span class="line"><span class="string">  支持换行&#x27;&#x27;&#x27;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(s1);</span><br><span class="line">  <span class="built_in">print</span>(s2); </span><br><span class="line">  <span class="built_in">print</span>(s3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串插值"><a href="#字符串插值" class="headerlink" title="字符串插值"></a>字符串插值</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">String</span> name = <span class="string">&#x27;Dart&#x27;</span>;</span><br><span class="line">  <span class="built_in">int</span> version = <span class="number">3</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// $变量名</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;语言: <span class="subst">$name</span>&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// $&#123;表达式&#125;</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;版本: <span class="subst">$&#123;version + <span class="number">1</span>&#125;</span>&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;大写: <span class="subst">$&#123;name.toUpperCase()&#125;</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="String常用方法"><a href="#String常用方法" class="headerlink" title="String常用方法"></a>String常用方法</h4><p>toString()方法将其他类型转换为字符串</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">num</span> a = <span class="number">5555</span>;</span><br><span class="line">  a.toString();</span><br><span class="line">  <span class="built_in">print</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">其他方法</div>
+    <div class="hide-toggle-content"><h5 id="一、长度-判空"><a href="#一、长度-判空" class="headerlink" title="一、长度 &#x2F; 判空"></a>一、长度 &#x2F; 判空</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;hello&quot;;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>length</code></td>
+<td>字符长度</td>
+<td><code>s.length → 5</code></td>
+</tr>
+<tr>
+<td><code>isEmpty</code></td>
+<td>是否为空</td>
+<td><code>&quot;&quot;.isEmpty → true</code></td>
+</tr>
+<tr>
+<td><code>isNotEmpty</code></td>
+<td>是否不为空</td>
+<td><code>&quot;hi&quot;.isNotEmpty → true</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="二、查找-判断"><a href="#二、查找-判断" class="headerlink" title="二、查找 &#x2F; 判断"></a>二、查找 &#x2F; 判断</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>contains()</code></td>
+<td>是否包含</td>
+<td><code>&quot;hello&quot;.contains(&quot;he&quot;) → true</code></td>
+</tr>
+<tr>
+<td><code>startsWith()</code></td>
+<td>是否以…开头</td>
+<td><code>&quot;hello&quot;.startsWith(&quot;h&quot;)</code></td>
+</tr>
+<tr>
+<td><code>endsWith()</code></td>
+<td>是否以…结尾</td>
+<td><code>&quot;hello&quot;.endsWith(&quot;o&quot;)</code></td>
+</tr>
+<tr>
+<td><code>indexOf()</code></td>
+<td>第一次出现位置</td>
+<td><code>&quot;hello&quot;.indexOf(&quot;l&quot;) → 2</code></td>
+</tr>
+<tr>
+<td><code>lastIndexOf()</code></td>
+<td>最后一次出现</td>
+<td><code>&quot;hello&quot;.lastIndexOf(&quot;l&quot;) → 3</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="三、截取-分割"><a href="#三、截取-分割" class="headerlink" title="三、截取 &#x2F; 分割"></a>三、截取 &#x2F; 分割</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>substring(start, end)</code></td>
+<td>截取字符串</td>
+<td><code>&quot;hello&quot;.substring(1,3) → &quot;el&quot;</code></td>
+</tr>
+<tr>
+<td><code>split()</code></td>
+<td>分割字符串</td>
+<td><code>&quot;a,b,c&quot;.split(&quot;,&quot;) → [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="四、替换"><a href="#四、替换" class="headerlink" title="四、替换"></a>四、替换</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>replaceAll()</code></td>
+<td>替换全部</td>
+<td><code>&quot;aabb&quot;.replaceAll(&quot;a&quot;,&quot;x&quot;) → &quot;xxbb&quot;</code></td>
+</tr>
+<tr>
+<td><code>replaceFirst()</code></td>
+<td>替换第一个</td>
+<td><code>&quot;aabb&quot;.replaceFirst(&quot;a&quot;,&quot;x&quot;) → &quot;xabb&quot;</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="五、大小写转换"><a href="#五、大小写转换" class="headerlink" title="五、大小写转换"></a>五、大小写转换</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>toLowerCase()</code></td>
+<td>转小写</td>
+<td><code>&quot;HELLO&quot;.toLowerCase()</code></td>
+</tr>
+<tr>
+<td><code>toUpperCase()</code></td>
+<td>转大写</td>
+<td><code>&quot;hello&quot;.toUpperCase()</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="六、去空格"><a href="#六、去空格" class="headerlink" title="六、去空格"></a>六、去空格</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>trim()</code></td>
+<td>去两边空格</td>
+<td><code>&quot; hi &quot;.trim() → &quot;hi&quot;</code></td>
+</tr>
+<tr>
+<td><code>trimLeft()</code></td>
+<td>去左边</td>
+<td><code>&quot; hi&quot;.trimLeft()</code></td>
+</tr>
+<tr>
+<td><code>trimRight()</code></td>
+<td>去右边</td>
+<td><code>&quot;hi &quot;.trimRight()</code></td>
+</tr>
+</tbody></table>
+</div>
+  </div>
+
+<h3 id="List列表类型"><a href="#List列表类型" class="headerlink" title="List列表类型"></a>List列表类型</h3><p>这个和C#里的几乎一样,C#里面也有list,不过list和数组差不多,包括访问数组里的元素方法也是一样的</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// 三种创建方式</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];           <span class="comment">// 字面量</span></span><br><span class="line">  <span class="keyword">var</span> fruits = &lt;<span class="built_in">String</span>&gt;[<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>]; <span class="comment">// 类型推断</span></span><br><span class="line">  <span class="built_in">List</span> empty = <span class="built_in">List</span>.empty();                <span class="comment">// 空列表（growable: false）</span></span><br><span class="line">  <span class="built_in">List</span> growable = <span class="built_in">List</span>.empty(growable: <span class="keyword">true</span>); <span class="comment">// 可增长的空列表</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(numbers);  <span class="comment">// [1, 2, 3]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>常用的方法:</p>
+<p>在尾部添加————add（内容）</p>
+<p>在尾部添加一个列表————addAll (列表)</p>
+<p>删除满足内容的第一个———-remove(内容)</p>
+<p>删除最后一个———–removeLast()</p>
+<p>删除索引范围内数据———-removeRange(start,end)</p>
+<p>循环————-forEach((item) {});</p>
+<p>是否都满足条件—————every((item){return 布尔值 })；</p>
+<p>筛选出满足条件的数据—————where((item){return 布尔值 })；</p>
+<p>列表的长度(属性)-length</p>
+<p>最后一个元素(属性)————–last</p>
+<p>第一个元素(属性)-first是否为空(属性）———–isEmpty</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>];</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; color1 = [<span class="string">&#x27;skyblue&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 尾部添加</span></span><br><span class="line">  colors.add(<span class="string">&quot;yellow&quot;</span>);</span><br><span class="line">  <span class="built_in">print</span>(colors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 尾部添加一个列表</span></span><br><span class="line">  colors.addAll(color1);</span><br><span class="line">  <span class="built_in">print</span>(colors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除某一个（删除第一个匹配的）</span></span><br><span class="line">  colors.remove(<span class="string">&#x27;blue&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(colors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除最后一个</span></span><br><span class="line">  colors.removeLast();</span><br><span class="line">  <span class="built_in">print</span>(colors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除索引范围内的数据（start &lt;= index &lt; end）</span></span><br><span class="line">  colors.removeRange(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">print</span>(colors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 循环遍历</span></span><br><span class="line">  colors.forEach((item) &#123;</span><br><span class="line">    <span class="built_in">print</span>(item);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 是否都满足条件</span></span><br><span class="line">  <span class="built_in">bool</span> allStartWithR = colors.every((item) &#123;</span><br><span class="line">    <span class="keyword">return</span> item.startsWith(<span class="string">&quot;r&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;是否全部以 r 开头: <span class="subst">$allStartWithR</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 筛选满足条件的数据</span></span><br><span class="line">  <span class="keyword">var</span> result = colors.where((item) &#123;</span><br><span class="line">    <span class="keyword">return</span> item.contains(<span class="string">&quot;e&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;包含 e 的元素: <span class="subst">$result</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 长度</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;长度: <span class="subst">$&#123;colors.length&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第一个元素</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;第一个: <span class="subst">$&#123;colors.first&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 最后一个元素</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;最后一个: <span class="subst">$&#123;colors.last&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 是否为空</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;是否为空: <span class="subst">$&#123;colors.isEmpty&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; colors = [<span class="string">&#x27;红red&#x27;</span>, <span class="string">&#x27;绿green&#x27;</span>, <span class="string">&#x27;蓝blue&#x27;</span>];</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; color1 = [<span class="string">&#x27;天蓝skyblue&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//是否所有元素都满足条件</span></span><br><span class="line">  <span class="built_in">print</span>(</span><br><span class="line">    colors.every((item) &#123;</span><br><span class="line">      <span class="keyword">return</span> item.toString().startsWith(<span class="string">&#x27;红&#x27;</span>);</span><br><span class="line">    &#125;),</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="comment">//筛选出满足条件的元素</span></span><br><span class="line">  <span class="built_in">print</span>(</span><br><span class="line">    colors.where((item) &#123;</span><br><span class="line">      <span class="keyword">return</span> item.toString().startsWith(<span class="string">&#x27;绿&#x27;</span>);</span><br><span class="line">    &#125;).toList(),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">具体例子</div>
+    <div class="hide-toggle-content"><h4 id="访问与修改"><a href="#访问与修改" class="headerlink" title="访问与修改"></a>访问与修改</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 访问元素</span></span><br><span class="line">  <span class="built_in">print</span>(colors[<span class="number">0</span>]);      <span class="comment">// red（第一个）</span></span><br><span class="line">  <span class="built_in">print</span>(colors.first);   <span class="comment">// red</span></span><br><span class="line">  <span class="built_in">print</span>(colors.last);    <span class="comment">// blue</span></span><br><span class="line">  <span class="built_in">print</span>(colors.length);  <span class="comment">// 3</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 修改元素</span></span><br><span class="line">  colors[<span class="number">1</span>] = <span class="string">&#x27;yellow&#x27;</span>;</span><br><span class="line">  <span class="built_in">print</span>(colors);  <span class="comment">// [red, yellow, blue]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 安全访问</span></span><br><span class="line">  <span class="built_in">print</span>(colors.elementAtOrNull(<span class="number">5</span>));  <span class="comment">// null（不会报错）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list = [];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加单个</span></span><br><span class="line">  list.add(<span class="number">1</span>);           <span class="comment">// [1]</span></span><br><span class="line">  list.addAll([<span class="number">2</span>, <span class="number">3</span>]);   <span class="comment">// [1, 2, 3]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 指定位置插入</span></span><br><span class="line">  list.insert(<span class="number">0</span>, <span class="number">0</span>);     <span class="comment">// [0, 1, 2, 3]（在索引0插入0）</span></span><br><span class="line">  list.insertAll(<span class="number">2</span>, [<span class="number">99</span>, <span class="number">100</span>]);  <span class="comment">// [0, 1, 99, 100, 2, 3]</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; items = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按值删除（第一个匹配）</span></span><br><span class="line">  items.remove(<span class="string">&#x27;b&#x27;</span>);     <span class="comment">// [&#x27;a&#x27;, &#x27;c&#x27;, &#x27;b&#x27;, &#x27;d&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按索引删除</span></span><br><span class="line">  items.removeAt(<span class="number">0</span>);     <span class="comment">// [&#x27;c&#x27;, &#x27;b&#x27;, &#x27;d&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 删除最后一个</span></span><br><span class="line">  items.removeLast();    <span class="comment">// [&#x27;c&#x27;, &#x27;b&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按条件删除</span></span><br><span class="line">  items.removeWhere((e) =&gt; e == <span class="string">&#x27;b&#x27;</span>);  <span class="comment">// [&#x27;c&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 清空</span></span><br><span class="line">  items.clear();         <span class="comment">// []</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询与查找"><a href="#查询与查找" class="headerlink" title="查询与查找"></a>查询与查找</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 包含判断</span></span><br><span class="line">  <span class="built_in">print</span>(numbers.contains(<span class="number">20</span>));  <span class="comment">// true</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查找位置</span></span><br><span class="line">  <span class="built_in">print</span>(numbers.indexOf(<span class="number">30</span>));      <span class="comment">// 2</span></span><br><span class="line">  <span class="built_in">print</span>(numbers.lastIndexOf(<span class="number">10</span>));  <span class="comment">// 0</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查找元素（按条件）</span></span><br><span class="line">  <span class="built_in">int</span> first = numbers.firstWhere((n) =&gt; n &gt; <span class="number">25</span>);  <span class="comment">// 30</span></span><br><span class="line">  <span class="built_in">int?</span> safe = numbers.firstWhere((n) =&gt; n &gt; <span class="number">100</span>, orElse: () =&gt; -<span class="number">1</span>);  <span class="comment">// -1</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查找索引</span></span><br><span class="line">  <span class="built_in">int</span> idx = numbers.indexWhere((n) =&gt; n &gt; <span class="number">25</span>);  <span class="comment">// 2</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;first: <span class="subst">$first</span>, idx: <span class="subst">$idx</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="切片与范围"><a href="#切片与范围" class="headerlink" title="切片与范围"></a>切片与范围</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; list = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取子列表（视图，修改会影响原列表）</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; sub = list.sublist(<span class="number">1</span>, <span class="number">4</span>);  <span class="comment">// [&#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 范围替换</span></span><br><span class="line">  list.replaceRange(<span class="number">1</span>, <span class="number">3</span>, [<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>]);  <span class="comment">// [&#x27;a&#x27;, &#x27;X&#x27;, &#x27;Y&#x27;, &#x27;d&#x27;, &#x27;e&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 填充范围</span></span><br><span class="line">  list.fillRange(<span class="number">0</span>, <span class="number">2</span>, <span class="string">&#x27;Z&#x27;</span>);  <span class="comment">// [&#x27;Z&#x27;, &#x27;Z&#x27;, &#x27;Y&#x27;, &#x27;d&#x27;, &#x27;e&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="排序与反转"><a href="#排序与反转" class="headerlink" title="排序与反转"></a>排序与反转</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; nums = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">6</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 原地排序</span></span><br><span class="line">  nums.sort();  <span class="comment">// [1, 1, 2, 3, 4, 5, 6, 9]</span></span><br><span class="line">  nums.sort((a, b) =&gt; b - a); <span class="comment">// 降序 [9, 6, 5, 4, 3, 2, 1, 1]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 自定义排序</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; fruits = [<span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;pie&#x27;</span>];</span><br><span class="line">  fruits.sort((a, b) =&gt; a.length.compareTo(b.length));  <span class="comment">// [&#x27;pie&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 反转（返回新列表）</span></span><br><span class="line">  <span class="keyword">var</span> reversed = nums.reversed.toList();  <span class="comment">// [9, 6, 5, 4, 3, 2, 1, 1]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 原地反转</span></span><br><span class="line">  nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">  <span class="comment">// Dart 没有原地反转方法，需要手动或转数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="映射与过滤"><a href="#映射与过滤" class="headerlink" title="映射与过滤"></a>映射与过滤</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// map：转换每个元素</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; strings = numbers.map((n) =&gt; <span class="string">&#x27;No.<span class="subst">$n</span>&#x27;</span>).toList();</span><br><span class="line">  <span class="built_in">print</span>(strings);  <span class="comment">// [No.1, No.2, No.3, No.4, No.5]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// where：过滤</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; evens = numbers.where((n) =&gt; n.isEven).toList();</span><br><span class="line">  <span class="built_in">print</span>(evens);  <span class="comment">// [2, 4]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// expand：展开嵌套</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;&gt; nested = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]];</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; flat = nested.expand((e) =&gt; e).toList();</span><br><span class="line">  <span class="built_in">print</span>(flat);  <span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 链式操作</span></span><br><span class="line">  <span class="keyword">var</span> result = numbers</span><br><span class="line">      .where((n) =&gt; n &gt; <span class="number">2</span>)      <span class="comment">// [3, 4, 5]</span></span><br><span class="line">      .map((n) =&gt; n * <span class="number">2</span>)         <span class="comment">// [6, 8, 10]</span></span><br><span class="line">      .toList();</span><br><span class="line">  <span class="built_in">print</span>(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; scores = [<span class="number">85</span>, <span class="number">92</span>, <span class="number">78</span>, <span class="number">90</span>, <span class="number">88</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 遍历</span></span><br><span class="line">  scores.forEach((s) =&gt; <span class="built_in">print</span>(s));</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 折叠/归约</span></span><br><span class="line">  <span class="built_in">int</span> sum = scores.reduce((a, b) =&gt; a + b);  <span class="comment">// 433</span></span><br><span class="line">  <span class="built_in">int</span> total = scores.fold(<span class="number">0</span>, (acc, s) =&gt; acc + s);  <span class="comment">// 433（带初始值）</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 条件判断</span></span><br><span class="line">  <span class="built_in">bool</span> allPass = scores.every((s) =&gt; s &gt;= <span class="number">60</span>);  <span class="comment">// true</span></span><br><span class="line">  <span class="built_in">bool</span> hasExcellent = scores.any((s) =&gt; s &gt;= <span class="number">90</span>);  <span class="comment">// true</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查找极值</span></span><br><span class="line">  <span class="built_in">int</span> max = scores.reduce((a, b) =&gt; a &gt; b ? a : b);  <span class="comment">// 92</span></span><br><span class="line">  <span class="built_in">int</span> min = scores.reduce((a, b) =&gt; a &lt; b ? a : b);  <span class="comment">// 78</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;总分: <span class="subst">$total</span>, 最高分: <span class="subst">$max</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="固定长度-vs-可增长"><a href="#固定长度-vs-可增长" class="headerlink" title="固定长度 vs 可增长"></a>固定长度 vs 可增长</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// 可增长列表（默认）</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; growable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">  growable.add(<span class="number">4</span>);      <span class="comment">// ✅ 可以添加</span></span><br><span class="line">  growable.length = <span class="number">10</span>; <span class="comment">// ✅ 可以改长度（填充null）</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 固定长度列表</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; fixed = <span class="built_in">List</span>.filled(<span class="number">3</span>, <span class="number">0</span>);  <span class="comment">// [0, 0, 0]</span></span><br><span class="line">  fixed[<span class="number">0</span>] = <span class="number">10</span>;        <span class="comment">// ✅ 可以修改元素</span></span><br><span class="line">  <span class="comment">// fixed.add(4);      // ❌ 错误：不能添加</span></span><br><span class="line">  <span class="comment">// fixed.length = 5;  // ❌ 错误：不能改长度</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 从可增长转固定</span></span><br><span class="line">  <span class="keyword">var</span> fixed2 = <span class="built_in">List</span>.unmodifiable(growable);  <span class="comment">// 不可修改的列表</span></span><br><span class="line">  <span class="comment">// fixed2[0] = 100;   // ❌ 运行时错误</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;growable: <span class="subst">$growable</span>&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;fixed: <span class="subst">$fixed</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="展开运算符"><a href="#展开运算符" class="headerlink" title="展开运算符"></a>展开运算符</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 展开 ...（合并列表）</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; combined = [...list1, ...list2];  <span class="comment">// [1, 2, 3, 4, 5, 6]</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 条件展开</span></span><br><span class="line">  <span class="built_in">bool</span> showExtra = <span class="keyword">true</span>;</span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; conditional = [</span><br><span class="line">    <span class="number">1</span>,</span><br><span class="line">    <span class="number">2</span>,</span><br><span class="line">    <span class="keyword">if</span> (showExtra) ...[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],  <span class="comment">// 条件成立才展开</span></span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// for 展开</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; repeated = [</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="string">&#x27;item-<span class="subst">$i</span>&#x27;</span>,  <span class="comment">// [&#x27;item-1&#x27;, &#x27;item-2&#x27;, &#x27;item-3&#x27;]</span></span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(combined);</span><br><span class="line">  <span class="built_in">print</span>(conditional);</span><br><span class="line">  <span class="built_in">print</span>(repeated);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加</td>
+<td><code>add()</code>, <code>addAll()</code>, <code>insert()</code>, <code>insertAll()</code></td>
+</tr>
+<tr>
+<td>删除</td>
+<td><code>remove()</code>, <code>removeAt()</code>, <code>removeLast()</code>, <code>removeWhere()</code>, <code>clear()</code></td>
+</tr>
+<tr>
+<td>访问</td>
+<td><code>[]</code>, <code>first</code>, <code>last</code>, <code>elementAt()</code>, <code>single</code></td>
+</tr>
+<tr>
+<td>查找</td>
+<td><code>contains()</code>, <code>indexOf()</code>, <code>indexWhere()</code>, <code>firstWhere()</code></td>
+</tr>
+<tr>
+<td>切片</td>
+<td><code>sublist()</code>, <code>getRange()</code>, <code>replaceRange()</code>, <code>fillRange()</code></td>
+</tr>
+<tr>
+<td>排序</td>
+<td><code>sort()</code>, <code>reversed</code></td>
+</tr>
+<tr>
+<td>转换</td>
+<td><code>map()</code>, <code>where()</code>, <code>expand()</code>, <code>cast&lt;T&gt;()</code></td>
+</tr>
+<tr>
+<td>聚合</td>
+<td><code>forEach()</code>, <code>reduce()</code>, <code>fold()</code>, <code>every()</code>, <code>any()</code>, <code>join()</code></td>
+</tr>
+<tr>
+<td>其他</td>
+<td><code>shuffle()</code>, <code>asMap()</code>, <code>toSet()</code>, <code>toString()</code></td>
+</tr>
+</tbody></table>
+</div>
+  </div>
+
+<h3 id="Map字典类型"><a href="#Map字典类型" class="headerlink" title="Map字典类型"></a>Map字典类型</h3><p>字典这个已经很熟悉了只不过这里的字典格式和列表差不多,反正和其他语言里的一样就是键值对</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// 三种创建方式</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; scores = &#123;<span class="string">&#x27;Alice&#x27;</span>: <span class="number">90</span>, <span class="string">&#x27;Bob&#x27;</span>: <span class="number">85</span>&#125;;  <span class="comment">// 字面量</span></span><br><span class="line">  <span class="keyword">var</span> ages = &lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&#123;<span class="string">&#x27;Tom&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;Jerry&#x27;</span>: <span class="number">22</span>&#125;;     <span class="comment">// 类型推断</span></span><br><span class="line">  <span class="built_in">Map</span> empty = &#123;&#125;;                                       <span class="comment">// 空 Map</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 构造函数创建</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; config = <span class="built_in">Map</span>();</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">int</span>, <span class="built_in">String</span>&gt; numbers = <span class="built_in">Map</span>.from(&#123;<span class="number">1</span>: <span class="string">&#x27;one&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;two&#x27;</span>&#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(scores);  <span class="comment">// &#123;Alice: 90, Bob: 85&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>循环———forEach</p>
+<p>在添加一个字典————-addAll</p>
+<p>是否包含某个key————containsKey</p>
+<p>删除某个key———-remove</p>
+<p>清空———clear</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; player = &#123;<span class="string">&#x27;女儿&#x27;</span>: <span class="string">&#x27;阿尼亚&#x27;</span>, <span class="string">&#x27;母亲&#x27;</span>: <span class="string">&#x27;约尔&#x27;</span>, <span class="string">&#x27;父亲&#x27;</span>: <span class="string">&#x27;劳埃德&#x27;</span>&#125;;</span><br><span class="line">  <span class="built_in">print</span>(player);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//循环 forEach</span></span><br><span class="line">  player.forEach((key, value) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$key</span>: <span class="subst">$value</span>&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//再添加一个字典--addAll</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; player2 = &#123;<span class="string">&#x27;同学&#x27;</span>: <span class="string">&#x27;达米安&#x27;</span>&#125;;</span><br><span class="line">  player.addAll(player2);</span><br><span class="line">  <span class="built_in">print</span>(player);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//是否包含某个键</span></span><br><span class="line">  <span class="built_in">print</span>(player.containsKey(<span class="string">&#x27;女儿&#x27;</span>)); <span class="comment">//true</span></span><br><span class="line">  <span class="built_in">print</span>(player.containsKey(<span class="string">&#x27;儿子&#x27;</span>)); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//删除某个键</span></span><br><span class="line">  player.remove(<span class="string">&#x27;同学&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(player);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//清空字典</span></span><br><span class="line">  player.clear();</span><br><span class="line">  <span class="built_in">print</span>(player); <span class="comment">//&#123;&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">具体例子</div>
+    <div class="hide-toggle-content"><h4 id="添加与修改"><a href="#添加与修改" class="headerlink" title="添加与修改"></a>添加与修改</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; map = &#123;&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加键值对</span></span><br><span class="line">  map[<span class="string">&#x27;a&#x27;</span>] = <span class="number">1</span>;           <span class="comment">// 直接赋值</span></span><br><span class="line">  map.putIfAbsent(<span class="string">&#x27;b&#x27;</span>, () =&gt; <span class="number">2</span>);  <span class="comment">// key不存在时才添加</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 批量添加</span></span><br><span class="line">  map.addAll(&#123;<span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 修改值</span></span><br><span class="line">  map[<span class="string">&#x27;a&#x27;</span>] = <span class="number">100</span>;         <span class="comment">// 已存在则覆盖</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 更新（基于旧值）</span></span><br><span class="line">  map.update(<span class="string">&#x27;a&#x27;</span>, (v) =&gt; v * <span class="number">2</span>);           <span class="comment">// 100 -&gt; 200</span></span><br><span class="line">  map.update(<span class="string">&#x27;z&#x27;</span>, (v) =&gt; v * <span class="number">2</span>, ifAbsent: () =&gt; <span class="number">0</span>);  <span class="comment">// 不存在则设为0</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(map);  <span class="comment">// &#123;a: 200, b: 2, c: 3, d: 4, z: 0&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; map = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按键删除</span></span><br><span class="line">  map.remove(<span class="string">&#x27;a&#x27;</span>);        <span class="comment">// 删除key &#x27;a&#x27;，返回被删的值（1），不存在返回null</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 条件删除</span></span><br><span class="line">  map.removeWhere((k, v) =&gt; v.isEven);  <span class="comment">// 删除值为偶数的项（b:2, d:4）</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 清空</span></span><br><span class="line">  <span class="comment">// map.clear();</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(map);  <span class="comment">// &#123;c: 3&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问与查询"><a href="#访问与查询" class="headerlink" title="访问与查询"></a>访问与查询</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; map = &#123;<span class="string">&#x27;Alice&#x27;</span>: <span class="number">90</span>, <span class="string">&#x27;Bob&#x27;</span>: <span class="number">85</span>, <span class="string">&#x27;Carol&#x27;</span>: <span class="number">95</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 访问值</span></span><br><span class="line">  <span class="built_in">print</span>(map[<span class="string">&#x27;Alice&#x27;</span>]);        <span class="comment">// 90</span></span><br><span class="line">  <span class="built_in">print</span>(map[<span class="string">&#x27;Unknown&#x27;</span>]);      <span class="comment">// null（key不存在）</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 安全访问</span></span><br><span class="line">  <span class="built_in">int?</span> score = map[<span class="string">&#x27;Unknown&#x27;</span>];</span><br><span class="line">  <span class="built_in">int</span> safe = map[<span class="string">&#x27;Unknown&#x27;</span>] ?? <span class="number">0</span>;  <span class="comment">// 不存在返回默认值0</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 检查存在性</span></span><br><span class="line">  <span class="built_in">print</span>(map.containsKey(<span class="string">&#x27;Alice&#x27;</span>));   <span class="comment">// true</span></span><br><span class="line">  <span class="built_in">print</span>(map.containsValue(<span class="number">100</span>));     <span class="comment">// false</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取键值集合</span></span><br><span class="line">  <span class="built_in">print</span>(map.keys);     <span class="comment">// (Alice, Bob, Carol)</span></span><br><span class="line">  <span class="built_in">print</span>(map.values);   <span class="comment">// (90, 85, 95)</span></span><br><span class="line">  <span class="built_in">print</span>(map.entries);  <span class="comment">// (MapEntry(Alice: 90), ...)</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 遍历</span></span><br><span class="line">  map.forEach((k, v) =&gt; <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$k</span>: <span class="subst">$v</span>&#x27;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; map = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式1：forEach</span></span><br><span class="line">  map.forEach((key, value) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$key</span> = <span class="subst">$value</span>&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式2：for-in entries</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> map.entries) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$&#123;entry.key&#125;</span>: <span class="subst">$&#123;entry.value&#125;</span>&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式3：解构遍历（Dart 3）</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> MapEntry(:key, :value) <span class="keyword">in</span> map.entries) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$key</span> -&gt; <span class="subst">$value</span>&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式4：只遍历key或value</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> map.keys) <span class="built_in">print</span>(k);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> v <span class="keyword">in</span> map.values) <span class="built_in">print</span>(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="转换与映射"><a href="#转换与映射" class="headerlink" title="转换与映射"></a>转换与映射</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; scores = &#123;<span class="string">&#x27;Alice&#x27;</span>: <span class="number">90</span>, <span class="string">&#x27;Bob&#x27;</span>: <span class="number">85</span>, <span class="string">&#x27;Carol&#x27;</span>: <span class="number">95</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// map：转换每个值</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; grades = scores.map((k, v) =&gt; </span><br><span class="line">    MapEntry(k, v &gt;= <span class="number">90</span> ? <span class="string">&#x27;A&#x27;</span> : <span class="string">&#x27;B&#x27;</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(grades);  <span class="comment">// &#123;Alice: A, Bob: B, Carol: A&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 过滤（没有直接filter，需要转换）</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; excellent = <span class="built_in">Map</span>.fromEntries(</span><br><span class="line">    scores.entries.where((e) =&gt; e.value &gt;= <span class="number">90</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(excellent);  <span class="comment">// &#123;Alice: 90, Carol: 95&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 键值互换</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">int</span>, <span class="built_in">String</span>&gt; reversed = <span class="built_in">Map</span>.fromEntries(</span><br><span class="line">    scores.entries.map((e) =&gt; MapEntry(e.value, e.key))</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(reversed);  <span class="comment">// &#123;90: Alice, 85: Bob, 95: Carol&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="合并与操作"><a href="#合并与操作" class="headerlink" title="合并与操作"></a>合并与操作</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; m1 = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>&#125;;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; m2 = &#123;<span class="string">&#x27;b&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;;  <span class="comment">// b冲突</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 展开合并（Dart 2.3+）</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; combined = &#123;...m1, ...m2&#125;;  <span class="comment">// m2的b覆盖m1的b</span></span><br><span class="line">  <span class="built_in">print</span>(combined);  <span class="comment">// &#123;a: 1, b: 20, c: 3&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 自定义合并（处理冲突）</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; merged = &#123;&#125;;</span><br><span class="line">  merged.addAll(m1);</span><br><span class="line">  m2.forEach((k, v) &#123;</span><br><span class="line">    merged[k] = (merged[k] ?? <span class="number">0</span>) + v;  <span class="comment">// 值相加</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">print</span>(merged);  <span class="comment">// &#123;a: 1, b: 22, c: 3&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 条件展开</span></span><br><span class="line">  <span class="built_in">bool</span> useM2 = <span class="keyword">true</span>;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; conditional = &#123;</span><br><span class="line">    ...m1,</span><br><span class="line">    <span class="keyword">if</span> (useM2) ...m2,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用构造函数"><a href="#常用构造函数" class="headerlink" title="常用构造函数"></a>常用构造函数</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// 固定key，延迟计算value</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; lazy = <span class="built_in">Map</span>.fromIterable(</span><br><span class="line">    [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">    key: (item) =&gt; item,</span><br><span class="line">    value: (item) =&gt; item.codeUnitAt(<span class="number">0</span>),</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(lazy);  <span class="comment">// &#123;a: 97, b: 98, c: 99&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 分组（Dart 2.13+）</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; words = [<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;apricot&#x27;</span>, <span class="string">&#x27;blueberry&#x27;</span>];</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; grouped = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> w <span class="keyword">in</span> words) &#123;</span><br><span class="line">    <span class="built_in">String</span> key = w[<span class="number">0</span>];  <span class="comment">// 按首字母分组</span></span><br><span class="line">    grouped.putIfAbsent(key, () =&gt; []).add(w);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">print</span>(grouped);  <span class="comment">// &#123;a: [apple, apricot], b: [banana, blueberry]&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 不可变Map</span></span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; readonly = <span class="built_in">Map</span>.unmodifiable(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>&#125;);</span><br><span class="line">  <span class="comment">// readonly[&#x27;a&#x27;] = 2;  // ❌ 运行时错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="排序与排序后的Map"><a href="#排序与排序后的Map" class="headerlink" title="排序与排序后的Map"></a>排序与排序后的Map</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; scores = &#123;<span class="string">&#x27;Bob&#x27;</span>: <span class="number">85</span>, <span class="string">&#x27;Alice&#x27;</span>: <span class="number">90</span>, <span class="string">&#x27;Carol&#x27;</span>: <span class="number">95</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按键排序（返回List）</span></span><br><span class="line">  <span class="keyword">var</span> sortedByKey = <span class="built_in">Map</span>.fromEntries(</span><br><span class="line">    scores.entries.toList()..sort((a, b) =&gt; a.key.compareTo(b.key))</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(sortedByKey);  <span class="comment">// &#123;Alice: 90, Bob: 85, Carol: 95&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 按值排序</span></span><br><span class="line">  <span class="keyword">var</span> sortedByValue = <span class="built_in">Map</span>.fromEntries(</span><br><span class="line">    scores.entries.toList()..sort((a, b) =&gt; a.value.compareTo(b.value))</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">print</span>(sortedByValue);  <span class="comment">// &#123;Bob: 85, Alice: 90, Carol: 95&#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// SplayTreeMap：自动按键排序（需要import &#x27;dart:collection&#x27;）</span></span><br><span class="line">  <span class="comment">// final sortedMap = SplayTreeMap&lt;String, int&gt;.from(scores);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="默认值处理"><a href="#默认值处理" class="headerlink" title="默认值处理"></a>默认值处理</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;&gt; groups = &#123;&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式1：putIfAbsent（推荐）</span></span><br><span class="line">  groups.putIfAbsent(<span class="string">&#x27;A&#x27;</span>, () =&gt; []).add(<span class="number">1</span>);</span><br><span class="line">  groups.putIfAbsent(<span class="string">&#x27;A&#x27;</span>, () =&gt; []).add(<span class="number">2</span>);  <span class="comment">// 不会创建新列表</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 方式2：扩展方法（需要collection_for）</span></span><br><span class="line">  (groups[<span class="string">&#x27;B&#x27;</span>] ??= []).add(<span class="number">3</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">print</span>(groups);  <span class="comment">// &#123;A: [1, 2], B: [3]&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加&#x2F;修改</td>
+<td><code>[] =</code>, <code>putIfAbsent()</code>, <code>addAll()</code>, <code>update()</code></td>
+</tr>
+<tr>
+<td>删除</td>
+<td><code>remove()</code>, <code>removeWhere()</code>, <code>clear()</code></td>
+</tr>
+<tr>
+<td>访问</td>
+<td><code>[]</code>, <code>containsKey()</code>, <code>containsValue()</code></td>
+</tr>
+<tr>
+<td>获取集合</td>
+<td><code>.keys</code>, <code>.values</code>, <code>.entries</code></td>
+</tr>
+<tr>
+<td>遍历</td>
+<td><code>forEach()</code>, <code>for-in</code></td>
+</tr>
+<tr>
+<td>转换</td>
+<td><code>map()</code>, <code>Map.fromEntries()</code></td>
+</tr>
+<tr>
+<td>合并</td>
+<td><code>{...m1, ...m2}</code></td>
+</tr>
+<tr>
+<td>其他</td>
+<td><code>cast()</code>, <code>updateAll()</code>, <code>isEmpty</code>, <code>length</code></td>
+</tr>
+</tbody></table>
+</div>
+  </div>
+
+<h3 id="dynamic-不要用"><a href="#dynamic-不要用" class="headerlink" title="dynamic(不要用)"></a>dynamic(不要用)</h3><p><code>dynamic</code> 是 Dart 的一个特殊类型，表示<strong>禁用静态类型检查</strong>，可以在运行时持有任何类型的值，并可以调用任何方法（编译时不检查）</p>
+<p>说人话就是完全不做类型检查，啥都能放</p>
+<blockquote>
+<p>dynamic和var和object的区别:</p>
+<p>dynamic——运时可自由改变类型，(无编译检查，方法和属性直接调用)</p>
+<p>var—–根据初始值进行推断类型，确定类型后类型确定，(有编译检查，仅限推断的属性和方法)</p>
+<p>Object——所有类型的父类，可接收任意类型，但访问成员需进行类型判断或强制转换，（有编译检查，不可直接调用具体类型的方法）</p>
+<p>简而言之就是var和Object一旦确定类型就不可改,而dynamic随便改</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">dynamic</span> a = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(a);</span><br><span class="line"></span><br><span class="line">  a = <span class="number">123</span>;</span><br><span class="line">  <span class="built_in">print</span>(a);</span><br><span class="line"></span><br><span class="line">  a = <span class="keyword">true</span>;</span><br><span class="line">  <span class="built_in">print</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由此可见这玩意太自由了,所以能不用就不用</p>
+<h3 id="late"><a href="#late" class="headerlink" title="late"></a>late</h3><p><code>late</code> 是 Dart 的空安全特性，用于<strong>延迟初始化</strong></p>
+<p>它告诉编译器：”这个变量稍后一定会被赋值，现在先别检查它是否为空”</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">late</span> <span class="built_in">String</span> name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  name = <span class="string">&quot;Tom&quot;</span>; <span class="comment">// 后面再赋值</span></span><br><span class="line">  <span class="built_in">print</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="核心特点"><a href="#核心特点" class="headerlink" title="核心特点"></a>核心特点</h4><ul>
+<li>变量<strong>先声明</strong></li>
+<li><strong>稍后再赋值</strong></li>
+<li>使用前必须赋值，否则报错</li>
+</ul>
+<h3 id="late-final"><a href="#late-final" class="headerlink" title="late final"></a>late final</h3><p>这个等于late+ final就是不可更改的延迟初始化的类型,没什么好说的</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">late</span> <span class="keyword">final</span> <span class="built_in">String</span> name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  name = <span class="string">&quot;Tom&quot;</span>;  <span class="comment">// ✅ 第一次赋值</span></span><br><span class="line">  name = <span class="string">&quot;Jack&quot;</span>; <span class="comment">// ❌ 报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空安全机制-空安全运算符"><a href="#空安全机制-空安全运算符" class="headerlink" title="空安全机制(空安全运算符)"></a>空安全机制(空安全运算符)</h2><p>在dart中,默认情况下，变量不能是 null，除非你明确允许它为 null</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>符号</th>
+<th>作用说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可空类型</td>
+<td><code>?</code></td>
+<td>声明变量可以为 <code>null</code></td>
+<td><code>String? name</code></td>
+</tr>
+<tr>
+<td>安全访问</td>
+<td><code>?.</code></td>
+<td>对象为 <code>null</code> 时跳过调用并返回 <code>null</code></td>
+<td><code>user?.name</code></td>
+</tr>
+<tr>
+<td>非空断言</td>
+<td><code>!.</code></td>
+<td>强制认为变量不为 <code>null</code>（否则运行时报错）</td>
+<td><code>name!.length</code></td>
+</tr>
+<tr>
+<td>空合并</td>
+<td><code>??</code></td>
+<td>左侧为 <code>null</code> 时返回右侧默认值</td>
+<td><code>name ?? &quot;Guest&quot;</code></td>
+</tr>
+<tr>
+<td>空值赋值</td>
+<td><code>??=</code></td>
+<td>仅当变量为 <code>null</code> 时才进行赋值</td>
+<td><code>name ??= &quot;Tom&quot;</code></td>
+</tr>
+<tr>
+<td>级联安全访问</td>
+<td><code>?..</code></td>
+<td>对象为 <code>null</code> 时不执行后续级联操作</td>
+<td><code>user?..setName(&quot;Tom&quot;)</code></td>
+</tr>
+<tr>
+<td>空展开</td>
+<td><code>...?</code></td>
+<td>集合为 <code>null</code> 时跳过展开</td>
+<td><code>[...?list]</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">//可空类型(声明变量可以为null)</span></span><br><span class="line">  <span class="built_in">String?</span> name;</span><br><span class="line"></span><br><span class="line">  name = <span class="keyword">null</span>; <span class="comment">// ✅ 可以</span></span><br><span class="line">  name = <span class="string">&quot;Tom&quot;</span>; <span class="comment">// ✅ 也可以</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(name);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//安全访问(对象为 null 时跳过调用并返回 null)</span></span><br><span class="line">  <span class="built_in">String?</span> name_1;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(name_1?.length); <span class="comment">// 输出null</span></span><br><span class="line"></span><br><span class="line">  name_1 = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(name_1?.length); <span class="comment">// 输出3</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//非空断言(强制认为变量不为 null（否则运行时报错）)</span></span><br><span class="line">  <span class="built_in">String?</span> name_2 = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(name_2!.length); <span class="comment">// ✅ 3</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">String?</span> a;</span><br><span class="line">  <span class="comment">//print(a!.length); // ❌ 运行时崩溃</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//空合并(左侧为 null 时返回右侧默认值)</span></span><br><span class="line">  <span class="built_in">String?</span> name_3;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(name_3 ?? <span class="string">&quot;Guest&quot;</span>); <span class="comment">// Guest</span></span><br><span class="line"></span><br><span class="line">  name_3 = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(name_3 ?? <span class="string">&quot;Guest&quot;</span>); <span class="comment">// Tom</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//空合并赋值(仅当变量为 null 时才进行赋值)</span></span><br><span class="line">  <span class="built_in">String?</span> name_4;</span><br><span class="line"></span><br><span class="line">  name_4 ??= <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(name_4); <span class="comment">// Tom</span></span><br><span class="line"></span><br><span class="line">  name_4 ??= <span class="string">&quot;Jack&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(name_4); <span class="comment">// 还是 Tom（不会被覆盖）</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//级联安全访问(对象为 null 时不执行后续级联操作)</span></span><br><span class="line">  User? user;</span><br><span class="line"></span><br><span class="line">  user?..setName(<span class="string">&quot;Tom&quot;</span>); <span class="comment">// ✅ 不会报错（因为 user 是 null）</span></span><br><span class="line"></span><br><span class="line">  user = User();</span><br><span class="line">  user?..setName(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(user.name); <span class="comment">// Tom</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//空展开(集合为 null 时跳过展开)</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;? list;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> newList = [<span class="number">1</span>, <span class="number">2</span>, ...?list];</span><br><span class="line">  <span class="built_in">print</span>(newList); <span class="comment">// [1, 2]</span></span><br><span class="line"></span><br><span class="line">  list = [<span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">  <span class="keyword">var</span> newList2 = [<span class="number">1</span>, <span class="number">2</span>, ...?list];</span><br><span class="line">  <span class="built_in">print</span>(newList2); <span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> name = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> setName(<span class="built_in">String</span> n) &#123;</span><br><span class="line">    name = n;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>加法</td>
+<td><code>1 + 2</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>减法</td>
+<td><code>5 - 3</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>乘法</td>
+<td><code>2 * 3</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>除法（结果是double）</td>
+<td><code>5 / 2 = 2.5</code></td>
+</tr>
+<tr>
+<td><code>~/</code></td>
+<td>整除</td>
+<td><code>5 ~/ 2 = 2</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>取余</td>
+<td><code>5 % 2 = 1</code></td>
+</tr>
+</tbody></table>
+<h3 id="自增自减"><a href="#自增自减" class="headerlink" title="自增自减"></a>自增自减</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>++</code></td>
+<td>自增</td>
+<td><code>a++</code></td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>自减</td>
+<td><code>a--</code></td>
+</tr>
+</tbody></table>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>==</code></td>
+<td>等于</td>
+<td><code>a == b</code></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>不等于</td>
+<td><code>a != b</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>大于</td>
+<td><code>a &gt; b</code></td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>小于</td>
+<td><code>a &lt; b</code></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>大于等于</td>
+<td><code>a &gt;= b</code></td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>小于等于</td>
+<td><code>a &lt;= b</code></td>
+</tr>
+</tbody></table>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code></td>
+<td>赋值</td>
+<td><code>a = 10</code></td>
+</tr>
+<tr>
+<td><code>+=</code></td>
+<td>加后赋值</td>
+<td><code>a += 2</code></td>
+</tr>
+<tr>
+<td><code>-=</code></td>
+<td>减后赋值</td>
+<td><code>a -= 2</code></td>
+</tr>
+<tr>
+<td><code>*=</code></td>
+<td>乘后赋值</td>
+<td><code>a *= 2</code></td>
+</tr>
+<tr>
+<td><code>/=</code></td>
+<td>除后赋值</td>
+<td><code>a /= 2</code></td>
+</tr>
+<tr>
+<td><code>~/=</code></td>
+<td>整除赋值</td>
+<td><code>a ~/= 2</code></td>
+</tr>
+<tr>
+<td><code>%=</code></td>
+<td>取余赋值</td>
+<td><code>a %= 2</code></td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>!</code></td>
+<td>非</td>
+<td>取反</td>
+<td><code>!true</code> → <code>false</code></td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>与</td>
+<td>两边都为 true</td>
+<td><code>a &amp;&amp; b</code></td>
+</tr>
+<tr>
+<td>&#96;</td>
+<td></td>
+<td>&#96;</td>
+<td>或</td>
+</tr>
+</tbody></table>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/15/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/"><span class="nav-label">← 上一篇</span><span class="nav-title">新的软件灵感</span></a></div><div class="post-nav next"><a href="/2026/04/13/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/claw-code%E5%B0%9D%E8%AF%95/"><span class="nav-label">下一篇 →</span><span class="nav-title">claw-code尝试</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=flutter%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3flutter%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B&amp;url=%2F2026%2F04%2F15%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F15%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F15%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/15/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F15%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3flutter%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F15%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3flutter%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/15/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

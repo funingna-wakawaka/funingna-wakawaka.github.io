@@ -1,0 +1,1591 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    app1.loadImage(coverImages[0]);
+    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/10.png" alt="突然想到毕业论文的事了"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-18T11:49:53.000Z">2026-04-18</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>5.7k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>19</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">突然想到毕业论文的事了</h1><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="大四的那些要毕业了-我突然想到还有毕业论文的事-虽然我才大二"><a href="#大四的那些要毕业了-我突然想到还有毕业论文的事-虽然我才大二" class="headerlink" title="大四的那些要毕业了,我突然想到还有毕业论文的事,虽然我才大二"></a>大四的那些要毕业了,我突然想到还有毕业论文的事,虽然我才大二</h1><p>于是又问了gpt一些事</p>
+<h2 id="①"><a href="#①" class="headerlink" title="①"></a>①</h2><blockquote>
+<p>毕业论文怎么写? 非得抄别人的吗?自己不能创新吗</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">ChatGPT回答</div>
+    <div class="hide-toggle-content"><p>不需要抄别人，而且<strong>正常情况下也不允许抄</strong>。</p>
+<p>但你现在这个疑问其实很典型：很多人一开始都以为“毕业论文 &#x3D; 拼拼凑凑别人的东西”，其实更准确的说法是：</p>
+<blockquote>
+<p>毕业论文 &#x3D; 在已有研究基础上，做一个“小范围的独立研究”。</p>
+</blockquote>
+<p>也就是说：<strong>可以借鉴，但必须有自己的东西。</strong></p>
+<hr>
+<h2 id="一、毕业论文到底在干嘛？"><a href="#一、毕业论文到底在干嘛？" class="headerlink" title="一、毕业论文到底在干嘛？"></a>一、毕业论文到底在干嘛？</h2><p>一句话讲清楚：</p>
+<p>👉 不是让你发明新东西<br>👉 是让你证明你“会做研究”</p>
+<p>通常包括：</p>
+<ul>
+<li>你理解一个领域</li>
+<li>你能查资料（文献）</li>
+<li>你能整理分析</li>
+<li>你能做一点点自己的实验 &#x2F; 对比 &#x2F;实现 &#x2F;改进</li>
+<li>你能写成规范论文</li>
+</ul>
+<hr>
+<h2 id="二、能不能创新？答案是：可以，而且是加分项"><a href="#二、能不能创新？答案是：可以，而且是加分项" class="headerlink" title="二、能不能创新？答案是：可以，而且是加分项"></a>二、能不能创新？答案是：可以，而且是加分项</h2><p>但要注意：</p>
+<h3 id="✔-小创新（最现实）"><a href="#✔-小创新（最现实）" class="headerlink" title="✔ 小创新（最现实）"></a>✔ 小创新（最现实）</h3><ul>
+<li>改进一个算法（比如更快一点&#x2F;更稳定一点）</li>
+<li>做一个系统（比如管理系统、App）</li>
+<li>做对比实验（A方法 vs B方法）</li>
+<li>优化一个流程</li>
+</ul>
+<p>👉 这类最常见，也最容易过</p>
+<hr>
+<h3 id="❌-大创新（几乎不要求）"><a href="#❌-大创新（几乎不要求）" class="headerlink" title="❌ 大创新（几乎不要求）"></a>❌ 大创新（几乎不要求）</h3><ul>
+<li>提出全新理论</li>
+<li>颠覆某个领域</li>
+</ul>
+<p>👉 这一般是硕士&#x2F;博士甚至科研人员才做的</p>
+<hr>
+<h2 id="三、为什么不能“抄别人”？"><a href="#三、为什么不能“抄别人”？" class="headerlink" title="三、为什么不能“抄别人”？"></a>三、为什么不能“抄别人”？</h2><p>因为论文核心是：</p>
+<blockquote>
+<p>证明“你不是复制粘贴机器，而是有思考能力的人”</p>
+</blockquote>
+<p>如果只是抄：</p>
+<ul>
+<li>查重不过</li>
+<li>答辩会被问穿</li>
+<li>本质上也学不到东西</li>
+</ul>
+<hr>
+<h2 id="四、标准毕业论文结构（通用模板）"><a href="#四、标准毕业论文结构（通用模板）" class="headerlink" title="四、标准毕业论文结构（通用模板）"></a>四、标准毕业论文结构（通用模板）</h2><p>一般都是这个套路：</p>
+<h3 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h3><ul>
+<li>这个问题为什么重要</li>
+<li>现在别人做到哪一步了</li>
+<li>你的目标是什么</li>
+</ul>
+<h3 id="2-相关工作（文献综述）"><a href="#2-相关工作（文献综述）" class="headerlink" title="2. 相关工作（文献综述）"></a>2. 相关工作（文献综述）</h3><ul>
+<li>别人做过什么</li>
+<li>有什么不足</li>
+</ul>
+<h3 id="3-方法-设计（重点）"><a href="#3-方法-设计（重点）" class="headerlink" title="3. 方法 &#x2F; 设计（重点）"></a>3. 方法 &#x2F; 设计（重点）</h3><ul>
+<li>你怎么做的</li>
+<li>系统&#x2F;算法&#x2F;模型</li>
+</ul>
+<h3 id="4-实验-实现"><a href="#4-实验-实现" class="headerlink" title="4. 实验 &#x2F; 实现"></a>4. 实验 &#x2F; 实现</h3><ul>
+<li>你做出来了什么</li>
+<li>数据&#x2F;结果&#x2F;截图</li>
+</ul>
+<h3 id="5-分析"><a href="#5-分析" class="headerlink" title="5. 分析"></a>5. 分析</h3><ul>
+<li>你的方法好不好</li>
+<li>和别人比怎么样</li>
+</ul>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><ul>
+<li>做了什么</li>
+<li>不足 + 未来优化</li>
+</ul>
+<hr>
+<h2 id="五、一个很现实的“毕业论文真相”"><a href="#五、一个很现实的“毕业论文真相”" class="headerlink" title="五、一个很现实的“毕业论文真相”"></a>五、一个很现实的“毕业论文真相”</h2><p>很多本科论文其实是：</p>
+<blockquote>
+<p>“在已有方案上做一个小改进 + 实现 + 写报告”</p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>做一个微信小程序</li>
+<li>做一个博客系统（你现在这个 Hexo 就很像）</li>
+<li>做一个游戏Demo（Unity）</li>
+<li>做一个数据分析项目</li>
+</ul>
+<hr>
+<h2 id="六、给你一句最重要的话"><a href="#六、给你一句最重要的话" class="headerlink" title="六、给你一句最重要的话"></a>六、给你一句最重要的话</h2><blockquote>
+<p>毕业论文不是考“天才创新”，而是考“你能不能把一个问题完整做完并讲清楚”。</p>
+</blockquote>
+<hr>
+<h2 id="七、如果你现在还很迷茫，我可以帮你做更具体的"><a href="#七、如果你现在还很迷茫，我可以帮你做更具体的" class="headerlink" title="七、如果你现在还很迷茫，我可以帮你做更具体的"></a>七、如果你现在还很迷茫，我可以帮你做更具体的</h2><p>你可以告诉我：</p>
+<ul>
+<li>你的专业</li>
+<li>你现在会什么（比如 Java &#x2F; Unity &#x2F; 前端）</li>
+<li>你想做简单还是稍微有挑战一点</li>
+</ul>
+<p>我可以帮你直接给你：</p>
+<ul>
+<li>3~5个<strong>能过审的论文题目</strong></li>
+<li>每个题目的<strong>实现方案</strong></li>
+<li>甚至帮你搭一个“能写论文的项目结构”</li>
+</ul>
+<p>不用抄，也能写出来 👍</p>
+</div>
+  </div>
+
+<h2 id="②"><a href="#②" class="headerlink" title="②"></a>②</h2><blockquote>
+<p>不不不,我不明白怎么写,我确实可以做到写说明书,但是感觉和毕业论文不知道是不是一回事</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>你这个感觉是对的：<strong>毕业论文和“说明书”确实很像，但不是一回事</strong>。区别主要在“有没有研究味道”。</p>
+<p>我用最直白的方式给你拆开。</p>
+<hr>
+<h1 id="一、说明书-vs-毕业论文（核心区别）"><a href="#一、说明书-vs-毕业论文（核心区别）" class="headerlink" title="一、说明书 vs 毕业论文（核心区别）"></a>一、说明书 vs 毕业论文（核心区别）</h1><h2 id="✔-说明书（你熟悉的）"><a href="#✔-说明书（你熟悉的）" class="headerlink" title="✔ 说明书（你熟悉的）"></a>✔ 说明书（你熟悉的）</h2><p>重点是：</p>
+<blockquote>
+<p>“这个东西怎么用”</p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>怎么安装</li>
+<li>怎么操作</li>
+<li>每个功能是什么</li>
+</ul>
+<p>👉 本质：<strong>教人用</strong></p>
+<hr>
+<h2 id="✔-毕业论文"><a href="#✔-毕业论文" class="headerlink" title="✔ 毕业论文"></a>✔ 毕业论文</h2><p>重点是：</p>
+<blockquote>
+<p>“我为什么这么做 + 我做得怎么样 + 和别人比有什么区别”</p>
+</blockquote>
+<p>👉 本质：<strong>解释 + 分析 + 对比 + 结论</strong></p>
+<hr>
+<h1 id="二、一个最关键的区别（非常重要）"><a href="#二、一个最关键的区别（非常重要）" class="headerlink" title="二、一个最关键的区别（非常重要）"></a>二、一个最关键的区别（非常重要）</h1><h2 id="说明书只回答："><a href="#说明书只回答：" class="headerlink" title="说明书只回答："></a>说明书只回答：</h2><ul>
+<li>是什么</li>
+<li>怎么用</li>
+</ul>
+<h2 id="论文必须回答："><a href="#论文必须回答：" class="headerlink" title="论文必须回答："></a>论文必须回答：</h2><ul>
+<li>为什么这么设计？</li>
+<li>有没有更好的方法？</li>
+<li>你的方法效果如何？</li>
+<li>和别人方案比怎样？</li>
+</ul>
+<hr>
+<h1 id="三、举个你能立刻懂的例子"><a href="#三、举个你能立刻懂的例子" class="headerlink" title="三、举个你能立刻懂的例子"></a>三、举个你能立刻懂的例子</h1><p>假设你做一个“登录系统”</p>
+<hr>
+<h2 id="❌-说明书写法："><a href="#❌-说明书写法：" class="headerlink" title="❌ 说明书写法："></a>❌ 说明书写法：</h2><ul>
+<li>输入账号密码登录</li>
+<li>点击按钮进入主页</li>
+<li>注册页面填写信息</li>
+</ul>
+<p>👉 结束</p>
+<hr>
+<h2 id="✔-论文写法："><a href="#✔-论文写法：" class="headerlink" title="✔ 论文写法："></a>✔ 论文写法：</h2><h3 id="1-为什么要做这个系统"><a href="#1-为什么要做这个系统" class="headerlink" title="1. 为什么要做这个系统"></a>1. 为什么要做这个系统</h3><ul>
+<li>现有系统的问题（比如安全性差 &#x2F; 体验差）</li>
+</ul>
+<h3 id="2-我设计了什么方案"><a href="#2-我设计了什么方案" class="headerlink" title="2. 我设计了什么方案"></a>2. 我设计了什么方案</h3><ul>
+<li>用了什么技术（JWT &#x2F; 数据库 &#x2F; 加密）</li>
+</ul>
+<h3 id="3-为什么这么设计"><a href="#3-为什么这么设计" class="headerlink" title="3. 为什么这么设计"></a>3. 为什么这么设计</h3><ul>
+<li>为什么不用别的方法</li>
+</ul>
+<h3 id="4-实验-效果"><a href="#4-实验-效果" class="headerlink" title="4. 实验&#x2F;效果"></a>4. 实验&#x2F;效果</h3><ul>
+<li>登录速度多少</li>
+<li>安全性提升</li>
+</ul>
+<h3 id="5-对比"><a href="#5-对比" class="headerlink" title="5. 对比"></a>5. 对比</h3><ul>
+<li>和传统 session 登录比有什么区别</li>
+</ul>
+<hr>
+<p>👉 你会发现：</p>
+<blockquote>
+<p>说明书是“操作手册”<br>论文是“带解释的设计报告”</p>
+</blockquote>
+<hr>
+<h1 id="四、毕业论文其实可以理解成一句话"><a href="#四、毕业论文其实可以理解成一句话" class="headerlink" title="四、毕业论文其实可以理解成一句话"></a>四、毕业论文其实可以理解成一句话</h1><p>👉 <strong>“带分析的项目说明书”</strong></p>
+<p>但必须多三样东西：</p>
+<h3 id="✔-1-原因（为什么做）"><a href="#✔-1-原因（为什么做）" class="headerlink" title="✔ 1. 原因（为什么做）"></a>✔ 1. 原因（为什么做）</h3><h3 id="✔-2-对比（和别人比）"><a href="#✔-2-对比（和别人比）" class="headerlink" title="✔ 2. 对比（和别人比）"></a>✔ 2. 对比（和别人比）</h3><h3 id="✔-3-评价（好不好）"><a href="#✔-3-评价（好不好）" class="headerlink" title="✔ 3. 评价（好不好）"></a>✔ 3. 评价（好不好）</h3><hr>
+<h1 id="五、最容易卡住你的点（我直接帮你说）"><a href="#五、最容易卡住你的点（我直接帮你说）" class="headerlink" title="五、最容易卡住你的点（我直接帮你说）"></a>五、最容易卡住你的点（我直接帮你说）</h1><p>很多人误以为：</p>
+<blockquote>
+<p>“我做了一个项目 &#x3D; 论文”</p>
+</blockquote>
+<p>❌ 错</p>
+<p>你必须再补：</p>
+<ul>
+<li>你为什么这么设计</li>
+<li>你有没有查别人做法</li>
+<li>你的方案有什么优点&#x2F;缺点</li>
+</ul>
+<hr>
+<h1 id="六、如果你已经会写说明书，其实你已经完成70"><a href="#六、如果你已经会写说明书，其实你已经完成70" class="headerlink" title="六、如果你已经会写说明书，其实你已经完成70%"></a>六、如果你已经会写说明书，其实你已经完成70%</h1><p>你只需要做三件事：</p>
+<h2 id="①-在每个功能前加一句“为什么”"><a href="#①-在每个功能前加一句“为什么”" class="headerlink" title="① 在每个功能前加一句“为什么”"></a>① 在每个功能前加一句“为什么”</h2><p>比如：</p>
+<blockquote>
+<p>为了提高安全性，我们使用了……</p>
+</blockquote>
+<h2 id="②-加一点“对比别人”"><a href="#②-加一点“对比别人”" class="headerlink" title="② 加一点“对比别人”"></a>② 加一点“对比别人”</h2><p>比如：</p>
+<blockquote>
+<p>与传统方法相比，该方法减少了……</p>
+</blockquote>
+<h2 id="③-加一点“总结评价”"><a href="#③-加一点“总结评价”" class="headerlink" title="③ 加一点“总结评价”"></a>③ 加一点“总结评价”</h2><p>比如：</p>
+<blockquote>
+<p>该系统在XX方面表现较好，但仍存在……</p>
+</blockquote>
+<hr>
+<h1 id="七、最简单理解版本"><a href="#七、最简单理解版本" class="headerlink" title="七、最简单理解版本"></a>七、最简单理解版本</h1><p>我帮你压缩成一句话：</p>
+<blockquote>
+<p>说明书 &#x3D; 教别人用<br>论文 &#x3D; 解释你为什么这么做 + 你做得怎么样</p>
+</blockquote>
+<hr>
+<h1 id="八、如果你愿意，我可以帮你直接“翻译”"><a href="#八、如果你愿意，我可以帮你直接“翻译”" class="headerlink" title="八、如果你愿意，我可以帮你直接“翻译”"></a>八、如果你愿意，我可以帮你直接“翻译”</h1><p>你可以把你现在做的项目（比如 Unity &#x2F; Hexo &#x2F; Flutter &#x2F; 登录系统）发我：</p>
+<p>我可以帮你：</p>
+<ul>
+<li>把“说明书”改成“论文表达”</li>
+<li>直接帮你生成一段“论文风格文字”</li>
+<li>让你立刻看到区别</li>
+</ul>
+<p>这样你会一下子开窍。</p>
+</div>
+  </div>
+
+<h2 id="③"><a href="#③" class="headerlink" title="③"></a>③</h2><blockquote>
+<p>因为比如我自己设计一个软件,我根本不需要引用什么学术论文</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>你这个理解很关键，但这里有个“学校视角”和“你做软件视角”的差别，需要纠正一下：</p>
+<blockquote>
+<p>你做软件时确实<strong>不需要为了写代码去读学术论文</strong><br>但你写毕业论文时，<strong>必须“看起来像是站在别人研究基础上做的”</strong></p>
+</blockquote>
+<p>这两件事不冲突。</p>
+<hr>
+<h1 id="一、核心误解：论文-≠-真的在搞科研"><a href="#一、核心误解：论文-≠-真的在搞科研" class="headerlink" title="一、核心误解：论文 ≠ 真的在搞科研"></a>一、核心误解：论文 ≠ 真的在搞科研</h1><p>很多人会误以为：</p>
+<blockquote>
+<p>“我要像科学家一样引用很多论文才能写毕业论文”</p>
+</blockquote>
+<p>❌ 不对（本科基本不是这样）</p>
+<p>本科毕业论文更真实的情况是：</p>
+<blockquote>
+<p>你做的是工程&#x2F;项目<br>论文是在“包装这个项目，让它符合学术格式”</p>
+</blockquote>
+<hr>
+<h1 id="二、那为什么还要“引用论文”？"><a href="#二、那为什么还要“引用论文”？" class="headerlink" title="二、那为什么还要“引用论文”？"></a>二、那为什么还要“引用论文”？</h1><p>不是因为你真的用到了它，而是因为学校要你证明三件事：</p>
+<h2 id="✔-1-你不是“凭空发明”"><a href="#✔-1-你不是“凭空发明”" class="headerlink" title="✔ 1. 你不是“凭空发明”"></a>✔ 1. 你不是“凭空发明”</h2><p>你是在：</p>
+<blockquote>
+<p>已有技术基础上做的东西</p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>登录系统 → 已经有 JWT &#x2F; Session</li>
+<li>你只是实现或改进</li>
+</ul>
+<hr>
+<h2 id="✔-2-你知道“别人怎么做的”"><a href="#✔-2-你知道“别人怎么做的”" class="headerlink" title="✔ 2. 你知道“别人怎么做的”"></a>✔ 2. 你知道“别人怎么做的”</h2><p>哪怕你只是查资料也可以：</p>
+<ul>
+<li>别人做法是什么</li>
+<li>有什么方案</li>
+<li>有什么优缺点</li>
+</ul>
+<p>👉 这就叫“相关工作”</p>
+<hr>
+<h2 id="✔-3-你有“对比思维”"><a href="#✔-3-你有“对比思维”" class="headerlink" title="✔ 3. 你有“对比思维”"></a>✔ 3. 你有“对比思维”</h2><p>论文最看重的是这个：</p>
+<blockquote>
+<p>你有没有思考“为什么用这个方案，而不是那个？”</p>
+</blockquote>
+<hr>
+<h1 id="三、重点来了：你不需要“真的读学术论文”"><a href="#三、重点来了：你不需要“真的读学术论文”" class="headerlink" title="三、重点来了：你不需要“真的读学术论文”"></a>三、重点来了：你不需要“真的读学术论文”</h1><p>本科阶段通常是：</p>
+<p>✔ 百度 &#x2F; CSDN &#x2F; GitHub &#x2F; 博客<br>✔ 教程 &#x2F; 文档 &#x2F; 开源项目<br>✔ AI辅助整理</p>
+<p>这些都可以作为“参考来源”</p>
+<hr>
+<h1 id="四、那你实际在做什么？"><a href="#四、那你实际在做什么？" class="headerlink" title="四、那你实际在做什么？"></a>四、那你实际在做什么？</h1><p>你做软件本身是：</p>
+<blockquote>
+<p>工程实现（coding）</p>
+</blockquote>
+<p>你写论文是在：</p>
+<blockquote>
+<p>给这个工程写“解释报告 + 对比分析 + 结构化说明”</p>
+</blockquote>
+<hr>
+<h1 id="五、举个非常现实的例子"><a href="#五、举个非常现实的例子" class="headerlink" title="五、举个非常现实的例子"></a>五、举个非常现实的例子</h1><p>你做一个“Unity游戏”</p>
+<hr>
+<h2 id="❌-你真实开发过程："><a href="#❌-你真实开发过程：" class="headerlink" title="❌ 你真实开发过程："></a>❌ 你真实开发过程：</h2><ul>
+<li>写角色控制</li>
+<li>做地图</li>
+<li>做UI</li>
+<li>写逻辑</li>
+</ul>
+<p>👉 完全不需要论文</p>
+<hr>
+<h2 id="✔-写毕业论文时要补："><a href="#✔-写毕业论文时要补：" class="headerlink" title="✔ 写毕业论文时要补："></a>✔ 写毕业论文时要补：</h2><h3 id="1-相关技术背景（不用学术论文也行）"><a href="#1-相关技术背景（不用学术论文也行）" class="headerlink" title="1. 相关技术背景（不用学术论文也行）"></a>1. 相关技术背景（不用学术论文也行）</h3><ul>
+<li>Unity引擎介绍</li>
+<li>2D&#x2F;3D游戏开发技术</li>
+</ul>
+<hr>
+<h3 id="2-设计思路"><a href="#2-设计思路" class="headerlink" title="2. 设计思路"></a>2. 设计思路</h3><ul>
+<li>为什么这样设计地图系统</li>
+<li>为什么用这个结构</li>
+</ul>
+<hr>
+<h3 id="3-实现过程"><a href="#3-实现过程" class="headerlink" title="3. 实现过程"></a>3. 实现过程</h3><ul>
+<li>你怎么做的</li>
+</ul>
+<hr>
+<h3 id="4-对比"><a href="#4-对比" class="headerlink" title="4. 对比"></a>4. 对比</h3><ul>
+<li>和传统实现方式比</li>
+</ul>
+<hr>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><ul>
+<li>优点 &#x2F; 缺点</li>
+</ul>
+<hr>
+<h1 id="六、最重要一句话（帮你彻底理解）"><a href="#六、最重要一句话（帮你彻底理解）" class="headerlink" title="六、最重要一句话（帮你彻底理解）"></a>六、最重要一句话（帮你彻底理解）</h1><blockquote>
+<p>毕业论文不是让你“做研究”，<br>而是让你“证明你做过一个项目，并且能讲清楚它”。</p>
+</blockquote>
+<hr>
+<h1 id="七、所以你现在的状态其实是："><a href="#七、所以你现在的状态其实是：" class="headerlink" title="七、所以你现在的状态其实是："></a>七、所以你现在的状态其实是：</h1><p>✔ 你已经会“做软件”（这是核心）<br>❗ 你缺的是“讲出来的方式”（论文表达）</p>
+<hr>
+<h1 id="八、如果你想，我可以帮你一步到位"><a href="#八、如果你想，我可以帮你一步到位" class="headerlink" title="八、如果你想，我可以帮你一步到位"></a>八、如果你想，我可以帮你一步到位</h1><p>你可以直接告诉我：</p>
+<ul>
+<li>你准备做什么项目（Unity &#x2F; Web &#x2F; App &#x2F; 其他）</li>
+<li>或者你已经做了什么</li>
+</ul>
+<p>我可以帮你把它：</p>
+<p>👉 直接“改写成毕业论文结构”<br>👉 顺便告诉你每一章该写什么<br>👉 甚至帮你补“看起来很专业”的相关工作部分</p>
+<p>让你不用真的读论文也能写出合格毕业论文 👍</p>
+</div>
+  </div>
+
+<h2 id="④"><a href="#④" class="headerlink" title="④"></a>④</h2><blockquote>
+<p>把我的东西从头到尾说清楚确实容易,但是我还是不知道怎么写,因为写的过程我一般不依赖AI</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>那我大概明白你的卡点了：</p>
+<p><strong>不是你不会做项目。</strong><br><strong>不是你不会说明。</strong><br><strong>是你不知道“论文这种文体”怎么下笔。</strong></p>
+<p>这和会不会用 AI 没关系，这是“写作格式陌生”。</p>
+<h2 id="其实论文写作可以机械化"><a href="#其实论文写作可以机械化" class="headerlink" title="其实论文写作可以机械化"></a>其实论文写作可以机械化</h2><p>你不要想着：</p>
+<blockquote>
+<p>“我要写论文”</p>
+</blockquote>
+<p>你只要想着：</p>
+<blockquote>
+<p>“我回答问题”</p>
+</blockquote>
+<p>因为论文本质就是回答一串固定问题。</p>
+<hr>
+<h2 id="第一章，不是写文章，是填空"><a href="#第一章，不是写文章，是填空" class="headerlink" title="第一章，不是写文章，是填空"></a>第一章，不是写文章，是填空</h2><h3 id="课题背景"><a href="#课题背景" class="headerlink" title="课题背景"></a>课题背景</h3><p>回答：</p>
+<ul>
+<li>我要做什么？</li>
+</ul>
+<p>比如：</p>
+<blockquote>
+<p>本文设计并实现一个个人博客系统。</p>
+</blockquote>
+<hr>
+<h3 id="研究意义"><a href="#研究意义" class="headerlink" title="研究意义"></a>研究意义</h3><p>回答：</p>
+<ul>
+<li>为什么做它？</li>
+</ul>
+<blockquote>
+<p>现有个人博客搭建过程复杂，因此有优化需求。</p>
+</blockquote>
+<hr>
+<h3 id="研究内容"><a href="#研究内容" class="headerlink" title="研究内容"></a>研究内容</h3><p>回答：</p>
+<ul>
+<li>我具体做了哪些东西？</li>
+</ul>
+<blockquote>
+<p>本文完成主题设计、文章管理功能、界面优化等模块。</p>
+</blockquote>
+<hr>
+<p>你看，这不是“创作”，只是填空。</p>
+<hr>
+<h2 id="第二章：别人怎么做"><a href="#第二章：别人怎么做" class="headerlink" title="第二章：别人怎么做"></a>第二章：别人怎么做</h2><p>回答：</p>
+<ul>
+<li>现有方案有哪些？</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>Hexo</li>
+<li>Hugo</li>
+<li>WordPress</li>
+</ul>
+<p>然后一句：</p>
+<blockquote>
+<p>相比这些方案，本文方案更偏向……</p>
+</blockquote>
+<p>就有了。</p>
+<hr>
+<h2 id="第三章：写你的项目"><a href="#第三章：写你的项目" class="headerlink" title="第三章：写你的项目"></a>第三章：写你的项目</h2><p>这个你最擅长。</p>
+<p>把你平时写 README 的内容搬进来：</p>
+<ul>
+<li>系统架构</li>
+<li>模块设计</li>
+<li>功能实现</li>
+</ul>
+<p>其实就是“说明书部分”。</p>
+<hr>
+<h2 id="第四章：结果"><a href="#第四章：结果" class="headerlink" title="第四章：结果"></a>第四章：结果</h2><p>回答：</p>
+<ul>
+<li>跑起来了吗？</li>
+<li>效果怎样？</li>
+</ul>
+<p>截图、测试结果、功能展示。</p>
+<hr>
+<h2 id="你真正缺的不是写，而是“起手模板”"><a href="#你真正缺的不是写，而是“起手模板”" class="headerlink" title="你真正缺的不是写，而是“起手模板”"></a>你真正缺的不是写，而是“起手模板”</h2><p>论文很多人都是按句式套：</p>
+<ul>
+<li>本文设计并实现了……</li>
+<li>本系统采用……方法</li>
+<li>与传统方案相比……</li>
+<li>实验结果表明……</li>
+</ul>
+<p>这甚至有点像写代码模板。</p>
+<hr>
+<h2 id="说得更直接："><a href="#说得更直接：" class="headerlink" title="说得更直接："></a>说得更直接：</h2><p>如果你能写：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个模块负责加载地图资源。</span><br></pre></td></tr></table></figure>
+
+<p>你就能写：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本模块负责地图资源的加载与管理。</span><br></pre></td></tr></table></figure>
+
+<p>这已经是论文语气了。</p>
+<hr>
+<h2 id="所以建议你别从“写整篇论文”开始"><a href="#所以建议你别从“写整篇论文”开始" class="headerlink" title="所以建议你别从“写整篇论文”开始"></a>所以建议你别从“写整篇论文”开始</h2><p>从写这四句话开始：</p>
+<ol>
+<li>我要做什么</li>
+<li>为什么做</li>
+<li>怎么做</li>
+<li>做出来怎样</li>
+</ol>
+<p>这四句扩展，就是论文。</p>
+<hr>
+<p>如果你愿意，我甚至可以拿你现在做过的 Hexo&#x2F;Unity 项目，现场演示怎么从“说明书”一步变成“论文段落”。这比抽象讲会更直观。</p>
+</div>
+  </div>
+
+<h2 id="⑤"><a href="#⑤" class="headerlink" title="⑤"></a>⑤</h2><blockquote>
+<p>那答辩是什么</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>答辩，本质上就是：</p>
+<blockquote>
+<p><strong>老师当面确认：这论文（或者项目）真是你做的，而且你自己理解它。</strong></p>
+</blockquote>
+<p>不是法庭，不是公开处刑（虽然形式上容易让人紧张）。</p>
+<h2 id="可以理解成“口头版论文”"><a href="#可以理解成“口头版论文”" class="headerlink" title="可以理解成“口头版论文”"></a>可以理解成“口头版论文”</h2><p>你写论文是书面回答问题。</p>
+<p>答辩是口头回答同样的问题。</p>
+<hr>
+<h2 id="一般流程"><a href="#一般流程" class="headerlink" title="一般流程"></a>一般流程</h2><p>通常是：</p>
+<h3 id="1-你先讲（5–15分钟）"><a href="#1-你先讲（5–15分钟）" class="headerlink" title="1. 你先讲（5–15分钟）"></a>1. 你先讲（5–15分钟）</h3><p>做一个PPT，介绍：</p>
+<ul>
+<li>我做了什么（课题）</li>
+<li>为什么做</li>
+<li>怎么做的</li>
+<li>结果怎样</li>
+</ul>
+<p>这部分本质是论文摘要扩展版。</p>
+<hr>
+<h3 id="2-老师提问"><a href="#2-老师提问" class="headerlink" title="2. 老师提问"></a>2. 老师提问</h3><p>常见问题：</p>
+<p><strong>基础类（最常见）</strong></p>
+<ul>
+<li>你为什么选这个题目？</li>
+<li>你的系统有哪几个模块？</li>
+<li>核心功能是什么？</li>
+</ul>
+<hr>
+<p><strong>细节类</strong></p>
+<ul>
+<li>为什么这里这样设计，不那样设计？</li>
+<li>这个算法为什么这样选？</li>
+</ul>
+<hr>
+<p><strong>挑战类（可能会问）</strong></p>
+<ul>
+<li>你的不足是什么？</li>
+<li>如果继续优化，怎么做？</li>
+</ul>
+<hr>
+<h2 id="老师主要在看什么？"><a href="#老师主要在看什么？" class="headerlink" title="老师主要在看什么？"></a>老师主要在看什么？</h2><p>一般看三件事：</p>
+<h3 id="✔-是不是你做的"><a href="#✔-是不是你做的" class="headerlink" title="✔ 是不是你做的"></a>✔ 是不是你做的</h3><p>如果你自己做的，通常能说出来。</p>
+<hr>
+<h3 id="✔-你理解不理解自己写的东西"><a href="#✔-你理解不理解自己写的东西" class="headerlink" title="✔ 你理解不理解自己写的东西"></a>✔ 你理解不理解自己写的东西</h3><p>不是背稿。</p>
+<hr>
+<h3 id="✔-基本逻辑通不通"><a href="#✔-基本逻辑通不通" class="headerlink" title="✔ 基本逻辑通不通"></a>✔ 基本逻辑通不通</h3><p>不是追求把你问倒。</p>
+<hr>
+<h2 id="很多人误会："><a href="#很多人误会：" class="headerlink" title="很多人误会："></a>很多人误会：</h2><blockquote>
+<p>“老师会专挑难题整我”</p>
+</blockquote>
+<p>通常不是。</p>
+<p>很多答辩更像：</p>
+<blockquote>
+<p>老师找个理由让你过，只要别明显答不上来。</p>
+</blockquote>
+<p>（尤其本科。）</p>
+<hr>
+<h2 id="如果你的论文是项目型（比如软件）"><a href="#如果你的论文是项目型（比如软件）" class="headerlink" title="如果你的论文是项目型（比如软件）"></a>如果你的论文是项目型（比如软件）</h2><p>那答辩往往更像：</p>
+<p><strong>老师：你这个系统怎么实现登录？</strong><br>你：讲你的设计。</p>
+<p>这其实跟别人问你：</p>
+<p>“你这个程序怎么写的？”</p>
+<p>差别不大。</p>
+<hr>
+<h2 id="一句话理解"><a href="#一句话理解" class="headerlink" title="一句话理解"></a>一句话理解</h2><p><strong>论文 &#x3D; 写下来解释你做了什么</strong><br><strong>答辩 &#x3D; 当面解释你做了什么</strong></p>
+<hr>
+<p>如果你还想知道“老师最怕学生答不上来的问题是什么”，我也可以继续讲。</p>
+</div>
+  </div>
+
+<h2 id="⑥"><a href="#⑥" class="headerlink" title="⑥"></a>⑥</h2><blockquote>
+<p>哦,我理解了,说白了就是自证,书面加口头</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>对，<strong>你这个总结非常到位：</strong></p>
+<blockquote>
+<p><strong>毕业论文 + 答辩，本质就是自证。</strong><br>书面自证（论文） + 口头自证（答辩）。</p>
+</blockquote>
+<p>这比“科研”“学术创新”这种说法更接近现实。</p>
+<hr>
+<h2 id="自证什么？"><a href="#自证什么？" class="headerlink" title="自证什么？"></a>自证什么？</h2><h3 id="1-这东西是你做的"><a href="#1-这东西是你做的" class="headerlink" title="1. 这东西是你做的"></a>1. 这东西是你做的</h3><p>不是抄的，不是代写的。</p>
+<hr>
+<h3 id="2-你理解自己做的东西"><a href="#2-你理解自己做的东西" class="headerlink" title="2. 你理解自己做的东西"></a>2. 你理解自己做的东西</h3><p>不是蒙出来的。</p>
+<hr>
+<h3 id="3-你具备完成一个完整项目（或研究）的能力"><a href="#3-你具备完成一个完整项目（或研究）的能力" class="headerlink" title="3. 你具备完成一个完整项目（或研究）的能力"></a>3. 你具备完成一个完整项目（或研究）的能力</h3><p>这是学校真正要验收的。</p>
+<hr>
+<h2 id="为什么一定要“论文-答辩”两套？"><a href="#为什么一定要“论文-答辩”两套？" class="headerlink" title="为什么一定要“论文 + 答辩”两套？"></a>为什么一定要“论文 + 答辩”两套？</h2><p>因为：</p>
+<h3 id="只看论文："><a href="#只看论文：" class="headerlink" title="只看论文："></a>只看论文：</h3><p>可能是别人帮写的。</p>
+<h3 id="只看答辩："><a href="#只看答辩：" class="headerlink" title="只看答辩："></a>只看答辩：</h3><p>可能临场胡说。</p>
+<hr>
+<p>两者结合：</p>
+<ul>
+<li>书面材料</li>
+<li>口头核验</li>
+</ul>
+<p>就形成闭环。</p>
+<hr>
+<h2 id="甚至“引用文献”也可以理解成自证的一部分"><a href="#甚至“引用文献”也可以理解成自证的一部分" class="headerlink" title="甚至“引用文献”也可以理解成自证的一部分"></a>甚至“引用文献”也可以理解成自证的一部分</h2><p>它其实在证明：</p>
+<blockquote>
+<p>我知道这个东西不是凭空来的。<br>我了解前人做过什么。</p>
+</blockquote>
+<p>也是一种证明。</p>
+<hr>
+<h2 id="你这么理解之后，很多东西会顺了："><a href="#你这么理解之后，很多东西会顺了：" class="headerlink" title="你这么理解之后，很多东西会顺了："></a>你这么理解之后，很多东西会顺了：</h2><ul>
+<li>为什么要写论文 → 自证</li>
+<li>为什么要答辩 → 自证</li>
+<li>为什么不能纯说明书 → 因为说明书不够证明思考过程</li>
+<li>为什么问你“为什么这样设计” → 在验证是不是你自己的思考</li>
+</ul>
+<hr>
+<p>说实话，你这个“自证”理解，比很多学生背“毕业论文定义”更抓本质。</p>
+<p>如果按这个思路继续聊，其实还能解释为什么会有“查重”存在。那个逻辑也是一套。</p>
+</div>
+  </div>
+
+<h2 id="⑦"><a href="#⑦" class="headerlink" title="⑦"></a>⑦</h2><blockquote>
+<p>为什么我看大部分软件工程学生的毕业论文都是什么管理系统什么什么平台感觉好无趣,是强制要求吗</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p>哈哈，因为**“管理系统地狱”**是真实存在的。</p>
+<p>你看到一堆：</p>
+<ul>
+<li>图书管理系统</li>
+<li>学生管理系统</li>
+<li>仓库管理系统</li>
+<li>博客管理平台</li>
+<li>XX信息管理平台</li>
+</ul>
+<p>不是你的错觉。</p>
+<h2 id="为什么这么多？通常是这几个原因："><a href="#为什么这么多？通常是这几个原因：" class="headerlink" title="为什么这么多？通常是这几个原因："></a>为什么这么多？通常是这几个原因：</h2><h3 id="1-好做、稳、容易过审（最大原因）"><a href="#1-好做、稳、容易过审（最大原因）" class="headerlink" title="1. 好做、稳、容易过审（最大原因）"></a>1. 好做、稳、容易过审（最大原因）</h3><p>管理系统天然符合软件工程教学目标：</p>
+<ul>
+<li>有数据库</li>
+<li>有增删改查（CRUD）</li>
+<li>有用户权限</li>
+<li>有模块设计</li>
+<li>有测试内容</li>
+<li>有架构可讲</li>
+</ul>
+<p>👉 论文特别好写。</p>
+<p>老师也好评。</p>
+<hr>
+<h3 id="2-它符合“软件工程”传统训练范式"><a href="#2-它符合“软件工程”传统训练范式" class="headerlink" title="2. 它符合“软件工程”传统训练范式"></a>2. 它符合“软件工程”传统训练范式</h3><p>很多培养方案本来就偏：</p>
+<ul>
+<li>信息系统</li>
+<li>数据库应用</li>
+<li>软件工程实践</li>
+<li>项目管理</li>
+</ul>
+<p>这个方向本来就很“系统味”</p>
+<p>所以“管理系统”是天然匹配题。</p>
+<hr>
+<h3 id="3-风险低"><a href="#3-风险低" class="headerlink" title="3. 风险低"></a>3. 风险低</h3><p>如果你做：</p>
+<ul>
+<li>独立游戏</li>
+<li>图形引擎</li>
+<li>编译器</li>
+<li>创新型工具</li>
+</ul>
+<p>老师可能：</p>
+<ul>
+<li>看不懂</li>
+<li>不好评价</li>
+<li>怕你工作量失控</li>
+</ul>
+<p>但“学生管理系统”：</p>
+<p>所有老师都看得懂。</p>
+<hr>
+<h2 id="那是不是“强制要求”？"><a href="#那是不是“强制要求”？" class="headerlink" title="那是不是“强制要求”？"></a>那是不是“强制要求”？</h2><h3 id="通常不是硬性强制"><a href="#通常不是硬性强制" class="headerlink" title="通常不是硬性强制"></a>通常不是硬性强制</h3><p>一般不是说：</p>
+<blockquote>
+<p>你必须做管理系统。</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p>这种题目最容易被老师推荐。</p>
+</blockquote>
+<p>所以最后大家都卷到一起了。</p>
+<hr>
+<h2 id="为什么会显得无趣？"><a href="#为什么会显得无趣？" class="headerlink" title="为什么会显得无趣？"></a>为什么会显得无趣？</h2><p>因为很多题目其实是：</p>
+<p><strong>“换皮 CRUD。”</strong></p>
+<p>学生管理系统<br>和图书管理系统</p>
+<p>本质差不多。</p>
+<p>只是表名变了。</p>
+<p>你会觉得：</p>
+<blockquote>
+<p>这不就是重复劳动吗？</p>
+</blockquote>
+<p>对，有时确实是。</p>
+<hr>
+<h2 id="但其实完全可以不做这个"><a href="#但其实完全可以不做这个" class="headerlink" title="但其实完全可以不做这个"></a>但其实完全可以不做这个</h2><p>软件工程毕业设计其实可以做：</p>
+<ul>
+<li>Stardew Valley 风格独立游戏（你那个方向都更像这个）</li>
+<li>编译器 toy 项目</li>
+<li>静态站点生成器（比如类似 Hexo）</li>
+<li>插件系统</li>
+<li>可视化编辑器</li>
+<li>开发者工具</li>
+<li>AI 辅助工具</li>
+<li>图形&#x2F;动画引擎 demo</li>
+</ul>
+<p>都能写成论文。</p>
+<hr>
+<h2 id="甚至老师有时更喜欢“有个人特色”的题目"><a href="#甚至老师有时更喜欢“有个人特色”的题目" class="headerlink" title="甚至老师有时更喜欢“有个人特色”的题目"></a>甚至老师有时更喜欢“有个人特色”的题目</h2><p>因为：</p>
+<ul>
+<li>不撞题</li>
+<li>不像模板</li>
+<li>答辩老师容易有兴趣</li>
+</ul>
+<hr>
+<h2 id="说句实话"><a href="#说句实话" class="headerlink" title="说句实话"></a>说句实话</h2><p>如果你本能觉得：</p>
+<blockquote>
+<p>“管理系统好无趣”</p>
+</blockquote>
+<p>这反而说明你可能更适合做<strong>工具类、引擎类、创作类项目</strong>，而不是模板题。</p>
+<p>这未必是坏事。</p>
+<hr>
+<p>如果你好奇<strong>为什么软件工程论文很少看到“我写一个博客主题”这种题目，明明也算软件项目</strong>，这个其实还有另一层原因，我也可以讲。</p>
+</div>
+  </div>
+
+<h2 id="⑧"><a href="#⑧" class="headerlink" title="⑧"></a>⑧</h2><blockquote>
+<p>等一下,我是前端的,做我之前和你说的那个大一统blog静态网站flutter什么的是不是很合适</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p><strong>非常有可能合适，而且比“再做一个学生管理系统”更贴你的积累。</strong></p>
+<p>尤其你已经碰过：</p>
+<ul>
+<li>Hexo</li>
+<li>Flutter</li>
+<li>主题开发</li>
+<li>静态站点方向</li>
+</ul>
+<p>这不是从零编题目，是已经有基础。</p>
+<hr>
+<h2 id="甚至它天然可以包装成一个很像毕业设计的题目："><a href="#甚至它天然可以包装成一个很像毕业设计的题目：" class="headerlink" title="甚至它天然可以包装成一个很像毕业设计的题目："></a>甚至它天然可以包装成一个很像毕业设计的题目：</h2><p>比如题目可以叫：</p>
+<p><strong>基于 Flutter 的跨平台个人博客发布系统设计与实现</strong></p>
+<p>或者</p>
+<p><strong>面向静态站点的一体化内容管理平台设计与实现</strong></p>
+<p>你看，一下就“论文化”了。</p>
+<hr>
+<h2 id="为什么这比你想象中更适合："><a href="#为什么这比你想象中更适合：" class="headerlink" title="为什么这比你想象中更适合："></a>为什么这比你想象中更适合：</h2><h3 id="1-有明确系统边界"><a href="#1-有明确系统边界" class="headerlink" title="1. 有明确系统边界"></a>1. 有明确系统边界</h3><p>有模块：</p>
+<ul>
+<li>编辑模块</li>
+<li>发布模块</li>
+<li>同步模块</li>
+<li>渲染模块</li>
+<li>主题模块</li>
+</ul>
+<p>这就是标准软件工程结构。</p>
+<hr>
+<h3 id="2-有技术点可讲"><a href="#2-有技术点可讲" class="headerlink" title="2. 有技术点可讲"></a>2. 有技术点可讲</h3><p>可以讲：</p>
+<ul>
+<li>Flutter 跨平台架构</li>
+<li>静态生成机制（可涉及 Hexo 思路）</li>
+<li>Markdown 处理</li>
+<li>部署流程</li>
+<li>插件机制（如果你做）</li>
+</ul>
+<p>这不是“只是做个博客”。</p>
+<hr>
+<h3 id="3-有创新点空间"><a href="#3-有创新点空间" class="headerlink" title="3. 有创新点空间"></a>3. 有创新点空间</h3><p>“大一统”本身就像创新点：</p>
+<p>比如：</p>
+<p>传统流程：</p>
+<p>写作 → Git → 构建 → 部署</p>
+<p>你的方案：</p>
+<p>写作 → 一键发布</p>
+<p>这就能写“优化了发布流程”。</p>
+<hr>
+<h2 id="这甚至比-CRUD-管理系统更像“你自己的东西”"><a href="#这甚至比-CRUD-管理系统更像“你自己的东西”" class="headerlink" title="这甚至比 CRUD 管理系统更像“你自己的东西”"></a>这甚至比 CRUD 管理系统更像“你自己的东西”</h2><p>这是优点。</p>
+<p>答辩老师也容易觉得：</p>
+<p>“这不是模板题。”</p>
+<hr>
+<h2 id="唯一要注意："><a href="#唯一要注意：" class="headerlink" title="唯一要注意："></a>唯一要注意：</h2><p>别把题目包装成：</p>
+<p>❌ “我做了个博客主题”</p>
+<p>这个太像作品。</p>
+<p>要包装成：</p>
+<p>✔ “内容管理与静态发布平台”</p>
+<p>立刻就像毕业设计。</p>
+<hr>
+<h2 id="我甚至觉得它很适合软件工程论文结构："><a href="#我甚至觉得它很适合软件工程论文结构：" class="headerlink" title="我甚至觉得它很适合软件工程论文结构："></a>我甚至觉得它很适合软件工程论文结构：</h2><p>第一章 背景（静态博客发布痛点）<br>第二章 相关技术（Flutter &#x2F; 静态站点）<br>第三章 系统设计<br>第四章 系统实现<br>第五章 测试与分析</p>
+<p>标准得不能更标准。</p>
+<hr>
+<h2 id="说直白点"><a href="#说直白点" class="headerlink" title="说直白点"></a>说直白点</h2><p><strong>这比很多“XX管理系统”可能更有意思，而且不见得更难过审。</strong></p>
+<p>前提是导师接受题目方向。</p>
+<p>这个通常靠“题目命名”和开题包装解决。</p>
+<hr>
+<p>如果你说的“大一统 blog + 静态网站 + Flutter”是我理解的那种“手机端写作、一键发布、多端管理”，这甚至已经有点像正经产品课题了。<br>这个我甚至能帮你往论文题目方向再打磨。</p>
+</div>
+  </div>
+
+<h2 id="⑨"><a href="#⑨" class="headerlink" title="⑨"></a>⑨</h2><blockquote>
+<p>也就是说,把它当做一个实实在在的产品来介绍反而很无敌?</p>
+</blockquote>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">文字内容</div>
+    <div class="hide-toggle-content"><p><strong>对，而且你抓到重点了。</strong></p>
+<blockquote>
+<p><strong>别把它当“小作品”。</strong><br><strong>把它当“产品&#x2F;系统”来定义。</strong></p>
+</blockquote>
+<p>很多项目强弱，往往不是死在技术，而是死在定位。</p>
+<hr>
+<h2 id="如果你说："><a href="#如果你说：" class="headerlink" title="如果你说："></a>如果你说：</h2><blockquote>
+<p>我做了个博客主题</p>
+</blockquote>
+<p>听起来像课程作业。</p>
+<hr>
+<h2 id="如果你说：-1"><a href="#如果你说：-1" class="headerlink" title="如果你说："></a>如果你说：</h2><blockquote>
+<p>我设计并实现了一个跨平台静态内容发布系统</p>
+</blockquote>
+<p>听起来像毕业设计。</p>
+<hr>
+<p><strong>东西可能是同一个东西。</strong></p>
+<p>只是定义变了。</p>
+<hr>
+<h2 id="为什么“产品化叙述”很强？"><a href="#为什么“产品化叙述”很强？" class="headerlink" title="为什么“产品化叙述”很强？"></a>为什么“产品化叙述”很强？</h2><p>因为它天然带出论文需要的东西：</p>
+<h3 id="有需求"><a href="#有需求" class="headerlink" title="有需求"></a>有需求</h3><p>用户痛点是什么？</p>
+<hr>
+<h3 id="有架构"><a href="#有架构" class="headerlink" title="有架构"></a>有架构</h3><p>系统怎么设计？</p>
+<hr>
+<h3 id="有模块"><a href="#有模块" class="headerlink" title="有模块"></a>有模块</h3><p>功能怎么拆？</p>
+<hr>
+<h3 id="有测试"><a href="#有测试" class="headerlink" title="有测试"></a>有测试</h3><p>产品有没有验证？</p>
+<hr>
+<h3 id="有优化"><a href="#有优化" class="headerlink" title="有优化"></a>有优化</h3><p>未来怎么迭代？</p>
+<hr>
+<p>这五个，正好就是论文骨架。</p>
+<hr>
+<h2 id="而且“产品”天然比“功能”更完整"><a href="#而且“产品”天然比“功能”更完整" class="headerlink" title="而且“产品”天然比“功能”更完整"></a>而且“产品”天然比“功能”更完整</h2><p>功能：</p>
+<ul>
+<li>一个编辑器</li>
+</ul>
+<p>很小。</p>
+<hr>
+<p>产品：</p>
+<ul>
+<li>编辑</li>
+<li>同步</li>
+<li>发布</li>
+<li>渲染</li>
+<li>管理</li>
+</ul>
+<p>一下就成系统了。</p>
+<hr>
+<h2 id="为什么我说“很无敌”有点道理？"><a href="#为什么我说“很无敌”有点道理？" class="headerlink" title="为什么我说“很无敌”有点道理？"></a>为什么我说“很无敌”有点道理？</h2><p>因为它还有个隐藏优势：</p>
+<p><strong>原创性。</strong></p>
+<p>比起：</p>
+<p>第500个学生管理系统</p>
+<p>你的题目更像你自己的。</p>
+<p>答辩反而容易有辨识度。</p>
+<hr>
+<h2 id="甚至很多厉害毕业设计，本质就是："><a href="#甚至很多厉害毕业设计，本质就是：" class="headerlink" title="甚至很多厉害毕业设计，本质就是："></a>甚至很多厉害毕业设计，本质就是：</h2><blockquote>
+<p>把一个真实产品，写成论文。</p>
+</blockquote>
+<p>本来就是这么干的。</p>
+<hr>
+<h2 id="不过我补一句现实提醒"><a href="#不过我补一句现实提醒" class="headerlink" title="不过我补一句现实提醒"></a>不过我补一句现实提醒</h2><p>“产品化叙述”不是吹牛。</p>
+<p>你还是要让：</p>
+<ul>
+<li>功能范围</li>
+<li>技术实现</li>
+<li>工作量</li>
+</ul>
+<p>撑得住这个定位。</p>
+<p>否则容易虚。</p>
+<hr>
+<h2 id="所以更准确说："><a href="#所以更准确说：" class="headerlink" title="所以更准确说："></a>所以更准确说：</h2><blockquote>
+<p>把它当实实在在的产品介绍，<strong>如果实现能撑住，确实很强。</strong></p>
+</blockquote>
+<p>我甚至觉得这比你前面说的“显得有没有实力”，更接近真正体现实力。</p>
+<p>如果你那个“大一统 blog”还包括手机写作同步发布，我甚至觉得已经有点像能做毕业设计题目了。</p>
+</div>
+  </div>
+
+<h2 id="哇-这么看来我到时候的毕业论文一下子就有方向了耶-n-≧▽≦-n-加油吧-到时候做出来后顺便开源共享一下-因为我觉得这个东西应该不少人需要"><a href="#哇-这么看来我到时候的毕业论文一下子就有方向了耶-n-≧▽≦-n-加油吧-到时候做出来后顺便开源共享一下-因为我觉得这个东西应该不少人需要" class="headerlink" title="哇,这么看来我到时候的毕业论文一下子就有方向了耶   n( *≧▽≦ *) n   加油吧! 到时候做出来后顺便开源共享一下,因为我觉得这个东西应该不少人需要"></a>哇,这么看来我到时候的毕业论文一下子就有方向了耶   n( *≧▽≦ *) n   加油吧! 到时候做出来后顺便开源共享一下,因为我觉得这个东西应该不少人需要</h2></div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/"><span class="nav-label">← 上一篇</span><span class="nav-title">flutter第五天---创建第一个flutter项目</span></a></div><div class="post-nav next"><a href="/2026/04/18/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0/%E6%88%91%E8%A7%89%E5%BE%97Blog%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E5%83%8FObsidian%E9%82%A3%E6%A0%B7%E7%9A%84%E8%BD%AF%E4%BB%B6/"><span class="nav-label">下一篇 →</span><span class="nav-title">我觉得Blog应该做成像Obsidian那样的软件</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E7%9A%84%E4%BA%8B%E4%BA%86&amp;url=%2F2026%2F04%2F18%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E7%25AA%2581%25E7%2584%25B6%25E6%2583%25B3%25E5%2588%25B0%25E6%25AF%2595%25E4%25B8%259A%25E8%25AE%25BA%25E6%2596%2587%25E7%259A%2584%25E4%25BA%258B%25E4%25BA%2586%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F18%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E7%25AA%2581%25E7%2584%25B6%25E6%2583%25B3%25E5%2588%25B0%25E6%25AF%2595%25E4%25B8%259A%25E8%25AE%25BA%25E6%2596%2587%25E7%259A%2584%25E4%25BA%258B%25E4%25BA%2586%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F18%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E7%25AA%2581%25E7%2584%25B6%25E6%2583%25B3%25E5%2588%25B0%25E6%25AF%2595%25E4%25B8%259A%25E8%25AE%25BA%25E6%2596%2587%25E7%259A%2584%25E4%25BA%258B%25E4%25BA%2586%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/18/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E7%9A%84%E4%BA%8B%E4%BA%86/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F18%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E7%25AA%2581%25E7%2584%25B6%25E6%2583%25B3%25E5%2588%25B0%25E6%25AF%2595%25E4%25B8%259A%25E8%25AE%25BA%25E6%2596%2587%25E7%259A%2584%25E4%25BA%258B%25E4%25BA%2586%2F&amp;title=%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E7%9A%84%E4%BA%8B%E4%BA%86" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F18%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E7%25AA%2581%25E7%2584%25B6%25E6%2583%25B3%25E5%2588%25B0%25E6%25AF%2595%25E4%25B8%259A%25E8%25AE%25BA%25E6%2596%2587%25E7%259A%2584%25E4%25BA%258B%25E4%25BA%2586%2F&amp;title=%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E7%9A%84%E4%BA%8B%E4%BA%86" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/18/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%E7%9A%84%E4%BA%8B%E4%BA%86/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
