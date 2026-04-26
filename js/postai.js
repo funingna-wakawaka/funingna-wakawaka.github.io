@@ -268,7 +268,7 @@ function ChucklePostAI(AI_option) {
       controller = new AbortController();
       signal = controller.signal;
 
-      const apiUrl = "https://deepseek.example.com";
+      const apiUrl = "https://deepseek.3930088367.workers.dev/";
 
       try {
         const response = await fetch(apiUrl, {
@@ -278,7 +278,7 @@ function ChucklePostAI(AI_option) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "deepseek-chat",
+            model: "deepseek-v4-pro",
             messages: [{ role: "user", content: prompt }],
           }),
         });

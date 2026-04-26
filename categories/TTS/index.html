@@ -247,7 +247,7 @@ if (cover && cover.style.display !== 'none') {
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item active" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -318,57 +318,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/15.png" alt="头好晕"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-24T14:11:35.000Z">2026-04-24</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>594</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>1</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">头好晕</h1><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近有点头好晕-有一种濒死感"><a href="#最近有点头好晕-有一种濒死感" class="headerlink" title="最近有点头好晕,有一种濒死感"></a>最近有点头好晕,有一种濒死感</h1><p>白天和晚上都是,不知道是什么原因,难道是长时间盯着电脑屏幕导致的吗?</p>
-<p>不仅头晕还失眠,注意力不集中,畏惧阳光,眼睛看东西有点模糊,白天的时候眼睛睁不开</p>
-<p>脖子和下巴总是出现一阵一阵的肿胀感,走路没力气,对事物开始丧失兴趣和精力</p>
-<p>后脑勺感觉很沉重,耳朵就像塞进去了什么</p>
-<p>吃东西太饱会开始产生强烈的呕吐感,睡多长时间都感觉累</p>
-<p>晚上睡着的时候大脑无比清醒,甚至分不清自己到底是醒着的还是睡着的,双腿有点酸痛感</p>
-<p>然后身边的某些室友都跟从来都不用睡觉一样,天天熬夜到1~2点……….不好评价</p>
-<p>我花了太多时间沉浸在虚拟世界和数字海洋了,已经快把自己淹死了,虽然我确实可以从中获取不少东西,但他们都是虚拟的,跟比特币一样,毫无实际价值,电脑一关就什么都没有了</p>
-<p>而且我有点太与时俱进了,虽然我确实喜欢新东西,但是有点过度关注这些东西了</p>
-<p>最近孤独感又出现了……….不知道为什么……….</p>
-<p>不知道为什么我的出现会给身边的人带来巨大的压力,但是,我们本来就不在一个频道,不在一个频道,那就没有可比性,希望他们可以领悟到这一点</p>
-<p>我不知道为什么感觉他们很幼稚,不是说他们行为上,而是心理上,就是这些货比小孩还小孩,说话和做事都没有底线和准则</p>
-<p>我已经分不清虚无感和孤独感了,对外界的感知越来越弱,难道是我这个人太过于神经质了?</p>
-<p>我觉得是我的问题,我不该对身边的人产生关注的,这样会损耗我的热情和动力和精力,他人之事,莫管勿问</p>
-<p>可能是因为长时间不出门导致的,这几天出去玩玩吧!   我五一的时候找一个没去过的旅游景点看看,不过去哪比较好呢</p>
-</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
-  if (typeof ChucklePostAI !== 'undefined') {
-    // 获取按钮文本，如果未定义则使用默认值
-    const buttons = [
-      "介绍自己",
-      "来点灵感",
-      "生成AI简介"
-    ];
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关分类</h1><div class="post-subtitle"><span>探索与</span> "TTS" <span>相关的所有文章</span></div></div><div class="category-content"><div class="category-posts"><div class="category-header"><div class="category-info"><h2 class="category-name"> <i class="fas fa-folder"></i> TTS</h2><div class="category-description"><span>共有</span> 1 <span>篇文章</span></div></div><div class="category-back"><a href="/categories/"><i class="fas fa-arrow-left"></i> 返回所有分类</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/25/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/">Azure的AI-Speech服务</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>上次我们已经获得了Azure的学生包了因为我们其实已经白嫖了DigitalOcean 的服务器的服务了,然后又白嫖了阿里的token
+最近新出来Deepseek V4的模型,这个阿里同样是可以支持的
+首先在Azure的搜索栏搜索Speech然后点击进入
+​	.cospubooefcs{zoom:25%;}
+​	.hsioxniymmnt{zoom: 25%;}
 
-    new ChucklePostAI({
-      el: '#post-ai-container',
-      title_el: '.post-title',
-      summary_directly: false,
-      interface: {
-        name: "阿罗娜",
-        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
-        version: "OpenAI GPT-4o",
-        button: buttons
-      }
-    });
-  }
-});
-</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
-window.tocConfig = {
-  empty_toc_behavior: "placeholder"
-};
-</script><div class="post-navigation"><div class="post-nav next"><a href="/2026/04/23/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/DigitalOcean%E6%90%AD%E5%BB%BAVPN/"><span class="nav-label">下一篇 →</span><span class="nav-title">DigitalOcean搭建VPN</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E5%A4%B4%E5%A5%BD%E6%99%95&amp;url=%2F2026%2F04%2F24%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E5%25A4%25B4%25E5%25A5%25BD%25E6%2599%2595%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F24%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E5%25A4%25B4%25E5%25A5%25BD%25E6%2599%2595%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F24%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E5%25A4%25B4%25E5%25A5%25BD%25E6%2599%2595%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E5%A4%B4%E5%A5%BD%E6%99%95/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F24%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E5%25A4%25B4%25E5%25A5%25BD%25E6%2599%2595%2F&amp;title=%E5%A4%B4%E5%A5%BD%E6%99%95" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F24%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2597%25A5%25E5%25B8%25B8%25E7%2594%259F%25E6%25B4%25BB%25E6%2597%25A5%25E8%25AE%25B0%2F%25E5%25A4%25B4%25E5%25A5%25BD%25E6%2599%2595%2F&amp;title=%E5%A4%B4%E5%A5%BD%E6%99%95" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/%E5%A4%B4%E5%A5%BD%E6%99%95/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
-  envId: 'https://twikoo-five-ruby.vercel.app',
-  el: '#twikoo',
-  region: '',
-  path: 'window.location.pathname',
-  visitor: true,
-  onCommentLoaded: function () {
-    console.log('Twikoo评论加载成功');
-  }
-});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+
+Subscription（订阅） 选你的学生订阅（Azure for Students）
+Resource group（资源组） 没有就点「Create new」 随便起名，比如：airi-ai
+Region（地区） (Asia P...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-25</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/TTS/">TTS</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/25/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
