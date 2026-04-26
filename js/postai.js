@@ -310,10 +310,13 @@ function ChucklePostAI(AI_option) {
 
     // 获取文章内容
     function getTextContent(element) {
-      const totalLength = AI_option.total_length || 3000; // 增加默认长度限制
-      // 获取完整的文章内容，不再截取
-      const content = `文章标题：${post_title}。文章内容：${getText(element)}`;
-      return content;
+      const totalLength = AI_option.total_length || 3000;
+      let text = getText(element);
+
+      // 使用下方已有的 extractString 函数截取过长的内容，防止超出 API Token 限制报错
+      text = extractString(text, totalLength);
+
+      return `文章标题：${post_title}。文章内容：${text}`;
     }
 
     // 提取纯文本
