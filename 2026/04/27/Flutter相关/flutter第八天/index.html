@@ -1,0 +1,1062 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+<!-- 条件加载关于页面样式--><style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    app1.loadImage(coverImages[0]);
+    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/18.png" alt="flutter第八天--"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-27T02:26:20.000Z">2026-04-27</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>4.3k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>20</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">flutter第八天--</h1><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来学学更多的flutter的组件"><a href="#今天来学学更多的flutter的组件" class="headerlink" title="今天来学学更多的flutter的组件"></a>今天来学学更多的flutter的组件</h1><h2 id="弹性布局-Flex"><a href="#弹性布局-Flex" class="headerlink" title="弹性布局-Flex"></a>弹性布局-Flex</h2><p>​	<style>.nxjzxmtphugo{zoom: 67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427103207193.png" class="nxjzxmtphugo" alt="image-20260427103207193"></p>
+<h3 id="Expanded"><a href="#Expanded" class="headerlink" title="Expanded"></a>Expanded</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity, <span class="comment">//宽度占满父组件</span></span><br><span class="line">          height: <span class="built_in">double</span>.infinity, <span class="comment">//高度占满父组件</span></span><br><span class="line">          decoration: BoxDecoration(color: Colors.tealAccent),</span><br><span class="line">          child: Flex(</span><br><span class="line">            direction: Axis.horizontal, <span class="comment">//主轴水平</span></span><br><span class="line">            <span class="comment">//direction: Axis.vertical, //主轴垂直</span></span><br><span class="line">            children: [</span><br><span class="line">              <span class="comment">//Expaned组件会占满剩余空间</span></span><br><span class="line">              Expanded(</span><br><span class="line">                flex: <span class="number">1</span>, <span class="comment">//flex属性表示占剩余空间的比例,如果有多个Expanded组件，flex值越大占的空间越多</span></span><br><span class="line">                child: Container(</span><br><span class="line">                  color: Colors.redAccent,</span><br><span class="line">                  height: <span class="number">50</span>,</span><br><span class="line">                  width: <span class="number">50</span>,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line"></span><br><span class="line">              Expanded(</span><br><span class="line">                flex: <span class="number">2</span>,</span><br><span class="line">                child: Container(</span><br><span class="line">                  color: Colors.blueAccent,</span><br><span class="line">                  height: <span class="number">50</span>,</span><br><span class="line">                  width: <span class="number">50</span>,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.weoyeevwgyyc{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427105320683.png" class="weoyeevwgyyc" alt="image-20260427105320683"></p>
+<h3 id="Flexible"><a href="#Flexible" class="headerlink" title="Flexible"></a>Flexible</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity, <span class="comment">//宽度占满父组件</span></span><br><span class="line">          height: <span class="built_in">double</span>.infinity, <span class="comment">//高度占满父组件</span></span><br><span class="line">          decoration: BoxDecoration(color: Colors.tealAccent),</span><br><span class="line">          child: Flex(</span><br><span class="line">            direction: Axis.horizontal, <span class="comment">//主轴水平</span></span><br><span class="line">            <span class="comment">//direction: Axis.vertical, //主轴垂直</span></span><br><span class="line">            children: [</span><br><span class="line">              <span class="comment">//Flexible组件不同于Expanded组件，Flexible组件可以设置flex属性来控制占用剩余空间的比例，而Expanded组件默认占用所有剩余空间</span></span><br><span class="line">              Flexible(</span><br><span class="line">                flex: <span class="number">50</span>, <span class="comment">//flex属性表示占剩余空间的比例,如果有多个Flexible组件，flex值越大占的空间越多</span></span><br><span class="line">                child: Container(</span><br><span class="line">                  color: Colors.redAccent,</span><br><span class="line">                  height: <span class="number">100</span>,</span><br><span class="line">                  width: <span class="number">100</span>,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line"></span><br><span class="line">              Flexible(</span><br><span class="line">                flex: <span class="number">2</span>,</span><br><span class="line">                child: Container(</span><br><span class="line">                  color: Colors.blueAccent,</span><br><span class="line">                  height: <span class="number">100</span>,</span><br><span class="line">                  width: <span class="number">100</span>,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.rggaihrxqhde{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427110008830.png" class="rggaihrxqhde" alt="image-20260427110008830"></p>
+<blockquote>
+<p>Flex布局受其父组件传递的约束影响。确保父组件提供了适当的布局约束</p>
+<p>Expanded与Flexible的区别：</p>
+<p>——–    Expanded强制子组件填满所有剩余空间，</p>
+<p>——–    Flexible根据自身大小调整，不强制占满空间</p>
+</blockquote>
+<p>我们来练习一下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity, <span class="comment">//宽度占满父组件</span></span><br><span class="line">          height: <span class="built_in">double</span>.infinity, <span class="comment">//高度占满父组件</span></span><br><span class="line">          decoration: BoxDecoration(color: Colors.tealAccent),</span><br><span class="line">          child: Flex(</span><br><span class="line">            direction: Axis.vertical, <span class="comment">//主轴垂直</span></span><br><span class="line">            children: [</span><br><span class="line">              Container(color: Colors.redAccent, height: <span class="number">100</span>),</span><br><span class="line">              Expanded(</span><br><span class="line">                child: Container(</span><br><span class="line">                  color: Colors.greenAccent,</span><br><span class="line">                  width: <span class="built_in">double</span>.infinity,</span><br><span class="line">                  height: <span class="number">100</span>,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">              Container(color: Colors.blueAccent, height: <span class="number">100</span>),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.eotqepfqpyex{zoom:33%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111112801.png" class="eotqepfqpyex" alt="image-20260427111112801"></p>
+<h2 id="流式布局-Wrap"><a href="#流式布局-Wrap" class="headerlink" title="流式布局-Wrap"></a>流式布局-Wrap</h2><p>​	<style>.riizedqlytkv{zoom: 67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111509237.png" class="riizedqlytkv" alt="image-20260427111509237"></p>
+<blockquote>
+<p>当子组件内容是根据数据动态生成时，使用wrap可以确保布局始终适配</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//使用Widgt类型的返回值，生成一个包含10个Container组件的列表</span></span><br><span class="line">  <span class="built_in">List</span>&lt;Widget&gt; getList() &#123;</span><br><span class="line">    <span class="comment">//List.generate(count, generator)方法可以生成一个包含count个元素的列表，generator是一个函数，用于生成每个元素的值</span></span><br><span class="line">    <span class="comment">//这里用()&#123;&#125;匿名函数来生成每个元素的值，index是当前元素的索引，从0开始</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">List</span>.generate(<span class="number">13</span>, (index) &#123;</span><br><span class="line">      <span class="keyword">return</span> Container(width: <span class="number">100</span>, height: <span class="number">100</span>, color: Colors.redAccent);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity, <span class="comment">//宽度占满父组件</span></span><br><span class="line">          height: <span class="built_in">double</span>.infinity, <span class="comment">//高度占满父组件</span></span><br><span class="line">          decoration: BoxDecoration(color: Colors.tealAccent),</span><br><span class="line">          child: Wrap(</span><br><span class="line">            spacing: <span class="number">10</span>, <span class="comment">//主轴上间距</span></span><br><span class="line">            runSpacing: <span class="number">10</span>, <span class="comment">//交叉轴上间距</span></span><br><span class="line">            alignment: WrapAlignment.spaceAround, <span class="comment">//主轴对齐方式为均分</span></span><br><span class="line">            direction: Axis.horizontal, <span class="comment">//主轴方向为水平方向</span></span><br><span class="line">            children: getList(), <span class="comment">//生成10个子组件</span></span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.ipopxiwbejuj{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427113827205.png" class="ipopxiwbejuj" alt="image-20260427113827205"></p>
+<blockquote>
+<p>List.generate是一个构造器，用于快速创建长度固定且每个元素可以通过索引号确定的列表语法：</p>
+<p>List.generate(int count, E generator(int index), {bool growable: false})</p>
+</blockquote>
+<h2 id="层叠布局-Stack-Positioned"><a href="#层叠布局-Stack-Positioned" class="headerlink" title="层叠布局-Stack&#x2F;Positioned"></a>层叠布局-Stack&#x2F;Positioned</h2><p>​	<style>.feihxkesrrqy{zoom: 50%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427152644733.png" class="feihxkesrrqy" alt="image-20260427152644733"></p>
+<p>​	<style>.zqiaolbphife{zoom: 67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160646763.png" class="zqiaolbphife" alt="image-20260427160646763"></p>
+<p>可以看出这个是层叠式的,一层叠一层</p>
+<p>​	<style>.fsfepwfvglev{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427154016318.png" class="fsfepwfvglev" alt="image-20260427154016318"></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.lightBlueAccent,</span><br><span class="line">          child: Stack(</span><br><span class="line">            alignment: Alignment.center, <span class="comment">//让每一个子组件都居中</span></span><br><span class="line">            children: [</span><br><span class="line">              Container(width: <span class="number">300</span>, height: <span class="number">300</span>, color: Colors.red),</span><br><span class="line">              Container(width: <span class="number">200</span>, height: <span class="number">200</span>, color: Colors.green),</span><br><span class="line">              Container(width: <span class="number">100</span>, height: <span class="number">100</span>, color: Colors.blue),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Positioned"><a href="#Positioned" class="headerlink" title="Positioned"></a>Positioned</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.lightBlueAccent,</span><br><span class="line">          child: Stack(</span><br><span class="line">            alignment: Alignment.center,</span><br><span class="line">            children: [</span><br><span class="line">              Container(width: <span class="number">150</span>, height: <span class="number">150</span>, color: Colors.red),</span><br><span class="line">              Container(width: <span class="number">100</span>, height: <span class="number">100</span>, color: Colors.green),</span><br><span class="line">              Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.blue),</span><br><span class="line">              Positioned(</span><br><span class="line">                <span class="comment">//Positionzd组件用于确定子组件的位置</span></span><br><span class="line">                right: <span class="number">50</span>,</span><br><span class="line">                bottom: <span class="number">50</span>,</span><br><span class="line">                child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),</span><br><span class="line">              ),</span><br><span class="line">              Positioned(</span><br><span class="line">                left: <span class="number">50</span>,</span><br><span class="line">                bottom: <span class="number">50</span>,</span><br><span class="line">                child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),</span><br><span class="line">              ),</span><br><span class="line">              Positioned(</span><br><span class="line">                right: <span class="number">50</span>,</span><br><span class="line">                top: <span class="number">50</span>,</span><br><span class="line">                child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),</span><br><span class="line">              ),</span><br><span class="line">              Positioned(</span><br><span class="line">                left: <span class="number">50</span>,</span><br><span class="line">                top: <span class="number">50</span>,</span><br><span class="line">                child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.ksupmkafuauk{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155308373.png" class="ksupmkafuauk" alt="image-20260427155308373"></p>
+<p>还有一个很奇葩的玩法就是,我们在之前学习的padding这里可以用positioned来代替效果</p>
+<p>首先先了解positioned的一个特性,如果我们同时输入上下左右四个方向</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Positioned(</span><br><span class="line">    right: 50,</span><br><span class="line">    top: 50,</span><br><span class="line">    bottom: 50,</span><br><span class="line">    left: 50,</span><br><span class="line">    child: Container(width: 50, height: 50, color: Colors.yellow),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p>此时代码不会报错,而是子组件往四个方向延伸来覆盖容器</p>
+<p>​	<style>.rklvrybmoqcm{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155905606.png" class="rklvrybmoqcm" alt="image-20260427155905606"></p>
+<p>而且取值为0的时候甚至全部覆盖body</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Positioned(</span><br><span class="line">	right: 0,</span><br><span class="line">	top: 0,</span><br><span class="line">	bottom: 0,</span><br><span class="line">	left: 0,</span><br><span class="line">	child: Container(width: 50, height: 50, color: Colors.yellow),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.adjdoxdriudt{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160250154.png" class="adjdoxdriudt" alt="image-20260427160250154"></p>
+<p>同理,我们也可以制造单方向延伸的条</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Positioned(</span><br><span class="line">	right: <span class="number">0</span>,</span><br><span class="line">	bottom: <span class="number">0</span>,</span><br><span class="line">	left: <span class="number">0</span>,</span><br><span class="line">	child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.qkiwrhqnnijc{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160510691.png" class="qkiwrhqnnijc" alt="image-20260427160510691"></p>
+<h2 id="文本组件-Text"><a href="#文本组件-Text" class="headerlink" title="文本组件-Text"></a>文本组件-Text</h2><p>​	<style>.tlfwerwiezbp{zoom:50%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160906913.png" class="tlfwerwiezbp" alt="image-20260427160906913"></p>
+<p>​	<style>.piutprqntuat{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427192614139.png" class="piutprqntuat" alt="image-20260427192614139"></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.lightBlueAccent,</span><br><span class="line">          alignment: Alignment.center,</span><br><span class="line">          child: Text(</span><br><span class="line">            <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">            style: TextStyle(</span><br><span class="line">              fontSize: <span class="number">24</span>,</span><br><span class="line">              fontWeight: FontWeight.bold, <span class="comment">//fontWeight这里是加粗</span></span><br><span class="line">              color: Colors.white, <span class="comment">//color是字体颜色</span></span><br><span class="line">              fontStyle: FontStyle.italic, <span class="comment">//fontStyle这里是斜体</span></span><br><span class="line">              shadows: [</span><br><span class="line">                Shadow(</span><br><span class="line">                  color: Colors.black45,</span><br><span class="line">                  offset: Offset(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">                  blurRadius: <span class="number">4</span>,</span><br><span class="line">                ),</span><br><span class="line">              ], <span class="comment">//shadows是阴影</span></span><br><span class="line">              decoration: TextDecoration.underline, <span class="comment">//decoration是下饰线</span></span><br><span class="line">              decorationColor: Colors.white70, <span class="comment">//decorationColor是下饰线的颜色</span></span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们普通的文字排列是默认的换行</p>
+<p>​	<style>.jnktirdpsrdu{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193608648.png" class="jnktirdpsrdu" alt="image-20260427193608648"></p>
+<p>但是我们也可以指定显示的行号</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.lightBlueAccent,</span><br><span class="line">          alignment: Alignment.center,</span><br><span class="line">          child: Text(</span><br><span class="line">            <span class="string">&quot;终末地AI群聊:欢迎管理员群主进入！本群的管理者有陈千语干员和佩丽卡总督等人,新成员为庄方宜天师和弥弗长官,请大家遵守群规，友好相处哦！&quot;</span>,</span><br><span class="line">            style: TextStyle(</span><br><span class="line">              fontSize: <span class="number">24</span>,</span><br><span class="line">              fontWeight: FontWeight.bold, <span class="comment">//fontWeight这里是加粗</span></span><br><span class="line">              color: Colors.white, <span class="comment">//color是字体颜色</span></span><br><span class="line">              fontStyle: FontStyle.italic, <span class="comment">//fontStyle这里是斜体</span></span><br><span class="line">              shadows: [</span><br><span class="line">                Shadow(</span><br><span class="line">                  color: Colors.black45,</span><br><span class="line">                  offset: Offset(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">                  blurRadius: <span class="number">4</span>,</span><br><span class="line">                ),</span><br><span class="line">              ], <span class="comment">//shadows是阴影</span></span><br><span class="line">              decoration: TextDecoration.underline, <span class="comment">//decoration是下饰线</span></span><br><span class="line">              decorationColor: Colors.white70, <span class="comment">//decorationColor是下饰线的颜色</span></span><br><span class="line">            ),</span><br><span class="line">            maxLines: <span class="number">1</span>, <span class="comment">//maxLines是文本的最大行数，这里是1行</span></span><br><span class="line">            overflow: TextOverflow.ellipsis, <span class="comment">//overflow是文本溢出时的处理方式，这里是用省略号表示溢出部分</span></span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.wtvlpsvpdkqi{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193807845.png" class="wtvlpsvpdkqi" alt="image-20260427193807845"></p>
+<h3 id="TextSpan"><a href="#TextSpan" class="headerlink" title="TextSpan"></a>TextSpan</h3><p>如果需要在同一段本中显示不同样式，可用Text.rich构造函数配合TextSpan来实现</p>
+<p>​	<style>.hngvlwgcxoco{zoom: 67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195400407.png" class="hngvlwgcxoco" alt="image-20260427195400407"></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.white,</span><br><span class="line">          alignment: Alignment.center,</span><br><span class="line">          child: Text.rich(</span><br><span class="line">            <span class="comment">// 使用 Text.rich 来创建富文本富文本就是可以在同一段文本中使用不同的样式</span></span><br><span class="line">            TextSpan(</span><br><span class="line">              text: <span class="string">&quot;点击进入,打开你的拉电线之旅~~\n\n&quot;</span>,</span><br><span class="line">              children: [</span><br><span class="line">                TextSpan(</span><br><span class="line">                  text: <span class="string">&quot;欢迎来到终末地AI群聊！\n\n&quot;</span>,</span><br><span class="line">                  style: TextStyle(</span><br><span class="line">                    fontSize: <span class="number">24</span>,</span><br><span class="line">                    fontWeight: FontWeight.bold,</span><br><span class="line">                    color: Colors.cyanAccent,</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">                TextSpan(</span><br><span class="line">                  text: <span class="string">&quot;在这里，你可以与各种AI角色进行有趣的对话\n\n&quot;</span>,</span><br><span class="line">                  style: TextStyle(fontSize: <span class="number">16</span>, color: Colors.indigoAccent),</span><br><span class="line">                ),</span><br><span class="line">                TextSpan(text: <span class="string">&quot;梨花飘落你窗前~~\n\n&quot;</span>, style: TextStyle(fontSize: <span class="number">16</span>)),</span><br><span class="line">              ],</span><br><span class="line">              style: TextStyle(</span><br><span class="line">                fontSize: <span class="number">18</span>,</span><br><span class="line">                color: Colors.deepOrangeAccent,</span><br><span class="line">              ), <span class="comment">// 这是默认的样式，如果子 TextSpan 没有指定样式，就会使用这个样式</span></span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.dhkobilbusyx{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195655702.png" class="dhkobilbusyx" alt="image-20260427195655702"></p>
+<h2 id="图片组件-image"><a href="#图片组件-image" class="headerlink" title="图片组件-image"></a>图片组件-image</h2><p>​	<style>.thnvsqemymhk{zoom: 50%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200101988.png" class="thnvsqemymhk" alt="image-20260427200101988"></p>
+<p>​	<style>.aomegdoqpgfv{zoom: 50%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427211656998.png" class="aomegdoqpgfv" alt="image-20260427211656998"></p>
+<h3 id="image-asset-本地资源"><a href="#image-asset-本地资源" class="headerlink" title="image.asset(本地资源)"></a>image.asset(本地资源)</h3><p>pubspec.yaml启用图片文件夹</p>
+<p>将资源assets功能启用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">assets:</span><br><span class="line">    - images/a_dot_burr.jpeg</span><br><span class="line">    - images/a_dot_ham.jpeg</span><br></pre></td></tr></table></figure>
+
+<p>这个需要一些配置</p>
+<p>​	<style>.njvhafkubvcu{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200736889.png" class="njvhafkubvcu" alt="image-20260427200736889"></p>
+<p>例如我们将图片放到这个images文件夹</p>
+<p>​	<style>.sdlfctjwmyxc{zoom: 33%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427201351231.png" class="sdlfctjwmyxc" alt="image-20260427201351231"></p>
+<p>然后在main.dart中启用资源,同时重新run执行</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          width: <span class="built_in">double</span>.infinity,</span><br><span class="line">          height: <span class="built_in">double</span>.infinity,</span><br><span class="line">          color: Colors.white,</span><br><span class="line">          alignment: Alignment.center,</span><br><span class="line">          child: Image.asset(<span class="string">&quot;lib/images/01.png&quot;</span>),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: Container(</span><br><span class="line">          height: <span class="number">80</span>,</span><br><span class="line">          child: Center(child: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.upitkpecegme{zoom: 25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427202244242.png" class="upitkpecegme" alt="image-20260427202244242"></p>
+<p>当然也可以使用width和hight来控制图片的大小</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">child: Image.asset(<span class="string">&quot;lib/images/01.png&quot;</span>, width: <span class="number">500</span>, fit: BoxFit.contain),</span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle">
+    <div class="hide-toggle-title">fit属性</div>
+    <div class="hide-toggle-content"><h3 id="fit属性"><a href="#fit属性" class="headerlink" title="fit属性"></a>fit属性</h3><p>这里<code>fit</code> 用的是 BoxFit 这个枚举，一共有 <strong>7种</strong>，每一种控制图片如何在给定空间里缩放&#x2F;裁剪</p>
+<h4 id="1-BoxFit-fill"><a href="#1-BoxFit-fill" class="headerlink" title="1. BoxFit.fill"></a>1. BoxFit.fill</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.fill</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>强行拉伸填满</strong></p>
+<ul>
+<li>会变形 ❗（宽高比被破坏）</li>
+<li>很少用，除非你不在意比例</li>
+</ul>
+<hr>
+<h4 id="2-BoxFit-contain"><a href="#2-BoxFit-contain" class="headerlink" title="2. BoxFit.contain"></a>2. BoxFit.contain</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.contain</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>完整显示图片</strong></p>
+<ul>
+<li>不裁剪</li>
+<li>保持比例</li>
+<li>可能有空白（黑边）</li>
+</ul>
+<p>📌 类似：图片“缩小装进盒子”</p>
+<hr>
+<h4 id="3-BoxFit-cover-⭐（最常用）"><a href="#3-BoxFit-cover-⭐（最常用）" class="headerlink" title="3. BoxFit.cover ⭐（最常用）"></a>3. BoxFit.cover ⭐（最常用）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.cover</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>铺满容器</strong></p>
+<ul>
+<li>保持比例</li>
+<li>会裁剪超出的部分</li>
+</ul>
+<p>📌 类似：背景图常用（推荐）</p>
+<hr>
+<h4 id="4-BoxFit-fitWidth"><a href="#4-BoxFit-fitWidth" class="headerlink" title="4. BoxFit.fitWidth"></a>4. BoxFit.fitWidth</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.fitWidth</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>宽度填满</strong></p>
+<ul>
+<li>高度按比例缩放</li>
+<li>可能上下裁剪</li>
+</ul>
+<hr>
+<h4 id="5-BoxFit-fitHeight"><a href="#5-BoxFit-fitHeight" class="headerlink" title="5. BoxFit.fitHeight"></a>5. BoxFit.fitHeight</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.fitHeight</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>高度填满</strong></p>
+<ul>
+<li>宽度按比例缩放</li>
+<li>可能左右裁剪</li>
+</ul>
+<hr>
+<h4 id="6-BoxFit-none"><a href="#6-BoxFit-none" class="headerlink" title="6. BoxFit.none"></a>6. BoxFit.none</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.none</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>不缩放</strong></p>
+<ul>
+<li>原始大小显示</li>
+<li>超出部分直接裁掉</li>
+</ul>
+<hr>
+<h4 id="7-BoxFit-scaleDown"><a href="#7-BoxFit-scaleDown" class="headerlink" title="7. BoxFit.scaleDown"></a>7. BoxFit.scaleDown</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit: BoxFit.scaleDown</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>只缩小，不放大</strong></p>
+<ul>
+<li>类似 <code>contain</code></li>
+<li>但如果图片本来就小，就不会放大</li>
+</ul>
+</div>
+  </div>
+
+<h3 id="image-network-网络资源"><a href="#image-network-网络资源" class="headerlink" title="image.network(网络资源)"></a>image.network(网络资源)</h3><p>这个不需要在pubspec.yaml 直接使用就行了,把网址或者库粘贴进去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Image.network(&#x27;https://example.com/image.png&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>但是问题是,这个东西需要联网,否则图片会显示不出来, 除此之外, Android&#x2F;HarmonyOS&#x2F;iOS使用Image.network需要配置网络权限</p>
+<p>而且如果图片的源头断了也不会显示出来</p>
+<h2 id="文本输入组件-TextField"><a href="#文本输入组件-TextField" class="headerlink" title="文本输入组件-TextField"></a>文本输入组件-TextField</h2><p>​	<style>.vtyncumuskdx{zoom: 67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427212237017.png" class="vtyncumuskdx" alt="image-20260427212237017"></p>
+<p>​	<style>.egvulbpyvqcy{zoom: 80%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224300913.png" class="egvulbpyvqcy" alt="image-20260427224300913"></p>
+<p>这里我们可以写一个登录界面,使用<strong>有状态组件StatefulWidget</strong>(因为这个是动态刷新的)</p>
+<p>​	<style>.vytyvmtpmfoq{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427222355749.png" class="vytyvmtpmfoq" alt="image-20260427222355749"></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;MainPage&gt; createState() =&gt; _MainPageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MainPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MainPage</span>&gt; </span>&#123;</span><br><span class="line">  TextEditingController _usernameController =</span><br><span class="line">      TextEditingController(); <span class="comment">// 实例化一个用户名输入控制器</span></span><br><span class="line">  TextEditingController _passwordController =</span><br><span class="line">      TextEditingController(); <span class="comment">// 实例化一个密码输入控制器</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Container(</span><br><span class="line">          padding: EdgeInsets.all(<span class="number">20</span>),</span><br><span class="line">          color: Colors.white,</span><br><span class="line">          child: Column(</span><br><span class="line">            mainAxisAlignment: MainAxisAlignment.center, <span class="comment">//界面元素垂直居中</span></span><br><span class="line"></span><br><span class="line">            children: [</span><br><span class="line">              TextField(</span><br><span class="line">                controller: _usernameController, <span class="comment">// 绑定用户名输入控制器</span></span><br><span class="line">                onChanged: (value) =&gt; <span class="built_in">print</span>(<span class="string">&quot;用户名输入: <span class="subst">$value</span>&quot;</span>), <span class="comment">// 用户名输入时的回调</span></span><br><span class="line">                onSubmitted: (value) =&gt; <span class="built_in">print</span>(<span class="string">&quot;用户名提交: <span class="subst">$value</span>&quot;</span>), <span class="comment">// 用户名提交时的回调</span></span><br><span class="line">                decoration: InputDecoration(</span><br><span class="line">                  contentPadding: EdgeInsets.only(</span><br><span class="line">                    left: <span class="number">20</span>,</span><br><span class="line">                  ), <span class="comment">// 输入框内容内边距,这里设置为左侧20像素</span></span><br><span class="line">                  hintText: <span class="string">&quot;请输入用户名&quot;</span>, <span class="comment">// 输入框提示文本</span></span><br><span class="line">                  fillColor: <span class="keyword">const</span> Color.fromARGB(<span class="number">255</span>, <span class="number">85</span>, <span class="number">242</span>, <span class="number">227</span>), <span class="comment">// 输入框背景颜色</span></span><br><span class="line">                  filled: <span class="keyword">true</span>, <span class="comment">// 是否填充背景颜色</span></span><br><span class="line">                  labelText: <span class="string">&quot;用户名&quot;</span>, <span class="comment">// 输入框标签</span></span><br><span class="line">                  border: OutlineInputBorder(</span><br><span class="line">                    <span class="comment">// 输入框边框样式,这里设置为无边框并且圆角</span></span><br><span class="line">                    borderSide: BorderSide.none,</span><br><span class="line">                    borderRadius: BorderRadius.circular(<span class="number">25</span>),</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">              SizedBox(height: <span class="number">10</span>), <span class="comment">// 输入框之间的间距</span></span><br><span class="line">              TextField(</span><br><span class="line">                controller: _passwordController, <span class="comment">// 绑定密码输入控制器</span></span><br><span class="line">                obscureText: <span class="keyword">true</span>, <span class="comment">// 隐藏输入内容,适用于密码输入</span></span><br><span class="line">                onChanged: (value) =&gt; <span class="built_in">print</span>(<span class="string">&quot;密码输入: <span class="subst">$value</span>&quot;</span>), <span class="comment">// 密码输入时的回调</span></span><br><span class="line">                onSubmitted: (value) =&gt; <span class="built_in">print</span>(<span class="string">&quot;密码提交: <span class="subst">$value</span>&quot;</span>), <span class="comment">// 密码提交时的回调</span></span><br><span class="line">                decoration: InputDecoration(</span><br><span class="line">                  contentPadding: EdgeInsets.only(</span><br><span class="line">                    left: <span class="number">20</span>,</span><br><span class="line">                  ), <span class="comment">// 输入框内容内边距,这里设置为左侧20像素</span></span><br><span class="line">                  hintText: <span class="string">&quot;请输入密码&quot;</span>, <span class="comment">// 输入框提示文本</span></span><br><span class="line">                  fillColor: <span class="keyword">const</span> Color.fromARGB(<span class="number">255</span>, <span class="number">85</span>, <span class="number">242</span>, <span class="number">227</span>), <span class="comment">// 输入框背景颜色</span></span><br><span class="line">                  filled: <span class="keyword">true</span>, <span class="comment">// 是否填充背景颜色</span></span><br><span class="line">                  labelText: <span class="string">&quot;密码&quot;</span>, <span class="comment">// 输入框标签</span></span><br><span class="line">                  border: OutlineInputBorder(</span><br><span class="line">                    <span class="comment">// 输入框边框样式,这里设置为无边框并且圆角</span></span><br><span class="line">                    borderSide: BorderSide.none,</span><br><span class="line">                    borderRadius: BorderRadius.circular(<span class="number">25</span>),</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">              SizedBox(height: <span class="number">10</span>), <span class="comment">// 输入框和按钮之间的间距</span></span><br><span class="line">              Container(</span><br><span class="line">                height: <span class="number">50</span>,</span><br><span class="line">                width: <span class="built_in">double</span>.infinity,</span><br><span class="line">                decoration: BoxDecoration(</span><br><span class="line">                  <span class="comment">// 按钮的装饰,这里设置为黑色背景和圆角</span></span><br><span class="line">                  color: Colors.black,</span><br><span class="line">                  borderRadius: BorderRadius.circular(<span class="number">25</span>),</span><br><span class="line">                ),</span><br><span class="line">                child: TextButton(</span><br><span class="line">                  <span class="comment">// 登录按钮,使用TextButton组件,并且设置按钮文本颜色为白色</span></span><br><span class="line">                  onPressed: () &#123;</span><br><span class="line">                    <span class="built_in">print</span>(</span><br><span class="line">                      <span class="string">&quot;用户名: <span class="subst">$&#123;_usernameController.text&#125;</span>, 密码: <span class="subst">$&#123;_passwordController.text&#125;</span>&quot;</span>,</span><br><span class="line">                    );</span><br><span class="line">                  &#125;,</span><br><span class="line">                  child: Text(<span class="string">&quot;登录&quot;</span>, style: TextStyle(color: Colors.white)),</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: BottomAppBar(</span><br><span class="line">          child: Container(</span><br><span class="line">            height: <span class="number">50.0</span>,</span><br><span class="line">            child: Center(child: Text(<span class="string">&quot;© 2026 终末地AI群聊&quot;</span>)),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用滚动组件"><a href="#常用滚动组件" class="headerlink" title="常用滚动组件"></a>常用滚动组件</h2><p>​	<style>.xgoxbannfymt{zoom:67%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224457489.png" class="xgoxbannfymt" alt="image-20260427224457489"></p>
+<h3 id="SingleChildScrollView"><a href="#SingleChildScrollView" class="headerlink" title="SingleChildScrollView"></a>SingleChildScrollView</h3><p>​	<style>.pnleilhyslls{zoom:50%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428131617737.png" class="pnleilhyslls" alt="image-20260428131617737"></p>
+<p>包裹个组件，让单个组件具备滚动能</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;MainPage&gt; createState() =&gt; _MainPageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MainPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MainPage</span>&gt; </span>&#123;</span><br><span class="line">  TextEditingController _usernameController =</span><br><span class="line">      TextEditingController(); <span class="comment">// 用户名输入控制器</span></span><br><span class="line">  TextEditingController _passwordController =</span><br><span class="line">      TextEditingController(); <span class="comment">// 密码输入控制器</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: SingleChildScrollView(</span><br><span class="line">          child: Column(</span><br><span class="line">            children: <span class="built_in">List</span>.generate(<span class="number">100</span>, (index) &#123;</span><br><span class="line">              <span class="keyword">return</span> Container(</span><br><span class="line">                margin: EdgeInsets.only(top: <span class="number">10</span>),</span><br><span class="line">                width: <span class="built_in">double</span>.infinity,</span><br><span class="line">                color: Colors.lightBlueAccent,</span><br><span class="line">                height: <span class="number">100</span>,</span><br><span class="line">                child: Text(</span><br><span class="line">                  <span class="string">&quot;这是第<span class="subst">$&#123;index + <span class="number">1</span>&#125;</span>条消息&quot;</span>,</span><br><span class="line">                  style: TextStyle(</span><br><span class="line">                    color: Colors.white,</span><br><span class="line">                    fontSize: <span class="number">20</span>,</span><br><span class="line">                    fontWeight: FontWeight.bold,</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">                alignment: Alignment.center,</span><br><span class="line">              );</span><br><span class="line">            &#125;),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        bottomNavigationBar: BottomAppBar(</span><br><span class="line">          child: Container(</span><br><span class="line">            height: <span class="number">50.0</span>,</span><br><span class="line">            child: Center(child: Text(<span class="string">&quot;© 2026 终末地AI群聊&quot;</span>)),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们可以增加一个回到首页的按钮</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MainPage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;MainPage&gt; createState() =&gt; _MainPageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MainPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MainPage</span>&gt; </span>&#123;</span><br><span class="line">  ScrollController _scrollController = ScrollController(); <span class="comment">//滚动控制器</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(centerTitle: <span class="keyword">true</span>, title: Text(<span class="string">&quot;终末地AI群聊&quot;</span>)),</span><br><span class="line">        body: Stack(</span><br><span class="line">          <span class="comment">// 使用Stack布局，允许内容滚动</span></span><br><span class="line">          children: [</span><br><span class="line">            SingleChildScrollView(</span><br><span class="line">              controller: _scrollController, <span class="comment">//添加滚动控制器</span></span><br><span class="line">              padding: EdgeInsets.all(<span class="number">20</span>), <span class="comment">// 添加内边距</span></span><br><span class="line">              child: Column(</span><br><span class="line">                children: <span class="built_in">List</span>.generate(<span class="number">100</span>, (index) &#123;</span><br><span class="line">                  <span class="keyword">return</span> Container(</span><br><span class="line">                    margin: EdgeInsets.only(top: <span class="number">10</span>),</span><br><span class="line">                    width: <span class="built_in">double</span>.infinity,</span><br><span class="line">                    color: Colors.lightBlueAccent,</span><br><span class="line">                    height: <span class="number">100</span>,</span><br><span class="line">                    child: Text(</span><br><span class="line">                      <span class="string">&quot;这是第<span class="subst">$&#123;index + <span class="number">1</span>&#125;</span>条消息&quot;</span>,</span><br><span class="line">                      style: TextStyle(</span><br><span class="line">                        color: Colors.white,</span><br><span class="line">                        fontSize: <span class="number">20</span>,</span><br><span class="line">                        fontWeight: FontWeight.bold,</span><br><span class="line">                      ),</span><br><span class="line">                    ),</span><br><span class="line">                    alignment: Alignment.center,</span><br><span class="line">                  );</span><br><span class="line">                &#125;),</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">            Positioned(</span><br><span class="line">              right: <span class="number">10</span>,</span><br><span class="line">              bottom: <span class="number">10</span>,</span><br><span class="line">              child: GestureDetector(</span><br><span class="line">                onTap: () &#123;</span><br><span class="line">                  <span class="built_in">print</span>(<span class="string">&quot;回到顶部按钮已被点击&quot;</span>);</span><br><span class="line">                  <span class="comment">//_scrollController.jumpTo(0);</span></span><br><span class="line">                  _scrollController.animateTo(</span><br><span class="line">                    <span class="number">0</span>,</span><br><span class="line">                    duration: <span class="built_in">Duration</span>(seconds: <span class="number">1</span>),</span><br><span class="line">                    curve: Curves.ease,</span><br><span class="line">                  );</span><br><span class="line">                &#125;,</span><br><span class="line">                child: Container(</span><br><span class="line">                  decoration: BoxDecoration(</span><br><span class="line">                    borderRadius: BorderRadius.circular(<span class="number">25</span>),</span><br><span class="line">                    color: Colors.cyanAccent,</span><br><span class="line">                  ),</span><br><span class="line"></span><br><span class="line">                  width: <span class="number">70</span>,</span><br><span class="line">                  height: <span class="number">70</span>,</span><br><span class="line">                  alignment: Alignment.center,</span><br><span class="line">                  child: Text(</span><br><span class="line">                    <span class="string">&quot;回到顶部&quot;</span>,</span><br><span class="line">                    style: TextStyle(</span><br><span class="line">                      fontSize: <span class="number">15</span>,</span><br><span class="line">                      color: Colors.white,</span><br><span class="line">                      fontWeight: FontWeight.bold,</span><br><span class="line">                    ),</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">            Positioned(</span><br><span class="line">              right: <span class="number">10</span>,</span><br><span class="line">              top: <span class="number">10</span>,</span><br><span class="line">              child: GestureDetector(</span><br><span class="line">                onTap: () &#123;</span><br><span class="line">                  <span class="built_in">print</span>(<span class="string">&quot;回到底部按钮已被点击&quot;</span>);</span><br><span class="line">                  <span class="comment">// _scrollController.jumpTo(</span></span><br><span class="line">                  <span class="comment">//   _scrollController.position.maxScrollExtent,</span></span><br><span class="line">                  <span class="comment">// );</span></span><br><span class="line">                  _scrollController.animateTo(</span><br><span class="line">                    _scrollController.position.maxScrollExtent,</span><br><span class="line">                    duration: <span class="built_in">Duration</span>(seconds: <span class="number">1</span>),</span><br><span class="line">                    curve: Curves.ease,</span><br><span class="line">                  );</span><br><span class="line">                &#125;,</span><br><span class="line">                child: Container(</span><br><span class="line">                  decoration: BoxDecoration(</span><br><span class="line">                    borderRadius: BorderRadius.circular(<span class="number">25</span>),</span><br><span class="line">                    color: Colors.cyanAccent,</span><br><span class="line">                  ),</span><br><span class="line"></span><br><span class="line">                  width: <span class="number">70</span>,</span><br><span class="line">                  height: <span class="number">70</span>,</span><br><span class="line">                  alignment: Alignment.center,</span><br><span class="line">                  child: Text(</span><br><span class="line">                    <span class="string">&quot;回到底部&quot;</span>,</span><br><span class="line">                    style: TextStyle(</span><br><span class="line">                      fontSize: <span class="number">15</span>,</span><br><span class="line">                      color: Colors.white,</span><br><span class="line">                      fontWeight: FontWeight.bold,</span><br><span class="line">                    ),</span><br><span class="line">                  ),</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line"></span><br><span class="line">        bottomNavigationBar: BottomAppBar(</span><br><span class="line">          child: Container(</span><br><span class="line">            height: <span class="number">50.0</span>,</span><br><span class="line">            child: Center(child: Text(<span class="string">&quot;© 2026 终末地AI群聊&quot;</span>)),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.xetvyneawhwu{zoom:25%;}</style><img src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428093647708.png" class="xetvyneawhwu" alt="image-20260428093647708"></p>
+<p>其中这里面涉及的两个方法—jumpTo和animateTo这里细说一下</p>
+<h4 id="jumpTo-直接跳转"><a href="#jumpTo-直接跳转" class="headerlink" title="jumpTo(直接跳转)"></a>jumpTo(直接跳转)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_scrollController.jumpTo(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本质:<strong>瞬间跳转到指定滚动位置（没有动画）</strong></p>
+</blockquote>
+<p>参数只有一个</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>顶部</td>
+</tr>
+<tr>
+<td><code>_scrollController.position.maxScrollExtent</code></td>
+<td>底部</td>
+</tr>
+<tr>
+<td>任意数字</td>
+<td>指定位置</td>
+</tr>
+</tbody></table>
+<p>特点</p>
+<ul>
+<li>不会有任何过渡效果</li>
+<li>立即生效</li>
+<li>用户体验比较“生硬”</li>
+<li>适合：<ul>
+<li>初始化位置</li>
+<li>强制修正滚动位置</li>
+<li>不关心动画的场景</li>
+</ul>
+</li>
+</ul>
+<p>举例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_scrollController.jumpTo(</span><br><span class="line">  _scrollController.position.maxScrollExtent,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>效果就是： 一点击直接“啪”一下到底，没有滚动过程</p>
+<h4 id="animateTo-动画平滑"><a href="#animateTo-动画平滑" class="headerlink" title="animateTo(动画平滑)"></a>animateTo(动画平滑)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">animateTo(</span><br><span class="line">  <span class="built_in">double</span> offset, &#123;</span><br><span class="line">  <span class="keyword">required</span> <span class="built_in">Duration</span> duration,</span><br><span class="line">  <span class="keyword">required</span> Curve curve,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="第一个参数offset-滚动位置"><a href="#第一个参数offset-滚动位置" class="headerlink" title="第一个参数offset(滚动位置)"></a>第一个参数offset(滚动位置)</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>顶部</td>
+</tr>
+<tr>
+<td><code>_scrollController.position.maxScrollExtent</code></td>
+<td>底部</td>
+</tr>
+<tr>
+<td>任意数字</td>
+<td>指定位置</td>
+</tr>
+</tbody></table>
+<p>这个和jumpTo是一样的</p>
+<h5 id="第二个参数duration-动画时长"><a href="#第二个参数duration-动画时长" class="headerlink" title="第二个参数duration(动画时长)"></a>第二个参数duration(动画时长)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Duration(seconds: 1)</span><br></pre></td></tr></table></figure>
+
+<p>即动画持续时间为1秒</p>
+<p>你可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Duration(milliseconds: 300)</span><br><span class="line">Duration(seconds: 2)</span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<ul>
+<li>时间越短 → 越快</li>
+<li>时间越长 → 越慢</li>
+</ul>
+<h5 id="第三个参数curves-动画曲线"><a href="#第三个参数curves-动画曲线" class="headerlink" title="第三个参数curves(动画曲线)"></a>第三个参数curves(动画曲线)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Curves.bounceIn</span><br></pre></td></tr></table></figure>
+
+<p> 控制动画“运动方式”（非常重要）</p>
+<p>常见曲线：</p>
+<table>
+<thead>
+<tr>
+<th>曲线</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Curves.linear</code></td>
+<td>匀速（最死板）</td>
+</tr>
+<tr>
+<td><code>Curves.ease</code></td>
+<td>平滑（推荐）</td>
+</tr>
+<tr>
+<td><code>Curves.easeIn</code></td>
+<td>先慢后快</td>
+</tr>
+<tr>
+<td><code>Curves.easeOut</code></td>
+<td>先快后慢</td>
+</tr>
+<tr>
+<td><code>Curves.easeInOut</code></td>
+<td>两头慢中间快</td>
+</tr>
+<tr>
+<td><code>Curves.bounceIn</code></td>
+<td>弹跳进入（你现在用的）</td>
+</tr>
+<tr>
+<td><code>Curves.elasticOut</code></td>
+<td>弹簧效果</td>
+</tr>
+</tbody></table>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/28/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/ClaudeCode%E9%85%8D%E7%BD%AEDeepSeek/"><span class="nav-label">← 上一篇</span><span class="nav-title">ClaudeCode配置DeepSeek</span></a></div><div class="post-nav next"><a href="/2026/04/26/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%97%A5%E5%B8%B8%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0/%E7%BB%99Blog%E5%A2%9E%E5%8A%A0AI%E6%80%BB%E7%BB%93%E5%8A%9F%E8%83%BD/"><span class="nav-label">下一篇 →</span><span class="nav-title">给Blog增加AI总结功能</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--&amp;url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
+import { PetStateMachine }    from '/images/pet/js/pet-state.js';
+import { PetHair }            from '/images/pet/js/pet-hair.js';
+import { PetLayers }          from '/images/pet/js/pet-layers.js';
+import { PetSound }           from '/images/pet/js/pet-sound.js';
+import { PetOutline }         from '/images/pet/js/pet-outline.js';
+import { PetChat }            from '/images/pet/js/pet-chat.js';
+import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+
+  const musicPlaylist = [
+    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
+    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
+    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
+    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
+    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
+    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
+    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
+    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
+    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
+    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
+  ];
+  
+  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
