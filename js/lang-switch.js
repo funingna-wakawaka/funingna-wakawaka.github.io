@@ -25,7 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
     身份: "Identity",
     二次元爱好者: "Anime Enthusiast",
     我的技能点: "My Skill Points",
+
+    //
     碎碎念: "Random Thoughts",
+    "大家好! 欢迎来到我的个人Blog空间":
+      "Hello everyone! Welcome to my personal blog space.",
+    "我会不定期的分享一些有关各个学科的知识的(当然我也是各个领域的彩笔),同时Unity和Godot游戏开发的一些想法也会写进去":
+      "I’ll occasionally share some bits of knowledge from various fields (though I’m pretty much a noob in all of them 😅). I’ll also write about some ideas related to Unity and Godot game development.",
+    "本人没什么实力只会当CV小白捏,完全是啥也不懂的半吊子,离不开GPT,Gemini还有Claude三个大神   @_@":
+      "Honestly, I don’t have much skill—just a beginner who mostly copy-pastes stuff. I’m basically a half-baked learner who doesn’t understand much and can’t live without GPT, Gemini, and Claude, the three great gods @_@",
 
     //联系方式
     联系方式: "Contact",
