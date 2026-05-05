@@ -7,6 +7,9 @@
     document.documentElement.classList.add('dark-mode');
   }
 })();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
 </script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
 
@@ -39,6 +42,8 @@
 <link rel="stylesheet" href="/css/loading-animation.css">
 
 <link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
 <!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -149,7 +154,9 @@ if (cover && cover.style.display !== 'none') {
   
   import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
-    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
     const canvas2 = document.getElementById('refraction-canvas-2');
@@ -169,8 +176,12 @@ if (cover && cover.style.display !== 'none') {
     let currentSlide = 0;
     let activeApp = 1;
     
-    app1.loadImage(coverImages[0]);
-    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
 
     let slideTimer = null;
     if (coverImages.length > 1) {
@@ -237,17 +248,22 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
   // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
   setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -275,7 +291,40 @@ if (cover && cover.style.display !== 'none') {
   height: 100%;
   justify-content: center;
   align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
 }
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
 #theme-color-picker {
   position: absolute;
   opacity: 0;
@@ -287,6 +336,11 @@ if (cover && cover.style.display !== 'none') {
 body.dark-mode .theme-color-picker-container {
   background: #262626;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
 }
 </style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
 (function() {
@@ -311,12 +365,31 @@ document.addEventListener('DOMContentLoaded', function() {
   colorPicker.addEventListener('input', function(e) {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
   });
 
   // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
   colorPicker.addEventListener('change', function(e) {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/18.png" alt="flutter第三天---class和mixin和泛型"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-16T05:08:39.000Z">2026-04-16</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.9k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>18</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">flutter第三天---class和mixin和泛型</h1><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="由于是面向对象语言-所以Dart同样也有class类"><a href="#由于是面向对象语言-所以Dart同样也有class类" class="headerlink" title="由于是面向对象语言,所以Dart同样也有class类"></a>由于是面向对象语言,所以Dart同样也有class类</h1><p>因为我们对类已经相当熟悉了,这里就用代码描述一下吧</p>
 <p>类中包含对象的属性和方法(也就是定义的行为)</p>
@@ -342,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<h3 id="命名构造（Dart-特有，很常用）"><a href="#命名构造（Dart-特有，很常用）" class="headerlink" title="命名构造（Dart 特有，很常用）"></a>命名构造（Dart 特有，很常用）</h3><p>​	<style>.opzrvsvkugmm{zoom: 50%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416143744161.png" class="opzrvsvkugmm" alt="image-20260416143744161"></p>
+<h3 id="命名构造（Dart-特有，很常用）"><a href="#命名构造（Dart-特有，很常用）" class="headerlink" title="命名构造（Dart 特有，很常用）"></a>命名构造（Dart 特有，很常用）</h3><p>​	<style>.wvzgusjlqimt{zoom: 50%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416143744161.png" class="wvzgusjlqimt" alt="image-20260416143744161"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void main(List&lt;String&gt; args) &#123;</span><br><span class="line">  Player player = Player.NPC(&#x27;帽子米塔&#x27;, 100);</span><br><span class="line">  print(&#x27;玩家名字：$&#123;player.name&#125;, 玩家血量：$&#123;player.hp&#125;&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Player &#123;</span><br><span class="line">  String? name = &#x27;&#x27;;</span><br><span class="line">  int? hp = 0;</span><br><span class="line"></span><br><span class="line">  void attack() &#123;</span><br><span class="line">    print(&#x27;$name 发动攻击&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //有参构造函数</span><br><span class="line">  Player.NPC(String? name, int? hp) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.hp = hp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然而这种写法仍然繁琐,看的鸡肋</p>
@@ -359,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>④使用命名参数(初始化值)</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; args) &#123;</span><br><span class="line">  Player npc = Player.NPC();</span><br><span class="line">  Player player = Player();</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;玩家名字：<span class="subst">$&#123;player.name&#125;</span>, 玩家血量：<span class="subst">$&#123;player.hp&#125;</span>&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;NPC名字：<span class="subst">$&#123;npc.name&#125;</span>, NPC血量：<span class="subst">$&#123;npc.hp&#125;</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line">  <span class="built_in">int</span> hp;</span><br><span class="line"></span><br><span class="line">  Player(&#123;<span class="keyword">this</span>.name = <span class="string">&quot;玩家1&quot;</span>, <span class="keyword">this</span>.hp = <span class="number">100</span>&#125;);</span><br><span class="line">  Player.NPC(&#123;<span class="keyword">this</span>.name = <span class="string">&quot;NPC1&quot;</span>, <span class="keyword">this</span>.hp = <span class="number">100</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> attack() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$name</span> 发动攻击&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>​	<style>.nmxkwgucjuwl{zoom:80%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416154014857.png" class="nmxkwgucjuwl" alt="image-20260416154014857"></p>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>​	<style>.rohzqwavwvoz{zoom:80%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416154014857.png" class="rohzqwavwvoz" alt="image-20260416154014857"></p>
 <p>这个上面已经演示过了,格式就是这样,用来简化代码</p>
 <h2 id="公有属性和私有属性"><a href="#公有属性和私有属性" class="headerlink" title="公有属性和私有属性"></a>公有属性和私有属性</h2><p>学过C#和java还有JavaScript的都知道public和private这两个东西,通常来说在这些语言中是默认属性和函数私有的,只有显式声明public才会变成公有</p>
 <p>不过,在Dart里,默认的属性是共有的,(这点和lua很像,lua也是只有标注locla关键字才是私有)</p>
@@ -377,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> name;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> _gender;</span><br><span class="line">  <span class="built_in">int</span> hp;</span><br><span class="line"></span><br><span class="line">  Player(<span class="keyword">this</span>.name, <span class="keyword">this</span>._gender, <span class="keyword">this</span>.hp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里看到报错了,因为我们把gender设置为私有属性,别的文件无法访问</p>
-<p>​	<style>.deuevnwultjp{zoom: 25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416173331577.png" class="deuevnwultjp" alt="image-20260416173331577"></p>
+<p>​	<style>.ptexknflbccb{zoom: 25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416173331577.png" class="ptexknflbccb" alt="image-20260416173331577"></p>
 <p>导入的话就是用<code>import</code>来导入相对路径的文件,例如</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;test.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;1111/closed.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span><span class="string">&#x27;./1111/closed.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -411,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;enemy.dart&#x27;</span> <span class="keyword">as</span> enemy <span class="keyword">hide</span> A;</span><br></pre></td></tr></table></figure>
 
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是面向对象的三大特点:继承,多态,封装之一,就是子类会获得父类的所有属性和方法,封装这个最好理解,比如函数本身就是封装,你在使用函数的时候无需在意函数内部怎么实现的,只需要学会怎么使用这个函数提供的功能即可</p>
-<p>​	<style>.pynbxtlmxlqu{zoom:25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416191201330.png" class="pynbxtlmxlqu" alt="image-20260416191201330"></p>
+<p>​	<style>.ekpwajlqmmvj{zoom:25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416191201330.png" class="ekpwajlqmmvj" alt="image-20260416191201330"></p>
 <h3 id="extends关键字"><a href="#extends关键字" class="headerlink" title="extends关键字"></a>extends关键字</h3><p>Dart 是<strong>单继承语言</strong>，也就是一个类只能继承一个父类</p>
 <p>和C#差不多,不过和Java更像,C#中使用的是“:”来继承父类或者接口</p>
 <p>在Dart中使用的是extends</p>
@@ -454,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>这东西我个人觉得非常好用,至少比继承好用</p>
 <p>不过还存在一个问题,如果不同的mixin里面存在相同名字的方法,就会发生覆盖的现象,后添加的会覆盖先添加的</p>
-<p>​	<style>.ztpfobwlhmmx{zoom:25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416204322018.png" class="ztpfobwlhmmx" alt="image-20260416204322018"></p>
+<p>​	<style>.ebtehftjmikl{zoom:25%;}</style><img src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416204322018.png" class="ebtehftjmikl" alt="image-20260416204322018"></p>
 <p>例如我们如果把A,B都混合进C类,后添加的B的同名方法和属性会覆盖A的</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mixin</span> A &#123;</span><br><span class="line">  <span class="keyword">void</span> say() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">mixin</span> B &#123;</span><br><span class="line">  <span class="keyword">void</span> say() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="title">with</span> <span class="title">A</span>, <span class="title">B</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  C().say(); <span class="comment">//B</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -884,7 +957,7 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;恋爱循环&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;残酷天使的行动纲领&quot;,&quot;artist&quot;:&quot;高桥洋子&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=3&quot;},{&quot;title&quot;:&quot;红莲华 (Gurenge)&quot;,&quot;artist&quot;:&quot;LiSA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=4&quot;},{&quot;title&quot;:&quot;千本樱&quot;,&quot;artist&quot;:&quot;初音未来&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=5&quot;},{&quot;title&quot;:&quot;secret base ~你给我的所有~&quot;,&quot;artist&quot;:&quot;&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=6&quot;},{&quot;title&quot;:&quot;打上花火&quot;,&quot;artist&quot;:&quot;DAOKO / 米津玄师&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=7&quot;},{&quot;title&quot;:&quot;极乐净土&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=8&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;TK from 凛冽时雨&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=9&quot;},{&quot;title&quot;:&quot;鸟之诗&quot;,&quot;artist&quot;:&quot;Lia&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=10&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -933,10 +1006,12 @@ initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪�
 <script src="/js/loading-animation.js"></script>
 
 <script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
 <script>window.theme = {
-  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":false},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","model":"deepseek-v4-pro","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"}
 };

@@ -7,6 +7,9 @@
     document.documentElement.classList.add('dark-mode');
   }
 })();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
 </script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
 
@@ -39,6 +42,8 @@
 <link rel="stylesheet" href="/css/loading-animation.css">
 
 <link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
 <!-- 条件加载关于页面样式-->
 <link rel="stylesheet" href="/css/about.css">
 <style>:root {
@@ -151,7 +156,9 @@ if (cover && cover.style.display !== 'none') {
   
   import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
-    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
     const canvas2 = document.getElementById('refraction-canvas-2');
@@ -171,8 +178,12 @@ if (cover && cover.style.display !== 'none') {
     let currentSlide = 0;
     let activeApp = 1;
     
-    app1.loadImage(coverImages[0]);
-    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
 
     let slideTimer = null;
     if (coverImages.length > 1) {
@@ -239,17 +250,22 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
   // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
   setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item active" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item active" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -277,7 +293,40 @@ if (cover && cover.style.display !== 'none') {
   height: 100%;
   justify-content: center;
   align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
 }
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
 #theme-color-picker {
   position: absolute;
   opacity: 0;
@@ -289,6 +338,11 @@ if (cover && cover.style.display !== 'none') {
 body.dark-mode .theme-color-picker-container {
   background: #262626;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
 }
 </style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
 (function() {
@@ -313,12 +367,31 @@ document.addEventListener('DOMContentLoaded', function() {
   colorPicker.addEventListener('input', function(e) {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
   });
 
   // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
   colorPicker.addEventListener('change', function(e) {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>个人介绍 | huyangpahuo</title><link rel="stylesheet" href="/css/about.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></head><body><main class="about-page"><div id="background-shapes"></div><div class="about-container"><div class="about-header"><div class="about-avatar"><img src="/images/0.png" alt="Avatar"></div><h1 class="about-name">胡杨怕火</h1><p class="about-bio">传递笑容魔法的Ciallo～(∠・ω&lt; )⌒☆</p></div><div class="interests-showcase"><a class="interest-card card-portrait card-large" href="https://store.steampowered.com/app/1943950/Escape_the_Backrooms/" target="_blank"><div class="card-bg" style="background-image: url(/images/13.jpg); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">逃离后室</h3><div class="card-description"><p>在不断的切出层级中探寻生的希望</p></div><div class="card-icon"><i class="fas fa-heart"></i></div><div class="card-hover-content"><p>下次窃皮者来的时候不要堵门你尔朵隆吗</p></div></div></a><a class="interest-card card-landscape card-medium" href="https://store.steampowered.com/app/2379780/Balatro/" target="_blank"><div class="card-bg" style="background-image: url(/images/14.png); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">小丑牌</h3><div class="card-description"><p>一旦拥有爱不释手</p></div><div class="card-icon"><i class="fas fa-palette"></i></div><div class="card-hover-content"><p>结果就是玩上瘾了</p></div></div></a><a class="interest-card card-portrait card-medium" href="https://store.steampowered.com/app/2239550/Watch_Dogs_Legion/" target="_blank"><div class="card-bg" style="background-image: url(/images/15.png); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">看门狗</h3><div class="card-description"><p>赋予游戏以美国都市的真实感</p></div><div class="card-icon"><i class="fas fa-running"></i></div><div class="card-hover-content"><p>没错,我是嘉豪</p></div></div></a><a class="interest-card card-landscape card-large" href="https://www.minecraft.net/zh-hans" target="_blank"><div class="card-bg" style="background-image: url(/images/16.png); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">我的世界</h3><div class="card-description"><p>生存探索无限,创造缔造奇迹</p></div><div class="card-icon"><i class="fas fa-lightbulb"></i></div><div class="card-hover-content"><p>准备好进服务器偷别人家了吗孩子们</p></div></div></a><a class="interest-card card-portrait card-small" href="https://store.steampowered.com/app/2138710/Sifu/" target="_blank"><div class="card-bg" style="background-image: url(/images/10.png); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">师父</h3><div class="card-description"><p>抬手不是抱歉</p></div><div class="card-icon"><i class="fas fa-plane"></i></div><div class="card-hover-content"><p>这,即是武德.jpg</p></div></div></a><a class="interest-card card-landscape card-small" href="https://store.steampowered.com/app/2527500/_MiSide/" target="_blank"><div class="card-bg" style="background-image: url(/images/7.png); background-size: cover; background-position: center;"></div><div class="card-content"><h3 class="card-title">米塔</h3><div class="card-description"><p>满足了我对二次元的所有幻想</p></div><div class="card-icon"><i class="fas fa-book"></i></div><div class="card-hover-content"><p>幻想死了 狗头狗头狗头</p></div></div></a></div><div class="about-details"><div class="about-section"><h2>关于我</h2><div class="intro-card-wrapper"><div class="intro-banner-bg"><img src="/images/1.jpg" alt="Banner" onerror="this.style.display='none'"><div class="banner-overlay"></div></div><div class="profile-info-content"><div class="profile-item" data-label="称呼">胡杨怕火</div><div class="profile-item" data-label="年龄">19岁</div><div class="profile-item" data-label="大学">河南师范大学软件工程</div><div class="profile-item" data-label="爱好">做游戏和绘画</div><div class="profile-item" data-label="擅长">吃饱睡睡饱吃</div><div class="profile-item" data-label="身份">二次元爱好者</div></div></div></div><div class="about-section"><h2>我的技能点</h2><div class="interest-cloud"><span class="tag">摄影和剪辑</span><span class="tag">像素画和二次元绘画</span><span class="tag">Logo和矢量图设计</span><span class="tag">各种计算机语言</span><span class="tag">Blender建模</span><span class="tag">Linux</span><span class="tag">计算机图形学</span><span class="tag">微信小程序</span><span class="tag">AI</span><span class="tag">游戏制作</span><span class="tag">写小说</span><span class="tag">我的世界模组制作</span><span class="tag">英语</span><span class="tag">日语</span><span class="tag">前端和数据库</span><span class="tag">安卓应用制作</span></div></div><div class="about-section"><h2>碎碎念</h2><div class="bio-content" style="white-space: pre-wrap;"><h1 id="大家好-欢迎来到我的个人Blog空间"><a href="#大家好-欢迎来到我的个人Blog空间" class="headerlink" title="大家好! 欢迎来到我的个人Blog空间"></a>大家好! 欢迎来到我的个人Blog空间</h1><h2 id="我会不定期的分享一些有关各个学科的知识的-当然我也是各个领域的彩笔-同时Unity和Godot游戏开发的一些想法也会写进去"><a href="#我会不定期的分享一些有关各个学科的知识的-当然我也是各个领域的彩笔-同时Unity和Godot游戏开发的一些想法也会写进去" class="headerlink" title="我会不定期的分享一些有关各个学科的知识的(当然我也是各个领域的彩笔),同时Unity和Godot游戏开发的一些想法也会写进去"></a>我会不定期的分享一些有关各个学科的知识的(当然我也是各个领域的彩笔),同时Unity和Godot游戏开发的一些想法也会写进去</h2><h2 id="本人没什么实力只会当CV小白捏-完全是啥也不懂的半吊子-离不开GPT-Gemini还有Claude三个大神"><a href="#本人没什么实力只会当CV小白捏-完全是啥也不懂的半吊子-离不开GPT-Gemini还有Claude三个大神" class="headerlink" title="本人没什么实力只会当CV小白捏,完全是啥也不懂的半吊子,离不开GPT,Gemini还有Claude三个大神   @_@"></a>本人没什么实力只会当CV小白捏,完全是啥也不懂的半吊子,离不开GPT,Gemini还有Claude三个大神   @_@</h2></div></div><div class="about-section"><h2>联系方式</h2><div class="contact-info"><a class="contact-item" href="mailto:3930088367@qq.com"><i class="fas fa-envelope"></i><div><div class="contact-label">邮箱</div><div class="contact-value">3930088367@qq.com</div></div></a><a class="contact-item" target="_blank" rel="noopener" href="https://github.com/huyangpahuo"><i class="fab fa-github"></i><div><div class="contact-label">GitHub</div><div class="contact-value">huyangpahuo</div></div></a><a class="contact-item" target="_blank" rel="noopener" href="https://space.bilibili.com/3546621941910044"><i class="fas fa-tv"></i><div><div class="contact-label">哔哩哔哩</div><div class="contact-value">胡杨怕火</div></div></a></div></div></div></div></main><script>document.addEventListener('DOMContentLoaded', function() {
   // === 背景几何图形漫游 ===
@@ -747,7 +820,7 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;恋爱循环&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;残酷天使的行动纲领&quot;,&quot;artist&quot;:&quot;高桥洋子&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=3&quot;},{&quot;title&quot;:&quot;红莲华 (Gurenge)&quot;,&quot;artist&quot;:&quot;LiSA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=4&quot;},{&quot;title&quot;:&quot;千本樱&quot;,&quot;artist&quot;:&quot;初音未来&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=5&quot;},{&quot;title&quot;:&quot;secret base ~你给我的所有~&quot;,&quot;artist&quot;:&quot;&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=6&quot;},{&quot;title&quot;:&quot;打上花火&quot;,&quot;artist&quot;:&quot;DAOKO / 米津玄师&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=7&quot;},{&quot;title&quot;:&quot;极乐净土&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=8&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;TK from 凛冽时雨&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=9&quot;},{&quot;title&quot;:&quot;鸟之诗&quot;,&quot;artist&quot;:&quot;Lia&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=10&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -796,10 +869,12 @@ initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪�
 <script src="/js/loading-animation.js"></script>
 
 <script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
 <script>window.theme = {
-  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":false},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","model":"deepseek-v4-pro","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"}
 };

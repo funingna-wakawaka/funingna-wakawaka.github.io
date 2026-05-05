@@ -263,12 +263,21 @@ function ChucklePostAI(AI_option) {
     }
 
     // 统一的AI响应函数
+    // 统一的AI响应函数
     async function getAIResponse(prompt) {
       completeGenerate = false;
       controller = new AbortController();
       signal = controller.signal;
 
-      const apiUrl = "https://deepseek.3930088367.workers.dev/";
+      // ★★★ 纯粹从配置文件读取，不在JS中保留默认值 ★★★
+      const apiUrl = AI_option.api_url;
+      const aiModel = AI_option.model;
+
+      // 如果 _config.yml 里忘记配置了，直接在前端给予错误提示
+      if (!apiUrl || !aiModel) {
+        startAI("请先在 _config.yml 中配置 api_url 和 model 选项。");
+        return null;
+      }
 
       try {
         const response = await fetch(apiUrl, {
@@ -278,7 +287,7 @@ function ChucklePostAI(AI_option) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "deepseek-v4-pro",
+            model: aiModel, // 完全使用配置项中的模型
             messages: [{ role: "user", content: prompt }],
           }),
         });

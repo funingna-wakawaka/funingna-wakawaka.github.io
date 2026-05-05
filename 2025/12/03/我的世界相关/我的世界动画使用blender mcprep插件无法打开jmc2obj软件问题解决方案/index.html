@@ -7,6 +7,9 @@
     document.documentElement.classList.add('dark-mode');
   }
 })();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
 </script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
 
@@ -39,6 +42,8 @@
 <link rel="stylesheet" href="/css/loading-animation.css">
 
 <link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
 <!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -149,7 +154,9 @@ if (cover && cover.style.display !== 'none') {
   
   import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
-    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
     const canvas2 = document.getElementById('refraction-canvas-2');
@@ -169,8 +176,12 @@ if (cover && cover.style.display !== 'none') {
     let currentSlide = 0;
     let activeApp = 1;
     
-    app1.loadImage(coverImages[0]);
-    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
 
     let slideTimer = null;
     if (coverImages.length > 1) {
@@ -237,17 +248,22 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
   // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
   setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -275,7 +291,40 @@ if (cover && cover.style.display !== 'none') {
   height: 100%;
   justify-content: center;
   align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
 }
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
 #theme-color-picker {
   position: absolute;
   opacity: 0;
@@ -287,6 +336,11 @@ if (cover && cover.style.display !== 'none') {
 body.dark-mode .theme-color-picker-container {
   background: #262626;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
 }
 </style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
 (function() {
@@ -311,6 +365,17 @@ document.addEventListener('DOMContentLoaded', function() {
   colorPicker.addEventListener('input', function(e) {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
   });
 
   // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
@@ -318,19 +383,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
   });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/3.jpg" alt="我的世界动画使用blender-mcprep插件无法打开jmc2obj软件问题解决方案"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/">我的世界</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2025-12-03T05:11:59.000Z">2025-12-03</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>2.1k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>7</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">我的世界动画使用blender-mcprep插件无法打开jmc2obj软件问题解决方案</h1><div class="post-tags"><a class="tag" href="/tags/Minecraft/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Minecraft</a><a class="tag" href="/tags/Blender/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Blender</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我的世界动画使用blender-mcprep插件无法打开jmc2obj软件问题解决方案"><a href="#我的世界动画使用blender-mcprep插件无法打开jmc2obj软件问题解决方案" class="headerlink" title="我的世界动画使用blender mcprep插件无法打开jmc2obj软件问题解决方案"></a>我的世界动画使用blender mcprep插件无法打开jmc2obj软件问题解决方案</h1><h2 id="Ciallo～-∠・ω-⌒★-MC未来的动画制作者们"><a href="#Ciallo～-∠・ω-⌒★-MC未来的动画制作者们" class="headerlink" title="Ciallo～(∠・ω&lt; )⌒★   MC未来的动画制作者们"></a>Ciallo～(∠・ω&lt; )⌒★   MC未来的动画制作者们</h2><p>估计在你们选择使用blender制作MC动画时,免不了要使用mcprep插件,如图</p>
-<style>.grewvumxssuv{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/d4f8ad0471a4441f84548eceb322b134.jpeg" class="grewvumxssuv" alt="d4f8ad0471a4441f84548eceb322b134">
+<style>.plmuuolrnkzr{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/d4f8ad0471a4441f84548eceb322b134.jpeg" class="plmuuolrnkzr" alt="d4f8ad0471a4441f84548eceb322b134">
 
 <p>插件怎么导入想必你们都会,这个插件支持快速打开jmc2obj和mineways这两个可以将我的世界的地图以obj格式导入到blender中的工具</p>
-<style>.yetthodrgotf{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0a1d03374d06414d99c0d5c9740a75f3.jpeg" class="yetthodrgotf" alt="0a1d03374d06414d99c0d5c9740a75f3">
+<style>.gyysxidlkqgt{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0a1d03374d06414d99c0d5c9740a75f3.jpeg" class="gyysxidlkqgt" alt="0a1d03374d06414d99c0d5c9740a75f3">
 
 <p>快速打开方式就是只需要在blender中按   <font color='Turquoise'>N键</font>  点击  “<font color='Turquoise'>MCprep</font>“  插件,然后在 “<font color='Turquoise'>MCprep工具</font>“  一栏中点击   “<font color='Turquoise'>高级</font>“  右边的 <font color='Turquoise'>齿轮形状的图标</font>,就会弹出 “<font color='Turquoise'>偏好设置</font>“  窗口并自动定位到   “<font color='Turquoise'>插件</font>“ 位置,此时只需要在这两个位置制定jmc2obj和mineways这两个工具的路径</p>
-<style>.qgisrxyovdng{}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e8f4459c48dd411f92baabc7e3bf2d17.png" class="qgisrxyovdng" alt="e8f4459c48dd411f92baabc7e3bf2d17">
+<style>.vyukyxbiitlw{}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e8f4459c48dd411f92baabc7e3bf2d17.png" class="vyukyxbiitlw" alt="e8f4459c48dd411f92baabc7e3bf2d17">
 
 <p>其中mineways只需要导入exe文件的路径即可,最好不要有中文,这个还是很简单的</p>
 <p>打开的话点击这个地方<font color='Turquoise'>Open Mineways </font> 就可以了,打开jmc2obj也是同理,自己试试就知道了</p>
 <p>当然,你也可以选择直接在blender外打开exe 或者jar文件来运行软件,就是多了去找这两个文件的操作十分不爽</p>
-<style>.ibcbbqyxjsvb{}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0eca3a8d0e1c4cd9a35c11779821297e.png" class="ibcbbqyxjsvb" alt="img"><style>.ngcntmngxgof{zoom: 67%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/653db70041d0477ab6e9469d3a66cef4.png" class="ngcntmngxgof" alt="653db70041d0477ab6e9469d3a66cef4">
+<style>.ddhpdqmoayyo{}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0eca3a8d0e1c4cd9a35c11779821297e.png" class="ddhpdqmoayyo" alt="img"><style>.wygohwrkvifv{zoom: 67%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/653db70041d0477ab6e9469d3a66cef4.png" class="wygohwrkvifv" alt="653db70041d0477ab6e9469d3a66cef4">
 
 <p>但是对于jmc2obj，这是一个jar 文件,双击的话或者在blender里” Open jmc2obj “大概率是打不开的,一般是需要java来打开的</p>
 <p>(我就默认你们是我的世界java版本的玩家了  (,,・ω・,,)     )</p>
@@ -338,48 +411,48 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="首先看看你们电脑上有没有java"><a href="#首先看看你们电脑上有没有java" class="headerlink" title="首先看看你们电脑上有没有java"></a>首先看看你们电脑上有没有java</h2><p>这个时候首先看看你们电脑上有没有<font color='Red'>java</font>,  win+R在小窗口输入”<font color='Red'>cmd</font>“小写字母</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd</span><br></pre></td></tr></table></figure>
 
-<style>.eodedeqwiwqk{zoom: 50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e3b21f2c4d84485ba97e63b8ca33fa6d.jpeg" class="eodedeqwiwqk" alt="e3b21f2c4d84485ba97e63b8ca33fa6d">
+<style>.utcimkklyeig{zoom: 50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e3b21f2c4d84485ba97e63b8ca33fa6d.jpeg" class="utcimkklyeig" alt="e3b21f2c4d84485ba97e63b8ca33fa6d">
 
 
 
 <p>呼出界面后输入”<font color='Red'>where java</font>“,中间有一个空格不要忘了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where java</span><br></pre></td></tr></table></figure>
 
-<style>.rsbdfpyfwilt{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7ea6413e217d466a8498a4cdbde7d322.jpeg" class="rsbdfpyfwilt" alt="7ea6413e217d466a8498a4cdbde7d322">
+<style>.wxwsorngwixv{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7ea6413e217d466a8498a4cdbde7d322.jpeg" class="wxwsorngwixv" alt="7ea6413e217d466a8498a4cdbde7d322">
 
 <p>如图所示,可以看到我的电脑有两个java,这里我用的是放到<font color='Red'>D盘里的java</font></p>
 <p>好的,接下来给java配置到电脑的<font color='Red'>PATH</font>路径</p>
 <h2 id="给java配置到电脑的PATH路径"><a href="#给java配置到电脑的PATH路径" class="headerlink" title="给java配置到电脑的PATH路径"></a>给java配置到电脑的PATH路径</h2><p>首先找到电脑”<font color='Red'>设置</font>“，里的”<font color='Red'>系统</font>“  我这个是<font color='Red'>windows 11</font> ,不知道其他版本系统怎么设置</p>
-<style>.suufekwktbio{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c1c02604da294a029b83abaefad0d651.jpeg" class="suufekwktbio" alt="c1c02604da294a029b83abaefad0d651">
+<style>.qfuekbnyvfzg{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c1c02604da294a029b83abaefad0d651.jpeg" class="qfuekbnyvfzg" alt="c1c02604da294a029b83abaefad0d651">
 
 <p>找到最底下的” <font color='Red'>系统信息 </font>“</p>
-<style>.gkkpnrublojg{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b10d807a003a4bb9a615ef69e9a12940.jpeg" class="gkkpnrublojg" alt="b10d807a003a4bb9a615ef69e9a12940">
+<style>.ufjgoyxtuhvi{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b10d807a003a4bb9a615ef69e9a12940.jpeg" class="ufjgoyxtuhvi" alt="b10d807a003a4bb9a615ef69e9a12940">
 
 <p>点击进去后如图</p>
-<style>.ijnmnehwjmde{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1086f6ad4edd446d9e589550ff3f7508.jpeg" class="ijnmnehwjmde" alt="1086f6ad4edd446d9e589550ff3f7508">
+<style>.ebfjfqqnbmfn{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1086f6ad4edd446d9e589550ff3f7508.jpeg" class="ebfjfqqnbmfn" alt="1086f6ad4edd446d9e589550ff3f7508">
 
 <p>这里有三个很显眼的<font color='LightSkyBlue'>蓝色</font>字体,选择右边的”<font color='LightSkyBlue'>高级系统设置</font>“</p>
 <p>就会弹出这个界面</p>
-<style>.qkjfweaudwmd{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e70a3c71863343048f7ff992567255e4.jpeg" class="qkjfweaudwmd" alt="e70a3c71863343048f7ff992567255e4">
+<style>.foyvvzweydvu{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e70a3c71863343048f7ff992567255e4.jpeg" class="foyvvzweydvu" alt="e70a3c71863343048f7ff992567255e4">
 
 <p>点击底下的”<font color='Red'>环境变量</font>“</p>
 <p>又有一个窗口出现</p>
-<style>.bmexfmjjtdwr{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/9f2d010b1d9340b89dcd71b18b427b73.jpeg" class="bmexfmjjtdwr" alt="9f2d010b1d9340b89dcd71b18b427b73">
+<style>.pcyangexihve{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/9f2d010b1d9340b89dcd71b18b427b73.jpeg" class="pcyangexihve" alt="9f2d010b1d9340b89dcd71b18b427b73">
 
 <p>这里不要选错地方了,在下方的”<font color='Red'>系统变量</font> “里翻啊翻啊翻找到<font color='Red'> path</font> 并点击 <font color='Red'>编辑</font> </p>
-<style>.ssxngsrmliqh{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/5d19b3e04b78430b8e105a27f0eeff01.png" class="ssxngsrmliqh" alt="5d19b3e04b78430b8e105a27f0eeff01">
+<style>.glbucxliwswz{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/5d19b3e04b78430b8e105a27f0eeff01.png" class="glbucxliwswz" alt="5d19b3e04b78430b8e105a27f0eeff01">
 
 <p>很好,现在你们是不是还记得刚才第一步的操作—-<font color='Red'>找到java的路径</font></p>
 <p>复制下来等会有用</p>
 <p>编辑界面如下</p>
-<style>.wzrhrzewuxpu{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b964c044a4e84648b228d203210aef92.jpeg" class="wzrhrzewuxpu" alt="b964c044a4e84648b228d203210aef92">
+<style>.onxdzdwcvtco{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b964c044a4e84648b228d203210aef92.jpeg" class="onxdzdwcvtco" alt="b964c044a4e84648b228d203210aef92">
 
 <p>点击右边的”<font color='Red'>新建</font>“,此时会自动跳转的最后一行,把刚才复制的路径粘贴上去,注意<font color='Red'>删掉</font>路径后面的<font color='Red'>java.exe </font></p>
 <p>然后点击<font color='Red'>上移</font>,尽量将路径移动到最上面</p>
 <p>你可以看看我的写法,路径里有没有中文都可以</p>
 <p>点击”<font color='Red'>确定</font>“</p>
 <p>然后我们回到这个界面</p>
-<style>.grvmuzkjwpzg{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/9b6b9c0f0450474ebfa63bce9fa61ed5.jpeg" class="grvmuzkjwpzg" alt="9b6b9c0f0450474ebfa63bce9fa61ed5">
+<style>.nwfxwnyvgnql{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/9b6b9c0f0450474ebfa63bce9fa61ed5.jpeg" class="nwfxwnyvgnql" alt="9b6b9c0f0450474ebfa63bce9fa61ed5">
 
 <p>再次点击这个系统变量下面的”  <font color='Red'>新建</font>  “,不是刚才的那个哟</p>
 <p>这样写</p>
@@ -387,53 +460,53 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>下面就是电脑下的<font color='Red'>jdk文件</font>的路径,jdk版本我的比较新是23的</p>
 <p>完成后<font color='Red'>确定</font>即可</p>
 <p>注意:不是java.exe路径!!!  是它的上上一级路径 ∑(￣□￣;)</p>
-<style>.vphqwshlpavh{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7879b1973be14750beb7958b59ed838d.jpeg" class="vphqwshlpavh" alt="7879b1973be14750beb7958b59ed838d">
+<style>.ovvtcdvtexhh{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7879b1973be14750beb7958b59ed838d.jpeg" class="ovvtcdvtexhh" alt="7879b1973be14750beb7958b59ed838d">
 
 <p>到这里我们就添加完毕了 注意注意!!!</p>
 <p>检查刚才的英文大小写,检查空格,检查有没有多打字!!!!!</p>
 <p>没问题的话,恭喜</p>
 <p>我们进入下一步</p>
-<h2 id="如何打开jMc2Obj-jar文件"><a href="#如何打开jMc2Obj-jar文件" class="headerlink" title="如何打开jMc2Obj-###.jar文件"></a>如何打开jMc2Obj-###.jar文件</h2><style>.gntsbbuvtxlv{zoom: 50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c3ef44b16dc04f5f9a7c917b5a667e6e.png" class="gntsbbuvtxlv" alt="c3ef44b16dc04f5f9a7c917b5a667e6e">
+<h2 id="如何打开jMc2Obj-jar文件"><a href="#如何打开jMc2Obj-jar文件" class="headerlink" title="如何打开jMc2Obj-###.jar文件"></a>如何打开jMc2Obj-###.jar文件</h2><style>.eharfxwpgogd{zoom: 50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c3ef44b16dc04f5f9a7c917b5a667e6e.png" class="eharfxwpgogd" alt="c3ef44b16dc04f5f9a7c917b5a667e6e">
 
 <p>首先<font color='Red'>win+R</font>输入<font color='Red'>regedit</font>进入<font color='Red'>注册表编辑器</font></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regedit</span><br></pre></td></tr></table></figure>
 
-<style>.bufptxcdlhrs{zoom: 33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/264dd202ef594ac499d7853dce78629f.png" class="bufptxcdlhrs" alt="264dd202ef594ac499d7853dce78629f">
+<style>.bvnowhuesdem{zoom: 33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/264dd202ef594ac499d7853dce78629f.png" class="bvnowhuesdem" alt="264dd202ef594ac499d7853dce78629f">
 
 <p>看到了吗,一直往下翻翻翻翻</p>
 <p>找到这个<font color='Red'>jarfile</font>,然后一层一层的打开直到出现右边的东西</p>
 <p>右键<font color='Red'>有俩字默认</font>的这个东西</p>
-<style>.diuvlgbmjvee{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/f33eb291e55144499991ba976a7755b2.png" class="diuvlgbmjvee" alt="f33eb291e55144499991ba976a7755b2">
+<style>.jukxwhljgphm{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/f33eb291e55144499991ba976a7755b2.png" class="jukxwhljgphm" alt="f33eb291e55144499991ba976a7755b2">
 
 
 
 <p>点击<font color='Red'>修改</font></p>
-<style>.cfxpwcipkpqb{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/95696d65d0bd4569a1e7cc094ea88eb6.png" class="cfxpwcipkpqb" alt="95696d65d0bd4569a1e7cc094ea88eb6">
+<style>.xmguzwuxzkel{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/95696d65d0bd4569a1e7cc094ea88eb6.png" class="xmguzwuxzkel" alt="95696d65d0bd4569a1e7cc094ea88eb6">
 
-<p>将里面的路径<style>.xcwpocxtmgks{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c83749e97f494a8c85dc984039527ee4.png" class="xcwpocxtmgks" alt="c83749e97f494a8c85dc984039527ee4"></p>
-<p>替换为你们的<font color='Red'>java路径</font>,这里我已经换好了,注意这后面的<style>.muocveljbmpj{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b9ba322ce28146fc8544eacc8fc5af46.png" class="muocveljbmpj" alt="b9ba322ce28146fc8544eacc8fc5af46">不要动</p>
+<p>将里面的路径<style>.mbptukiiwdmk{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/c83749e97f494a8c85dc984039527ee4.png" class="mbptukiiwdmk" alt="c83749e97f494a8c85dc984039527ee4"></p>
+<p>替换为你们的<font color='Red'>java路径</font>,这里我已经换好了,注意这后面的<style>.ofhzkehktumc{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/b9ba322ce28146fc8544eacc8fc5af46.png" class="ofhzkehktumc" alt="b9ba322ce28146fc8544eacc8fc5af46">不要动</p>
 <p>点击确定即可,注意空格键的存在和引号是<font color='Red'>英文</font>的</p>
 <p>你们看看电脑里<font color='Red'> jMc2Obj-###.jar</font>(我下载的是127最新版本,你们的自己看看) 文件放到哪个文件夹</p>
 <p>然后右击jar文件用<font color='Red'>java</font>打开</p>
-<style>.xebmrmicoicm{zoom: 25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7598f2601672436fb01e3ab93ea6db82.png" class="xebmrmicoicm" alt="7598f2601672436fb01e3ab93ea6db82">
+<style>.eukcepeopopq{zoom: 25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/7598f2601672436fb01e3ab93ea6db82.png" class="eukcepeopopq" alt="7598f2601672436fb01e3ab93ea6db82">
 
 <p>或者点击<font color='Red'>属性</font>,在打开方式里更改用<font color='Red'>java</font>打开,这个是为了方便一些上一步打开方式选错的制作者</p>
-<style>.xssyylaabhnu{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/45ecd3d530214201b0f3ab41cb0bfb21.png" class="xssyylaabhnu" alt="45ecd3d530214201b0f3ab41cb0bfb21">
+<style>.wsphpzsejirg{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/45ecd3d530214201b0f3ab41cb0bfb21.png" class="wsphpzsejirg" alt="45ecd3d530214201b0f3ab41cb0bfb21">
 
-<style>.dmqplkhfpygs{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/853962d5dba94ab7a6c41d7a2b46e32f.jpeg" class="dmqplkhfpygs" alt="853962d5dba94ab7a6c41d7a2b46e32f">
+<style>.vurgcpxksfne{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/853962d5dba94ab7a6c41d7a2b46e32f.jpeg" class="vurgcpxksfne" alt="853962d5dba94ab7a6c41d7a2b46e32f">
 
-<style>.fdabjqwgkdmc{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/87b67b5bf932410aa519965d8fad64bb.png" class="fdabjqwgkdmc" alt="87b67b5bf932410aa519965d8fad64bb">
+<style>.xfnyquylwyvh{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/87b67b5bf932410aa519965d8fad64bb.png" class="xfnyquylwyvh" alt="87b67b5bf932410aa519965d8fad64bb">
 
 <p>然后发现如果还是打不开的话,我们进一步操作</p>
 <p>首先检查jar文件的完整性,毕竟jMc2Obj原作者是发布到github上的</p>
 <p>国内可能由于网路问题下载文件不完全</p>
 <p>先在jar文件所在的文件夹空白处右键点击在”<font color='Red'>在终端中打开</font>“,打开我们的<font color='Red'>powershell</font></p>
-<style>.btqpetrzrvgl{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/ddd7141277a1414fbd33c0936a094564.png" class="btqpetrzrvgl" alt="ddd7141277a1414fbd33c0936a094564">
+<style>.qugmgkipylvy{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/ddd7141277a1414fbd33c0936a094564.png" class="qugmgkipylvy" alt="ddd7141277a1414fbd33c0936a094564">
 
 <p>先输入” <font color='Red'>  dir  </font>“回车</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir</span><br></pre></td></tr></table></figure>
 
-<style>.tfgsxejbywnn{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/916df44a71474524ac71229a05f8d66d.jpeg" class="tfgsxejbywnn" alt="916df44a71474524ac71229a05f8d66d">
+<style>.specjfpclidu{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/916df44a71474524ac71229a05f8d66d.jpeg" class="specjfpclidu" alt="916df44a71474524ac71229a05f8d66d">
 
 <p>出现这几行字尤其是中间的一行就行了</p>
 <p><font color='Teal'>-a—-         2025&#x2F;10&#x2F;2     16:11        9897475 jMc2Obj-127.jar</font></p>
@@ -443,27 +516,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jMc2Obj-127.jar</span><br></pre></td></tr></table></figure>
 
 <p>如果出现以下结果就是正确的</p>
-<style>.tjzgpsisyoys{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/477cc0874aa84e7a8c069734cd16025f.jpeg" class="tjzgpsisyoys" alt="477cc0874aa84e7a8c069734cd16025f">
+<style>.uolcfuobiovs{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/477cc0874aa84e7a8c069734cd16025f.jpeg" class="uolcfuobiovs" alt="477cc0874aa84e7a8c069734cd16025f">
 
-<style>.osexpipttsch{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/98d53fdafd094206a89ad3dabf6514de.jpeg" class="osexpipttsch" alt="98d53fdafd094206a89ad3dabf6514de">
+<style>.dgvgqvvlriub{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/98d53fdafd094206a89ad3dabf6514de.jpeg" class="dgvgqvvlriub" alt="98d53fdafd094206a89ad3dabf6514de">
 
-<style>.vippqigdsvdn{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a71036e47d204628b17b9ccb84f26b30.jpeg" class="vippqigdsvdn" alt="a71036e47d204628b17b9ccb84f26b30">
+<style>.nsgtgeojqgjw{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a71036e47d204628b17b9ccb84f26b30.jpeg" class="nsgtgeojqgjw" alt="a71036e47d204628b17b9ccb84f26b30">
 
 <p>这代表启动<font color='Teal'>jMc2Obj</font>成功而且你们百分之一百会遇到这个错误</p>
-<style>.kocbnwcvcbkl{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a42b2f481dcf4658a4c6d44cc6d5c788.jpeg" class="kocbnwcvcbkl" alt="a42b2f481dcf4658a4c6d44cc6d5c788">
+<style>.pcguckxphqij{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a42b2f481dcf4658a4c6d44cc6d5c788.jpeg" class="pcguckxphqij" alt="a42b2f481dcf4658a4c6d44cc6d5c788">
 
 <p>这是因为无法检测java的版本更新导致的,因为java的主人SUN公司已经死掉了,所以这个软件无法再从sun公司的官网下载更新了,所以是一个正常现象,但是每次启动都会出现这个东西</p>
 <p>very very sick  ( º﹃º )</p>
 <p>不过我们的<font color='Teal'>jMc2Obj</font></p>
 <p>已经打开了如图,出现一个大界面和一个小窗口即<font color='Red'>console控制台</font></p>
-<style>.gqsngcejwxhy{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a213ef0d588946d693e456985fccf6f1.jpeg" class="gqsngcejwxhy" alt="a213ef0d588946d693e456985fccf6f1">
+<style>.cdummmeimhfa{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a213ef0d588946d693e456985fccf6f1.jpeg" class="cdummmeimhfa" alt="a213ef0d588946d693e456985fccf6f1">
 
 <p>然后我们就可以在这里导入MC  的<font color='Red'>saves </font>文件里的存档世界文件</p>
-<style>.defxjoclnflk{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a6a017e1ed5344f8a17a24eca7350942.jpeg" class="defxjoclnflk" alt="a6a017e1ed5344f8a17a24eca7350942">
+<style>.gxkrqgkmkgnq{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/a6a017e1ed5344f8a17a24eca7350942.jpeg" class="gxkrqgkmkgnq" alt="a6a017e1ed5344f8a17a24eca7350942">
 
 <p>点击”<font color='Red'>加载世界</font>“</p>
 <p>当当!!!!!</p>
-<style>.xkeidepjtddp{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1b7613aec91141528bcb7371cb9d42a6.jpeg" class="xkeidepjtddp" alt="1b7613aec91141528bcb7371cb9d42a6">
+<style>.snbolylulror{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1b7613aec91141528bcb7371cb9d42a6.jpeg" class="snbolylulror" alt="1b7613aec91141528bcb7371cb9d42a6">
 
 <p>至于怎么用网上一堆教程,大家自己可以去学习一下</p>
 <h2 id="更加便携的打开jMc2Obj的操作方式"><a href="#更加便携的打开jMc2Obj的操作方式" class="headerlink" title="更加便携的打开jMc2Obj的操作方式"></a>更加便携的打开jMc2Obj的操作方式</h2><p>想必你们也发现了,每次启动这个软件都要输入这个破命令 ┐(´д&#96;)┌</p>
@@ -473,26 +546,26 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>然后在<font color='LightSkyBlue'>记事本</font>中写下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">title jMc2Obj NowYouCanStart</span><br><span class="line">java -Djmc.checkupdate=false -jar &quot;%~dp0jMc2Obj-127.jar&quot; 2&gt;nul</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<style>.lhyfbcpadclx{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e1f6b4f25d73476e9ad031edacc3584e.jpeg" class="lhyfbcpadclx" alt="e1f6b4f25d73476e9ad031edacc3584e">
+<style>.nebaoqcwdbou{zoom:25%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/e1f6b4f25d73476e9ad031edacc3584e.jpeg" class="nebaoqcwdbou" alt="e1f6b4f25d73476e9ad031edacc3584e">
 
 <p>这里我用java -Djmc.checkupdate&#x3D;false -jar “%~dp0jMc2Obj-127.jar” 2&gt;nul</p>
 <p>禁止了powershell里的报错出现,但是我禁止不了那个小小的console控制台里的报错,</p>
 <p>因为那个是软件自带的,我也尝试了下载github上的源码来修改,结果越改越错,算了,还是放哪儿吧</p>
 <p>( ´ﾟДﾟ&#96;)</p>
 <p>大家写完了后<font color='LightSkyBlue'>修改txt文件</font>的格式为<font color='LightSkyBlue'>bat格式</font>(改文件格式大家应该都会吧),名字自己随便取</p>
-<style>.vpiulxjqrufg{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/449fbdeab88a4f48bb87b35373b7dbe5.jpeg" class="vpiulxjqrufg" alt="449fbdeab88a4f48bb87b35373b7dbe5">
+<style>.ejuoysvbdffx{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/449fbdeab88a4f48bb87b35373b7dbe5.jpeg" class="ejuoysvbdffx" alt="449fbdeab88a4f48bb87b35373b7dbe5">
 
 <p>可以发现文件样子变了,而且还出现了一个<font color='LightSkyBlue'>conf  </font>  文件夹</p>
 <p>没错,这个就是刚才成功运行<font color='Teal'>jMc2Obj</font>  后自己产生的,不用管它</p>
 <p>好了,此时点击这个bat文件,然后你可以发现jMc2Obj 居然启动了,就像<font color='LightSkyBlue'>exe文件</font>一样</p>
 <p>出现这个<font color='Red'>叉掉</font>就行,不用管它,因为还是那个java更新问题</p>
-<style>.zsidrvvvtgvf{zoom:80%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/249dd92aedbf427fa010849a10e96a2a.png" class="zsidrvvvtgvf" alt="249dd92aedbf427fa010849a10e96a2a">
+<style>.iqnkuseegmzs{zoom:80%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/249dd92aedbf427fa010849a10e96a2a.png" class="iqnkuseegmzs" alt="249dd92aedbf427fa010849a10e96a2a">
 
 <p>但是怎么在blender中打开呢,答案是mineways怎么添加和打开的,jMc2Obj 就怎么打开</p>
-<style>.lrwkqfcugxry{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/ed36aaa6846e4bbeade486542fa10652.png" class="lrwkqfcugxry" alt="ed36aaa6846e4bbeade486542fa10652">
+<style>.gvkromzfpakb{zoom:33%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/ed36aaa6846e4bbeade486542fa10652.png" class="gvkromzfpakb" alt="ed36aaa6846e4bbeade486542fa10652">
 
 <p>看到没有,就是把这个start.bat文件当做exe文件来使用</p>
-<style>.hsyyzrsxbksh{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0a5df6d92b804eda834e76409d0462eb.png" class="hsyyzrsxbksh" alt="0a5df6d92b804eda834e76409d0462eb">
+<style>.qvvemcwuxqnw{zoom:50%;}</style><img src="/2025/12/03/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E7%9B%B8%E5%85%B3/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8blender%20mcprep%E6%8F%92%E4%BB%B6%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80jmc2obj%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/0a5df6d92b804eda834e76409d0462eb.png" class="qvvemcwuxqnw" alt="0a5df6d92b804eda834e76409d0462eb">
 
 <p>点击” <font color='Turquoise'>Open jmc2obj</font> “就大功告成了!!!! ( ◜◡‾)</p>
 <p>感谢你们的阅读,如果对你们有帮助的话,可否点赞收藏加关注呢</p>
@@ -899,7 +972,7 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;恋爱循环&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;残酷天使的行动纲领&quot;,&quot;artist&quot;:&quot;高桥洋子&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=3&quot;},{&quot;title&quot;:&quot;红莲华 (Gurenge)&quot;,&quot;artist&quot;:&quot;LiSA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=4&quot;},{&quot;title&quot;:&quot;千本樱&quot;,&quot;artist&quot;:&quot;初音未来&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=5&quot;},{&quot;title&quot;:&quot;secret base ~你给我的所有~&quot;,&quot;artist&quot;:&quot;&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=6&quot;},{&quot;title&quot;:&quot;打上花火&quot;,&quot;artist&quot;:&quot;DAOKO / 米津玄师&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=7&quot;},{&quot;title&quot;:&quot;极乐净土&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=8&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;TK from 凛冽时雨&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=9&quot;},{&quot;title&quot;:&quot;鸟之诗&quot;,&quot;artist&quot;:&quot;Lia&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=10&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -948,10 +1021,12 @@ initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪�
 <script src="/js/loading-animation.js"></script>
 
 <script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
 <script>window.theme = {
-  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":false},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","model":"deepseek-v4-pro","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"}
 };

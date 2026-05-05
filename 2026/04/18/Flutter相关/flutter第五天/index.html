@@ -7,6 +7,9 @@
     document.documentElement.classList.add('dark-mode');
   }
 })();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
 </script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
 
@@ -39,6 +42,8 @@
 <link rel="stylesheet" href="/css/loading-animation.css">
 
 <link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
 <!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -149,7 +154,9 @@ if (cover && cover.style.display !== 'none') {
   
   import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
-    const coverImages = ['/images/1.png','/images/2.png','/images/4.png', '/images/5.png','/images/6.png','/images/7.png','/images/8.png','/images/9.png','/images/10.png','/images/11.png','/images/12.png','/images/13.png','/images/14.png','/images/15.png','/images/16.png','/images/18.png','/images/20.png', '/images/21.png'];
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
     const canvas2 = document.getElementById('refraction-canvas-2');
@@ -169,8 +176,12 @@ if (cover && cover.style.display !== 'none') {
     let currentSlide = 0;
     let activeApp = 1;
     
-    app1.loadImage(coverImages[0]);
-    if (coverImages.length > 1) app2.loadImage(coverImages[1]);
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
 
     let slideTimer = null;
     if (coverImages.length > 1) {
@@ -237,17 +248,22 @@ if (cover && cover.style.display !== 'none') {
     });
   };
 
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
   // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
   setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get("欢迎来到我的奇妙世界") : "欢迎来到我的奇妙世界";
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get("胡杨怕火") : "胡杨怕火";
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get("开始你的旅行") : "开始你的旅行";
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">浏览器插件推荐</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://darkreader.org/">DarkReader(可以强制网页黑色主题)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.code-box.fun/">CodeBox(可以下载平台文章)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://immersivetranslate.cn/">ImmersiveTranslate(可以翻译网页外语)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://www.aixdownloader.com/zh">AixDownloader(可以批量下载图片)</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -275,7 +291,40 @@ if (cover && cover.style.display !== 'none') {
   height: 100%;
   justify-content: center;
   align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
 }
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
 #theme-color-picker {
   position: absolute;
   opacity: 0;
@@ -287,6 +336,11 @@ if (cover && cover.style.display !== 'none') {
 body.dark-mode .theme-color-picker-container {
   background: #262626;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
 }
 </style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
 (function() {
@@ -311,6 +365,17 @@ document.addEventListener('DOMContentLoaded', function() {
   colorPicker.addEventListener('input', function(e) {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
   });
 
   // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
@@ -318,26 +383,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     localStorage.setItem('custom-accent-color', newColor);
   });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/18.png" alt="flutter第五天---创建第一个flutter项目"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-18T13:32:39.000Z">2026-04-18</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>7</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">flutter第五天---创建第一个flutter项目</h1><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="OK-终于开始了苦呀西-虽然我写的是第五天-其实只用了两天"><a href="#OK-终于开始了苦呀西-虽然我写的是第五天-其实只用了两天" class="headerlink" title="OK,终于开始了苦呀西,虽然我写的是第五天,其实只用了两天"></a>OK,终于开始了苦呀西,虽然我写的是第五天,其实只用了两天</h1><h2 id="检测环境配置"><a href="#检测环境配置" class="headerlink" title="检测环境配置"></a>检测环境配置</h2><p>不知道你们的flutter下载好了没有?</p>
 <p>最好去vscode里下,因为会省掉很多麻烦的步骤,vscode会自动帮你把fluttersdk添加到path路径</p>
 <p>然后执行如下命令检测</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flutter <span class="literal">--version</span></span><br><span class="line">dart <span class="literal">--version</span></span><br><span class="line"></span><br><span class="line">flutter doctor <span class="literal">-v</span></span><br></pre></td></tr></table></figure>
 
 <p>其中第三个命令你们一定会报错</p>
-<p>​	<style>.itqmyxqvtyqx{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418213910648.png" class="itqmyxqvtyqx" alt="image-20260418213910648"></p>
-<p>​	<style>.zbfyciqbjzfw{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418213928732.png" class="zbfyciqbjzfw" alt="image-20260418213928732"></p>
+<p>​	<style>.xyqobxjiubvs{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418213910648.png" class="xyqobxjiubvs" alt="image-20260418213910648"></p>
+<p>​	<style>.fkkfgttfpiwa{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418213928732.png" class="fkkfgttfpiwa" alt="image-20260418213928732"></p>
 <p>最底下那个是因为网络问题(Google嘛,懂的都懂,国内不挂梯子肯定ping不通)</p>
 <p>问题是Android,你们没有安装Android的SDK并配置到系统Path路径</p>
 <p>这里我推荐你们挂梯子去下载一个Android Studio 然后在里面下载SDK</p>
-<p>​	<style>.qgdlsjpemxhs{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214614509.png" class="qgdlsjpemxhs" alt="image-20260418214614509"></p>
+<p>​	<style>.xjgnigvsfwei{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214614509.png" class="xjgnigvsfwei" alt="image-20260418214614509"></p>
 <p>其中这几个必须下载,而且要全程外网,否则就会下载失败(实在不行你们去官网直接下载提供的SDK)</p>
-<p>​	<style>.yvemdwzsehlm{zoom: 33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214714010.png" class="yvemdwzsehlm" alt="image-20260418214714010"></p>
+<p>​	<style>.rdqcohjguevm{zoom: 33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214714010.png" class="rdqcohjguevm" alt="image-20260418214714010"></p>
 <p>这些分别是构建工具和安卓手机虚拟机</p>
-<p>​	<style>.kosfjawwkzur{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214935129.png" class="kosfjawwkzur" alt="image-20260418214935129"></p>
+<p>​	<style>.fxetyhnrkdcc{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418214935129.png" class="fxetyhnrkdcc" alt="image-20260418214935129"></p>
 <p>by the way,这个虚拟机甚至可以刷视频  <font color='#FFD700'>狗头狗头狗头</font></p>
-<p>​	<style>.evuudlzjnxwm{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418215241768.png" class="evuudlzjnxwm" alt="image-20260418215241768"></p>
+<p>​	<style>.sichtlggkbcq{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418215241768.png" class="sichtlggkbcq" alt="image-20260418215241768"></p>
 <p>完成后添加sdk到path路径</p>
-<p>​	<style>.ofuhpfrhqcow{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418215439783.png" class="ofuhpfrhqcow" alt="image-20260418215439783"></p>
+<p>​	<style>.brdfnybolyir{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260418215439783.png" class="brdfnybolyir" alt="image-20260418215439783"></p>
 <p>或者你这样在系统变量(不是Path)里添加</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ANDROID_HOME=D:\AndroidStudio\sdk     //改成你自己的SDK路径</span><br><span class="line">ANDROID_SDK_ROOT=D:\AndroidStudio\sdk    //改成你自己的SDK路径</span><br></pre></td></tr></table></figure>
 
@@ -351,16 +424,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>然后安装Pub依赖</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter pub get</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.gswwosojmnkc{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419111349202.png" class="gswwosojmnkc" alt="image-20260419111349202"></p>
-<p>​	<style>.lpgcmtdffvij{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419111410794.png" class="lpgcmtdffvij" alt="image-20260419111410794"></p>
+<p>​	<style>.nkgfexjwxzsd{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419111349202.png" class="nkgfexjwxzsd" alt="image-20260419111349202"></p>
+<p>​	<style>.vukuwgkihjsk{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419111410794.png" class="vukuwgkihjsk" alt="image-20260419111410794"></p>
 <p>至于这里面的proxy什么的是因为我挂了梯子代理,注意如果你挂了代理也会影响localhost本地服务器,</p>
 <p>一定要在系统变量里设置NO_PROXY 来屏蔽本地服务器否则根本打不开浏览器网页或者浏览器只会显示白屏什么都没有</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NO_PROXY=localhost,127.0.0.1,::1</span><br></pre></td></tr></table></figure>
 
 <p>还有就是用完梯子之后要把这个HTTP_PROXY和HTTPS_PROXY从系统变量中删除,否则电脑所有流量都会经过梯子,而下一次如果忘记打开梯子时就会发现电脑连不上网</p>
 <p>现在已经已经没有问题了!</p>
-<p>​	<style>.hrgqtbuzwpyk{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419211224309.png" class="hrgqtbuzwpyk" alt="image-20260419211224309"></p>
-<p>​	<style>.qxtwkphlalfm{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419211244739.png" class="qxtwkphlalfm" alt="image-20260419211244739"></p>
+<p>​	<style>.tvvsjeqscjug{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419211224309.png" class="tvvsjeqscjug" alt="image-20260419211224309"></p>
+<p>​	<style>.menorvwqvrdp{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419211244739.png" class="menorvwqvrdp" alt="image-20260419211244739"></p>
 <p>OK,环境配置完了,接下来就是创建工程了</p>
 <h2 id="创建Flutter工程"><a href="#创建Flutter工程" class="headerlink" title="创建Flutter工程"></a>创建Flutter工程</h2><p>首先新建一个文件夹,在这个文件夹里打开终端</p>
 <p>这里我们有很多命令</p>
@@ -405,11 +478,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h3><p>我们可以用这个列出所有flutter可用的命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter config</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.dpodtihvxsvk{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419114639156.png" class="dpodtihvxsvk" alt="image-20260419114639156"></p>
+<p>​	<style>.hdogyjfgtmlb{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419114639156.png" class="hdogyjfgtmlb" alt="image-20260419114639156"></p>
 <p>当然也可以查看功能的启用与否</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter config --list</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.etjkfzunhtcf{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419114814334.png" class="etjkfzunhtcf" alt="image-20260419114814334"></p>
+<p>​	<style>.uiwornrkbckv{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419114814334.png" class="uiwornrkbckv" alt="image-20260419114814334"></p>
 <p>然后开启和关闭功能就是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//enable开启</span><br><span class="line">flutter config --enable-web  </span><br><span class="line">flutter config --enable-windows-desktop</span><br><span class="line"></span><br><span class="line">//no-enable关闭</span><br><span class="line">flutter config --no-enable-web</span><br></pre></td></tr></table></figure>
 
@@ -426,19 +499,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flutter build apk     </span><br><span class="line">flutter build appbundle   //上架Google Play专用</span><br><span class="line">flutter build web</span><br><span class="line">flutter build windows   </span><br><span class="line">flutter build linux</span><br><span class="line"></span><br><span class="line">//这俩只能在macos上打包,因为需要苹果的签名</span><br><span class="line">flutter build macos   </span><br><span class="line">flutter build ios    </span><br></pre></td></tr></table></figure>
 
 <p>例如我们构建apk</p>
- <style>.mtijyisjvcxt{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260428164557996.png" class="mtijyisjvcxt" alt="image-20260428164557996">
+ <style>.cvcfnumtvufo{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260428164557996.png" class="cvcfnumtvufo" alt="image-20260428164557996">
 
 <h3 id="清除项目"><a href="#清除项目" class="headerlink" title="清除项目"></a>清除项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter clean</span><br></pre></td></tr></table></figure>
 
 <p>注意,除此之外尤其是android,每次失败都要把build出来的以及gradle和pub缓存文件夹里的东西删的干干净净再重新开始,否则接下来不可能成功,疯狂报错(别问我怎么知道的……..问就是心态崩了)</p>
-<h2 id="OK-我们从Web平台开始"><a href="#OK-我们从Web平台开始" class="headerlink" title="OK,我们从Web平台开始"></a>OK,我们从Web平台开始</h2><p>​	<style>.pirnilxhrczy{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419190327090.png" class="pirnilxhrczy" alt="image-20260419190327090"></p>
+<h2 id="OK-我们从Web平台开始"><a href="#OK-我们从Web平台开始" class="headerlink" title="OK,我们从Web平台开始"></a>OK,我们从Web平台开始</h2><p>​	<style>.ktpuklokftac{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419190327090.png" class="ktpuklokftac" alt="image-20260419190327090"></p>
 <p>浏览器的话最好Chrome或者Edge</p>
-<p>​	<style>.gcjlbzknqasf{zoom: 50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419204054334.png" class="gcjlbzknqasf" alt="image-20260419204054334"></p>
+<p>​	<style>.whhqxtldmjrl{zoom: 50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419204054334.png" class="whhqxtldmjrl" alt="image-20260419204054334"></p>
 <p>我们启用Chrome</p>
-<p>​	<style>.smxdqyuiteel{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419213114181.png" class="smxdqyuiteel" alt="image-20260419213114181"></p>
+<p>​	<style>.llhodtfrmnnn{zoom:33%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419213114181.png" class="llhodtfrmnnn" alt="image-20260419213114181"></p>
 <p>然后它自动跳转到浏览器,第一次的时候刷新一下浏览器,就可以看到这个自带的计数器案例了</p>
-<p>​	<style>.pekwhdxcyucx{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419213218834.png" class="pekwhdxcyucx" alt="image-20260419213218834"></p>
-<h2 id="runAPP和Widget"><a href="#runAPP和Widget" class="headerlink" title="runAPP和Widget"></a>runAPP和Widget</h2><p>​	<style>.hdprdgqtwlvi{zoom:50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419214306453.png" class="hdprdgqtwlvi" alt="image-20260419214306453"></p>
+<p>​	<style>.cdvopcsuvdwq{zoom:25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419213218834.png" class="cdvopcsuvdwq" alt="image-20260419213218834"></p>
+<h2 id="runAPP和Widget"><a href="#runAPP和Widget" class="headerlink" title="runAPP和Widget"></a>runAPP和Widget</h2><p>​	<style>.hylssvpdnnop{zoom:50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419214306453.png" class="hylssvpdnnop" alt="image-20260419214306453"></p>
 <p>runAPP它的作用只有一个：</p>
 <p><strong>把你的 Flutter UI“挂载到屏幕上”</strong></p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -489,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <td>会（build 重建）</td>
 </tr>
 </tbody></table>
-<h2 id="Material库"><a href="#Material库" class="headerlink" title="Material库"></a>Material库</h2><p>​	<style>.jdgkgcmqbiya{zoom: 50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419221147469.png" class="jdgkgcmqbiya" alt="image-20260419221147469"></p>
+<h2 id="Material库"><a href="#Material库" class="headerlink" title="Material库"></a>Material库</h2><p>​	<style>.jeqlwmxxsaef{zoom: 50%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419221147469.png" class="jeqlwmxxsaef" alt="image-20260419221147469"></p>
 <p>不是到大家有没有用过Google play,你可以发现谷歌的所有软件都是统一的UI,而这个UI名称就叫做material,这里我们的flutter内置了这个库</p>
 <h3 id="MaterialAPP"><a href="#MaterialAPP" class="headerlink" title="MaterialAPP"></a>MaterialAPP</h3><p>MaterialApp &#x3D; “给整个 Flutter App 套上 Android&#x2F;Material 设计系统 + 路由 + 主题 + 全局配置的总控制器”</p>
 <p>也就是说这个是应用的壳子,方便对整个应用的属性进行整体设计</p>
@@ -499,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p><code>theme</code>:用来设置整个应用的主题</p>
 <p><code>home</code>:用来展示窗口的主题内容</p>
 </blockquote>
-<p>​	<style>.heauoxpqqmfb{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419224054062.png" class="heauoxpqqmfb" alt="image-20260419224054062"></p>
+<p>​	<style>.etbdswbtlegq{zoom: 25%;}</style><img src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%BA%94%E5%A4%A9/image-20260419224054062.png" class="etbdswbtlegq" alt="image-20260419224054062"></p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>; <span class="comment">//导入Material包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(</span><br><span class="line">    MaterialApp(</span><br><span class="line">      title: <span class="string">&quot;终末地AI群聊&quot;</span>,</span><br><span class="line">      theme: ThemeData(scaffoldBackgroundColor: Colors.lightBlueAccent),</span><br><span class="line">      home: Scaffold(),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
@@ -903,7 +976,7 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;恋爱循环&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;残酷天使的行动纲领&quot;,&quot;artist&quot;:&quot;高桥洋子&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=3&quot;},{&quot;title&quot;:&quot;红莲华 (Gurenge)&quot;,&quot;artist&quot;:&quot;LiSA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=4&quot;},{&quot;title&quot;:&quot;千本樱&quot;,&quot;artist&quot;:&quot;初音未来&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=5&quot;},{&quot;title&quot;:&quot;secret base ~你给我的所有~&quot;,&quot;artist&quot;:&quot;&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=6&quot;},{&quot;title&quot;:&quot;打上花火&quot;,&quot;artist&quot;:&quot;DAOKO / 米津玄师&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=7&quot;},{&quot;title&quot;:&quot;极乐净土&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=8&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;TK from 凛冽时雨&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=9&quot;},{&quot;title&quot;:&quot;鸟之诗&quot;,&quot;artist&quot;:&quot;Lia&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=10&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -952,10 +1025,12 @@ initDesktopPet();</script></div><!-- 立即应用暗色模式，避免页面闪�
 <script src="/js/loading-animation.js"></script>
 
 <script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
 <script>window.theme = {
-  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":false},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","model":"deepseek-v4-pro","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"}
 };
