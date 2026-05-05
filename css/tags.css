@@ -415,7 +415,7 @@ img.inline {
   }
 }
 
-/* ===== Tags & Categories Page Styles ===== */
+/* ===== Tags Page Styles ===== */
 
 .post-subtitle {
   color: var(--secondary-color);
@@ -425,9 +425,8 @@ img.inline {
   font-weight: 400;
 }
 
-/* ★★★ Tag & Category Header Styles (共享样式) ★★★ */
-.tag-header,
-.category-header {
+/* Tag Header Styles */
+.tag-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -436,28 +435,24 @@ img.inline {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.tag-info h2.tag-name,
-.category-info h2.category-name {
+.tag-info h2.tag-name {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
 }
 
-.tag-info h2.tag-name i,
-.category-info h2.category-name i {
+.tag-info h2.tag-name i {
   margin-right: 0.5rem;
   color: var(--accent-color);
 }
 
-.tag-description,
-.category-description {
+.tag-description {
   color: var(--secondary-color);
   font-size: 1rem;
 }
 
-.tag-back a,
-.category-back a {
+.tag-back a {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1rem;
@@ -465,17 +460,14 @@ img.inline {
   border-radius: 4px;
   color: var(--primary-color);
   transition: all 0.3s ease;
-  text-decoration: none;
 }
 
-.tag-back a:hover,
-.category-back a:hover {
+.tag-back a:hover {
   background-color: var(--accent-color);
   color: white;
 }
 
-.tag-back a i,
-.category-back a i {
+.tag-back a i {
   margin-right: 0.5rem;
 }
 
@@ -772,10 +764,7 @@ img.inline {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-
-  /* ★★★ 移动端组合类 ★★★ */
-  .tag-header,
-  .category-header {
+  .tag-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -800,6 +789,45 @@ img.inline {
   .tag-cloud-item {
     padding: 0.75rem;
   }
+}
+
+/* ===== Category Back Button Styles (添加到 tags.css 中) ===== */
+.category-back a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: var(--primary-color) !important;
+  /* 强制在亮色模式下显示主文本颜色 */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.category-back a:hover {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+  /* 强制悬浮时文字为白色，防止被覆盖 */
+}
+
+.category-back a i {
+  margin-right: 0.5rem;
+}
+
+/* 修复 Tag 和 Category 返回按钮在暗色模式下的颜色 */
+body.dark-mode .tag-back a,
+body.dark-mode .category-back a {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* 暗色模式下使用半透明白色背景 */
+  color: #eeeeee !important;
+  /* 暗色模式下使用浅色文字 */
+}
+
+body.dark-mode .tag-back a:hover,
+body.dark-mode .category-back a:hover {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+  /* 悬浮时保持纯白文字 */
 }
 
 /* 平板设备的响应式调整 */
