@@ -269,21 +269,9 @@ function ChucklePostAI(AI_option) {
       controller = new AbortController();
       signal = controller.signal;
 
-      // ★★★ 纯粹从配置文件读取，不在JS中保留默认值 ★★★
+      // 【核心修改】不要写死，从 AI_option 中读取配置
       const apiUrl = AI_option.api_url;
       const aiModel = AI_option.model;
-
-      // 如果 _config.yml 里忘记配置了，直接在前端给予错误提示
-      if (!apiUrl || !aiModel) {
-        const errorMsg =
-          window.i18n && typeof window.i18n.get === "function"
-            ? window.i18n.get(
-                "请先在 _config.yml 中配置 api_url 和 model 选项。",
-              )
-            : "请先在 _config.yml 中配置 api_url 和 model 选项。";
-        startAI(errorMsg);
-        return null;
-      }
 
       try {
         const response = await fetch(apiUrl, {
@@ -293,7 +281,7 @@ function ChucklePostAI(AI_option) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: aiModel, // 完全使用配置项中的模型
+            model: aiModel, // 读取传进来的模型名称
             messages: [{ role: "user", content: prompt }],
           }),
         });

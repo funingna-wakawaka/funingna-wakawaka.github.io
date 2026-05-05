@@ -161,8 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "请等待. . .": "Please wait...",
     "Alona请求AI出错了，请稍后再试。":
       "Alona encountered an error while requesting AI. Please try again later.",
-    "请先在 _config.yml 中配置 api_url 和 model 选项。":
-      "Please first configure the api_url and model options in _config.yml.",
 
     // 文章
     "点击阅读->": "Click to Read ->",
