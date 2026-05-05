@@ -263,15 +263,12 @@ function ChucklePostAI(AI_option) {
     }
 
     // 统一的AI响应函数
-    // 统一的AI响应函数
     async function getAIResponse(prompt) {
       completeGenerate = false;
       controller = new AbortController();
       signal = controller.signal;
 
-      // 【核心修改】不要写死，从 AI_option 中读取配置
-      const apiUrl = AI_option.api_url;
-      const aiModel = AI_option.model;
+      const apiUrl = "https://deepseek.3930088367.workers.dev/";
 
       try {
         const response = await fetch(apiUrl, {
@@ -281,7 +278,7 @@ function ChucklePostAI(AI_option) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: aiModel, // 读取传进来的模型名称
+            model: "deepseek-v4-pro",
             messages: [{ role: "user", content: prompt }],
           }),
         });
