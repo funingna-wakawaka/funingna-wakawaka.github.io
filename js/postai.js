@@ -275,7 +275,13 @@ function ChucklePostAI(AI_option) {
 
       // 如果 _config.yml 里忘记配置了，直接在前端给予错误提示
       if (!apiUrl || !aiModel) {
-        startAI("请先在 _config.yml 中配置 api_url 和 model 选项。");
+        const errorMsg =
+          window.i18n && typeof window.i18n.get === "function"
+            ? window.i18n.get(
+                "请先在 _config.yml 中配置 api_url 和 model 选项。",
+              )
+            : "请先在 _config.yml 中配置 api_url 和 model 选项。";
+        startAI(errorMsg);
         return null;
       }
 

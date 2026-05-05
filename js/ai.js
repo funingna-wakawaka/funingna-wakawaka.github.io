@@ -1,17 +1,29 @@
+// 先判断主题是否开启了 AI，且配置变量已加载
+if (window.theme && window.theme.ai_summary && window.theme.ai_summary.enable) {
+  // AI构造函数
+  new ChucklePostAI({
+    /* 必须配置 */
+    el: "#post>#article-container",
 
+    // ！！！在这里动态读取 _config.yml 传过来的全局变量 ！！！
+    api_url: window.theme.ai_summary.api_url,
+    model: window.theme.ai_summary.model,
+    summary_directly: window.theme.ai_summary.summary_directly || false,
 
-          // AI构造函数
-          new ChucklePostAI({
-            /* 必须配置 */
-            // 文章内容所在的元素属性的选择器，也是AI挂载的容器，AI将会挂载到该容器的最前面
-            el: '#post>#article-container',
-            // 驱动AI所必须的key，即是tianliGPT后端服务所必须的key
-              key:'',
-            /* 非必须配置 */
-            // 文章标题所在的元素属性的选择器，默认获取当前网页的标题
-            title_el: '.post-title',
-            // 文章推荐方式，all：匹配数据库内所有文章进行推荐，web：仅当前站内的文章，默认all
-            rec_method: 'web',
-            // 获取文章内容时，需要排除的元素及其子元素，默认如下
-            exclude: ['highlight', 'Copyright-Notice', 'post-ai', 'post-series', 'mini-sandbox']
-          })
+    // 驱动AI所必须的key
+    key: "",
+
+    /* 非必须配置 */
+    title_el: ".post-title",
+    rec_method: "web",
+    exclude: [
+      "highlight",
+      "Copyright-Notice",
+      "post-ai",
+      "post-series",
+      "mini-sandbox",
+    ],
+  });
+} else {
+  console.log("AI 摘要功能未在配置文件中开启或环境加载失败");
+}
