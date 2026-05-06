@@ -223,6 +223,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //调色盘
     自定义主题色: "Custom Theme Color",
 
+    //sakana
+    切换角色: "Switch Character",
+
     // 音乐播放器
     展开播放器: "Expand Player",
     收起播放器: "Collapse Player",
