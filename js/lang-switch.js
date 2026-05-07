@@ -136,15 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
     没有评论: "No Comments",
     Twikoo评论加载成功: "Twikoo comments loaded successfully",
 
-    // 浏览器插件推荐
-    浏览器插件推荐: "Plugins",
-    "DarkReader(可以强制网页黑色主题)": "DarkReader (Force Dark Mode)",
-    "CodeBox(可以下载平台文章)": "CodeBox (Download Articles)",
-    "ImmersiveTranslate(可以翻译网页外语)":
-      "ImmersiveTranslate (Translate Foreign Languages)",
-    "AixDownloader(可以批量下载图片)": "AixDownloader (Batch Download Images)",
-
-    // 其他工具
+    //追番
+    追番: Anime,
 
     // 更多
     更多: "More",
@@ -236,9 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "播放/暂停": "Play/Pause",
     未在播放: "Not Playing",
     "请在 _config.yml 中配置歌曲": "Please configure songs in _config.yml",
-
-    //追番
-    追番: Anime
   };
 
   // ==========================================
