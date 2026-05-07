@@ -236,6 +236,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "播放/暂停": "Play/Pause",
     未在播放: "Not Playing",
     "请在 _config.yml 中配置歌曲": "Please configure songs in _config.yml",
+
+    //追番
+    追番: Anime
   };
 
   // ==========================================
