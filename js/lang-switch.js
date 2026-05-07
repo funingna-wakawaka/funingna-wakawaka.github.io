@@ -137,7 +137,35 @@ document.addEventListener("DOMContentLoaded", function () {
     Twikoo评论加载成功: "Twikoo comments loaded successfully",
 
     //追番
-    追番: Anime,
+    追番: "Anime",
+    "Bilibili 追番": "Bilibili Anime",
+    "暂无追番数据，请确保已在 source/_data/ 目录下创建了 anime.yml":
+      "No anime data found. Please make sure anime.yml exists in source/_data/",
+
+    //番的名称
+    咒术回战乙骨忧太篇: "Jujutsu Kaisen 0",
+    咒术回战第一季: "Jujutsu Kaisen Season 1",
+    咒术回战第二季: "Jujutsu Kaisen Season 2",
+    JOJO的奇妙冒险: "JoJo's Bizarre Adventure",
+    "JOJO的奇妙冒险 星尘远征军": "JoJo's Bizarre Adventure: Stardust Crusaders",
+    "JOJO的奇妙冒险 星尘远征军 埃及篇":
+      "JoJo's Bizarre Adventure: Stardust Crusaders – Battle in Egypt",
+    "JOJO的奇妙冒险 黄金之风": "JoJo's Bizarre Adventure: Golden Wind",
+    "JOJO的奇妙冒险 不灭钻石":
+      "JoJo's Bizarre Adventure: Diamond Is Unbreakable",
+    "JOJO的奇妙冒险 石之海": "JoJo's Bizarre Adventure: Stone Ocean",
+    "岸边露伴 一动也不动": "Thus Spoke Kishibe Rohan",
+    间谍过家家第一季: "SPY×FAMILY Season 1",
+    间谍过家家第二季: "SPY×FAMILY Season 2",
+    "间谍过家家 代号：白": "SPY×FAMILY CODE: White",
+    工作细胞第一季: "Cells at Work! Season 1",
+    工作细胞第二季: "Cells at Work! Season 2",
+    工作细胞BLACK: "Cells at Work! CODE BLACK",
+    石纪元第一季: "Dr. Stone Season 1",
+    石纪元第二季: "Dr. Stone: Stone Wars",
+    石纪元龙水篇: "Dr. Stone: Ryusui",
+    石纪元第三季: "Dr. Stone: New World",
+    石纪元第四季: "Dr. Stone: Science Future",
 
     // 更多
     更多: "More",
