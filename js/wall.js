@@ -40,14 +40,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const authorEl = comment.querySelector(
         ".tk-nick, .vnick, .gt-comment-username",
       );
-      const author = authorEl ? authorEl.innerText : "匿名";
+      // ★ 将 innerText 改为 textContent
+      const author = authorEl ? authorEl.textContent.trim() : "匿名";
+
+      // 提取留言内容（兼容 Twikoo, Valine, Gitalk）
+      const contentEl = comment.querySelector(
+        ".tk-content, .vcontent, .gt-comment-body",
+      );
+
+      // ★ 将 innerText 改为 textContent，并过滤掉多余的换行符
+      let message = "什么也没留下~";
+      if (contentEl) {
+        // 获取文本，并将多个空格、换行替换为单空格
+        message = contentEl.textContent.replace(/\s+/g, " ").trim();
+      }
+
+      if (message.length > 60) message = message.substring(0, 60) + "...";
 
       // 按顺序选取配置的图片，避免乱跳
       const images = window.photoWallImages || [];
       const randomImg =
         images.length > 0 ? images[index % images.length] : "/images/0.png";
 
-      createPhotoCard(author, randomImg, index);
+      // 传入 message
+      createPhotoCard(author, message, randomImg, index);
     });
   }
 
@@ -83,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // 3. 创建相片卡片 (采用伪随机算法固定坐标)
   // ==========================================
-  function createPhotoCard(author, imgSrc, index) {
+  function createPhotoCard(author, message, imgSrc, index) {
     // 伪随机函数：确保同一张照片每次刷新都在同一个固定位置，避免乱飞
     function seededRandom(seed) {
       const x = Math.sin(seed + 1) * 10000;
@@ -110,8 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // 保存初始倾斜角度到元素上，方便拖拽结束后恢复
     card.dataset.rotation = randomRotation;
 
+    // 添加留言和作者结构
     card.innerHTML = `
       <img src="${imgSrc}" alt="photo">
+      <div class="message">${message}</div>
       <div class="author">${author}</div>
     `;
 
