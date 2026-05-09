@@ -257,6 +257,12 @@ document.addEventListener("DOMContentLoaded", function () {
     "播放/暂停": "Play/Pause",
     未在播放: "Not Playing",
     "请在 _config.yml 中配置歌曲": "Please configure songs in _config.yml",
+
+    //照片墙
+    在这里留下你的足迹: "Leave your mark here",
+    留言: "Leave a Message",
+    留言板: "Message Board",
+    照片墙: "PhotoWall",
   };
 
   // ==========================================
