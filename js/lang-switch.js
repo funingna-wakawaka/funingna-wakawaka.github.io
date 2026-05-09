@@ -263,6 +263,38 @@ document.addEventListener("DOMContentLoaded", function () {
     留言: "Leave a Message",
     留言板: "Message Board",
     照片墙: "PhotoWall",
+
+    //桌宠
+    //drag
+    "放开我!!!": "Let go of me!!!",
+    "救命啊!!!": "Help!!!",
+    "我讨厌你~呜呜": "I hate you~ boohoo",
+    //click
+    不要老是戳我呀: "Stop poking me",
+    "真讨厌!": "So annoying!",
+    "你又点我了!": "You poked me again!",
+    //rightClick
+    不要右键点我听到没有: "Don't right-click me, got it?",
+    干什么啊: "What are you doing?",
+    //fall
+    哼: "Hmph",
+    哎呀: "Ouch",
+    //idle
+    你怎么不理我了: "Why are you ignoring me?",
+    快点和我说话: "Talk to me!",
+    我好无聊啊: "I'm so bored",
+    老师我想听歌: "Sensei, I want to listen to music",
+    我好困啊: "I'm so sleepy",
+    "可以放首歌吗我想听歌!!!":
+      "Can you play a song? I want to listen to music!!!",
+    不要右键戳我: "Don't right-click me",
+
+    //桌宠设置面板
+    全局音乐控制: "Global Music Control",
+    未加载音乐: "No music loaded",
+    角色音效: "Character Sound Effects",
+    静音: "Mute",
+    取消静音: "Unmute",
   };
 
   // ==========================================

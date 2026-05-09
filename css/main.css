@@ -3222,3 +3222,95 @@ figure.highlight .tag:hover {
   color: #e06c75 !important;
   transform: none !important;
 }
+
+/* ===== 桌面宠物右键菜单 UI ===== */
+#pet-sound-menu {
+  position: fixed;
+  z-index: 999999;
+  display: none;
+  background: rgba(var(--card-bg-rgb, 255, 255, 255), 0.85);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-primary);
+  color: var(--text-color);
+  min-width: 180px;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+#pet-sound-menu.menu-show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.dark-mode #pet-sound-menu {
+  background: rgba(38, 38, 38, 0.85);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+#pet-sound-menu .pet-menu-label {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  margin-bottom: 6px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#pet-sound-menu .pet-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+#pet-sound-menu .pet-menu-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+#pet-sound-menu input[type=range] {
+  width: 100%;
+  accent-color: var(--accent-color);
+  cursor: pointer;
+  margin-bottom: 12px;
+  height: 4px;
+  background: var(--border-color);
+  border-radius: 2px;
+  outline: none;
+  appearance: none;
+}
+
+#pet-sound-menu input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.pet-menu-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 12px 0;
+}

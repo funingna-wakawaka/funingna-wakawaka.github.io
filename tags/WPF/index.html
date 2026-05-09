@@ -402,10 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 配置WPF的环境首先配置好你的Visual Studio的.NET的配置,下载好这个东西
-​	.pxrwqsklqrxk{zoom:25%;}
+​	.ursvmbbwtfsr{zoom:25%;}
 创建WPF项目然后创建项目
-​	.wwtxcyjvggkg{zoom:33%;}
-.cvwaxmdtd...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-07</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/WPF/">WPF</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/07/WPF%E7%9B%B8%E5%85%B3/WPF%E5%AF%BC%E8%88%AA%E6%A0%8F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+​	.unepuvoxeius{zoom:33%;}
+.dlsidjrmp...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-07</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/WPF/">WPF</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/07/WPF%E7%9B%B8%E5%85%B3/WPF%E5%AF%BC%E8%88%AA%E6%A0%8F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
@@ -623,14 +623,14 @@ document.addEventListener('DOMContentLoaded', function() {
   0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
   100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
 }
-</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
-import { PetStateMachine }    from '/images/pet/js/pet-state.js';
-import { PetHair }            from '/images/pet/js/pet-hair.js';
-import { PetLayers }          from '/images/pet/js/pet-layers.js';
-import { PetSound }           from '/images/pet/js/pet-sound.js';
-import { PetOutline }         from '/images/pet/js/pet-outline.js';
-import { PetChat }            from '/images/pet/js/pet-chat.js';
-import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -726,21 +726,8 @@ function initDesktopPet() {
   const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
   const outline = new PetOutline(elInner);
   const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
-
-  const musicPlaylist = [
-    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
-    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
-    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
-    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
-    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
-    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
-    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
-    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
-    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
-    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
-  ];
   
-  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
   // ===== 主循环 =====

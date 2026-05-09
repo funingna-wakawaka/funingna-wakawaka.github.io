@@ -415,12 +415,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>然后我们在另外一个文件启用</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- test_module.lua 文件</span></span><br><span class="line"><span class="comment">-- module 模块为上文提到到 module.lua</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;module&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">module</span>.constant)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.func3()</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.rwuzqotodgrq{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.png" class="rwuzqotodgrq" alt="image-20260413202737035"></p>
-<p>​	<style>.boevcbbsttvv{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.png" class="boevcbbsttvv" alt="image-20260413202759729"></p>
+<p>​	<style>.cuvbifghwcmt{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.png" class="cuvbifghwcmt" alt="image-20260413202737035"></p>
+<p>​	<style>.otuwwrknajlu{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.png" class="otuwwrknajlu" alt="image-20260413202759729"></p>
 <p>但是大家可能会遇到的误区就是误以为模块里定义的表名就是文件名,其实不是的,</p>
 <p>此时我们就可以把这个module.lua当做命名空间,然后modele.lua里面的属性和函数视作C#里的静态static函数,使用直接用点语法就行</p>
-<p>​	<style>.smvoibrqejpg{zoom: 25%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.png" class="smvoibrqejpg" alt="image-20260413203756002"></p>
- <style>.hotvnqwuvnuc{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.png" class="hotvnqwuvnuc" alt="image-20260413203812059">
+<p>​	<style>.ompmpjpygbak{zoom: 25%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.png" class="ompmpjpygbak" alt="image-20260413203756002"></p>
+ <style>.snlxeslxfcvp{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.png" class="snlxeslxfcvp" alt="image-20260413203812059">
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">require函数的原理</div>
@@ -430,9 +430,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Lua 会做一件事： <strong>到一堆“固定路径”里去找 module.lua</strong>,也就是它会尝试从 Lua 文件或 C 程序库中加载模块</p>
 <p>require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH(这里我用的是我自定义的LUA_HOME,因为我的是lua5.4) 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。</p>
 <p>其实就是我们设置的path路径</p>
-<p>​	<style>.ydmkecfywdbd{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.png" class="ydmkecfywdbd" alt="image-20260413212716317"></p>
+<p>​	<style>.frcgnvrieimk{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.png" class="frcgnvrieimk" alt="image-20260413212716317"></p>
 <p>lua会去这个路径package.path去找路径</p>
-<p>​	<style>.hoafoagrepah{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.png" class="hoafoagrepah" alt="image-20260413211400410"></p>
+<p>​	<style>.kpzrehedsqkm{zoom:33%;}</style><img src="/2026/04/13/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%9B%B8%E5%85%B3/Love2d%E5%BC%95%E6%93%8E/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.png" class="kpzrehedsqkm" alt="image-20260413211400410"></p>
 <p>而在这些路径里</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua;D:\ZeroBraneStudio\lua-5.1.5-52\5.1\lua\?.luac  </span><br></pre></td></tr></table></figure>
 
@@ -709,14 +709,14 @@ window.tocConfig = {
   0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
   100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
 }
-</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/images/pet/js/pet-sprite.js';
-import { PetStateMachine }    from '/images/pet/js/pet-state.js';
-import { PetHair }            from '/images/pet/js/pet-hair.js';
-import { PetLayers }          from '/images/pet/js/pet-layers.js';
-import { PetSound }           from '/images/pet/js/pet-sound.js';
-import { PetOutline }         from '/images/pet/js/pet-outline.js';
-import { PetChat }            from '/images/pet/js/pet-chat.js';
-import { PetMusicPlayer }     from '/images/pet/js/pet-music.js';
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -812,21 +812,8 @@ function initDesktopPet() {
   const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
   const outline = new PetOutline(elInner);
   const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
-
-  const musicPlaylist = [
-    { title: "恋爱循环 - 花泽香菜", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=1" },
-    { title: "Only My Railgun - fripSide", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=2" },
-    { title: "残酷天使的行动纲领 - 高桥洋子", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=3" },
-    { title: "红莲华 (Gurenge) - LiSA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=4" },
-    { title: "千本樱 - 初音未来", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=5" },
-    { title: "secret base ~你给我的所有~", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=6" },
-    { title: "打上花火 - DAOKO/米津玄师", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=7" },
-    { title: "极乐净土 - GARNiDELiA", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=8" },
-    { title: "unravel - TK from 凛冽时雨", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3", cover: "https://picsum.photos/100/100?random=9" },
-    { title: "鸟之诗 - Lia", url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3", cover: "https://picsum.photos/100/100?random=10" }
-  ];
   
-  const musicPlayer = new PetMusicPlayer({ playlist: musicPlaylist });
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
   // ===== 主循环 =====

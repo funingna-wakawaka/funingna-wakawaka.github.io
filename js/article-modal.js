@@ -83,11 +83,22 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         iframeDoc.head.appendChild(iframeStyle);
 
-        // 4. ★★★ 关键：监听 iframe 内部的链接点击 ★★★
-        // 这样可以让 iframe 内部的跳转也能触发标题更新
-        // 注意：这只对同源域名有效，跨域无法监听
+        // =================================================================
+        // ★ 核心修复：监听 iframe 内部的点击，并手动通知父窗口（解决桌宠菜单关不掉）
+        // =================================================================
+        const notifyParent = () => {
+          // 伪造一个 mousedown 事件派发给父窗口
+          const event = new MouseEvent("mousedown", {
+            bubbles: true,
+            cancelable: true,
+            view: window.parent,
+          });
+          window.parent.document.dispatchEvent(event);
+        };
+
+        iframeDoc.addEventListener("mousedown", notifyParent);
+        iframeDoc.addEventListener("touchstart", notifyParent);
       } catch (e) {
-        // 跨域限制 (Cross-origin) 会导致无法访问 iframe 内容
         console.warn("无法访问iframe内容 (可能是跨域限制):", e);
       }
     }
