@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="/css/article-modal.css">
 
 <link rel="stylesheet" href="/css/music-player.css">
-<!-- 条件加载照片墙页面样式--><!-- 条件加载关于页面样式--><style>:root {
+<!-- 条件加载关于页面样式--><!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
   --accent-color: #ff6b6b;
@@ -402,10 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 配置WPF的环境首先配置好你的Visual Studio的.NET的配置,下载好这个东西
-​	.ssqeepwyfhum{zoom:25%;}
+​	.chqwpkgymtjc{zoom:25%;}
 创建WPF项目然后创建项目
-​	.xfkpfzwrwlhp{zoom:33%;}
-.pltcowphe...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-07</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/WPF/">WPF</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/07/WPF%E7%9B%B8%E5%85%B3/WPF%E5%AF%BC%E8%88%AA%E6%A0%8F/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+​	.turjralpsnzv{zoom:33%;}
+.nfhpsjvcb...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-07</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/WPF/">WPF</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/07/WPF%E7%9B%B8%E5%85%B3/WPF%E5%AF%BC%E8%88%AA%E6%A0%8F/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
@@ -631,6 +631,7 @@ import { PetSound }           from '/js/pet/pet-sound.js';
 import { PetOutline }         from '/js/pet/pet-outline.js';
 import { PetChat }            from '/js/pet/pet-chat.js';
 import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -730,6 +731,15 @@ function initDesktopPet() {
  const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
   // ===== 主循环 =====
   let lastTime = 0;
   function mainLoop(timestamp) {
@@ -750,6 +760,11 @@ function initDesktopPet() {
     layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
     sound.update(state);
     chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
 
     requestAnimationFrame(mainLoop);
   }
@@ -809,11 +824,18 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/article-modal.js"></script>
 
 <script src="/js/music-player.js"></script>
-<script>window.theme = {
+
+<script src="/js/wall.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
-  article_list: {"card_size":"normal","view_mode":"modal"}
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":150,"throttle_ms":50}}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

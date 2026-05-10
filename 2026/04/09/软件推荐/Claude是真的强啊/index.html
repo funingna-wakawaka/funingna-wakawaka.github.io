@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="/css/article-modal.css">
 
 <link rel="stylesheet" href="/css/music-player.css">
-<!-- 条件加载照片墙页面样式--><!-- 条件加载关于页面样式--><style>:root {
+<!-- 条件加载关于页面样式--><!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
   --accent-color: #ff6b6b;
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>首先就是打开美国节点的VPN(注意:你的梯子的质量一定要非常非常好,否则秒封),然后去淘宝买美国电话号码服务</p>
 <iframe src="/demos/plants_vs_zombies_game.html" width="100%" height="520" frameborder="0" style="border-radius:12px;"></iframe>
 
-<p>​		<style>.qylqpsreodnc{zoom:33%;}</style><img src="/2026/04/09/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/Claude%E6%98%AF%E7%9C%9F%E7%9A%84%E5%BC%BA%E5%95%8A/image-20260409132420705.png" class="qylqpsreodnc" alt="image-20260409132420705"></p>
+<p>​		<style>.mlccqgmitjux{zoom:33%;}</style><img src="/2026/04/09/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/Claude%E6%98%AF%E7%9C%9F%E7%9A%84%E5%BC%BA%E5%95%8A/image-20260409132420705.png" class="mlccqgmitjux" alt="image-20260409132420705"></p>
 <p>因为咱们也用不上太高大上的内容所以免费版本就够用了</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -660,6 +660,7 @@ import { PetSound }           from '/js/pet/pet-sound.js';
 import { PetOutline }         from '/js/pet/pet-outline.js';
 import { PetChat }            from '/js/pet/pet-chat.js';
 import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -759,6 +760,15 @@ function initDesktopPet() {
  const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
   // ===== 主循环 =====
   let lastTime = 0;
   function mainLoop(timestamp) {
@@ -779,6 +789,11 @@ function initDesktopPet() {
     layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
     sound.update(state);
     chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
 
     requestAnimationFrame(mainLoop);
   }
@@ -838,11 +853,18 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/article-modal.js"></script>
 
 <script src="/js/music-player.js"></script>
-<script>window.theme = {
+
+<script src="/js/wall.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
-  article_list: {"card_size":"normal","view_mode":"modal"}
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":150,"throttle_ms":50}}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

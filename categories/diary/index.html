@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="/css/article-modal.css">
 
 <link rel="stylesheet" href="/css/music-player.css">
-<!-- 条件加载照片墙页面样式--><!-- 条件加载关于页面样式--><style>:root {
+<!-- 条件加载关于页面样式--><!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
   --accent-color: #ff6b6b;
@@ -392,16 +392,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关分类</h1><div class="post-subtitle"><span>探索与</span> "diary" <span>相关的所有文章</span></div></div><div class="category-content"><div class="category-posts"><div class="category-header"><div class="category-info"><h2 class="category-name"> <i class="fas fa-folder"></i> diary</h2><div class="category-description"><span>共有</span> 1 <span>篇文章</span></div></div><div class="category-back"><a href="/categories/"><i class="fas fa-arrow-left"></i> 返回所有分类</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/20/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E7%99%BE%E7%82%BC%E7%9A%84Token/">如何白嫖阿里百炼的Token</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>如题,我们首先得是大学生或者研究生先学生认证领取优惠劵点击前往阿里百炼
- .ghpkfcxonqic{zoom: 25%;}
+ .bjtwlhuaeere{zoom: 25%;}
 
 虽然这个东西跟假的一样,不过我证明了是真的,阿里巴巴还是有钱了
 然后领取之前先通过支付宝来进行账号学生认证(而支付宝是通过学信网认证)之后领取,有效期为一年
 然后我们点击大模型服务  然后随便挑一个并前往购买
-​	.mjpcgvbkjqfo{zoom:33%;}
+​	.ddtpihevxudd{zoom:33%;}
 然后不管你点击哪一个都会跳转到这个界面
-​	.obuxjybvulsa{zoom:33%;}
+​	.qugshorcoodl{zoom:33%;}
 点击访问模型广场
-​	.bzyswvtaoqdg{zoom:33%;}
+​	.cjpeoiwnnmsc{zoom:33%;}
 以下就是支持的所有模型
 为方便你们在Ope...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-20</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/20/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E7%99%BE%E7%82%BC%E7%9A%84Token/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
@@ -629,6 +629,7 @@ import { PetSound }           from '/js/pet/pet-sound.js';
 import { PetOutline }         from '/js/pet/pet-outline.js';
 import { PetChat }            from '/js/pet/pet-chat.js';
 import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -728,6 +729,15 @@ function initDesktopPet() {
  const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
   // ===== 主循环 =====
   let lastTime = 0;
   function mainLoop(timestamp) {
@@ -748,6 +758,11 @@ function initDesktopPet() {
     layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
     sound.update(state);
     chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
 
     requestAnimationFrame(mainLoop);
   }
@@ -807,11 +822,18 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/article-modal.js"></script>
 
 <script src="/js/music-player.js"></script>
-<script>window.theme = {
+
+<script src="/js/wall.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
-  article_list: {"card_size":"normal","view_mode":"modal"}
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":150,"throttle_ms":50}}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

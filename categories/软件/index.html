@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="/css/article-modal.css">
 
 <link rel="stylesheet" href="/css/music-player.css">
-<!-- 条件加载照片墙页面样式--><!-- 条件加载关于页面样式--><style>:root {
+<!-- 条件加载关于页面样式--><!-- 条件加载关于页面样式--><style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
   --accent-color: #ff6b6b;
@@ -393,16 +393,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关分类</h1><div class="post-subtitle"><span>探索与</span> "软件" <span>相关的所有文章</span></div></div><div class="category-content"><div class="category-posts"><div class="category-header"><div class="category-info"><h2 class="category-name"> <i class="fas fa-folder"></i> 软件</h2><div class="category-description"><span>共有</span> 1 <span>篇文章</span></div></div><div class="category-back"><a href="/categories/"><i class="fas fa-arrow-left"></i> 返回所有分类</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/09/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/%E6%88%91%E6%8A%8ATyporaWriterkit%E5%88%B6%E4%BD%9C%E6%88%90%E4%BA%86Utools%E6%8F%92%E4%BB%B6/">我把TyporaWriterkit制作成了Utools插件</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>大家好呀Utools插件版本utools下载地址
 如标题所说,我把之前的小软件做成了utools的插件
-​	.ppoojkqfgeni{zoom:33%;}
+​	.xkyzxfyufgfp{zoom:33%;}
 为什么呢? 因为我觉得—–要是不宣传一波一辈子都没人发现我的仓库（T￢T)&#x2F;~~
 不废话了,先看看我的插件长什么样子吧
- .cjpdjeykwztm{zoom:33%;}
+ .fdesqlgljild{zoom:33%;}
 
- .pmonqdktvrgk{zoom:33%;}
+ .bmgmvqhbrtdr{zoom:33%;}
 
- .dxfnqwpypdti{zoom:33%;}
+ .jhwwoitetpvq{zoom:33%;}
 
- .guwyxbglgtyu{zoom:33%;}
+ .oeytebvnpqtc{zoom:33%;}
 
 不得不说现在Claude是真的牛逼,完美复刻了我原先的软件还美化了许多
 文件设置存储位置为
@@ -633,6 +633,7 @@ import { PetSound }           from '/js/pet/pet-sound.js';
 import { PetOutline }         from '/js/pet/pet-outline.js';
 import { PetChat }            from '/js/pet/pet-chat.js';
 import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
 
 function initDesktopPet() {
   // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
@@ -732,6 +733,15 @@ function initDesktopPet() {
  const musicPlayer = new PetMusicPlayer(); // 参数已不需要
   if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
 
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
   // ===== 主循环 =====
   let lastTime = 0;
   function mainLoop(timestamp) {
@@ -752,6 +762,11 @@ function initDesktopPet() {
     layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
     sound.update(state);
     chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
 
     requestAnimationFrame(mainLoop);
   }
@@ -811,11 +826,18 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/article-modal.js"></script>
 
 <script src="/js/music-player.js"></script>
-<script>window.theme = {
+
+<script src="/js/wall.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
-  article_list: {"card_size":"normal","view_mode":"modal"}
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":150,"throttle_ms":50}}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

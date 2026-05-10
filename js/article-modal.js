@@ -86,12 +86,33 @@ document.addEventListener("DOMContentLoaded", function () {
         // =================================================================
         // ★ 核心修复：监听 iframe 内部的点击，并手动通知父窗口（解决桌宠菜单关不掉）
         // =================================================================
-        const notifyParent = () => {
-          // 伪造一个 mousedown 事件派发给父窗口
+        const notifyParent = (e) => {
+          if (!e) return;
+
+          // 获取 iframe 在父窗口中的相对位置
+          const iframeRect = modalIframe.getBoundingClientRect();
+
+          // 计算鼠标在父级窗口中的真实坐标
+          // 兼容 touchstart 的 touches
+          let clientX = e.clientX;
+          let clientY = e.clientY;
+
+          if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          }
+
+          // 加上 iframe 的偏移量
+          const parentX = clientX + iframeRect.left;
+          const parentY = clientY + iframeRect.top;
+
+          // 伪造一个 mousedown 事件派发给父窗口，并带上准确的坐标
           const event = new MouseEvent("mousedown", {
             bubbles: true,
             cancelable: true,
             view: window.parent,
+            clientX: parentX,
+            clientY: parentY,
           });
           window.parent.document.dispatchEvent(event);
         };
