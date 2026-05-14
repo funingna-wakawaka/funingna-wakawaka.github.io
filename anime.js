@@ -38,19 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ★ 修改：智能播放核心函数 (切换 iframe 或 Artplayer)
-  // 增加 autoFullscreen 参数用于点击卡片时自动全屏
-  function playVideo(rawUrl, apiOverride, autoFullscreen = false) {
-    // ==========================================
-    // ★ 修复核心：在切换集数前，强制把侧边栏还原回默认容器，并取消 fixed 状态
-    // ==========================================
-    const safeBody = document.querySelector(".anime-modal-body");
-    const safeSidebar = document.getElementById("anime-episode-sidebar");
-    if (safeBody && safeSidebar && safeSidebar.parentNode !== safeBody) {
-      safeSidebar.classList.remove("fixed-fullscreen");
-      safeBody.appendChild(safeSidebar);
-    }
-
+  // ★ 播放核心函数 (切换 iframe 或 Artplayer)
+  function playVideo(rawUrl, apiOverride) {
     const api = apiOverride !== undefined ? apiOverride : globalApi;
     let finalUrl = rawUrl;
 
@@ -168,38 +157,21 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
-
-      // ★ 如果是初次点击番剧卡片，自动请求全屏
-      if (autoFullscreen) {
-        // 使用 timeout 防止极偶发的全屏失败
-        setTimeout(() => {
-          art.fullscreen = true;
-        }, 50);
-      }
     } else {
       // 网页解析/B站外链：使用 iframe
       if (art) {
+        // ★ 在销毁 art 实例之前，强制把侧边栏还原回默认容器，并取消 fixed 状态
+        const safeBody = document.querySelector(".anime-modal-body");
+        if (safeBody && episodeSidebar && episodeSidebar.parentNode !== safeBody) {
+          episodeSidebar.classList.remove("fixed-fullscreen");
+          safeBody.appendChild(episodeSidebar);
+        }
         art.destroy(false);
         art = null;
       }
       playerContainer.style.display = "none";
       iframe.style.display = "block";
       iframe.src = finalUrl;
-      
-      // ★ Iframe 模式初次点击自动全屏
-      if (autoFullscreen) {
-        setTimeout(() => {
-          try {
-            if (iframe.requestFullscreen) {
-              iframe.requestFullscreen();
-            } else if (document.querySelector(".anime-modal-body").requestFullscreen) {
-              document.querySelector(".anime-modal-body").requestFullscreen();
-            }
-          } catch (e) {
-            console.warn("iframe 全屏失败", e);
-          }
-        }, 50);
-      }
     }
   }
 
@@ -282,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
           sourceSelect.appendChild(opt);
         });
 
-        function renderEpisodes(sourceIndex, isInitialClick = false) {
+        function renderEpisodes(sourceIndex) {
           const currentSource = sources[sourceIndex];
           const eps = currentSource.episodes || [];
           episodeList.innerHTML = "";
@@ -298,24 +270,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 .querySelectorAll(".episode-btn")
                 .forEach((b) => b.classList.remove("active"));
               btn.classList.add("active");
-              // 切换剧集时传 false 不强行破坏全屏
-              playVideo(ep.url, currentSource.player_api, false);
+              playVideo(ep.url, currentSource.player_api);
             });
             episodeList.appendChild(btn);
           });
           
           if (eps.length > 0) {
-            playVideo(eps[0].url, currentSource.player_api, isInitialClick);
+            playVideo(eps[0].url, currentSource.player_api);
           }
         }
 
-        sourceSelect.onchange = (e) => renderEpisodes(e.target.value, false);
-        // true: 首次点击卡片自动全屏
-        renderEpisodes(0, true);
+        sourceSelect.onchange = (e) => renderEpisodes(e.target.value);
+        renderEpisodes(0);
       } else {
         episodeBtn.style.display = "none";
         sourceSelect.style.display = "none";
-        playVideo(defaultUrl, globalApi, true);
+        playVideo(defaultUrl, globalApi);
       }
 
       modal.classList.add("active");
