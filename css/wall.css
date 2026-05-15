@@ -94,7 +94,7 @@
     border-radius: 2px;
     pointer-events: none;
     /* 稍微降低图片亮度，让白色文字更清晰 */
-    filter: brightness(0.8);
+    filter: brightness(0.8); 
 }
 
 /* 留言文字悬浮在照片上的样式 */
@@ -103,14 +103,12 @@
     top: 10px;
     left: 10px;
     right: 10px;
-    bottom: 40px;
-    /* 避开底部作者名字的空间 */
+    bottom: 40px; /* 避开底部作者名字的空间 */
     padding: 10px;
     color: #ffffff;
     font-size: 0.95rem;
     line-height: 1.5;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-    /* 加上阴影防止图片背景过白看不清字 */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* 加上阴影防止图片背景过白看不清字 */
     text-align: center;
     pointer-events: none;
     z-index: 2;

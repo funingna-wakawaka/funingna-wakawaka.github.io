@@ -138,9 +138,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //追番
     追番: "Anime",
-    "Bilibili 追番": "Bilibili Anime",
-    "暂无追番数据，请确保已在 source/_data/ 目录下创建了 anime.yml":
-      "No anime data found. Please make sure anime.yml exists in source/_data/",
+    我的追番: "My Anime List",
+    "暂无追番数据，请确保已在 source/_data/anime/ 目录下创建了 yml 文件":
+      "No anime data found. Please make sure anime.yml exists in source/_data/anime/",
+    已观看: "Watched",
+    点击观看: "Click to Watch",
+    "正在加载...": "Loading...",
+    "选集/换源": "Episodes/Sources",
+    播放列表: "Playlist",
+    登场角色: "Characters",
+    "未配置 bangumi_url":
+      "Please configure bangumi_url in source/_data/anime.yml",
+    "无法解析 Bangumi ID":
+      "Failed to parse Bangumi ID. Please check your anime.yml",
+    暂无角色信息: "No character information available",
+    "加载失败，请检查网络":
+      "Failed to load. Please check your network connection",
 
     //番的名称
     咒术回战乙骨忧太篇: "Jujutsu Kaisen 0",
@@ -157,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "岸边露伴 一动也不动": "Thus Spoke Kishibe Rohan",
     间谍过家家第一季: "SPY×FAMILY Season 1",
     间谍过家家第二季: "SPY×FAMILY Season 2",
-    "间谍过家家 代号：白": "SPY×FAMILY CODE: White",
+    "间谍过家家 代号白": "SPY×FAMILY CODE: White",
     工作细胞第一季: "Cells at Work! Season 1",
     工作细胞第二季: "Cells at Work! Season 2",
     工作细胞BLACK: "Cells at Work! CODE BLACK",
