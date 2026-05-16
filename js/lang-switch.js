@@ -145,8 +145,14 @@ document.addEventListener("DOMContentLoaded", function () {
     点击观看: "Click to Watch",
     "正在加载...": "Loading...",
     "选集/换源": "Episodes/Sources",
+    "加载中...": "Loading...",
+    选集: "Episodes",
     播放列表: "Playlist",
     登场角色: "Characters",
+
+    "即将自动播放下一集...": "Next episode will play automatically...",
+    "已经是最后一集了~": "This is the last episode~",
+    该源暂无集数数据: "No episode data for this source",
     "未配置 bangumi_url":
       "Please configure bangumi_url in source/_data/anime.yml",
     "无法解析 Bangumi ID":

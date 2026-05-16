@@ -89,7 +89,6 @@
 
 /* --- 2. 徽章与悬停特效 --- */
 
-/* "已观看" 徽章 */
 .watched-badge {
     position: absolute;
     bottom: 8px;
@@ -105,7 +104,6 @@
     z-index: 5;
 }
 
-/* 封面悬停遮罩层：默认全透明，鼠标移入显现 */
 .play-overlay {
     position: absolute;
     top: 0;
@@ -120,8 +118,8 @@
     transition: opacity 0.3s ease;
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-    border-radius: 10px;
-    /* 贴合封面的圆角 */
+    border-radius: inherit;
+    /* 随容器自动变更圆角 */
     z-index: 10;
 }
 
@@ -129,7 +127,6 @@
     opacity: 1;
 }
 
-/* "点击观看" 悬浮按钮：随主题色变色 */
 .play-text {
     color: #ffffff;
     background-color: var(--accent-color, #ff6b6b);
@@ -146,7 +143,7 @@
     transform: scale(1);
 }
 
-/* --- 3. 模态播放器窗口 (与文章模态尺寸对齐) --- */
+/* --- 3. 模态播放器窗口 --- */
 .anime-modal {
     display: none;
     position: fixed;
@@ -154,11 +151,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* 【卡顿修复】移除了会导致大面积视频渲染掉帧的 backdrop-filter: blur(10px); 改为了加深颜色的背景 */
     background: rgba(0, 0, 0, 0.92);
     z-index: 9999;
     align-items: flex-start;
-    /* 居上，与文章模态保持一致 */
     justify-content: center;
     overflow-y: auto;
     padding: 20px;
@@ -172,13 +167,9 @@
 .anime-modal-content {
     background: var(--card-background-color, #ffffff);
     width: 95%;
-    /* 与文章模态宽度一致 */
     max-width: 1400px;
-    /* 与文章模态最大宽度一致 */
     height: 90vh;
-    /* 与文章模态高度一致 */
     margin-top: 3vh;
-    /* 与文章模态上边距一致 */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -193,7 +184,6 @@
     align-items: center;
     padding: 15px 20px;
     border-bottom: 1px solid var(--border-color, #e5e5e5);
-    /* ★ 新增：提升顶部工具栏层级，防止被下方 iframe 遮挡吃掉点击事件 */
     position: relative;
     z-index: 100;
 }
@@ -207,14 +197,12 @@
     text-overflow: ellipsis;
 }
 
-/* 模态框顶部工具栏 (含选集和关闭按钮) */
 .anime-modal-tools {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* 选集按钮 UI */
 .anime-tool-btn {
     background: var(--background-color, #f0f0f0);
     border: 1px solid var(--border-color, #ddd);
@@ -254,7 +242,6 @@
     flex: 1;
     background: #000;
     position: relative;
-    /* 为侧边栏提供定位基准 */
     overflow: hidden;
 }
 
@@ -265,26 +252,22 @@
     display: block;
 }
 
-/* --- 4. 选集侧边栏 (抽屉动画 UI) --- */
+/* --- 4. 选集侧边栏 --- */
 .anime-episode-sidebar {
     position: absolute;
     top: 0;
     right: -320px;
-    /* 默认隐藏在右侧视野外 */
     width: 300px;
     height: 100%;
-    /* 同样为了性能移除 blur() */
     background: rgba(25, 25, 25, 0.98);
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
     transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
-    /* ★ 修改：将 z-index 提至极高，绝对压制所有视频容器 */
     z-index: 2147483647;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 唤出状态 */
 .anime-episode-sidebar.show {
     right: 0;
 }
@@ -319,14 +302,12 @@
 .sidebar-list {
     flex: 1;
     overflow-y: auto;
-    /* ★ 为底部留出充分的空白，方便选择最后几集 */
     padding: 10px 10px 80px 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-/* 侧边栏滚动条美化 */
 .sidebar-list::-webkit-scrollbar {
     width: 6px;
 }
@@ -336,7 +317,6 @@
     border-radius: 3px;
 }
 
-/* 每一集的按钮 */
 .episode-btn {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -354,7 +334,6 @@
     color: #fff;
 }
 
-/* 当前正在播放的集数高亮 */
 .episode-btn.active {
     background: var(--accent-color);
     color: #fff;
@@ -373,7 +352,6 @@
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 10000;
-    /* 保证在最顶端 */
     overflow: hidden;
     flex-direction: column;
 }
@@ -433,7 +411,6 @@
     -webkit-box-orient: vertical;
 }
 
-/* 角色菜单滚动条美化 */
 .context-menu-body::-webkit-scrollbar {
     width: 6px;
 }
@@ -460,9 +437,59 @@
     }
 }
 
+/* ★ 移动端重新设计：圆形布局 */
 @media (max-width: 768px) {
+    .bili-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
 
-    /* 1. 取消模态框外部的遮罩留白，变为一个完整的原生页面 */
+    .bili-card-wrapper {
+        max-width: 100%;
+        position: relative;
+    }
+
+    .bili-card {
+        border-radius: 50%;
+        padding: 4px;
+        /* 外层发光感/边距 */
+        aspect-ratio: 1 / 1;
+        height: auto;
+        background: transparent;
+        /* 取消原本的方形背景 */
+        border: 2px solid rgba(150, 150, 150, 0.2);
+    }
+
+    .cover-wrapper {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .bili-card img {
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .bili-card h3 {
+        position: absolute;
+        bottom: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9rem;
+        width: 120%;
+        text-align: center;
+        background: transparent;
+        color: var(--text-color);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    /* 使模态框适应手机 */
     .anime-modal {
         padding: 0;
     }
@@ -477,7 +504,6 @@
         flex-direction: column;
     }
 
-    /* 2. 视频区域固定为 16:9 比例，停靠在页面上方 */
     .anime-modal-body {
         flex: none;
         width: 100%;
@@ -486,42 +512,27 @@
         min-height: 30vh;
     }
 
-    /* 3. ★ 恢复手机端的侧边栏抽屉模式，适应屏幕大小 */
     .anime-episode-sidebar {
         width: 240px !important;
-        /* 手机端抽屉变窄 */
         right: -240px !important;
-        /* 默认隐藏 */
     }
 
     .anime-episode-sidebar.show {
         right: 0 !important;
-        /* 呼出时显示 */
     }
 
-    /* 4. ★ 确保顶部栏的呼出按钮在手机端可见 */
     #anime-episode-btn,
     #sidebar-close-btn {
         display: flex !important;
     }
 }
 
-/* 手机端：卡片排成一竖列 */
-@media (max-width: 640px) {
-    .bili-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .bili-card-wrapper {
-        max-width: 65%;
-        margin: 0 auto;
-    }
-}
-
+/* 手机端更小屏幕 */
 @media (max-width: 480px) {
-    .bili-card-wrapper {
-        max-width: 85%;
+    .bili-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        margin-bottom: 20px;
     }
 }
 
@@ -532,7 +543,12 @@ html.dark-mode .bili-card {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 暗色模式 - 模态框及选集按钮 */
+@media (max-width: 768px) {
+    html.dark-mode .bili-card {
+        background: transparent;
+    }
+}
+
 html.dark-mode .anime-modal-content {
     background: #1e1e1e;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
@@ -613,5 +629,4 @@ html.dark-mode .context-menu-body::-webkit-scrollbar-thumb {
     top: 0 !important;
     height: 100vh !important;
     z-index: 2147483647 !important;
-    /* 强制覆盖播放器 */
 }

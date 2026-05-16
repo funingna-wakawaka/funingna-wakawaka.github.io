@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // ★ 2. 初始化配置与本地历史记录
   // ==========================================
-  const animeConfig = window.theme && window.theme.anime ? window.theme.anime : {};
+  const animeConfig =
+    window.theme && window.theme.anime ? window.theme.anime : {};
   const isHistoryEnabled = animeConfig.history !== false;
   const globalApi = animeConfig.player_api || "";
   let art = null; // 全局 Artplayer 实例
@@ -25,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const match = url.match(/BV[a-zA-Z0-9]+/);
     return match ? match[0] : url;
   }
+
+  // 判断是否为移动端
+  const isMobile = () => window.innerWidth <= 768;
 
   // 修复原生全屏事件下的侧边栏显示问题
   document.addEventListener("fullscreenchange", function () {
@@ -56,12 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const iframe = document.getElementById("anime-modal-iframe");
-    const playerContainer = document.getElementById("anime-artplayer-container");
+    const playerContainer = document.getElementById(
+      "anime-artplayer-container",
+    );
     const episodeSidebar = document.getElementById("anime-episode-sidebar");
 
     // 拦截 blob 临时链接
     if (finalUrl.startsWith("blob:")) {
-      alert("播放失败！\n\n检测到使用了 blob: 链接，这通常是其他网站的临时缓存，无法跨站播放。\n请换源或使用真实的 .m3u8 直链！");
+      alert(
+        "播放失败！\n\n检测到使用了 blob: 链接，这通常是其他网站的临时缓存，无法跨站播放。\n请换源或使用真实的 .m3u8 直链！",
+      );
       iframe.style.display = "none";
       playerContainer.style.display = "none";
       return;
@@ -80,7 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
       playerContainer.style.display = "block";
 
       const accentColor =
-        getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim() || "#ff6b6b";
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent-color")
+          .trim() || "#ff6b6b";
 
       let customType = {};
       if (finalUrl.includes(".m3u8") || finalUrl.includes("m3u8")) {
@@ -107,6 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (art) {
         art.switchUrl(finalUrl);
+        // 如果是在移动端播放直链，且非全屏，则自动尝试进入全屏
+        if (isMobile() && !art.fullscreen) {
+          art.fullscreen = true;
+        }
       } else {
         art = new Artplayer({
           container: playerContainer,
@@ -135,6 +149,13 @@ document.addEventListener("DOMContentLoaded", function () {
           ],
         });
 
+        // Artplayer 初始化完后自动全屏（移动端适用）
+        art.on("ready", () => {
+          if (isMobile()) {
+            art.fullscreen = true;
+          }
+        });
+
         // 自动播放下一集
         art.on("video:ended", function () {
           const activeBtn = document.querySelector(".episode-btn.active");
@@ -156,7 +177,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // 网页外链/第三方解析接口：使用 iframe
       if (art) {
         const safeBody = document.querySelector(".anime-modal-body");
-        if (safeBody && episodeSidebar && episodeSidebar.parentNode !== safeBody) {
+        if (
+          safeBody &&
+          episodeSidebar &&
+          episodeSidebar.parentNode !== safeBody
+        ) {
           episodeSidebar.classList.remove("fixed-fullscreen");
           safeBody.appendChild(episodeSidebar);
         }
@@ -166,6 +191,16 @@ document.addEventListener("DOMContentLoaded", function () {
       playerContainer.style.display = "none";
       iframe.style.display = "block";
       iframe.src = finalUrl;
+
+      // Iframe 在移动端想要直接触发全屏稍有局限，但我们依然可以通过外层 body 请求全屏
+      if (isMobile() && !document.fullscreenElement) {
+        const modalBody = document.querySelector(".anime-modal-body");
+        if (modalBody.requestFullscreen) {
+          modalBody.requestFullscreen().catch((err) => console.log(err));
+        } else if (modalBody.webkitRequestFullscreen) {
+          modalBody.webkitRequestFullscreen();
+        }
+      }
     }
   }
 
@@ -174,7 +209,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   const HISTORY_KEY = "anime_watch_history";
   function getHistory() {
-    try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {}; } catch { return {}; }
+    try {
+      return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {};
+    } catch {
+      return {};
+    }
   }
   function saveHistory(title) {
     if (!isHistoryEnabled) return;
@@ -206,7 +245,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
   const sourceSelect = document.getElementById("anime-source-select");
   const contextMenu = document.getElementById("anime-context-menu");
-  const charactersContainer = document.getElementById("context-menu-characters");
+  const charactersContainer = document.getElementById(
+    "context-menu-characters",
+  );
   const loadingText = document.getElementById("context-menu-loading");
 
   // ==========================================
@@ -227,6 +268,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // 兼容旧版写法：如果没有 sources 数组但有 episodes 数组
       if (yamlSources.length === 0 && rootEpisodes.length > 0) {
         yamlSources = [{ name: "默认源", episodes: rootEpisodes }];
+      }
+
+      // 无论移动端PC端，若是既没有直链也没数据，一律提示并返回，不弹空模态框
+      if (yamlSources.length === 0 && !defaultUrl) {
+        alert(`未能找到《${title}》的播放源，请检查 yml 配置！`);
+        return;
       }
 
       saveHistory(title);
@@ -264,7 +311,9 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.textContent = ep.title;
 
             btn.addEventListener("click", () => {
-              document.querySelectorAll(".episode-btn").forEach((b) => b.classList.remove("active"));
+              document
+                .querySelectorAll(".episode-btn")
+                .forEach((b) => b.classList.remove("active"));
               btn.classList.add("active");
               playVideo(ep.url, currentSource.player_api);
             });
@@ -280,17 +329,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 默认渲染第一个源
         renderEpisodes(0);
-
       } else if (defaultUrl) {
         // 非常旧的单链接写法
         episodeBtn.style.display = "none";
         sourceSelect.style.display = "none";
         playVideo(defaultUrl, globalApi);
-      } else {
-        // 什么数据都没有
-        episodeBtn.style.display = "none";
-        sourceSelect.style.display = "none";
-        episodeList.innerHTML = `<div style="padding: 20px; color: #ff6b6b; text-align: center;">未能找到该番剧的播放源，请检查 yml 配置</div>`;
       }
 
       modal.classList.add("active");
@@ -311,17 +354,21 @@ document.addEventListener("DOMContentLoaded", function () {
       contextMenu.classList.add("show");
 
       const rect = contextMenu.getBoundingClientRect();
-      if (x + rect.width > window.innerWidth) contextMenu.style.left = `${window.innerWidth - rect.width - 10}px`;
-      if (y + rect.height > window.innerHeight) contextMenu.style.top = `${window.innerHeight - rect.height - 10}px`;
+      if (x + rect.width > window.innerWidth)
+        contextMenu.style.left = `${window.innerWidth - rect.width - 10}px`;
+      if (y + rect.height > window.innerHeight)
+        contextMenu.style.top = `${window.innerHeight - rect.height - 10}px`;
 
       if (!bangumiUrl) {
-        charactersContainer.innerHTML = "<div style='grid-column: 1/-1; text-align:center; color:#888;'>未配置 bangumi_url</div>";
+        charactersContainer.innerHTML =
+          "<div style='grid-column: 1/-1; text-align:center; color:#888;'>未配置 bangumi_url</div>";
         return;
       }
 
       const subjectMatch = bangumiUrl.match(/\/subject\/(\d+)/);
       if (!subjectMatch) {
-        charactersContainer.innerHTML = "<div style='grid-column: 1/-1; text-align:center; color:#888;'>无法解析 Bangumi ID</div>";
+        charactersContainer.innerHTML =
+          "<div style='grid-column: 1/-1; text-align:center; color:#888;'>无法解析 Bangumi ID</div>";
         return;
       }
 
@@ -333,12 +380,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           loadingText.style.display = "none";
           if (!data || data.length === 0) {
-            charactersContainer.innerHTML = "<div style='grid-column: 1/-1; text-align:center; color:#888;'>暂无角色信息</div>";
+            charactersContainer.innerHTML =
+              "<div style='grid-column: 1/-1; text-align:center; color:#888;'>暂无角色信息</div>";
             return;
           }
           const topCharacters = data.slice(0, 30);
           topCharacters.forEach((char) => {
-            const imgSrc = char.images && char.images.grid ? char.images.grid : "https://api.bgm.tv/v0/img/no_icon_subject.png";
+            const imgSrc =
+              char.images && char.images.grid
+                ? char.images.grid
+                : "https://api.bgm.tv/v0/img/no_icon_subject.png";
             const item = document.createElement("div");
             item.className = "character-item";
             item.innerHTML = `
@@ -351,7 +402,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((err) => {
           console.error(err);
           loadingText.style.display = "none";
-          charactersContainer.innerHTML = "<div style='grid-column: 1/-1; text-align:center; color:#888;'>加载失败，请检查网络</div>";
+          charactersContainer.innerHTML =
+            "<div style='grid-column: 1/-1; text-align:center; color:#888;'>加载失败，请检查网络</div>";
         });
     });
   });
@@ -359,8 +411,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // ★ 7. 模态框与侧边栏控制逻辑
   // ==========================================
-  if (episodeBtn) episodeBtn.addEventListener("click", () => episodeSidebar.classList.toggle("show"));
-  if (sidebarCloseBtn) sidebarCloseBtn.addEventListener("click", () => episodeSidebar.classList.remove("show"));
+  if (episodeBtn)
+    episodeBtn.addEventListener("click", () =>
+      episodeSidebar.classList.toggle("show"),
+    );
+  if (sidebarCloseBtn)
+    sidebarCloseBtn.addEventListener("click", () =>
+      episodeSidebar.classList.remove("show"),
+    );
 
   function closeModal() {
     const safeBody = document.querySelector(".anime-modal-body");
@@ -380,6 +438,13 @@ document.addEventListener("DOMContentLoaded", function () {
       art = null;
     }
     document.body.style.overflow = "";
+
+    // 如果之前强制进入了全屏，关闭模态框时可以顺便退出全屏
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch((err) => console.log(err));
+    } else if (document.webkitFullscreenElement) {
+      document.webkitExitFullscreen();
+    }
   }
 
   if (modalClose) modalClose.addEventListener("click", closeModal);
