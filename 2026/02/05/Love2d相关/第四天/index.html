@@ -1,0 +1,1914 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/12.png" alt="love2d学习第四天--字符串和运算符"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-02-05T10:44:12.000Z">2026-02-05</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>6.9k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>30</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">love2d学习第四天--字符串和运算符</h1><div class="post-tags"><a class="tag" href="/tags/love2d/"><i class="fas fa-tag" style="margin-right: 3px"> </i>love2d</a><a class="tag" href="/tags/lua/"><i class="fas fa-tag" style="margin-right: 3px"> </i>lua</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来了解一点新的东西"><a href="#今天来了解一点新的东西" class="headerlink" title="今天来了解一点新的东西"></a>今天来了解一点新的东西</h1><h2 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h2><p>之前讲函数的时候忘记了这个可变参数,不过说实话我感觉这玩意会诞生估计是lua语言制作者用来偷懒的</p>
+<p>这个东西某种程度上还挺好用的,但是只能在函数function里使用</p>
+<p>正常的代参函数是这样的</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(a, b, c)</span></span></span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(numberCount(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) <span class="comment">-- 输出 6</span></span><br></pre></td></tr></table></figure>
+
+<p>但是假如我们传入的参数贼多,这时候就可以使用   “<font color='#FFD700'>…</font>”</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">local</span> args = &#123; ... &#125;;  </span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #args <span class="keyword">do</span>   <span class="comment">--for循环遍历表</span></span><br><span class="line">        sum = sum + args[i];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(numberAdd(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) <span class="comment">-- 输出 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 或者</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd2</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span> &#123; ... &#125; <span class="keyword">do</span>  <span class="comment">--此时可以用...忽略表名</span></span><br><span class="line">        sum = sum + v;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(numberAdd2(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) <span class="comment">-- 输出 6</span></span><br></pre></td></tr></table></figure>
+
+<p>还可以这样在里面加上固定参数,固定参数必须放在可变参数之前</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">(hi, ...)</span></span> <span class="comment">---&gt; 固定的参数hi</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(hi, ...))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">hello(<span class="string">&quot;hello\n&quot;</span>)</span><br><span class="line">hello(<span class="string">&quot;%d\n&quot;</span>, <span class="number">911</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到可变参数…使用方法和表没有区别,如果使用#来获取…的长度,那么…参数里就不能出现nil,否则nil会被忽略</p>
+<blockquote>
+<p>通常在遍历变长参数的时候只需要使用 <strong>{…}</strong>，然而变长参数可能会包含一些 <strong>nil</strong>，那么就可以用 <strong>select</strong> 函数来访问变长参数了：<strong>select(‘#’, …)</strong> 或者 <strong>select(n, …)</strong></p>
+<ul>
+<li><strong>select(‘#’, …)</strong> 返回可变参数的长度</li>
+<li><strong>select(n, …)</strong> 用于返回从起点 <strong>n</strong> 开始到结束位置的所有参数列表</li>
+</ul>
+</blockquote>
+<p>​	<style>.sxdgmrhqbtfc{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205233440605.png" class="sxdgmrhqbtfc" alt="image-20260205233440605"></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">local</span> args = &#123; ... &#125;;</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #args <span class="keyword">do</span> <span class="comment">--for循环遍历表</span></span><br><span class="line">        sum = sum + args[i];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> #args, sum; <span class="comment">--返回参数个数和总和</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> count, total = numberAdd(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="literal">nil</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数个数为&quot;</span> .. count .. <span class="string">&quot;，总和为&quot;</span> .. total) <span class="comment">-- 输出 参数个数为3，总和为6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="select-“-”-…-或select-‘-’-…-统计传入参数总数"><a href="#select-“-”-…-或select-‘-’-…-统计传入参数总数" class="headerlink" title="select(“#”,…)或select(‘#’,…)统计传入参数总数"></a>select(“#”,…)或select(‘#’,…)统计传入参数总数</h3><p>这时候我们可以使用<code>select(&quot;#&quot;,...)</code>或者<code>select(&#39;#&#39;,...)</code>,就可以返回可变参数的真实数量了包括nil</p>
+<p>​	<style>.gkowwlclfbvh{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205234158826.png" class="gkowwlclfbvh" alt="image-20260205234158826"></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">local</span> args = &#123; ... &#125;;</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #args <span class="keyword">do</span> <span class="comment">--for循环遍历表</span></span><br><span class="line">        sum = sum + args[i];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">select</span>(<span class="string">&quot;#&quot;</span>, ...), sum; <span class="comment">--返回参数个数和总和</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> count, total = numberAdd(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="literal">nil</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数个数为&quot;</span> .. count .. <span class="string">&quot;，总和为&quot;</span> .. total) <span class="comment">-- 输出 参数个数为4，总和为6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="select-n-…-返回从第n个参数和其后的所有参数"><a href="#select-n-…-返回从第n个参数和其后的所有参数" class="headerlink" title="select(n,…)返回从第n个参数和其后的所有参数"></a>select(n,…)返回从第n个参数和其后的所有参数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">select</span>(<span class="number">2</span>, ...))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args1</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> a=<span class="built_in">select</span>(<span class="number">2</span>, ...)<span class="comment">--结果只有原神,因为这个select(2, ...)是多返回值,但是只有a一个变量接收</span></span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args1(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args2</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> a,b=<span class="built_in">select</span>(<span class="number">2</span>, ...)</span><br><span class="line">    <span class="built_in">print</span>(a,b)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args2(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">args3</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> <span class="built_in">table</span> = &#123;<span class="built_in">select</span>(<span class="number">2</span>, ...)&#125;</span><br><span class="line">    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">print</span>(v)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">args3(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.vhnyfxiawplj{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205235452574.png" class="vhnyfxiawplj" alt="image-20260205235452574"></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t = &#123;<span class="built_in">select</span>(<span class="number">1</span>, ...)&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以可变参数就是</p>
+<blockquote>
+<p>① … 是一堆参数</p>
+<p>② {…}是把参数变成表,返回值是地址</p>
+<p>③ select是精确操作参数</p>
+</blockquote>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">实例(A&#x3D;10,B&#x3D;20)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+</td>
+<td align="left">加法</td>
+<td align="left">A + B 输出结果 30</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">减法</td>
+<td align="left">A - B 输出结果 -10</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">乘法</td>
+<td align="left">A * B 输出结果 200</td>
+</tr>
+<tr>
+<td align="left">&#x2F;</td>
+<td align="left">除法</td>
+<td align="left">B &#x2F; A 输出结果 2</td>
+</tr>
+<tr>
+<td align="left">%</td>
+<td align="left">取余</td>
+<td align="left">B % A 输出结果 0</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">乘幂</td>
+<td align="left">A^2 输出结果 100</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">负号</td>
+<td align="left">-A 输出结果 -10</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;</td>
+<td align="left">整除运算符(&gt;&#x3D;lua5.3)</td>
+<td align="left"><strong>5&#x2F;&#x2F;2</strong> 输出结果 2</td>
+</tr>
+</tbody></table>
+<p>⚠️在 lua 中，<strong>&#x2F;</strong> 用作除法运算，计算结果包含小数部分，<strong>&#x2F;&#x2F;</strong> 用作整除运算，计算结果不包含小数部分,也就是取整</p>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">实例(A&#x3D;10,B&#x3D;20)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x3D;&#x3D;</td>
+<td align="left">等于，检测两个值是否相等，相等返回 true，否则返回 false</td>
+<td align="left">(A &#x3D;&#x3D; B) 为 false</td>
+</tr>
+<tr>
+<td align="left">~&#x3D;</td>
+<td align="left">不等于，检测两个值是否相等，不相等返回 true，否则返回 false</td>
+<td align="left">(A ~&#x3D; B) 为 true</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">大于，如果左边的值大于右边的值，返回 true，否则返回 false</td>
+<td align="left">(A &gt; B) 为 false</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">小于，如果左边的值大于右边的值，返回 false，否则返回 true</td>
+<td align="left">(A &lt; B) 为 true</td>
+</tr>
+<tr>
+<td align="left">&gt;&#x3D;</td>
+<td align="left">大于等于，如果左边的值大于等于右边的值，返回 true，否则返回 false</td>
+<td align="left">(A &gt;&#x3D; B) 返回 false</td>
+</tr>
+<tr>
+<td align="left">&lt;&#x3D;</td>
+<td align="left">小于等于， 如果左边的值小于等于右边的值，返回 true，否则返回 false</td>
+<td align="left">(A &lt;&#x3D; B) 返回 true</td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">实例(A&#x3D;10,B&#x3D;20)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">and</td>
+<td align="left">逻辑与操作符。 若 A 为 false，则返回 A，否则返回 B</td>
+<td align="left">(A and B) 为 false</td>
+</tr>
+<tr>
+<td align="left">or</td>
+<td align="left">逻辑或操作符。 若 A 为 true，则返回 A，否则返回 B</td>
+<td align="left">(A or B) 为 true</td>
+</tr>
+<tr>
+<td align="left">not</td>
+<td align="left">逻辑非操作符。与逻辑运算结果相反，如果条件为 true，逻辑非为 false</td>
+<td align="left">not(A and B) 为 true</td>
+</tr>
+</tbody></table>
+<h3 id="其他运算符"><a href="#其他运算符" class="headerlink" title="其他运算符"></a>其他运算符</h3><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">..</td>
+<td align="left">连接两个字符串</td>
+<td align="left">a..b ，其中 a 为 “Hello “ ， b 为 “World”, 输出结果为 “Hello World”</td>
+</tr>
+<tr>
+<td align="left">#</td>
+<td align="left">一元运算符，返回字符串或表的长度。</td>
+<td align="left">#”Hello” 返回 5</td>
+</tr>
+</tbody></table>
+<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><p>从上到下优先级依次降低</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">^</span><br><span class="line">not    - (负号)</span><br><span class="line">*      /       %</span><br><span class="line">+      - (减号)</span><br><span class="line">..</span><br><span class="line">&lt;      &gt;      &lt;=     &gt;=     ~=     ==</span><br><span class="line">and</span><br><span class="line">or</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>字符串这个我们之前已经讲过了一部分,这里系统学习一下有关字符串的函数吧</p>
+<h3 id="①字符串长度计算"><a href="#①字符串长度计算" class="headerlink" title="①字符串长度计算"></a>①字符串长度计算</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">len</span>() ASCII计算</span><br><span class="line"></span><br><span class="line">utf8.<span class="built_in">len</span>()  UTF8计算</span><br></pre></td></tr></table></figure>
+
+<p>Lua 中,要计算字符串的长度(即字符串中字符的个数),可以使用 <strong>string.len</strong> 函数或 <strong>utf8.len</strong> 函数</p>
+<p>计算包含中文的字符串一般用 <strong>utf8.len</strong>,</p>
+<p>计算只包含 ASCII 字符串的长度用 <strong>string.len</strong>,UTF-8 中文 &#x3D; 3字节</p>
+<p>​	 <style>.cqaegyononvq{zoom:33%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207171744032.png" class="cqaegyononvq" alt="image-20260207171744032"></p>
+<p>可以看出string.len是按照字节数计算的,而utf8.len是按照字符的个数计算的</p>
+<h3 id="②-字符串英文大小写转换"><a href="#②-字符串英文大小写转换" class="headerlink" title="② 字符串英文大小写转换"></a>② 字符串英文大小写转换</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">upper</span>() 小写转大写</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">lower</span>() 大写转小写</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.sswunbwbbvrw{zoom:33%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207173754106.png" class="sswunbwbbvrw" alt="image-20260207173754106"></p>
+<h3 id="③-替换字符串里的元素"><a href="#③-替换字符串里的元素" class="headerlink" title="③ 替换字符串里的元素"></a>③ 替换字符串里的元素</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(main, <span class="built_in">find</span>, replace, num)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数解释：</p>
+<ul>
+<li><code>main</code>：原字符串</li>
+<li><code>find</code>：要找的内容（支持模式匹配）</li>
+<li><code>replace</code>：替换成什么</li>
+<li><code>num</code>：替换次数（可选，不写 &#x3D; 全部替换）</li>
+</ul>
+</blockquote>
+<p>这么说你们可能看不懂</p>
+<p>​	<style>.ioupvefnvimm{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205302321.png" class="ioupvefnvimm" alt="image-20260207205302321"></p>
+<p>这下你们理解了吧,可以看到返回值有两个</p>
+<blockquote>
+<p>返回值1：新字符串</p>
+<p>返回值2：替换次数</p>
+</blockquote>
+<p>​	<style>.elugdemxoxta{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205732441.png" class="elugdemxoxta" alt="image-20260207205732441"></p>
+<p>我们还可以这么玩,就是利用模式匹配,%d为数字</p>
+<p>​	<style>.myceffnjwxxz{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207210200583.png" class="myceffnjwxxz" alt="image-20260207210200583"> </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;2026-02-10&quot;</span>, <span class="string">&quot;(%d+)%-(%d+)%-(%d+)&quot;</span>, <span class="string">&quot;%3/%2/%1&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;10/02/2026&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;%d&quot;</span>, <span class="string">&quot;#&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc###&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个后面会细说这个模式匹配的事</p>
+<h3 id="④-查找字符串子串位置（索引）"><a href="#④-查找字符串子串位置（索引）" class="headerlink" title="④ 	 查找字符串子串位置（索引）"></a>④ 	 查找字符串子串位置（索引）</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">find</span>(str, substr, [init], [plain])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数：</p>
+<ul>
+<li><p><code>str</code>: 原字符串</p>
+</li>
+<li><p><code>substr</code>:要查找的字符串</p>
+</li>
+<li><p><code>init</code>：开始位置（默认1）</p>
+</li>
+<li><p><code>plain</code>：</p>
+<p><code>true</code>：普通查找（不使用模式）</p>
+<p><code>false</code>：模式匹配（正则风格，默认）</p>
+</li>
+</ul>
+</blockquote>
+<p>​	<style>.xhbgtgpmcvrc{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207212128549.png" class="xhbgtgpmcvrc" alt="image-20260207212128549"></p>
+<blockquote>
+<p>返回值1: 要查找的字符串在原字符串中的开始位置</p>
+<p>返回值2:要查找的字符串在原字符串中的结束位置</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- +号是正则符号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(<span class="string">&quot;a+b&quot;</span>, <span class="string">&quot;+&quot;</span>, <span class="number">1</span>, <span class="literal">true</span>)) </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="⑤-字符串反转-只支持ASCII符号"><a href="#⑤-字符串反转-只支持ASCII符号" class="headerlink" title="⑤  字符串反转(只支持ASCII符号)"></a>⑤  字符串反转(只支持ASCII符号)</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">reverse</span>()    </span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.cvyvshppydou{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208141648374.png" class="cvyvshppydou" alt="image-20260208141648374"></p>
+<h3 id="⑥-字符串格式化"><a href="#⑥-字符串格式化" class="headerlink" title="⑥ 字符串格式化"></a>⑥ 字符串格式化</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>()</span><br></pre></td></tr></table></figure>
+
+<p>这个之前说过了,和C语言printf类似,就不细说了</p>
+<p>​	<style>.uvdblmvjnqjr{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208145712219.png" class="uvdblmvjnqjr" alt="image-20260208145712219"></p>
+<p>常用格式符：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%d</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%q</td>
+<td>带引号字符串</td>
+</tr>
+<tr>
+<td>%.2f</td>
+<td>保留两位小数</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>十六进制</td>
+</tr>
+</tbody></table>
+<p>这里还有更多</p>
+<blockquote>
+<p>格式字符串可能包含以下的转义码:</p>
+<ul>
+<li>%c - 接受一个数字, 并将其转化为ASCII码表中对应的字符</li>
+<li>%d, %i - 接受一个数字并将其转化为有符号的整数格式</li>
+<li>%o - 接受一个数字并将其转化为八进制数格式</li>
+<li>%u - 接受一个数字并将其转化为无符号整数格式</li>
+<li>%x - 接受一个数字并将其转化为十六进制数格式, 使用小写字母</li>
+<li>%X - 接受一个数字并将其转化为十六进制数格式, 使用大写字母</li>
+<li>%e - 接受一个数字并将其转化为科学记数法格式, 使用小写字母e</li>
+<li>%E - 接受一个数字并将其转化为科学记数法格式, 使用大写字母E</li>
+<li>%f - 接受一个数字并将其转化为浮点数格式</li>
+<li>%g(%G) - 接受一个数字并将其转化为%e(%E, 对应%G)及%f中较短的一种格式</li>
+<li>%q - 接受一个字符串并将其转化为可安全被Lua编译器读入的格式</li>
+<li>%s - 接受一个字符串并按照给定的参数格式化该字符串</li>
+</ul>
+</blockquote>
+<p>不过有一个需要注意,Lua 的格式符基本结构是:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%[符号][填充][对齐][宽度][.精度]类型</span><br><span class="line"></span><br><span class="line">对应:</span><br><span class="line">% + 0 - 宽度 .精度 类型</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">① 正负符号<span class="string">&quot;+&quot;</span>和<span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%+d&quot;</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">-- &quot;+5&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">-- &quot;5&quot; ,正数默认不显示+号</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%+d&quot;</span>, <span class="number">-5</span>)</span><br><span class="line"><span class="comment">-- &quot;-5&quot; ,负数默认显示-号</span></span><br><span class="line"></span><br><span class="line">② 占位符<span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;   42&quot;  (前面是空格)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%05d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;00042&quot;, 用 0 填充空位（默认是空格）</span></span><br><span class="line"></span><br><span class="line">③ 对齐标识<span class="string">&quot;-&quot;</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;   42&quot;  (默认右对齐)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%-5d&quot;</span>, <span class="number">42</span>)</span><br><span class="line"><span class="comment">-- &quot;42   &quot;  (左对齐)</span></span><br><span class="line"></span><br><span class="line">④ 宽度数值</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5s&quot;</span>, <span class="string">&quot;Lua&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;  Lua&quot;,即最少占用多少字符宽度,少的话空格填补</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5s&quot;</span>, <span class="string">&quot;HelloLua&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;HelloLua&quot; ,多的话也不会截断</span></span><br><span class="line"></span><br><span class="line">⑤ 精度</span><br><span class="line">(<span class="number">1</span>) 对于浮点型</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.2f&quot;</span>, <span class="number">3.14159</span>)</span><br><span class="line"><span class="comment">-- &quot;3.14&quot; ,2是保留两位小数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%6.2f&quot;</span>, <span class="number">3.14159</span>)</span><br><span class="line"><span class="comment">-- &quot;  3.14&quot; ,6是总宽度</span></span><br><span class="line">(<span class="number">2</span>)对于字符串</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.3s&quot;</span>, <span class="string">&quot;Hello&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;Hel&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%5.3s&quot;</span>, <span class="string">&quot;Hello&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;  Hel&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以用来打印角色信息</p>
+<p>​	<style>.eeflidkjspib{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001053002.png" class="eeflidkjspib" alt="image-20260209001053002"></p>
+<p>也可以输出游戏时间和评分</p>
+<p>​	<style>.sytdysncughc{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001513906.png" class="sytdysncughc" alt="image-20260209001513906"></p>
+<h3 id="⑦-数字和字符转换"><a href="#⑦-数字和字符转换" class="headerlink" title="⑦  数字和字符转换"></a>⑦  数字和字符转换</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">char</span>() <span class="comment">--数字 → 字符（ASCII/UTF8编码）</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">byte</span>(s, [i])  <span class="comment">--字符 → 数字编码 ,第二个参数是索引值</span></span><br></pre></td></tr></table></figure>
+
+<p>char 将整型数字转成字符并连接， byte 转换字符为整数值(可以指定某个字符，默认第一个字符)</p>
+ <style>.penwohwvhnso{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151409611.png" class="penwohwvhnso" alt="image-20260208151409611">
+
+<p>​		<style>.phqzovbcliay{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151746772.png" class="phqzovbcliay" alt="image-20260208151746772"></p>
+<h3 id="⑧-重复字符串"><a href="#⑧-重复字符串" class="headerlink" title="⑧ 重复字符串"></a>⑧ 重复字符串</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">rep</span>(<span class="built_in">string</span>, n)</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.qtgsqtktnjfs{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208234817461.png" class="qtgsqtktnjfs" alt="image-20260208234817461"></p>
+<h3 id="⑨-字符串截取"><a href="#⑨-字符串截取" class="headerlink" title="⑨ 字符串截取"></a>⑨ 字符串截取</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">sub</span>(s, i, j)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数解释：</p>
+<ul>
+<li><code>s</code>：原字符串</li>
+<li><code>i</code>：起始位置（必填）</li>
+<li><code>j</code>：结束位置（可选，默认 -1）</li>
+</ul>
+</blockquote>
+<p>你看这个和string.gsub(main, find, replace, num)是不是有点像,只不过那个是替换,这个是截取</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">2</span>, <span class="number">5</span>))</span><br><span class="line"><span class="comment">-- &quot;bcde&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果省略第二个参数，默认到字符串末尾,即j 默认是 -1（最后一个字符）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">3</span>))</span><br><span class="line"><span class="comment">-- &quot;cdef&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>对了,之前忘记说了,lua支持负数索引,这个特点大多数语言都不具备,负数索引就是从后往前数</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">-1</span>))</span><br><span class="line"><span class="comment">-- &quot;f&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">-2</span>))</span><br><span class="line"><span class="comment">-- &quot;ef&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;abcdef&quot;</span>, <span class="number">2</span>, <span class="number">-2</span>)</span><br><span class="line"><span class="comment">-- &quot;bcde&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️只支持ASCII符号,中文的话需要自己计算字节长度来确定其实和终止位置,因为中文是三字节,英文和数字默认1字节,而且超过范围lua不会报错</p>
+<p>这个可以这么用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">✅ 截取文件后缀名</span><br><span class="line"><span class="keyword">local</span> filename = <span class="string">&quot;test.png&quot;</span></span><br><span class="line"><span class="keyword">local</span> ext = <span class="built_in">string</span>.<span class="built_in">sub</span>(filename, <span class="number">-3</span>)</span><br><span class="line"><span class="built_in">print</span>(ext)  <span class="comment">-- png</span></span><br><span class="line"></span><br><span class="line">✅ 截取前缀</span><br><span class="line"><span class="keyword">local</span> id = <span class="string">&quot;user_12345&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(id, <span class="number">1</span>, <span class="number">4</span>))</span><br><span class="line"><span class="comment">-- user</span></span><br><span class="line"></span><br><span class="line">✅ 去掉扩展名</span><br><span class="line"><span class="keyword">local</span> name = <span class="string">&quot;hello.lua&quot;</span></span><br><span class="line"><span class="keyword">local</span> dot = <span class="built_in">string</span>.<span class="built_in">find</span>(name, <span class="string">&quot;%.&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(name, <span class="number">1</span>, dot<span class="number">-1</span>))</span><br><span class="line"><span class="comment">-- hello</span></span><br><span class="line"></span><br><span class="line">✅ 截取路径文件名</span><br><span class="line"><span class="keyword">local</span> <span class="built_in">path</span> = <span class="string">&quot;/home/user/file.txt&quot;</span></span><br><span class="line"><span class="keyword">local</span> pos = <span class="built_in">string</span>.<span class="built_in">find</span>(<span class="built_in">path</span>, <span class="string">&quot;.*/&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="built_in">path</span>, pos+<span class="number">1</span>))</span><br><span class="line"><span class="comment">-- file.txt</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="⑩-全局匹配-循环扫描"><a href="#⑩-全局匹配-循环扫描" class="headerlink" title="⑩  全局匹配 (循环扫描)"></a>⑩  全局匹配 (循环扫描)</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">gmatch</span>(str, pattern)</span><br></pre></td></tr></table></figure>
+
+<p>返回一个迭代器函数，每一次调用这个函数，返回一个在字符串 str 找到的下一个符合 pattern 描述的子串。如果参数 pattern 描述的字符串没有找到，迭代函数返回nil ,通常和 <code>for</code> 一起用</p>
+<p>说人话就是找到所有匹配条件的东西,比如下方这个就是找到字符串里的所有英文单词</p>
+<p>​	这些是可以互相组合的,例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;Hello Lua user&quot;</span>, <span class="string">&quot;%a+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(word)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--%a = 字母（a-zA-Z）</span></span><br><span class="line"><span class="comment">--+ = 连续多个</span></span><br><span class="line"><span class="comment">--%a+ = 连续的字母</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;a1b22c333&quot;</span>, <span class="string">&quot;%d+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;.&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(ch)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;Hello   Lua&quot;</span>, <span class="string">&quot;%s+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;space:&quot;</span>, s)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.kxspolisoerg{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210160644931.png" class="kxspolisoerg" alt="image-20260210160644931"></p>
+<h3 id="⑪-首次匹配-单次扫描"><a href="#⑪-首次匹配-单次扫描" class="headerlink" title="⑪ 首次匹配 (单次扫描)"></a>⑪ 首次匹配 (单次扫描)</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(str, pattern, init)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数含义:</p>
+<ul>
+<li>str :  要匹配的字符串</li>
+<li>pattern: 模式(规则)</li>
+<li>init : 从第几个字符开始匹配(可选),默认1</li>
+</ul>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123def456&quot;</span>, <span class="string">&quot;%d+&quot;</span>, <span class="number">7</span>))</span><br><span class="line"><span class="comment">--456</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123def456&quot;</span>, <span class="string">&quot;%d+&quot;</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment">--123</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123def&quot;</span>, <span class="string">&quot;%d+&quot;</span>))</span><br><span class="line"><span class="comment">--123</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123def456&quot;</span>, <span class="string">&quot;%d+&quot;</span>, <span class="number">-3</span>))</span><br><span class="line"><span class="comment">--456</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;I have 2 questions&quot;</span>, <span class="string">&quot;(%d+) (%a+)&quot;</span>)</span><br><span class="line"><span class="comment">-- 返回: &quot;2&quot;, &quot;questions&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%d, %q&quot;</span>, <span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;I have 2 questions&quot;</span>, <span class="string">&quot;(%d+) (%a+)&quot;</span>))</span><br><span class="line"><span class="comment">-- 2, &quot;questions&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>区别</p>
+<blockquote>
+<p>gmatch &#x3D; 找“所有符合规则的东西”（循环）,全局匹配（一个一个返回）<br>match &#x3D; 找“第一个符合规则的东西”（一次）,只匹配第一个结果（一次性返回）</p>
+</blockquote>
+<p>注意是match是每个捕获都会返回第一个匹配结果,不是只返回一个结果</p>
+<h2 id="有关pattern知识-这里用string-match来讲"><a href="#有关pattern知识-这里用string-match来讲" class="headerlink" title="有关pattern知识(这里用string.match来讲)"></a>有关pattern知识(这里用string.match来讲)</h2><p>Lua 没有完整正则表达式，但有一套“轻量正则”（pattern）</p>
+<p>可以理解为：</p>
+<blockquote>
+<p>Lua pattern &#x3D; 简化版正则表达式</p>
+</blockquote>
+<p>模式：</p>
+<h4 id="1-基本字符类"><a href="#1-基本字符类" class="headerlink" title="(1)基本字符类"></a>(1)基本字符类</h4><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%a</td>
+<td>字母 (A-Z a-z)</td>
+<td>“abc”</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>数字 (0-9)</td>
+<td>“123”</td>
+</tr>
+<tr>
+<td>%l</td>
+<td>小写字母</td>
+<td>“abc”</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>大写字母</td>
+<td>“ABC”</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>字母或数字</td>
+<td>“abc123”</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>空白字符</td>
+<td>空格、tab</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>标点符号</td>
+<td>. , ! ?</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>控制字符</td>
+<td>\n \t</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>十六进制</td>
+<td>0-9 A-F</td>
+</tr>
+<tr>
+<td>%z</td>
+<td>字符 0</td>
+<td>\0</td>
+</tr>
+</tbody></table>
+<p>‘%’ 用作特殊字符的转义字符，因此 ‘%.’ 匹配点；’%%’ 匹配字符 ‘%’</p>
+<p>转义字符 ‘%’不仅可以用来转义特殊字符，还可以用于所有的非字母的字符</p>
+<p>例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%a+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%a+%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc1234&quot;</span>, <span class="string">&quot;%w+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc1234&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc 1234&quot;</span>, <span class="string">&quot;%a+%s+%d+&quot;</span>))</span><br><span class="line"><span class="comment">-- &quot;abc 1234&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.enyjzutrqqpr{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210170230710.png" class="enyjzutrqqpr" alt="image-20260210170230710"></p>
+<h4 id="2-取反（大写字母）"><a href="#2-取反（大写字母）" class="headerlink" title="(2)取反（大写字母）"></a>(2)取反（大写字母）</h4><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%A</td>
+<td>非字母</td>
+</tr>
+<tr>
+<td>%D</td>
+<td>非数字</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>非空白</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>非字母数字</td>
+</tr>
+</tbody></table>
+<p>例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;%D+&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-普通字符匹配"><a href="#3-普通字符匹配" class="headerlink" title="(3)普通字符匹配"></a>(3)普通字符匹配</h4><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>字符 a</td>
+</tr>
+<tr>
+<td>1</td>
+<td>字符 1</td>
+</tr>
+<tr>
+<td>Lua</td>
+<td>字符串 Lua</td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;Hello Lua&quot;</span>, <span class="string">&quot;Lua&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;Lua&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-特殊符号（量词）"><a href="#4-特殊符号（量词）" class="headerlink" title="(4)特殊符号（量词）"></a>(4)特殊符号（量词）</h4><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>任意字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td>1次或多次</td>
+</tr>
+<tr>
+<td>*</td>
+<td>0次或多次</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0次或多次（最短匹配）</td>
+</tr>
+<tr>
+<td>?</td>
+<td>0次或1次</td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">. 任意字符</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;a.c&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line">+ 至少一次</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;123abc&quot;</span>, <span class="string">&quot;%d+&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;123&quot;</span></span><br><span class="line"></span><br><span class="line">* 任意次（贪婪）</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;%a*&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line">- 非贪婪（最短匹配）</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;&lt;tag&gt;hello&lt;/tag&gt;&quot;</span>, <span class="string">&quot;&lt;.-&gt;&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;&lt;tag&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">? 可有可无</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;color&quot;</span>, <span class="string">&quot;colou?r&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;color&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;colour&quot;</span>, <span class="string">&quot;colou?r&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;colour&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>*</code> &#x3D; 贪婪<br><code>-</code> &#x3D; 非贪婪</p>
+<h4 id="5-字符集合"><a href="#5-字符集合" class="headerlink" title="(5)字符集合 [ ]"></a>(5)字符集合 <code>[ ]</code></h4><p>类似正则的字符集</p>
+<p>例如[abc] 表示a 或 b 或 c,那么[ ^ abc ]表示除了abc以外的的字符</p>
+<p>​	<style>.hsnwridnscdo{zoom:25%;}</style><img src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210162649514.png" class="hsnwridnscdo" alt="image-20260210162649514"></p>
+<blockquote>
+<p>范围为 </p>
+<ul>
+<li>[a-z]</li>
+<li>[0-9]</li>
+<li>[A-Z]</li>
+</ul>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;[0-9]+&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;123&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-边界符（锚点）"><a href="#6-边界符（锚点）" class="headerlink" title="(6)边界符（锚点）"></a>(6)边界符（锚点）</h4><p>首先我们需要清楚一件事—–那就是边界符匹配的是位置,也就是边界,而不是字符</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^</td>
+<td>字符串开头,即字符串开始边界</td>
+</tr>
+<tr>
+<td>$</td>
+<td>字符串结尾,即字符串结束边界</td>
+</tr>
+<tr>
+<td>%f[set]</td>
+<td>前沿边界（Lua 独有）,即“自定义边界”</td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">^ 开头匹配</span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(s, <span class="string">&quot;^hello&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(s, <span class="string">&quot;^world&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--hello</span></span><br><span class="line"><span class="comment">--nil</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world 123&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s:<span class="built_in">gsub</span>(<span class="string">&quot;^&quot;</span>, <span class="string">&quot;[START]&quot;</span>))</span><br><span class="line"><span class="comment">--[START]hello world 123 1</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看出,hello位于字符串的开头,匹配成功,而world位于字符串的末尾,匹配不成功</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ 结尾匹配</span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(s, <span class="string">&quot;world$&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(s, <span class="string">&quot;hello$&quot;</span>))</span><br><span class="line"><span class="comment">--world</span></span><br><span class="line"><span class="comment">--nil</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world 123&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s:<span class="built_in">gsub</span>(<span class="string">&quot;$&quot;</span>, <span class="string">&quot;[END]&quot;</span>))</span><br><span class="line"><span class="comment">--hello world 123[END] 1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中^和$这两个一看就明白是干嘛的, ^是从从字符串开头找有没有这个</p>
+<p>$是从字符串结尾找有没有这个</p>
+<p>重点就是这个%f比较难理解</p>
+<p>%f &#x3D; frontier &#x3D; 边界,指的是匹配“字符边界”，不是字符本身</p>
+<blockquote>
+<p><code>%f[set]</code> 匹配一个位置：<br> 左边的字符不属于 set，右边的字符属于 set</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>部分(以%a为例)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%f[%a]</td>
+<td>左边不是字母，右边是字母</td>
+</tr>
+<tr>
+<td>%f[ ^%a ]</td>
+<td>左边是字母，右边不是字母</td>
+</tr>
+</tbody></table>
+<p>我们还是看具体的例子吧</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--例一:匹配单词开头</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s:<span class="built_in">gsub</span>(<span class="string">&quot;%f[%w]&quot;</span>, <span class="string">&quot;|&quot;</span>))</span><br><span class="line"><span class="comment">--|hello |world   2</span></span><br><span class="line">%w = 字母或数字</span><br><span class="line">所以 %f[%w] = “单词的起点”</span><br><span class="line"></span><br><span class="line">(空格) h → h 是字母，左边不是字母 → 匹配</span><br><span class="line">o (空格) → 空格不是字母 → 不匹配</span><br><span class="line">(空格) w → w 是字母，左边不是字母 → 匹配</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--例二:更直观一点的</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world 123&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s:<span class="built_in">gsub</span>(<span class="string">&quot;%f[%w]&quot;</span>, <span class="string">&quot;[WORD_START]&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(s:<span class="built_in">gsub</span>(<span class="string">&quot;%f[^%w]&quot;</span>, <span class="string">&quot;[WORD_END]&quot;</span>))</span><br><span class="line"><span class="comment">--[WORD_START]hello [WORD_START]world [WORD_START]123     3</span></span><br><span class="line"><span class="comment">--hello[WORD_END] world[WORD_END] 123[WORD_END]   3</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>边界符</th>
+<th>含义</th>
+<th>可自定义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>^</code></td>
+<td>字符串开始</td>
+<td>❌</td>
+<td><code>&quot;^hello&quot;</code></td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>字符串结束</td>
+<td>❌</td>
+<td><code>&quot;world$&quot;</code></td>
+</tr>
+<tr>
+<td><code>%f[%w]</code></td>
+<td>单词开始</td>
+<td>✅</td>
+<td><code>%f[%w]hello</code></td>
+</tr>
+<tr>
+<td><code>%f[^%w]</code></td>
+<td>单词结束</td>
+<td>✅</td>
+<td><code>hello%f[^%w]</code></td>
+</tr>
+<tr>
+<td><code>%f[%d]</code></td>
+<td>数字开始</td>
+<td>✅</td>
+<td><code>%f[%d]123</code></td>
+</tr>
+<tr>
+<td><code>%f[^%d]</code></td>
+<td>数字结束</td>
+<td>✅</td>
+<td><code>%f[^%d]123</code></td>
+</tr>
+<tr>
+<td><code>%f[%a]</code></td>
+<td>字母开始</td>
+<td>✅</td>
+<td><code>%f[%a]abc</code></td>
+</tr>
+<tr>
+<td><code>%f[^%a]</code></td>
+<td>字母结束</td>
+<td>✅</td>
+<td><code>%f[^%a]abc</code></td>
+</tr>
+<tr>
+<td><code>%f[b]</code></td>
+<td>字母 b 开始</td>
+<td>✅</td>
+<td><code>%f[b]abc</code></td>
+</tr>
+<tr>
+<td><code>%f[^b]</code></td>
+<td>字母 b 结束</td>
+<td>✅</td>
+<td><code>%f[^b]abc</code></td>
+</tr>
+</tbody></table>
+<p>我们可以使用更多例子来解释这个东西,记住%f[%a]这种只是代表位置相当于一个索引号不是具体的数字或者字母</p>
+<p>我们以后看见这个%f[%a]心里可以默认这是单词的开头可以直接忽视,因为这个是代表我们看不见的东西的属于概念</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--例一: 单词的匹配</span></span><br><span class="line"><span class="keyword">local</span> text = <span class="string">&quot;cat category bobcat cat!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(text, <span class="string">&quot;%f[%a]cat%f[%A]&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(w)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--cat</span></span><br><span class="line"><span class="comment">--cat</span></span><br><span class="line"><span class="comment">--不知道大家还记不记得%A代表什么?  没错! 代表非字母也就是单词的结尾,等同于 ^%a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例二:提取所有单词</span></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(<span class="string">&quot;Hello, Lua 5.4!&quot;</span>, <span class="string">&quot;%f[%a]%w+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(word)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--Hello</span></span><br><span class="line"><span class="comment">--Lua</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例三:提取出变量名</span></span><br><span class="line"><span class="keyword">local</span> code = <span class="string">&quot;local var1 = test_value + foo2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;%f[%a_][%w_]+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--local</span></span><br><span class="line"><span class="comment">--var1</span></span><br><span class="line"><span class="comment">--test_value</span></span><br><span class="line"><span class="comment">--foo2</span></span><br><span class="line"><span class="comment">--这是因为%f[%a_]表示变量名开始  [%w_]+表示变量内容</span></span><br><span class="line"><span class="comment">--[%w_]与任何字母/数字, 或下划线符号(_)配对</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例四:提取出数字</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;abc123def45&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;%f[%d]%d+&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--123</span></span><br><span class="line"><span class="comment">--45</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例五:替换字母</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;category cat bobcat&quot;</span>, <span class="string">&quot;%f[%a]cat%f[%A]&quot;</span>, <span class="string">&quot;dog&quot;</span>))</span><br><span class="line"><span class="comment">--category dog bobcat     1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例六:查找单词开头为大写的单词</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;Hello world From Lua&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;%f[%a][A-Z]%w*&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(w)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--Hello</span></span><br><span class="line"><span class="comment">--From</span></span><br><span class="line"><span class="comment">--Lua</span></span><br></pre></td></tr></table></figure>
+
+<p>%f 除了可以获取看的见的东西,还能获取看不见的东西—-位置</p>
+<blockquote>
+<p>也就是使用    %f[ set] ()</p>
+<p>它的作用是：<strong>精确获取某个“边界位置”的索引</strong>,当然这里表示获取某类字符开始的位置</p>
+<p>因为：</p>
+<ul>
+<li><code>%f</code> 只匹配 <strong>位置</strong></li>
+<li><code>()</code> 捕获 <strong>当前位置的索引</strong></li>
+</ul>
+</blockquote>
+<p>对了,你们看到的()这种括号表示捕获,也就是我们下面要讲的东西,每个括号即每个捕获都有一个返回值</p>
+<p>例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--例一:获取所有单词的位置</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;hello world lua&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> start, word <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;%f[%a]()(%w+)&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(start, word)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--1       hello</span></span><br><span class="line"><span class="comment">--7       world</span></span><br><span class="line"><span class="comment">--13      lua</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例二:token拆解器</span></span><br><span class="line"><span class="keyword">local</span> code = <span class="string">&quot;var1 = foo + bar2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, token <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;%f[%w_]()([%w_]+)&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(pos, token)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--1       var1</span></span><br><span class="line"><span class="comment">--8       foo</span></span><br><span class="line"><span class="comment">--14      bar2</span></span><br><span class="line"><span class="comment">--和例一差不多</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例三:遍历所有单词的位置</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;Lua is simple and powerful&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;%f[%a]()&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> word = s:<span class="built_in">match</span>(<span class="string">&quot;%w+&quot;</span>, pos)</span><br><span class="line">    <span class="built_in">print</span>(pos, word)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--1       Lua</span></span><br><span class="line"><span class="comment">--5       is</span></span><br><span class="line"><span class="comment">--8       simple</span></span><br><span class="line"><span class="comment">--15      and</span></span><br><span class="line"><span class="comment">--19      powerful</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--例四: 获取数字的位置</span></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">&quot;abc123def456&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;()(%f[%d])&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(pos)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--4</span></span><br><span class="line"><span class="comment">--10</span></span><br></pre></td></tr></table></figure>
+
+<p>常见的写法和用途</p>
+<p>不需要记住,用到时看一眼就行了,而且写法千变万化,并不局限于以下写法</p>
+<table>
+<thead>
+<tr>
+<th>单词边界</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%a]()</code></td>
+<td>单词开始</td>
+</tr>
+<tr>
+<td><code>%f[%A]()</code></td>
+<td>单词结束</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>单词提取</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%a](%w+)</code></td>
+<td>提取单词</td>
+</tr>
+<tr>
+<td><code>%f[%a]%w+%f[%A]</code></td>
+<td>完整单词</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>数字识别</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%d]()</code></td>
+<td>数字开始</td>
+</tr>
+<tr>
+<td><code>%f[%d]%d+</code></td>
+<td>提取整数</td>
+</tr>
+<tr>
+<td><code>%f[%d]%d+%.%d+</code></td>
+<td>浮点数</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Lua变量规则：</p>
+<p>[ a-z A-Z_ ] [a-z A-Z 0-9_ ]*</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Lua变量名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%a_]()([%a_][%w_]*)</code></td>
+<td>变量名 + 位置</td>
+</tr>
+<tr>
+<td><code>%f[%a_][%a_][%w_]*</code></td>
+<td>变量名</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>标点检测</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%p]()</code></td>
+<td>标点开始</td>
+</tr>
+<tr>
+<td><code>%p+</code></td>
+<td>连续标点</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>空格边界</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%s]()</code></td>
+<td>空格开始</td>
+</tr>
+<tr>
+<td><code>%s+</code></td>
+<td>连续空格</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>大写字母</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%f[%u]()</code></td>
+<td>大写字母开始</td>
+</tr>
+<tr>
+<td><code>%f[%u][A-Z]+</code></td>
+<td>大写单词</td>
+</tr>
+</tbody></table>
+<blockquote>
+<h3 id="单词-位置"><a href="#单词-位置" class="headerlink" title="单词 + 位置"></a>单词 + 位置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%f[%a]()(%w+)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="变量-位置"><a href="#变量-位置" class="headerlink" title="变量 + 位置"></a>变量 + 位置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%f[%a_]()([%a_][%w_]*)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="数字-位置"><a href="#数字-位置" class="headerlink" title="数字 + 位置"></a>数字 + 位置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%f[%d]()(%d+%.?%d*)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="标点-位置"><a href="#标点-位置" class="headerlink" title="标点 + 位置"></a>标点 + 位置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">()(%p+)</span><br></pre></td></tr></table></figure></blockquote>
+<p>但是各位有没有想过,那么括号这种东西怎么匹配呢?</p>
+<p>之前有一个东西忘记说了那就是</p>
+<blockquote>
+<p>在 Lua 中，<code>%b</code> 是一种特殊的<strong>模式匹配字符（Pattern Matching）</strong>，专门用于匹配<strong>平衡的配对符号</strong>（如成对的括号、大括号、方括号等）。它通过 <code>string.find</code>、<code>string.gsub</code> 等函数使用，格式为 <code>%bxy</code>，其中 <code>x</code> 是起始字符，<code>y</code> 是结束字符。</p>
+</blockquote>
+<p>例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%b()   匹配 ()</span><br><span class="line">%b[]   匹配 []</span><br><span class="line">%b&#123;&#125;   匹配 &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;(a(b)c)&quot;</span>, <span class="string">&quot;%b()&quot;</span>))</span><br><span class="line"><span class="comment">--(a(b)c)</span></span><br><span class="line"><span class="comment">--可以自动匹配嵌套括号</span></span><br></pre></td></tr></table></figure>
+
+<p>更高级的用途例如</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--例一: 解析代码 token</span></span><br><span class="line"><span class="keyword">local</span> code = <span class="string">&quot;foo(bar, 123) + test[5]&quot;</span></span><br><span class="line"><span class="keyword">for</span> pos, token <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;%f[%w_]()([%w_]+)&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;identifier:&quot;</span>, pos, token)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, block <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;()(%b())&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;paren block:&quot;</span>, pos, block)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, block <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;()(%b[])&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;index block:&quot;</span>, pos, block)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--identifier:     1       foo</span></span><br><span class="line"><span class="comment">--identifier:     5       bar</span></span><br><span class="line"><span class="comment">--identifier:     10      123</span></span><br><span class="line"><span class="comment">--identifier:     17      test</span></span><br><span class="line"><span class="comment">--identifier:     22      5</span></span><br><span class="line"><span class="comment">--paren block:    4       (bar, 123)</span></span><br><span class="line"><span class="comment">--index block:    21      [5]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--例二:精确识别 token(好像和例一也没什么区别)</span></span><br><span class="line"><span class="keyword">local</span> code = <span class="string">&quot;var1 = foo(bar, 42)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, token <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;%f[%a_]()([%a_][%w_]*)&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;identifier:&quot;</span>, pos, token)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, number <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;%f[%d]()(%d+)&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;number:&quot;</span>, pos, number)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pos, block <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(code, <span class="string">&quot;()(%b())&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;call:&quot;</span>, pos, block)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--identifier:     1       var1</span></span><br><span class="line"><span class="comment">--identifier:     8       foo</span></span><br><span class="line"><span class="comment">--identifier:     12      bar</span></span><br><span class="line"><span class="comment">--number: 4       1</span></span><br><span class="line"><span class="comment">--number: 17      42</span></span><br><span class="line"><span class="comment">--call:   11      (bar, 42)</span></span><br></pre></td></tr></table></figure>
+
+<p>什么,你说这个玩意有什么用,说实话我目前也不知道有什么用(毕竟我才刚学),AI说这个可以写写代码高亮（非常常见）,代码格式化工具,代码检查工具,DSL,模板引擎,代码转换工具,解释器 &#x2F; 编程语言</p>
+<p>但是吧,我觉得大家可能用不上这个,因为我学lua只是为了做游戏又不是写无聊的编辑器</p>
+<h4 id="7-捕获（capture）"><a href="#7-捕获（capture）" class="headerlink" title="(7)捕获（capture）"></a>(7)捕获（capture）</h4><p>捕获组就是用括号 <code>()</code> 包起来的部分,空的捕获 <code>()</code> 将捕获到当前字符串的位置（它是一个数字）</p>
+<p>捕获 &#x3D; “把匹配到的内容抓出来”</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">基本捕获 ()</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc123&quot;</span>, <span class="string">&quot;(%a+)(%d+)&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;abc&quot;, &quot;123&quot;</span></span><br><span class="line"></span><br><span class="line">嵌套捕获</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;2026-02-10&quot;</span>, <span class="string">&quot;(%d+)%-(%d+)%-(%d+)&quot;</span>)</span><br><span class="line"><span class="comment">-- &quot;2026&quot;, &quot;02&quot;, &quot;10&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>之所以会出现多个返回值是因为有因为有多个括号：</p>
+<blockquote>
+<p>例如基本捕获里的</p>
+<p>(%a+)   –&gt; 第1个捕获<br>(%d+)   –&gt; 第2个捕获</p>
+<p>return “abc”, “123”</p>
+</blockquote>
+<h4 id="8-引用捕获-1-2"><a href="#8-引用捕获-1-2" class="headerlink" title="8)引用捕获 %1 %2 ..."></a>8)引用捕获 <code>%1 %2 ...</code></h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;hello hello&quot;</span>, <span class="string">&quot;(%w+)%s+%1&quot;</span>)</span><br><span class="line"><span class="comment">--hello</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>%1</code> &#x3D; 第一个捕获的内容</p>
+<p><code>%2</code> &#x3D; 第二个捕获的内容</p>
+<p>…以此类推</p>
+</blockquote>
+<p>我们只需要记住这些即可</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%d+</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>%a+</td>
+<td>单词</td>
+</tr>
+<tr>
+<td>%w+</td>
+<td>字母数字</td>
+</tr>
+<tr>
+<td>.+</td>
+<td>任意</td>
+</tr>
+<tr>
+<td>.-</td>
+<td>最短任意</td>
+</tr>
+<tr>
+<td>^</td>
+<td>开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>结尾</td>
+</tr>
+<tr>
+<td>()</td>
+<td>捕获</td>
+</tr>
+<tr>
+<td>[^x]+</td>
+<td>非x</td>
+</tr>
+</tbody></table>
+<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><p>转义字符用于表示不能直接显示的字符，比如后退键，回车键等，如在字符串转换双引号可以使用 <font color='#FF0000'> \ </font></p>
+<table>
+<thead>
+<tr>
+<th>转义字符</th>
+<th>意义</th>
+<th>ASCII码值（十进制）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\a</td>
+<td>响铃(BEL)</td>
+<td>007</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>退格(BS) ，将当前位置移到前一列</td>
+<td>008</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页(FF)，将当前位置移到下页开头</td>
+<td>012</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行(LF) ，将当前位置移到下一行开头</td>
+<td>010</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车(CR) ，将当前位置移到本行开头</td>
+<td>013</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>水平制表(HT) （跳到下一个TAB位置）</td>
+<td>009</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>垂直制表(VT)</td>
+<td>011</td>
+</tr>
+<tr>
+<td>\</td>
+<td>代表一个反斜线字符’’&#39;</td>
+<td>092</td>
+</tr>
+<tr>
+<td>&#39;</td>
+<td>代表一个单引号（撇号）字符</td>
+<td>039</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>代表一个双引号字符</td>
+<td>034</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>空字符(NULL)</td>
+<td>000</td>
+</tr>
+<tr>
+<td>\ddd</td>
+<td>表示 1~3 位十进制数对应的字符</td>
+<td>d &#x3D; 0~9</td>
+</tr>
+<tr>
+<td>\xhh</td>
+<td>表示 1~2 位十六进制数对应的字符</td>
+<td>h &#x3D; 0<del>9 a</del>f A~F</td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">🔔 <span class="number">1</span>️⃣ \a 响铃（BEL）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello\aWorld&quot;</span>)</span><br><span class="line"><span class="comment">--HelloWorld</span></span><br><span class="line">效果：有些旧版本终端会发出“滴”的声音 🔔</span><br><span class="line">⚠️ 很多现代终端不会响,包括VScode</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">⌫ <span class="number">2</span>️⃣ \b 退格（Backspace）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ABC\bD&quot;</span>)</span><br><span class="line"><span class="comment">--ABD</span></span><br><span class="line">可以看到C没了,退格就是按一下退格键(就是你打字用来删字的按钮)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">📄 <span class="number">3</span>️⃣ \f 换页（Form Feed）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello\fWorld&quot;</span>)</span><br><span class="line"><span class="comment">--Hello</span></span><br><span class="line"><span class="comment">--World</span></span><br><span class="line">效果：类似“分页”，多数终端看不出来</span><br><span class="line">有些环境会清屏或分页</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">⏎<span class="number">4</span>️⃣ \n 换行（最常用）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;第一行\n第二行&quot;</span>)</span><br><span class="line"><span class="comment">--第一行</span></span><br><span class="line"><span class="comment">--第二行</span></span><br><span class="line">和C语言是一样的</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">↩️ <span class="number">5</span>️⃣ \r 回车（Return）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello\rLua&quot;</span>)</span><br><span class="line"><span class="comment">--Lualo</span></span><br><span class="line">解释：\r 回到行首,Lua 覆盖 Hello 的前 <span class="number">3</span> 个字符</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">⇥<span class="number">6</span>️⃣ \t 制表符（Tab）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;A\tB\tC&quot;</span>)</span><br><span class="line"><span class="comment">--A    B    C</span></span><br><span class="line">类似键盘 Tab 键</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">⬇️ <span class="number">7</span>️⃣ \v 垂直制表（Vertical Tab）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello\vWorld&quot;</span>)</span><br><span class="line"><span class="comment">--Hello</span></span><br><span class="line"><span class="comment">--World</span></span><br><span class="line">效果：很少用,多数终端看不出区别</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">🔙 <span class="number">8</span>️⃣ \ 反斜杠</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;C:\\Users\\Lua&quot;</span>)</span><br><span class="line"><span class="comment">--C:\Users\Lua</span></span><br><span class="line">因为：</span><br><span class="line">\ 本身是转义符</span><br><span class="line">要表示一个 \，必须写 \\</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">🧾 <span class="number">9</span>️⃣ \<span class="string">&#x27; 单引号</span></span><br><span class="line"><span class="string">print(&#x27;</span>I\<span class="string">&#x27;m Lua&#x27;</span>)</span><br><span class="line"><span class="comment">--I&#x27;m Lua</span></span><br><span class="line"></span><br><span class="line">🧾 🔟\<span class="string">&quot; 双引号</span></span><br><span class="line"><span class="string">print(&quot;</span>He said \<span class="string">&quot;Hello\&quot;&quot;</span>)</span><br><span class="line"><span class="comment">--He said &quot;Hello&quot;</span></span><br><span class="line">这个不用多说了吧</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\<span class="number">0</span> 空字符（NULL）</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;A\0B&quot;</span>)</span><br><span class="line"><span class="comment">--AB</span></span><br><span class="line">效果：字符串中有一个“看不见”的字符</span><br><span class="line">有些函数会截断字符串（C语言）</span><br><span class="line">比如lua可以通过计算字符串的长度查看是否存在空字符</span><br><span class="line"><span class="built_in">print</span>(#(<span class="string">&quot;A\0B&quot;</span>))</span><br><span class="line"><span class="comment">--3</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">\ddd = 用 十进制数字 表示一个字符</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\65&quot;</span>)</span><br><span class="line"><span class="comment">--A</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\101&quot;</span>)</span><br><span class="line"><span class="comment">--e</span></span><br><span class="line"></span><br><span class="line">\xhh = 用 十六进制数字 表示一个字符</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\x41&quot;</span>)</span><br><span class="line"><span class="comment">--A</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\x65&quot;</span>)</span><br><span class="line"><span class="comment">--e</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;\数字&quot;</span> = 用编号写字母</span><br><span class="line"><span class="string">&quot;\x数字&quot;</span> = 用另一种数字写字母</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Lua 没有八进制字符转义（不像 C 语言)<br>但 Lua 有“八进制数字字面量”（Lua 5.3+）和“十进制&#x2F;十六进制字符转义” </p>
+</blockquote>
+<p>数字字面量（lua代码）</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>65</td>
+<td>十进制</td>
+</tr>
+<tr>
+<td>0x41</td>
+<td>十六进制</td>
+</tr>
+<tr>
+<td>0o101</td>
+<td>八进制（Lua 5.3+）</td>
+</tr>
+<tr>
+<td>0b1000001</td>
+<td>二进制（Lua 5.3+）</td>
+</tr>
+</tbody></table>
+<p>最常用的 5 个转义字符：</p>
+<table>
+<thead>
+<tr>
+<th>转义</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\n</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>Tab</td>
+</tr>
+<tr>
+<td>\</td>
+<td>反斜杠</td>
+</tr>
+<tr>
+<td>\ “</td>
+<td>双引号</td>
+</tr>
+<tr>
+<td>\ ‘</td>
+<td>单引号</td>
+</tr>
+</tbody></table>
+<p>进阶：</p>
+<table>
+<thead>
+<tr>
+<th>转义</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\r</td>
+<td>回车（进度条）</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>空字符</td>
+</tr>
+<tr>
+<td>\xhh</td>
+<td>十六进制字符</td>
+</tr>
+<tr>
+<td>\ddd</td>
+<td>八进制字符</td>
+</tr>
+</tbody></table>
+<p>[^%d]: </p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/02/06/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/Alvin9999%E5%A4%A7%E4%BD%AC%E5%9B%9E%E6%9D%A5%E4%BA%86/"><span class="nav-label">← 上一篇</span><span class="nav-title">Alvin9999大佬回来了</span></a></div><div class="post-nav next"><a href="/2026/02/04/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%BD%BF%E7%94%A8VSCode%E5%86%99Csharp%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/"><span class="nav-label">下一篇 →</span><span class="nav-title">如何在VScode中配置C#环境</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=love2d%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9--%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6&amp;url=%2F2026%2F02%2F05%2FLove2d%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%25AC%25AC%25E5%259B%259B%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F02%2F05%2FLove2d%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%25AC%25AC%25E5%259B%259B%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F02%2F05%2FLove2d%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%25AC%25AC%25E5%259B%259B%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F02%2F05%2FLove2d%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%25AC%25AC%25E5%259B%259B%25E5%25A4%25A9%2F&amp;title=love2d%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9--%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F02%2F05%2FLove2d%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%25AC%25AC%25E5%259B%259B%25E5%25A4%25A9%2F&amp;title=love2d%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9--%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
+
+<script src="/js/wall.js"></script>
+
+<script src="/js/anime.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
