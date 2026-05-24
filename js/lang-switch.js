@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
     咒术回战乙骨忧太篇: "Jujutsu Kaisen 0",
     咒术回战第一季: "Jujutsu Kaisen Season 1",
     咒术回战第二季: "Jujutsu Kaisen Season 2",
+    咒术回战第三季: "Jujutsu Kaisen Season 3",
     JOJO的奇妙冒险: "JoJo's Bizarre Adventure",
     "JOJO的奇妙冒险 星尘远征军": "JoJo's Bizarre Adventure: Stardust Crusaders",
     "JOJO的奇妙冒险 星尘远征军 埃及篇":
@@ -173,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "JOJO的奇妙冒险 不灭钻石":
       "JoJo's Bizarre Adventure: Diamond Is Unbreakable",
     "JOJO的奇妙冒险 石之海": "JoJo's Bizarre Adventure: Stone Ocean",
+    "JOJO的奇妙冒险 飙马野郎": "JoJo's Bizarre Adventure: Steel Ball Run",
     "岸边露伴 一动也不动": "Thus Spoke Kishibe Rohan",
     间谍过家家第一季: "SPY×FAMILY Season 1",
     间谍过家家第二季: "SPY×FAMILY Season 2",
@@ -185,6 +187,12 @@ document.addEventListener("DOMContentLoaded", function () {
     石纪元龙水篇: "Dr. Stone: Ryusui",
     石纪元第三季: "Dr. Stone: New World",
     石纪元第四季: "Dr. Stone: Science Future",
+    进击的巨人第一季: "Attack on Titan Season 1",
+    进击的巨人第二季: "Attack on Titan Season 2",
+    进击的巨人第三季: "Attack on Titan Season 3",
+    进击的巨人第四季: "Attack on Titan Final Season",
+    电锯人: "Chainsaw Man",
+    电锯人蕾塞篇: "Chainsaw Man – The Movie: Reze Arc",
 
     // 更多
     更多: "More",

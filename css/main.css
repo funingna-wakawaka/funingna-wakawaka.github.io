@@ -943,7 +943,7 @@ p {
   border-collapse: collapse;
   margin: var(--spacing-lg) 0;
   display: table;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 .post-content table th,
@@ -3313,4 +3313,61 @@ body.dark-mode #pet-sound-menu {
   height: 1px;
   background: var(--border-color);
   margin: 12px 0;
+}
+
+/* ===== Post Content Table Horizontal Scroll ===== */
+
+/* 表格横向滚动：外层容器 */
+.post-content .table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--spacing-lg) 0;
+  border-radius: var(--radius-md);
+}
+
+/* 表格本体：按内容撑开，超出就滚动 */
+.post-content .table-scroll>table {
+  min-width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+/* 单元格：至少 5 字宽，自然换行（与 Typora 主题 word-break:initial 一致） */
+.post-content .table-scroll th,
+.post-content .table-scroll td {
+  min-width: 5ch;
+  padding: var(--spacing-sm) var(--spacing-md);
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* 4) 自定义滚动条（可选，和你代码块风格统一） */
+.post-content .table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.post-content .table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.post-content .table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.6);
+  border-radius: 3px;
+}
+
+.post-content .table-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.8);
+}
+
+/* 5) 暗色模式下的滚动条（可选） */
+body.dark-mode .post-content .table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(68, 68, 68, 0.8);
+}
+
+body.dark-mode .post-content .table-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 102, 102, 0.9);
 }

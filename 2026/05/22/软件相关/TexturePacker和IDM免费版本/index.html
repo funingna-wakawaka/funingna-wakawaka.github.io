@@ -1,0 +1,876 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/14.png" alt="TexturePacker和IDM免费版本"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/">软件推荐</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-05-22T12:35:23.000Z">2026-05-22</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>5k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>30</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">TexturePacker和IDM免费版本</h1><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="众所周知TexturePacker很适合游戏精灵图的拆分-而IDM-downloader可以批量下载itch上的游戏资源"><a href="#众所周知TexturePacker很适合游戏精灵图的拆分-而IDM-downloader可以批量下载itch上的游戏资源" class="headerlink" title="众所周知TexturePacker很适合游戏精灵图的拆分,而IDM downloader可以批量下载itch上的游戏资源"></a>众所周知TexturePacker很适合游戏精灵图的拆分,而IDM downloader可以批量下载itch上的游戏资源</h1><p>不过这两个都要钱(而且要不少钱),这里是破解程序,本质上是将试用期延长,这两个脚本都永久有效,无需断网,不会因为软件的更新失效</p>
+<h2 id="TexturePacker"><a href="#TexturePacker" class="headerlink" title="TexturePacker"></a>TexturePacker</h2><p>将这个写到txt文件,重命名为<strong>TexturePacker_Trial_Reset.reg</strong>,然后双击文件即可</p>
+<p>这个原作者为<a target="_blank" rel="noopener" href="https://github.com/pakholam/TexturePackerCrack">https://github.com/pakholam/TexturePackerCrack</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\code-and-web.de\TexturePacker]</span><br><span class="line">@=&quot;&quot;</span><br><span class="line">&quot;firstStart&quot;=&quot;false&quot;</span><br><span class="line">&quot;autoUpdateCheck&quot;=&quot;false&quot;</span><br><span class="line">&quot;autoUpdatesEnabled&quot;=&quot;false&quot;</span><br><span class="line">&quot;sendStatisticsEnabled&quot;=&quot;false&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\code-and-web.de\TexturePacker\licensing]</span><br><span class="line">&quot;agreementsAccepted&quot;=&quot;true&quot;</span><br><span class="line">&quot;trialExpired&quot;=&quot;false&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\code-and-web.de\TexturePacker\licensing\data]</span><br><span class="line">&quot;licenseType&quot;=&quot;single&quot;</span><br><span class="line">&quot;licenseKeyPlain&quot;=&quot;TP-1234-1234-1234-1234&quot;</span><br><span class="line">&quot;activatedComputers&quot;=dword:00000001</span><br><span class="line">&quot;email&quot;=&quot;country@boy.com&quot;</span><br><span class="line">&quot;expiryDate&quot;=&quot;2199-01-01&quot;</span><br><span class="line">&quot;product&quot;=&quot;TexturePacker&quot;</span><br><span class="line">&quot;street&quot;=&quot;country lane&quot;</span><br><span class="line">&quot;freeUpdatesUntil&quot;=&quot;2199-01-01&quot;</span><br><span class="line">&quot;cloudLicense&quot;=&quot;false&quot;</span><br><span class="line">&quot;licensee&quot;=&quot;countryboy&quot;</span><br><span class="line">&quot;numActivations&quot;=dword:00000001</span><br><span class="line">&quot;company&quot;=&quot;countryboy&quot;</span><br><span class="line">&quot;city&quot;=&quot;countryville&quot;</span><br><span class="line">&quot;maxActivations&quot;=dword:00000001</span><br></pre></td></tr></table></figure>
+
+<h2 id="IDM-downloader"><a href="#IDM-downloader" class="headerlink" title="IDM downloader"></a>IDM downloader</h2><p>同样的写入txt文件重命名为<strong>IAS_v1.2_Chs.cmd</strong>,在IDM启动的时候双击启用</p>
+<p>期间会出现要求续费的情况,无需理会关掉提示即可</p>
+<p>这个原作者为<a target="_blank" rel="noopener" href="https://github.com/WindowsAddict/IDM-Activation-Script">https://github.com/WindowsAddict/IDM-Activation-Script</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br><span class="line">797</span><br><span class="line">798</span><br><span class="line">799</span><br><span class="line">800</span><br><span class="line">801</span><br><span class="line">802</span><br><span class="line">803</span><br><span class="line">804</span><br><span class="line">805</span><br><span class="line">806</span><br><span class="line">807</span><br><span class="line">808</span><br><span class="line">809</span><br><span class="line">810</span><br><span class="line">811</span><br><span class="line">812</span><br><span class="line">813</span><br><span class="line">814</span><br><span class="line">815</span><br><span class="line">816</span><br><span class="line">817</span><br><span class="line">818</span><br><span class="line">819</span><br><span class="line">820</span><br><span class="line">821</span><br><span class="line">822</span><br><span class="line">823</span><br><span class="line">824</span><br><span class="line">825</span><br><span class="line">826</span><br><span class="line">827</span><br><span class="line">828</span><br><span class="line">829</span><br><span class="line">830</span><br><span class="line">831</span><br><span class="line">832</span><br><span class="line">833</span><br><span class="line">834</span><br><span class="line">835</span><br><span class="line">836</span><br><span class="line">837</span><br><span class="line">838</span><br><span class="line">839</span><br><span class="line">840</span><br><span class="line">841</span><br><span class="line">842</span><br><span class="line">843</span><br><span class="line">844</span><br><span class="line">845</span><br><span class="line">846</span><br><span class="line">847</span><br><span class="line">848</span><br><span class="line">849</span><br><span class="line">850</span><br><span class="line">851</span><br><span class="line">852</span><br><span class="line">853</span><br><span class="line">854</span><br><span class="line">855</span><br><span class="line">856</span><br><span class="line">857</span><br><span class="line">858</span><br><span class="line">859</span><br><span class="line">860</span><br><span class="line">861</span><br><span class="line">862</span><br><span class="line">863</span><br><span class="line">864</span><br><span class="line">865</span><br><span class="line">866</span><br><span class="line">867</span><br><span class="line">868</span><br><span class="line">869</span><br><span class="line">870</span><br><span class="line">871</span><br><span class="line">872</span><br><span class="line">873</span><br><span class="line">874</span><br><span class="line">875</span><br><span class="line">876</span><br><span class="line">877</span><br><span class="line">878</span><br><span class="line">879</span><br><span class="line">880</span><br><span class="line">881</span><br><span class="line">882</span><br><span class="line">883</span><br><span class="line">884</span><br><span class="line">885</span><br><span class="line">886</span><br><span class="line">887</span><br><span class="line">888</span><br><span class="line">889</span><br><span class="line">890</span><br><span class="line">891</span><br><span class="line">892</span><br><span class="line">893</span><br><span class="line">894</span><br><span class="line">895</span><br><span class="line">896</span><br><span class="line">897</span><br><span class="line">898</span><br><span class="line">899</span><br><span class="line">900</span><br><span class="line">901</span><br><span class="line">902</span><br><span class="line">903</span><br><span class="line">904</span><br><span class="line">905</span><br><span class="line">906</span><br><span class="line">907</span><br><span class="line">908</span><br><span class="line">909</span><br><span class="line">910</span><br><span class="line">911</span><br><span class="line">912</span><br><span class="line">913</span><br><span class="line">914</span><br><span class="line">915</span><br><span class="line">916</span><br><span class="line">917</span><br><span class="line">918</span><br><span class="line">919</span><br><span class="line">920</span><br><span class="line">921</span><br><span class="line">922</span><br><span class="line">923</span><br><span class="line">924</span><br><span class="line">925</span><br><span class="line">926</span><br><span class="line">927</span><br><span class="line">928</span><br><span class="line">929</span><br><span class="line">930</span><br><span class="line">931</span><br><span class="line">932</span><br><span class="line">933</span><br><span class="line">934</span><br><span class="line">935</span><br><span class="line">936</span><br><span class="line">937</span><br><span class="line">938</span><br><span class="line">939</span><br><span class="line">940</span><br><span class="line">941</span><br><span class="line">942</span><br></pre></td><td class="code"><pre><span class="line">@set iasver=1.2</span><br><span class="line">@setlocal DisableDelayedExpansion</span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::============================================================================</span><br><span class="line">::</span><br><span class="line">::   IDM Activation Script (IAS)</span><br><span class="line">::</span><br><span class="line">::   Homepages: https://github.com/WindowsAddict/IDM-Activation-Script</span><br><span class="line">::              https://massgrave.dev/idm-activation-script</span><br><span class="line">::</span><br><span class="line">::       Email: windowsaddict@protonmail.com</span><br><span class="line">::</span><br><span class="line">::============================================================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::  To activate, run the script with &quot;/act&quot; parameter or change 0 to 1 in below line</span><br><span class="line">set _activate=0</span><br><span class="line"></span><br><span class="line">::  To Freeze the 30 days trial period, run the script with &quot;/frz&quot; parameter or change 0 to 1 in below line</span><br><span class="line">set _freeze=0</span><br><span class="line"></span><br><span class="line">::  To reset the activation and trial, run the script with &quot;/res&quot; parameter or change 0 to 1 in below line</span><br><span class="line">set _reset=0</span><br><span class="line"></span><br><span class="line">::  If value is changed in above lines or parameter is used then script will run in unattended mode</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Set Path variable, it helps if it is misconfigured in the system</span><br><span class="line"></span><br><span class="line">set &quot;PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\&quot;</span><br><span class="line">if exist &quot;%SystemRoot%\Sysnative\reg.exe&quot; (</span><br><span class="line">set &quot;PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows</span><br><span class="line">:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows</span><br><span class="line"></span><br><span class="line">set &quot;_cmdf=%~f0&quot;</span><br><span class="line">for %%# in (%*) do (</span><br><span class="line">if /i &quot;%%#&quot;==&quot;r1&quot; set r1=1</span><br><span class="line">if /i &quot;%%#&quot;==&quot;r2&quot; set r2=1</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (</span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line">start %SystemRoot%\Sysnative\cmd.exe /c &quot;&quot;!_cmdf!&quot; %* r1&quot;</span><br><span class="line">exit /b</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows</span><br><span class="line"></span><br><span class="line">if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (</span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line">start %SystemRoot%\SysArm32\cmd.exe /c &quot;&quot;!_cmdf!&quot; %* r2&quot;</span><br><span class="line">exit /b</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">set &quot;blank=&quot;</span><br><span class="line">set &quot;mas=ht%blank%tps%blank%://mass%blank%grave.dev/&quot;</span><br><span class="line"></span><br><span class="line">::  Check if Null service is working, it&#x27;s important for the batch script</span><br><span class="line"></span><br><span class="line">sc query Null | find /i &quot;RUNNING&quot;</span><br><span class="line">if %errorlevel% NEQ 0 (</span><br><span class="line">echo:</span><br><span class="line">echo Null service is not running, script may crash...</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">echo Help - %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">ping 127.0.0.1 -n 10</span><br><span class="line">)</span><br><span class="line">cls</span><br><span class="line"></span><br><span class="line">::  Check LF line ending</span><br><span class="line"></span><br><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line">&gt;nul findstr /v &quot;$&quot; &quot;%~nx0&quot; &amp;&amp; (</span><br><span class="line">echo:</span><br><span class="line">echo Error: Script either has LF line ending issue or an empty line at the end of the script is missing.</span><br><span class="line">echo:</span><br><span class="line">ping 127.0.0.1 -n 6 &gt;nul</span><br><span class="line">popd</span><br><span class="line">exit /b</span><br><span class="line">)</span><br><span class="line">popd</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">cls</span><br><span class="line">color 07</span><br><span class="line">title  IDM Activation Script %iasver%</span><br><span class="line"></span><br><span class="line">set _args=</span><br><span class="line">set _elev=</span><br><span class="line">set _unattended=0</span><br><span class="line"></span><br><span class="line">set _args=%*</span><br><span class="line">if defined _args set _args=%_args:&quot;=%</span><br><span class="line">if defined _args (</span><br><span class="line">for %%A in (%_args%) do (</span><br><span class="line">if /i &quot;%%A&quot;==&quot;-el&quot;  set _elev=1</span><br><span class="line">if /i &quot;%%A&quot;==&quot;/res&quot; set _reset=1</span><br><span class="line">if /i &quot;%%A&quot;==&quot;/frz&quot; set _freeze=1</span><br><span class="line">if /i &quot;%%A&quot;==&quot;/act&quot; set _activate=1</span><br><span class="line">)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for %%A in (%_activate% %_freeze% %_reset%) do (if &quot;%%A&quot;==&quot;1&quot; set _unattended=1)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">set &quot;nul1=1&gt;nul&quot;</span><br><span class="line">set &quot;nul2=2&gt;nul&quot;</span><br><span class="line">set &quot;nul6=2^&gt;nul&quot;</span><br><span class="line">set &quot;nul=&gt;nul 2&gt;&amp;1&quot;</span><br><span class="line"></span><br><span class="line">set psc=powershell.exe</span><br><span class="line">set winbuild=1</span><br><span class="line">for /f &quot;tokens=6 delims=[]. &quot; %%G in (&#x27;ver&#x27;) do set winbuild=%%G</span><br><span class="line"></span><br><span class="line">set _NCS=1</span><br><span class="line">if %winbuild% LSS 10586 set _NCS=0</span><br><span class="line">if %winbuild% GEQ 10586 reg query &quot;HKCU\Console&quot; /v ForceV2 %nul2% | find /i &quot;0x0&quot; %nul1% &amp;&amp; (set _NCS=0)</span><br><span class="line"></span><br><span class="line">if %_NCS% EQU 1 (</span><br><span class="line">for /F %%a in (&#x27;echo prompt $E ^| cmd&#x27;) do set &quot;esc=%%a&quot;</span><br><span class="line">set     &quot;Red=&quot;41;97m&quot;&quot;</span><br><span class="line">set    &quot;Gray=&quot;100;97m&quot;&quot;</span><br><span class="line">set   &quot;Green=&quot;42;97m&quot;&quot;</span><br><span class="line">set    &quot;Blue=&quot;44;97m&quot;&quot;</span><br><span class="line">set  &quot;_White=&quot;40;37m&quot;&quot;</span><br><span class="line">set  &quot;_Green=&quot;40;92m&quot;&quot;</span><br><span class="line">set &quot;_Yellow=&quot;40;93m&quot;&quot;</span><br><span class="line">) else (</span><br><span class="line">set     &quot;Red=&quot;Red&quot; &quot;white&quot;&quot;</span><br><span class="line">set    &quot;Gray=&quot;Darkgray&quot; &quot;white&quot;&quot;</span><br><span class="line">set   &quot;Green=&quot;DarkGreen&quot; &quot;white&quot;&quot;</span><br><span class="line">set    &quot;Blue=&quot;Blue&quot; &quot;white&quot;&quot;</span><br><span class="line">set  &quot;_White=&quot;Black&quot; &quot;Gray&quot;&quot;</span><br><span class="line">set  &quot;_Green=&quot;Black&quot; &quot;Green&quot;&quot;</span><br><span class="line">set &quot;_Yellow=&quot;Black&quot; &quot;Yellow&quot;&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">set &quot;nceline=echo: &amp;echo ==== ERROR ==== &amp;echo:&quot;</span><br><span class="line">set &quot;eline=echo: &amp;call :_color %Red% &quot;==== ERROR ====&quot; &amp;echo:&quot;</span><br><span class="line">set &quot;line=___________________________________________________________________________________________________&quot;</span><br><span class="line">set &quot;_buf=&#123;$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=34;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;&#125;&quot;</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">if %winbuild% LSS 7600 (</span><br><span class="line">%nceline%</span><br><span class="line">echo Unsupported OS version Detected [%winbuild%].</span><br><span class="line">echo Project is supported only for Windows 7/8/8.1/10/11 and their Server equivalent.</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for %%# in (powershell.exe) do @if &quot;%%~$PATH:#&quot;==&quot;&quot; (</span><br><span class="line">%nceline%</span><br><span class="line">echo Unable to find powershell.exe in the system.</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Fix for the special characters limitation in path name</span><br><span class="line"></span><br><span class="line">set &quot;_work=%~dp0&quot;</span><br><span class="line">if &quot;%_work:~-1%&quot;==&quot;\&quot; set &quot;_work=%_work:~0,-1%&quot;</span><br><span class="line"></span><br><span class="line">set &quot;_batf=%~f0&quot;</span><br><span class="line">set &quot;_batp=%_batf:&#x27;=&#x27;&#x27;%&quot;</span><br><span class="line"></span><br><span class="line">set _PSarg=&quot;&quot;&quot;%~f0&quot;&quot;&quot; -el %_args%</span><br><span class="line">set _PSarg=%_PSarg:&#x27;=&#x27;&#x27;%</span><br><span class="line"></span><br><span class="line">set &quot;_appdata=%appdata%&quot;</span><br><span class="line">set &quot;_ttemp=%userprofile%\AppData\Local\Temp&quot;</span><br><span class="line"></span><br><span class="line">setlocal EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">echo &quot;!_batf!&quot; | find /i &quot;!_ttemp!&quot; %nul1% &amp;&amp; (</span><br><span class="line">if /i not &quot;!_work!&quot;==&quot;!_ttemp!&quot; (</span><br><span class="line">%eline%</span><br><span class="line">echo Script is launched from the temp folder,</span><br><span class="line">echo Most likely you are running the script directly from the archive file.</span><br><span class="line">echo:</span><br><span class="line">echo Extract the archive file and launch the script from the extracted folder.</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Check PowerShell</span><br><span class="line"></span><br><span class="line">REM :PowerShellTest: $ExecutionContext.SessionState.LanguageMode :PowerShellTest:</span><br><span class="line"></span><br><span class="line">%psc% &quot;$f=[io.file]::ReadAllText(&#x27;!_batp!&#x27;) -split &#x27;:PowerShellTest:\s*&#x27;;iex ($f[1])&quot; | find /i &quot;FullLanguage&quot; %nul1% || (</span><br><span class="line">%eline%</span><br><span class="line">%psc% $ExecutionContext.SessionState.LanguageMode</span><br><span class="line">echo:</span><br><span class="line">echo PowerShell is not working. Aborting...</span><br><span class="line">echo If you have applied restrictions on Powershell then undo those changes.</span><br><span class="line">echo:</span><br><span class="line">echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Elevate script as admin and pass arguments and preventing loop</span><br><span class="line"></span><br><span class="line">%nul1% fltmc || (</span><br><span class="line">if not defined _elev %psc% &quot;start cmd.exe -arg &#x27;/c \&quot;!_PSarg!\&quot;&#x27; -verb runas&quot; &amp;&amp; exit /b</span><br><span class="line">%eline%</span><br><span class="line">echo This script requires admin privileges.</span><br><span class="line">echo To do so, right click on this script and select &#x27;Run as administrator&#x27;.</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Disable QuickEdit and launch from conhost.exe to avoid Terminal app</span><br><span class="line"></span><br><span class="line">set quedit=</span><br><span class="line">set terminal=</span><br><span class="line"></span><br><span class="line">if %_unattended%==1 (</span><br><span class="line">set quedit=1</span><br><span class="line">set terminal=1</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for %%# in (%_args%) do (if /i &quot;%%#&quot;==&quot;-qedit&quot; set quedit=1)</span><br><span class="line"></span><br><span class="line">if %winbuild% LSS 10586 (</span><br><span class="line">reg query HKCU\Console /v QuickEdit %nul2% | find /i &quot;0x0&quot; %nul1% &amp;&amp; set quedit=1</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if %winbuild% GEQ 17763 (</span><br><span class="line">set &quot;launchcmd=start conhost.exe %psc%&quot;</span><br><span class="line">) else (</span><br><span class="line">set &quot;launchcmd=%psc%&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">set &quot;d1=$t=[AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1).DefineDynamicModule(2, $False).DefineType(0);&quot;</span><br><span class="line">set &quot;d2=$t.DefinePInvokeMethod(&#x27;GetStdHandle&#x27;, &#x27;kernel32.dll&#x27;, 22, 1, [IntPtr], @([Int32]), 1, 3).SetImplementationFlags(128);&quot;</span><br><span class="line">set &quot;d3=$t.DefinePInvokeMethod(&#x27;SetConsoleMode&#x27;, &#x27;kernel32.dll&#x27;, 22, 1, [Boolean], @([IntPtr], [Int32]), 1, 3).SetImplementationFlags(128);&quot;</span><br><span class="line">set &quot;d4=$k=$t.CreateType(); $b=$k::SetConsoleMode($k::GetStdHandle(-10), 0x0080);&quot;</span><br><span class="line"></span><br><span class="line">if defined quedit goto :skipQE</span><br><span class="line">%launchcmd% &quot;%d1% %d2% %d3% %d4% &amp; cmd.exe &#x27;/c&#x27; &#x27;!_PSarg! -qedit&#x27;&quot; &amp;exit /b</span><br><span class="line">:skipQE</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Check for updates</span><br><span class="line"></span><br><span class="line">set -=</span><br><span class="line">set old=</span><br><span class="line"></span><br><span class="line">for /f &quot;delims=[] tokens=2&quot; %%# in (&#x27;ping -4 -n 1 iasupdatecheck.mass%-%grave.dev&#x27;) do (</span><br><span class="line">if not [%%#]==[] (echo &quot;%%#&quot; | find &quot;127.69&quot; %nul1% &amp;&amp; (echo &quot;%%#&quot; | find &quot;127.69.%iasver%&quot; %nul1% || set old=1))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if defined old (</span><br><span class="line">echo ________________________________________________</span><br><span class="line">%eline%</span><br><span class="line">echo You are running outdated version IAS %iasver%</span><br><span class="line">echo ________________________________________________</span><br><span class="line">echo:</span><br><span class="line">if not %_unattended%==1 (</span><br><span class="line">echo [1] Get Latest IAS</span><br><span class="line">echo [0] Continue Anyway</span><br><span class="line">echo:</span><br><span class="line">call :_color %_Green% &quot;Enter a menu option in the Keyboard [1,0] :&quot;</span><br><span class="line">choice /C:10 /N</span><br><span class="line">if !errorlevel!==2 rem</span><br><span class="line">if !errorlevel!==1 (start https://github.com/WindowsAddict/IDM-Activation-Script &amp; start %mas%/idm-activation-script &amp; exit /b)</span><br><span class="line">)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">cls</span><br><span class="line">title  IDM Activation Script %iasver%</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Initializing...</span><br><span class="line"></span><br><span class="line">::  Check WMI</span><br><span class="line"></span><br><span class="line">%psc% &quot;Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName&quot; %nul2% | find /i &quot;computersystem&quot; %nul1% || (</span><br><span class="line">%eline%</span><br><span class="line">%psc% &quot;Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName&quot;</span><br><span class="line">echo:</span><br><span class="line">echo WMI is not working. Aborting...</span><br><span class="line">echo:</span><br><span class="line">echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::  Check user account SID</span><br><span class="line"></span><br><span class="line">set _sid=</span><br><span class="line">for /f &quot;delims=&quot; %%a in (&#x27;%psc% &quot;([System.Security.Principal.NTAccount](Get-WmiObject -Class Win32_ComputerSystem).UserName).Translate([System.Security.Principal.SecurityIdentifier]).Value&quot; %nul6%&#x27;) do (set _sid=%%a)</span><br><span class="line"> </span><br><span class="line">reg query HKU\%_sid%\Software %nul% || (</span><br><span class="line">for /f &quot;delims=&quot; %%a in (&#x27;%psc% &quot;$explorerProc = Get-Process -Name explorer | Where-Object &#123;$_.SessionId -eq (Get-Process -Id $pid).SessionId&#125; | Select-Object -First 1; $sid = (gwmi -Query (&#x27;Select * From Win32_Process Where ProcessID=&#x27; + $explorerProc.Id)).GetOwnerSid().Sid; $sid&quot; %nul6%&#x27;) do (set _sid=%%a)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">reg query HKU\%_sid%\Software %nul% || (</span><br><span class="line">%eline%</span><br><span class="line">echo:</span><br><span class="line">echo [%_sid%]</span><br><span class="line">echo User Account SID not found. Aborting...</span><br><span class="line">echo:</span><br><span class="line">echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">::  Check if the current user SID is syncing with the HKCU entries</span><br><span class="line"></span><br><span class="line">%nul% reg delete HKCU\IAS_TEST /f</span><br><span class="line">%nul% reg delete HKU\%_sid%\IAS_TEST /f</span><br><span class="line"></span><br><span class="line">set HKCUsync=$null</span><br><span class="line">%nul% reg add HKCU\IAS_TEST</span><br><span class="line">%nul% reg query HKU\%_sid%\IAS_TEST &amp;&amp; (</span><br><span class="line">set HKCUsync=1</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">%nul% reg delete HKCU\IAS_TEST /f</span><br><span class="line">%nul% reg delete HKU\%_sid%\IAS_TEST /f</span><br><span class="line"></span><br><span class="line">::  Below code also works for ARM64 Windows 10 (including x64 bit emulation)</span><br><span class="line"></span><br><span class="line">for /f &quot;skip=2 tokens=2*&quot; %%a in (&#x27;reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment&quot; /v PROCESSOR_ARCHITECTURE&#x27;) do set arch=%%b</span><br><span class="line">if /i not &quot;%arch%&quot;==&quot;x86&quot; set arch=x64</span><br><span class="line"></span><br><span class="line">if &quot;%arch%&quot;==&quot;x86&quot; (</span><br><span class="line">set &quot;CLSID=HKCU\Software\Classes\CLSID&quot;</span><br><span class="line">set &quot;CLSID2=HKU\%_sid%\Software\Classes\CLSID&quot;</span><br><span class="line">set &quot;HKLM=HKLM\Software\Internet Download Manager&quot;</span><br><span class="line">) else (</span><br><span class="line">set &quot;CLSID=HKCU\Software\Classes\Wow6432Node\CLSID&quot;</span><br><span class="line">set &quot;CLSID2=HKU\%_sid%\Software\Classes\Wow6432Node\CLSID&quot;</span><br><span class="line">set &quot;HKLM=HKLM\SOFTWARE\Wow6432Node\Internet Download Manager&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for /f &quot;tokens=2*&quot; %%a in (&#x27;reg query &quot;HKU\%_sid%\Software\DownloadManager&quot; /v ExePath %nul6%&#x27;) do call set &quot;IDMan=%%b&quot;</span><br><span class="line"></span><br><span class="line">if not exist &quot;%IDMan%&quot; (</span><br><span class="line">if %arch%==x64 set &quot;IDMan=%ProgramFiles(x86)%\Internet Download Manager\IDMan.exe&quot;</span><br><span class="line">if %arch%==x86 set &quot;IDMan=%ProgramFiles%\Internet Download Manager\IDMan.exe&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if not exist %SystemRoot%\Temp md %SystemRoot%\Temp</span><br><span class="line">set &quot;idmcheck=tasklist /fi &quot;imagename eq idman.exe&quot; | findstr /i &quot;idman.exe&quot; %nul1%&quot;</span><br><span class="line"></span><br><span class="line">::  Check CLSID registry access</span><br><span class="line"></span><br><span class="line">%nul% reg add %CLSID2%\IAS_TEST</span><br><span class="line">%nul% reg query %CLSID2%\IAS_TEST || (</span><br><span class="line">%eline%</span><br><span class="line">echo Failed to write in %CLSID2%</span><br><span class="line">echo:</span><br><span class="line">echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">goto done2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">%nul% reg delete %CLSID2%\IAS_TEST /f</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">if %_reset%==1 goto :_reset</span><br><span class="line">if %_activate%==1 (set frz=0&amp;goto :_activate)</span><br><span class="line">if %_freeze%==1 (set frz=1&amp;goto :_activate)</span><br><span class="line"></span><br><span class="line">:MainMenu</span><br><span class="line"></span><br><span class="line">cls</span><br><span class="line">title  IDM Activation Script %iasver%</span><br><span class="line">if not defined terminal mode 75, 28</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">echo:                This script is NOT working with latest IDM.     </span><br><span class="line">echo:            ___________________________________________________ </span><br><span class="line">echo:                                                               </span><br><span class="line">echo:               [1] Freeze Trial</span><br><span class="line">echo:               [2] Activate</span><br><span class="line">echo:               [3] Reset Activation / Trial</span><br><span class="line">echo:               _____________________________________________   </span><br><span class="line">echo:                                                               </span><br><span class="line">echo:               [4] Download IDM</span><br><span class="line">echo:               [5] Help</span><br><span class="line">echo:               [0] Exit</span><br><span class="line">echo:            ___________________________________________________</span><br><span class="line">echo:         </span><br><span class="line">call :_color2 %_White% &quot;             &quot; %_Green% &quot;Enter a menu option in the Keyboard [1,2,3,4,5,0]&quot;</span><br><span class="line">choice /C:123450 /N</span><br><span class="line">set _erl=%errorlevel%</span><br><span class="line"></span><br><span class="line">if %_erl%==6 exit /b</span><br><span class="line">if %_erl%==5 start https://github.com/WindowsAddict/IDM-Activation-Script &amp; start https://massgrave.dev/idm-activation-script &amp; goto MainMenu</span><br><span class="line">if %_erl%==4 start https://www.internetdownloadmanager.com/download.html &amp; goto MainMenu</span><br><span class="line">if %_erl%==3 goto _reset</span><br><span class="line">if %_erl%==2 (set frz=0&amp;goto :_activate)</span><br><span class="line">if %_erl%==1 (set frz=1&amp;goto :_activate)</span><br><span class="line">goto :MainMenu</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:_reset</span><br><span class="line"></span><br><span class="line">cls</span><br><span class="line">if not %HKCUsync%==1 (</span><br><span class="line">if not defined terminal mode 153, 35</span><br><span class="line">) else (</span><br><span class="line">if not defined terminal mode 113, 35</span><br><span class="line">)</span><br><span class="line">if not defined terminal %psc% &quot;&amp;%_buf%&quot; %nul%</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">%idmcheck% &amp;&amp; taskkill /f /im idman.exe</span><br><span class="line"></span><br><span class="line">set _time=</span><br><span class="line">for /f %%a in (&#x27;%psc% &quot;(Get-Date).ToString(&#x27;yyyyMMdd-HHmmssfff&#x27;)&quot;&#x27;) do set _time=%%a</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Creating backup of CLSID registry keys in %SystemRoot%\Temp</span><br><span class="line"></span><br><span class="line">reg export %CLSID% &quot;%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg&quot;</span><br><span class="line">if not %HKCUsync%==1 reg export %CLSID2% &quot;%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg&quot;</span><br><span class="line"></span><br><span class="line">call :delete_queue</span><br><span class="line">%psc% &quot;$sid = &#x27;%_sid%&#x27;; $HKCUsync = %HKCUsync%; $lockKey = $null; $deleteKey = 1; $f=[io.file]::ReadAllText(&#x27;!_batp!&#x27;) -split &#x27;:regscan\:.*&#x27;;iex ($f[1])&quot;</span><br><span class="line"></span><br><span class="line">call :add_key</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo %line%</span><br><span class="line">echo:</span><br><span class="line">call :_color %Green% &quot;The IDM reset process has been completed.&quot;</span><br><span class="line"></span><br><span class="line">goto done</span><br><span class="line"></span><br><span class="line">:delete_queue</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Deleting IDM registry keys...</span><br><span class="line">echo:</span><br><span class="line"></span><br><span class="line">for %%# in (</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;FName&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;LName&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;Email&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;Serial&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;scansk&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;tvfrdt&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;radxcnt&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;LstCheck&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;ptrk_scdt&quot;&quot;</span><br><span class="line">&quot;&quot;HKCU\Software\DownloadManager&quot; &quot;/v&quot; &quot;LastCheckQU&quot;&quot;</span><br><span class="line">&quot;%HKLM%&quot;</span><br><span class="line">) do for /f &quot;tokens=* delims=&quot; %%A in (&quot;%%~#&quot;) do (</span><br><span class="line">set &quot;reg=&quot;%%~A&quot;&quot; &amp;reg query !reg! %nul% &amp;&amp; call :del</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if not %HKCUsync%==1 for %%# in (</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;FName&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;LName&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;Email&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;Serial&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;scansk&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;tvfrdt&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;radxcnt&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;LstCheck&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;ptrk_scdt&quot;&quot;</span><br><span class="line">&quot;&quot;HKU\%_sid%\Software\DownloadManager&quot; &quot;/v&quot; &quot;LastCheckQU&quot;&quot;</span><br><span class="line">) do for /f &quot;tokens=* delims=&quot; %%A in (&quot;%%~#&quot;) do (</span><br><span class="line">set &quot;reg=&quot;%%~A&quot;&quot; &amp;reg query !reg! %nul% &amp;&amp; call :del</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">:del</span><br><span class="line"></span><br><span class="line">reg delete %reg% /f %nul%</span><br><span class="line"></span><br><span class="line">if &quot;%errorlevel%&quot;==&quot;0&quot; (</span><br><span class="line">set &quot;reg=%reg:&quot;=%&quot;</span><br><span class="line">echo Deleted - !reg!</span><br><span class="line">) else (</span><br><span class="line">set &quot;reg=%reg:&quot;=%&quot;</span><br><span class="line">call :_color2 %Red% &quot;Failed - !reg!&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:_activate</span><br><span class="line"></span><br><span class="line">cls</span><br><span class="line">if not %HKCUsync%==1 (</span><br><span class="line">if not defined terminal mode 153, 35</span><br><span class="line">) else (</span><br><span class="line">if not defined terminal mode 113, 35</span><br><span class="line">)</span><br><span class="line">if not defined terminal %psc% &quot;&amp;%_buf%&quot; %nul%</span><br><span class="line"></span><br><span class="line">if %frz%==0 if %_unattended%==0 (</span><br><span class="line">echo:</span><br><span class="line">echo %line%</span><br><span class="line">echo:</span><br><span class="line">echo      Activation is not working for some users and IDM may show fake serial nag screen.</span><br><span class="line">echo:</span><br><span class="line">call :_color2 %_White% &quot;     &quot; %_Green% &quot;Its recommended to use Freeze Trial option instead.&quot;</span><br><span class="line">echo %line%</span><br><span class="line">echo:</span><br><span class="line">choice /C:19 /N /M &quot;&gt;    [1] Go Back [9] Activate : &quot;</span><br><span class="line">if !errorlevel!==1 goto :MainMenu</span><br><span class="line">cls</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">if not exist &quot;%IDMan%&quot; (</span><br><span class="line">call :_color %Red% &quot;IDM [Internet Download Manager] is not Installed.&quot;</span><br><span class="line">echo You can download it from  https://www.internetdownloadmanager.com/download.html</span><br><span class="line">goto done</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:: Internet check with internetdownloadmanager.com ping and port 80 test</span><br><span class="line"></span><br><span class="line">set _int=</span><br><span class="line">for /f &quot;delims=[] tokens=2&quot; %%# in (&#x27;ping -n 1 internetdownloadmanager.com&#x27;) do (if not [%%#]==[] set _int=1)</span><br><span class="line"></span><br><span class="line">if not defined _int (</span><br><span class="line">%psc% &quot;$t = New-Object Net.Sockets.TcpClient;try&#123;$t.Connect(&quot;&quot;&quot;internetdownloadmanager.com&quot;&quot;&quot;, 80)&#125;catch&#123;&#125;;$t.Connected&quot; | findstr /i &quot;true&quot; %nul1% || (</span><br><span class="line">call :_color %Red% &quot;Unable to connect internetdownloadmanager.com, aborting...&quot;</span><br><span class="line">goto done</span><br><span class="line">)</span><br><span class="line">call :_color %Gray% &quot;Ping command failed for internetdownloadmanager.com&quot;</span><br><span class="line">echo:</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for /f &quot;skip=2 tokens=2*&quot; %%a in (&#x27;reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion&quot; /v ProductName 2^&gt;nul&#x27;) do set &quot;regwinos=%%b&quot;</span><br><span class="line">for /f &quot;skip=2 tokens=2*&quot; %%a in (&#x27;reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment&quot; /v PROCESSOR_ARCHITECTURE&#x27;) do set &quot;regarch=%%b&quot;</span><br><span class="line">for /f &quot;tokens=6-7 delims=[]. &quot; %%i in (&#x27;ver&#x27;) do if &quot;%%j&quot;==&quot;&quot; (set fullbuild=%%i) else (set fullbuild=%%i.%%j)</span><br><span class="line">for /f &quot;tokens=2*&quot; %%a in (&#x27;reg query &quot;HKU\%_sid%\Software\DownloadManager&quot; /v idmvers %nul6%&#x27;) do set &quot;IDMver=%%b&quot;</span><br><span class="line"></span><br><span class="line">echo Checking Info - [%regwinos% ^| %fullbuild% ^| %regarch% ^| IDM: %IDMver%]</span><br><span class="line"></span><br><span class="line">%idmcheck% &amp;&amp; (echo: &amp; taskkill /f /im idman.exe)</span><br><span class="line"></span><br><span class="line">set _time=</span><br><span class="line">for /f %%a in (&#x27;%psc% &quot;(Get-Date).ToString(&#x27;yyyyMMdd-HHmmssfff&#x27;)&quot;&#x27;) do set _time=%%a</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Creating backup of CLSID registry keys in %SystemRoot%\Temp</span><br><span class="line"></span><br><span class="line">reg export %CLSID% &quot;%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg&quot;</span><br><span class="line">if not %HKCUsync%==1 reg export %CLSID2% &quot;%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg&quot;</span><br><span class="line"></span><br><span class="line">call :delete_queue</span><br><span class="line">call :add_key</span><br><span class="line"></span><br><span class="line">%psc% &quot;$sid = &#x27;%_sid%&#x27;; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $toggle = 1; $f=[io.file]::ReadAllText(&#x27;!_batp!&#x27;) -split &#x27;:regscan\:.*&#x27;;iex ($f[1])&quot;</span><br><span class="line"></span><br><span class="line">if %frz%==0 call :register_IDM</span><br><span class="line"></span><br><span class="line">call :download_files</span><br><span class="line">if not defined _fileexist (</span><br><span class="line">%eline%</span><br><span class="line">echo Error: Unable to download files with IDM.</span><br><span class="line">echo:</span><br><span class="line">echo Help: %mas%idm-activation-script.html#Troubleshoot</span><br><span class="line">goto :done</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">%psc% &quot;$sid = &#x27;%_sid%&#x27;; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $f=[io.file]::ReadAllText(&#x27;!_batp!&#x27;) -split &#x27;:regscan\:.*&#x27;;iex ($f[1])&quot;</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo %line%</span><br><span class="line">echo:</span><br><span class="line">if %frz%==0 (</span><br><span class="line">call :_color %Green% &quot;The IDM Activation process has been completed.&quot;</span><br><span class="line">echo:</span><br><span class="line">call :_color %Gray% &quot;If the fake serial screen appears, use the Freeze Trial option instead.&quot;</span><br><span class="line">) else (</span><br><span class="line">call :_color %Green% &quot;The IDM 30 days trial period is successfully freezed for Lifetime.&quot;</span><br><span class="line">echo:</span><br><span class="line">call :_color %Gray% &quot;If IDM is showing a popup to register, reinstall IDM.&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:done</span><br><span class="line"></span><br><span class="line">echo %line%</span><br><span class="line">echo:</span><br><span class="line">echo:</span><br><span class="line">if %_unattended%==1 timeout /t 2 &amp; exit /b</span><br><span class="line"></span><br><span class="line">if defined terminal (</span><br><span class="line">call :_color %_Yellow% &quot;Press 0 key to return...&quot;</span><br><span class="line">choice /c 0 /n</span><br><span class="line">) else (</span><br><span class="line">call :_color %_Yellow% &quot;Press any key to return...&quot;</span><br><span class="line">pause %nul1%</span><br><span class="line">)</span><br><span class="line">goto MainMenu</span><br><span class="line"></span><br><span class="line">:done2</span><br><span class="line"></span><br><span class="line">if %_unattended%==1 timeout /t 2 &amp; exit /b</span><br><span class="line"></span><br><span class="line">if defined terminal (</span><br><span class="line">echo Press 0 key to exit...</span><br><span class="line">choice /c 0 /n</span><br><span class="line">) else (</span><br><span class="line">echo Press any key to exit...</span><br><span class="line">pause %nul1%</span><br><span class="line">)</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:_rcont</span><br><span class="line"></span><br><span class="line">reg add %reg% %nul%</span><br><span class="line">call :add</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">:register_IDM</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Applying registration details...</span><br><span class="line">echo:</span><br><span class="line"></span><br><span class="line">set /a fname = %random% %% 9999 + 1000</span><br><span class="line">set /a lname = %random% %% 9999 + 1000</span><br><span class="line">set email=%fname%.%lname%@tonec.com</span><br><span class="line"></span><br><span class="line">for /f &quot;delims=&quot; %%a in (&#x27;%psc% &quot;$key = -join ((Get-Random -Count  20 -InputObject ([char[]](&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#x27;))));$key = ($key.Substring(0,  5) + &#x27;-&#x27; + $key.Substring(5,  5) + &#x27;-&#x27; + $key.Substring(10,  5) + &#x27;-&#x27; + $key.Substring(15,  5) + $key.Substring(20));Write-Output $key&quot; %nul6%&#x27;) do (set key=%%a)</span><br><span class="line"></span><br><span class="line">set &quot;reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d &quot;%fname%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d &quot;%lname%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d &quot;%email%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d &quot;%key%&quot;&quot; &amp; call :_rcont</span><br><span class="line"></span><br><span class="line">if not %HKCUsync%==1 (</span><br><span class="line">set &quot;reg=HKU\%_sid%\SOFTWARE\DownloadManager /v FName /t REG_SZ /d &quot;%fname%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKU\%_sid%\SOFTWARE\DownloadManager /v LName /t REG_SZ /d &quot;%lname%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Email /t REG_SZ /d &quot;%email%&quot;&quot; &amp; call :_rcont</span><br><span class="line">set &quot;reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d &quot;%key%&quot;&quot; &amp; call :_rcont</span><br><span class="line">)</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">:download_files</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Triggering a few downloads to create certain registry keys, please wait...</span><br><span class="line">echo:</span><br><span class="line"></span><br><span class="line">set &quot;file=%SystemRoot%\Temp\temp.png&quot;</span><br><span class="line">set _fileexist=</span><br><span class="line"></span><br><span class="line">set link=https://www.internetdownloadmanager.com/images/idm_box_min.png</span><br><span class="line">call :download</span><br><span class="line">set link=https://www.internetdownloadmanager.com/register/IDMlib/images/idman_logos.png</span><br><span class="line">call :download</span><br><span class="line">set link=https://www.internetdownloadmanager.com/pictures/idm_about.png</span><br><span class="line">call :download</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">timeout /t 3 %nul1%</span><br><span class="line">%idmcheck% &amp;&amp; taskkill /f /im idman.exe</span><br><span class="line">if exist &quot;%file%&quot; del /f /q &quot;%file%&quot;</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">:download</span><br><span class="line"></span><br><span class="line">set /a attempt=0</span><br><span class="line">if exist &quot;%file%&quot; del /f /q &quot;%file%&quot;</span><br><span class="line">start &quot;&quot; /B &quot;%IDMan%&quot; /n /d &quot;%link%&quot; /p &quot;%SystemRoot%\Temp&quot; /f temp.png</span><br><span class="line"></span><br><span class="line">:check_file</span><br><span class="line"></span><br><span class="line">timeout /t 1 %nul1%</span><br><span class="line">set /a attempt+=1</span><br><span class="line">if exist &quot;%file%&quot; set _fileexist=1&amp;exit /b</span><br><span class="line">if %attempt% GEQ 20 exit /b</span><br><span class="line">goto :Check_file</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:add_key</span><br><span class="line"></span><br><span class="line">echo:</span><br><span class="line">echo Adding registry key...</span><br><span class="line">echo:</span><br><span class="line"></span><br><span class="line">set &quot;reg=&quot;%HKLM%&quot; /v &quot;AdvIntDriverEnabled2&quot;&quot;</span><br><span class="line"></span><br><span class="line">reg add %reg% /t REG_DWORD /d &quot;1&quot; /f %nul%</span><br><span class="line"></span><br><span class="line">:add</span><br><span class="line"></span><br><span class="line">if &quot;%errorlevel%&quot;==&quot;0&quot; (</span><br><span class="line">set &quot;reg=%reg:&quot;=%&quot;</span><br><span class="line">echo Added - !reg!</span><br><span class="line">) else (</span><br><span class="line">set &quot;reg=%reg:&quot;=%&quot;</span><br><span class="line">call :_color2 %Red% &quot;Failed - !reg!&quot;</span><br><span class="line">)</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:regscan:</span><br><span class="line">$finalValues = @()</span><br><span class="line"></span><br><span class="line">$arch = (Get-ItemProperty -Path &#x27;HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#x27;).PROCESSOR_ARCHITECTURE</span><br><span class="line">if ($arch -eq &quot;x86&quot;) &#123;</span><br><span class="line">  $regPaths = @(&quot;HKCU:\Software\Classes\CLSID&quot;, &quot;Registry::HKEY_USERS\$sid\Software\Classes\CLSID&quot;)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  $regPaths = @(&quot;HKCU:\Software\Classes\WOW6432Node\CLSID&quot;, &quot;Registry::HKEY_USERS\$sid\Software\Classes\Wow6432Node\CLSID&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foreach ($regPath in $regPaths) &#123;</span><br><span class="line">    if (($regPath -match &quot;HKEY_USERS&quot;) -and ($HKCUsync -ne $null)) &#123;</span><br><span class="line">        continue</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	Write-Host</span><br><span class="line">	Write-Host &quot;Searching IDM CLSID Registry Keys in $regPath&quot;</span><br><span class="line">	Write-Host</span><br><span class="line">	</span><br><span class="line">    $subKeys = Get-ChildItem -Path $regPath -ErrorAction SilentlyContinue -ErrorVariable lockedKeys | Where-Object &#123; $_.PSChildName -match &#x27;^\&#123;[A-F0-9]&#123;8&#125;-[A-F0-9]&#123;4&#125;-[A-F0-9]&#123;4&#125;-[A-F0-9]&#123;4&#125;-[A-F0-9]&#123;12&#125;\&#125;$&#x27; &#125;</span><br><span class="line"></span><br><span class="line">    foreach ($lockedKey in $lockedKeys) &#123;</span><br><span class="line">        $leafValue = Split-Path -Path $lockedKey.TargetObject -Leaf</span><br><span class="line">        $finalValues += $leafValue</span><br><span class="line">        Write-Output &quot;$leafValue - Found Locked Key&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ($subKeys -eq $null) &#123;</span><br><span class="line">	continue</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	$subKeysToExclude = &quot;LocalServer32&quot;, &quot;InProcServer32&quot;, &quot;InProcHandler32&quot;</span><br><span class="line"></span><br><span class="line">    $filteredKeys = $subKeys | Where-Object &#123; !($_.GetSubKeyNames() | Where-Object &#123; $subKeysToExclude -contains $_ &#125;) &#125;</span><br><span class="line"></span><br><span class="line">    foreach ($key in $filteredKeys) &#123;</span><br><span class="line">        $fullPath = $key.PSPath</span><br><span class="line">        $keyValues = Get-ItemProperty -Path $fullPath -ErrorAction SilentlyContinue</span><br><span class="line">        $defaultValue = $keyValues.PSObject.Properties | Where-Object &#123; $_.Name -eq &#x27;(default)&#x27; &#125; | Select-Object -ExpandProperty Value</span><br><span class="line"></span><br><span class="line">        if (($defaultValue -match &quot;^\d+$&quot;) -and ($key.SubKeyCount -eq 0)) &#123;</span><br><span class="line">            $finalValues += $($key.PSChildName)</span><br><span class="line">            Write-Output &quot;$($key.PSChildName) - Found Digit In Default and No Subkeys&quot;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        if (($defaultValue -match &quot;\+|=&quot;) -and ($key.SubKeyCount -eq 0)) &#123;</span><br><span class="line">            $finalValues += $($key.PSChildName)</span><br><span class="line">            Write-Output &quot;$($key.PSChildName) - Found + or = In Default and No Subkeys&quot;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        $versionValue = Get-ItemProperty -Path &quot;$fullPath\Version&quot; -ErrorAction SilentlyContinue | Select-Object -ExpandProperty &#x27;(default)&#x27; -ErrorAction SilentlyContinue</span><br><span class="line">        if (($versionValue -match &quot;^\d+$&quot;) -and ($key.SubKeyCount -eq 1)) &#123;</span><br><span class="line">            $finalValues += $($key.PSChildName)</span><br><span class="line">            Write-Output &quot;$($key.PSChildName) - Found Digit In \Version and No Other Subkeys&quot;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        $keyValues.PSObject.Properties | ForEach-Object &#123;</span><br><span class="line">            if ($_.Name -match &quot;MData|Model|scansk|Therad&quot;) &#123;</span><br><span class="line">                $finalValues += $($key.PSChildName)</span><br><span class="line">                Write-Output &quot;$($key.PSChildName) - Found MData Model scansk Therad&quot;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (($key.ValueCount -eq 0) -and ($key.SubKeyCount -eq 0)) &#123;</span><br><span class="line">            $finalValues += $($key.PSChildName)</span><br><span class="line">            Write-Output &quot;$($key.PSChildName) - Found Empty Key&quot;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$finalValues = @($finalValues | Select-Object -Unique)</span><br><span class="line"></span><br><span class="line">if ($finalValues -ne $null) &#123;</span><br><span class="line">    Write-Host</span><br><span class="line">    if ($lockKey -ne $null) &#123;</span><br><span class="line">        Write-Host &quot;Locking IDM CLSID Registry Keys...&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    if ($deleteKey -ne $null) &#123;</span><br><span class="line">        Write-Host &quot;Deleting IDM CLSID Registry Keys...&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    Write-Host</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    Write-Host &quot;IDM CLSID Registry Keys are not found.&quot;</span><br><span class="line">	Exit</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (($finalValues.Count -gt 20) -and ($toggle -ne $null)) &#123;</span><br><span class="line">	$lockKey = $null</span><br><span class="line">	$deleteKey = 1</span><br><span class="line">    Write-Host &quot;The IDM keys count is more than 20. Deleting them now instead of locking...&quot;</span><br><span class="line">	Write-Host</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Take-Permissions &#123;</span><br><span class="line">    param($rootKey, $regKey)</span><br><span class="line">    $AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)</span><br><span class="line">    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)</span><br><span class="line">    $TypeBuilder = $ModuleBuilder.DefineType(0)</span><br><span class="line"></span><br><span class="line">    $TypeBuilder.DefinePInvokeMethod(&#x27;RtlAdjustPrivilege&#x27;, &#x27;ntdll.dll&#x27;, &#x27;Public, Static&#x27;, 1, [int], @([int], [bool], [bool], [bool].MakeByRefType()), 1, 3) | Out-Null</span><br><span class="line">    9,17,18 | ForEach-Object &#123; $TypeBuilder.CreateType()::RtlAdjustPrivilege($_, $true, $false, [ref]$false) | Out-Null &#125;</span><br><span class="line"></span><br><span class="line">    $SID = New-Object System.Security.Principal.SecurityIdentifier(&#x27;S-1-5-32-544&#x27;)</span><br><span class="line">    $IDN = ($SID.Translate([System.Security.Principal.NTAccount])).Value</span><br><span class="line">    $Admin = New-Object System.Security.Principal.NTAccount($IDN)</span><br><span class="line"></span><br><span class="line">    $everyone = New-Object System.Security.Principal.SecurityIdentifier(&#x27;S-1-1-0&#x27;)</span><br><span class="line">    $none = New-Object System.Security.Principal.SecurityIdentifier(&#x27;S-1-0-0&#x27;)</span><br><span class="line"></span><br><span class="line">    $key = [Microsoft.Win32.Registry]::$rootKey.OpenSubKey($regkey, &#x27;ReadWriteSubTree&#x27;, &#x27;TakeOwnership&#x27;)</span><br><span class="line"></span><br><span class="line">    $acl = New-Object System.Security.AccessControl.RegistrySecurity</span><br><span class="line">    $acl.SetOwner($Admin)</span><br><span class="line">    $key.SetAccessControl($acl)</span><br><span class="line"></span><br><span class="line">    $key = $key.OpenSubKey(&#x27;&#x27;, &#x27;ReadWriteSubTree&#x27;, &#x27;ChangePermissions&#x27;)</span><br><span class="line">    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, &#x27;FullControl&#x27;, &#x27;ContainerInherit&#x27;, &#x27;None&#x27;, &#x27;Allow&#x27;)</span><br><span class="line">    $acl.ResetAccessRule($rule)</span><br><span class="line">    $key.SetAccessControl($acl)</span><br><span class="line"></span><br><span class="line">    if ($lockKey -ne $null) &#123;</span><br><span class="line">        $acl = New-Object System.Security.AccessControl.RegistrySecurity</span><br><span class="line">        $acl.SetOwner($none)</span><br><span class="line">        $key.SetAccessControl($acl)</span><br><span class="line"></span><br><span class="line">        $key = $key.OpenSubKey(&#x27;&#x27;, &#x27;ReadWriteSubTree&#x27;, &#x27;ChangePermissions&#x27;)</span><br><span class="line">        $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, &#x27;FullControl&#x27;, &#x27;Deny&#x27;)</span><br><span class="line">        $acl.ResetAccessRule($rule)</span><br><span class="line">        $key.SetAccessControl($acl)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foreach ($regPath in $regPaths) &#123;</span><br><span class="line">    if (($regPath -match &quot;HKEY_USERS&quot;) -and ($HKCUsync -ne $null)) &#123;</span><br><span class="line">        continue</span><br><span class="line">    &#125;</span><br><span class="line">    foreach ($finalValue in $finalValues) &#123;</span><br><span class="line">        $fullPath = Join-Path -Path $regPath -ChildPath $finalValue</span><br><span class="line">        if ($fullPath -match &#x27;HKCU:&#x27;) &#123;</span><br><span class="line">            $rootKey = &#x27;CurrentUser&#x27;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $rootKey = &#x27;Users&#x27;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $position = $fullPath.IndexOf(&quot;\&quot;)</span><br><span class="line">        $regKey = $fullPath.Substring($position + 1)</span><br><span class="line"></span><br><span class="line">        if ($lockKey -ne $null) &#123;</span><br><span class="line">            if (-not (Test-Path -Path $fullPath -ErrorAction SilentlyContinue)) &#123; New-Item -Path $fullPath -Force -ErrorAction SilentlyContinue | Out-Null &#125;</span><br><span class="line">            Take-Permissions $rootKey $regKey</span><br><span class="line">            try &#123;</span><br><span class="line">                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop</span><br><span class="line">                Write-Host -back &#x27;DarkRed&#x27; -fore &#x27;white&#x27; &quot;Failed - $fullPath&quot;</span><br><span class="line">            &#125;</span><br><span class="line">            catch &#123;</span><br><span class="line">                Write-Host &quot;Locked - $fullPath&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if ($deleteKey -ne $null) &#123;</span><br><span class="line">            if (Test-Path -Path $fullPath) &#123;</span><br><span class="line">                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction SilentlyContinue</span><br><span class="line">                if (Test-Path -Path $fullPath) &#123;</span><br><span class="line">                    Take-Permissions $rootKey $regKey</span><br><span class="line">                    try &#123;</span><br><span class="line">                        Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop</span><br><span class="line">                        Write-Host &quot;Deleted - $fullPath&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                    catch &#123;</span><br><span class="line">                        Write-Host -back &#x27;DarkRed&#x27; -fore &#x27;white&#x27; &quot;Failed - $fullPath&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    Write-Host &quot;Deleted - $fullPath&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">:regscan:</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line"></span><br><span class="line">:_color</span><br><span class="line"></span><br><span class="line">if %_NCS% EQU 1 (</span><br><span class="line">echo %esc%[%~1%~2%esc%[0m</span><br><span class="line">) else (</span><br><span class="line">%psc% write-host -back &#x27;%1&#x27; -fore &#x27;%2&#x27; &#x27;%3&#x27;</span><br><span class="line">)</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">:_color2</span><br><span class="line"></span><br><span class="line">if %_NCS% EQU 1 (</span><br><span class="line">echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m</span><br><span class="line">) else (</span><br><span class="line">%psc% write-host -back &#x27;%1&#x27; -fore &#x27;%2&#x27; &#x27;%3&#x27; -NoNewline; write-host -back &#x27;%4&#x27; -fore &#x27;%5&#x27; &#x27;%6&#x27;</span><br><span class="line">)</span><br><span class="line">exit /b</span><br><span class="line"></span><br><span class="line">::========================================================================================================================================</span><br><span class="line">:: Leave empty line below</span><br></pre></td></tr></table></figure>
+
+<p>记得重启一下软件,还有就是不要恶意利用这两个</p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/05/22/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Hexo%E4%BE%BF%E6%8D%B7%E8%84%9A%E6%9C%AC/"><span class="nav-label">← 上一篇</span><span class="nav-title">Hexo便捷脚本</span></a></div><div class="post-nav next"><a href="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/"><span class="nav-label">下一篇 →</span><span class="nav-title">深度缓冲区-顶点着色器-光照基础-自定义光照</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC&amp;url=%2F2026%2F05%2F22%2F%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259B%25B8%25E5%2585%25B3%2FTexturePacker%25E5%2592%258CIDM%25E5%2585%258D%25E8%25B4%25B9%25E7%2589%2588%25E6%259C%25AC%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F05%2F22%2F%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259B%25B8%25E5%2585%25B3%2FTexturePacker%25E5%2592%258CIDM%25E5%2585%258D%25E8%25B4%25B9%25E7%2589%2588%25E6%259C%25AC%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F05%2F22%2F%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259B%25B8%25E5%2585%25B3%2FTexturePacker%25E5%2592%258CIDM%25E5%2585%258D%25E8%25B4%25B9%25E7%2589%2588%25E6%259C%25AC%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/05/22/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F05%2F22%2F%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259B%25B8%25E5%2585%25B3%2FTexturePacker%25E5%2592%258CIDM%25E5%2585%258D%25E8%25B4%25B9%25E7%2589%2588%25E6%259C%25AC%2F&amp;title=TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F05%2F22%2F%25E8%25BD%25AF%25E4%25BB%25B6%25E7%259B%25B8%25E5%2585%25B3%2FTexturePacker%25E5%2592%258CIDM%25E5%2585%258D%25E8%25B4%25B9%25E7%2589%2588%25E6%259C%25AC%2F&amp;title=TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/05/22/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
+
+<script src="/js/wall.js"></script>
+
+<script src="/js/anime.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

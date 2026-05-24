@@ -1,0 +1,1201 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #ff6b6b;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#ff6b6b"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/19.png" alt="深度缓冲区-顶点着色器-光照基础-自定义光照"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/shdergraph/">shdergraph</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-05-22T09:58:10.000Z">2026-05-22</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.2k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>11</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">深度缓冲区-顶点着色器-光照基础-自定义光照</h1><div class="post-tags"><a class="tag" href="/tags/shdergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shdergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="深度缓冲区"><a href="#深度缓冲区" class="headerlink" title="深度缓冲区"></a>深度缓冲区</h1><p>为了实现渲染管线判定物体的空间层级关系,由于系统无法仅凭色彩数据判断是否覆盖已有像素,深度缓冲(Depth Buffer)作为辅助缓冲区,又称之为Z缓存(z-buffer)</p>
+<p>这个用于作为第二存储位图,尺寸和帧缓冲区完全一致,但存储的是物体像素到摄像机的空间距离</p>
+<p> 深度缓冲采用非线性映射存储0-1区间的数值,通过为近景物体分配更多数据位来实现高精度渲染</p>
+<p>在渲染物体时会绘制物体的深度值然后与深度缓冲区中的值进行比对这个过程就是深度测试(depth test),当绘制物体的深度值小于或等于缓冲区值时,新物体就会覆盖原有的物体,若绘制的是不透明物体还会更新缓冲区中的值,透明物体一般情况下不会写入深度数据</p>
+<p>然而这些不需要了解,因为这些比对操作由shadergraph自动完成</p>
+<p>​	<style>.mckenihrlorh{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522192910972.png" class="mckenihrlorh" alt="image-20260522192910972"></p>
+<p>这里我们需要关注这里面的这两个东西—–depth write(深度写入)和depth test(深度测试)</p>
+<p>深度写入功能决定在深度测试通过时,是否更新深度缓冲区数值,默认是auto模式,该模式会自动处理不透明物体并跳过透明物体</p>
+<p>而深度测试功能就是自定义新像素写入时的深度比较方式,系统默认采用L Equal模式也就是<strong>当前深度 ≤ 缓冲区深度</strong></p>
+<p>一、Depth Write（深度写入）— 3 个选项</p>
+<p>控制是否将当前像素的深度值写入 <strong>Depth Buffer（深度缓冲区 &#x2F; Z-Buffer）</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Auto（自动）</strong></td>
+<td>根据渲染队列（Render Queue）自动决定</td>
+<td>默认设置，不透明物体开启，透明物体关闭</td>
+</tr>
+<tr>
+<td><strong>Force Enabled（强制开启）</strong></td>
+<td>强制写入深度，无视队列类型</td>
+<td>特殊透明物体需要参与深度测试、粒子软粒子</td>
+</tr>
+<tr>
+<td><strong>Force Disabled（强制关闭）</strong></td>
+<td>强制不写入深度</td>
+<td>纯透明物体、UI、特效、后处理</td>
+</tr>
+</tbody></table>
+<hr>
+<p>二、Depth Test（深度测试）— 8 个比较模式</p>
+<p>控制当前像素的深度值如何与 <strong>Depth Buffer 中已有的深度值</strong> 进行比较，决定是否通过测试、是否渲染该像素</p>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">数学含义</th>
+<th align="left">效果</th>
+<th align="left">典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Less</strong></td>
+<td align="left">当前深度 &lt; 缓冲区深度</td>
+<td align="left">比已有物体<strong>更近</strong>才渲染</td>
+<td align="left">标准不透明物体（默认）</td>
+</tr>
+<tr>
+<td align="left"><strong>Greater</strong></td>
+<td align="left">当前深度 &gt; 缓冲区深度</td>
+<td align="left">比已有物体<strong>更远</strong>才渲染</td>
+<td align="left">特殊效果，如”只显示被遮挡部分”</td>
+</tr>
+<tr>
+<td align="left"><strong>LEqual</strong>(默认)</td>
+<td align="left">当前深度 ≤ 缓冲区深度</td>
+<td align="left">更近或<strong>相等</strong>时渲染</td>
+<td align="left">透明物体、避免 Z-Fighting</td>
+</tr>
+<tr>
+<td align="left"><strong>GEqual</strong></td>
+<td align="left">当前深度 ≥ 缓冲区深度</td>
+<td align="left">更远或<strong>相等</strong>时渲染</td>
+<td align="left">天空盒、远处背景</td>
+</tr>
+<tr>
+<td align="left"><strong>Equal</strong></td>
+<td align="left">当前深度 &#x3D; 缓冲区深度</td>
+<td align="left"><strong>仅相等</strong>时渲染</td>
+<td align="left">特殊遮罩、Stencil 配合</td>
+</tr>
+<tr>
+<td align="left"><strong>NotEqual</strong></td>
+<td align="left">当前深度 ≠ 缓冲区深度</td>
+<td align="left"><strong>不相等</strong>时渲染</td>
+<td align="left">排除特定深度区域</td>
+</tr>
+<tr>
+<td align="left"><strong>Always</strong></td>
+<td align="left">永远通过</td>
+<td align="left"><strong>无视深度</strong>，总是渲染</td>
+<td align="left">UI、全屏特效、Debug 显示</td>
+</tr>
+<tr>
+<td align="left"><strong>Never</strong></td>
+<td align="left">永远不通过</td>
+<td align="left"><strong>永远丢弃</strong>，不渲染</td>
+<td align="left">占位、调试、特殊剔除</td>
+</tr>
+</tbody></table>
+<p>当然也可以启用材质覆盖 <strong>Allow material override</strong>这样就可以在inspector窗口里对单个材质进行设置</p>
+<p>​	<style>.fwdibjyloeoj{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522194748559.png" class="fwdibjyloeoj" alt="image-20260522194748559"></p>
+<p>而unity会在绘制完所有不透明物体后将整个深度纹理状态复制到相机深度纹理这样着色器就可以访问这个纹理了,不过这个深度纹理仅对透明着色器有意义,对于不透明着色器读取深度纹理时这个纹理会显示为灰色,因为深度纹理不记录透明物体的深度信息</p>
+<h2 id="在URP中使用深度纹理"><a href="#在URP中使用深度纹理" class="headerlink" title="在URP中使用深度纹理"></a>在URP中使用深度纹理</h2><p>如果要在URP中使用深度纹理则需要启用这些文件里的Depth Texture(深度纹理)</p>
+<p>​	<style>.delpbapuzlkq{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522200227723.png" class="delpbapuzlkq" alt="image-20260522200227723"></p>
+<p>然后我们新建一个无光照的shadergraph</p>
+<p>将surface type改为transparent 也就是透明,然后添加两个颜色节点——ForegroundColor(前景色)和BackgroundColor</p>
+<p>​	<style>.swwyjxcmxoyk{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110126447.png" class="swwyjxcmxoyk" alt="image-20260523110126447"></p>
+<p>然后我们添加SceneDepth节点,这个默认会使用当前渲染像素的屏幕坐标来采样深度纹理,无需手动输入任何参数</p>
+<p>​	<style>.sdnbwjvewsdm{zoom:80%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110325461.png" class="sdnbwjvewsdm" alt="image-20260523110325461"></p>
+<p>Unity Shader Graph 的 <strong>Scene Depth</strong> 节点提供三种 <strong>Sampling（采样模式）</strong>，用于以不同方式解释深度缓冲区的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">采样模式</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Linear 01</strong></td>
+<td align="left">返回线性深度值，范围 <strong>0 到 1</strong>。0 对应相机的近裁剪面，1 对应远裁剪面。</td>
+</tr>
+<tr>
+<td align="left"><strong>Raw</strong></td>
+<td align="left">返回深度缓冲区的<strong>原始非线性深度值</strong>，范围同样为 0 到 1，但分布不是线性的（通常在近处精度高，远处精度低）。</td>
+</tr>
+<tr>
+<td align="left"><strong>Eye</strong></td>
+<td align="left">将深度值转换为** Eye（视图&#x2F;相机）空间距离**，单位为<strong>米</strong>，表示从相机到该像素对应场景点的实际距离。</td>
+</tr>
+</tbody></table>
+<p>在 Scene Depth 节点的上下文中，”线性关系”指的是 <strong>深度值与相机到物体的实际距离（Z 值）之间是否成正比</strong></p>
+<p>线性和非线性的区别</p>
+<blockquote>
+<p><strong>线性</strong> &#x3D; 深度值翻倍，实际距离也翻倍（成正比）<br><strong>非线性</strong> &#x3D; 深度值翻倍，实际距离不是翻倍（不成正比）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">数学关系</th>
+<th align="left">直观理解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Raw</strong></td>
+<td align="left"><strong>非线性</strong>（1&#x2F;z 关系）</td>
+<td align="left">近处精度极高，远处精度极低。同样的深度值变化，在近处代表的实际距离变化很小，在远处代表的实际距离变化很大。</td>
+</tr>
+<tr>
+<td align="left"><strong>Linear 01</strong></td>
+<td align="left"><strong>线性</strong>（归一化到 0-1）</td>
+<td align="left">深度值与实际距离成正比，但被压缩到 0（近裁剪面）到 1（远裁剪面）之间。0.5 正好对应远近裁剪面中间的距离。</td>
+</tr>
+<tr>
+<td align="left"><strong>Eye</strong></td>
+<td align="left"><strong>线性</strong>（世界单位）</td>
+<td align="left">直接输出实际距离（米），0.5 就是 0.5 米，100 就是 100 米，没有任何归一化。</td>
+</tr>
+</tbody></table>
+<p>而做物体轮廓描边效果可以使用Linear01</p>
+<p>​	<style>.hjhccnefvnrt{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523111230635.png" class="hjhccnefvnrt" alt="image-20260523111230635"></p>
+<p>然后我们添加Lerp节点</p>
+<p>Lerp是线性插值(Linear Interpolation)的简称,指的是在两个数值之间做平滑过渡</p>
+<p>左侧的A 和B两个输入端口分别接收要混合的数值,T输入则控制混合权重,决定结果偏向A还是B,取值范围0-1</p>
+<blockquote>
+<p>例如T&#x3D;0.25时输出结果就是75%的A加上25%的B</p>
+</blockquote>
+<p>​	<style>.nlvqketukrki{zoom: 50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523112323787.png" class="nlvqketukrki" alt="image-20260523112323787"></p>
+<p>我们将前景色ForegroundColor设置为绿色,BackgroundColor后景色设置为白色</p>
+<p>此时的材质显示的是白色</p>
+<p>​	<style>.idajbpmglcpq{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125309976.png" class="idajbpmglcpq" alt="image-20260523125309976"></p>
+<p>然后我们让视角被这个白色方块遮挡这三个物体</p>
+<p>​	<style>.zufgtygdrhfv{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125448422.png" class="zufgtygdrhfv" alt="image-20260523125448422"></p>
+<p>我们可以看到①和②号显示为前景色,而③号为白色,说明深度纹理有效</p>
+ <style>.gkbbuctqkoiw{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131127007.png" class="gkbbuctqkoiw" alt="image-20260523131127007">
+
+<p>调整透明度会影响绿色的明暗度,除了这个③号,这里有一个关键的决定性因素——<strong>surface type</strong></p>
+<p>​	<style>.lobnchpjtrls{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131821930.png" class="lobnchpjtrls" alt="image-20260523131821930"></p>
+<p>若设置为Opaque就表明这个是不透明材质,若设置为Transparent就是透明材质</p>
+<p>​	<style>.tkwkixauznno{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523132305621.png" class="tkwkixauznno" alt="image-20260523132305621"></p>
+<p>我们的③号就是用的Transparency的材质</p>
+<p>不透明材质的物品全部显示为前景色,例如我们将背景色设置为黄色就可以更明显的看出</p>
+<p>​	<style>.zjdesmuwjjgt{zoom:25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133132264.png" class="zjdesmuwjjgt" alt="image-20260523133132264"></p>
+<p>但是我们若将背景物体扩大就很难分辨出来这几个方块的存在</p>
+<p>​	<style>.gqukytstpoet{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133613445.png" class="gqukytstpoet" alt="image-20260523133613445"></p>
+<p>尤其是在游戏窗口完全是一片绿色</p>
+<p>​	<style>.spobfmffqwgi{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133742353.png" class="spobfmffqwgi" alt="image-20260523133742353"></p>
+<p>此时我们可以调整主摄像机的Clipping Planes</p>
+<p>​	<style>.wosmsrejcwqo{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133823071.png" class="wosmsrejcwqo" alt="image-20260523133823071"></p>
+<p>在 Unity 中，<strong>Clipping Planes（裁剪平面）</strong> 的两个值是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">名称</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Near</strong></td>
+<td align="left">近裁剪面</td>
+<td align="left">相机能看到的<strong>最近距离</strong>。小于这个距离的物体不会被渲染</td>
+</tr>
+<tr>
+<td align="left"><strong>Far</strong></td>
+<td align="left">远裁剪面</td>
+<td align="left">相机能看到的<strong>最远距离</strong>。大于这个距离的物体不会被渲染</td>
+</tr>
+</tbody></table>
+<p>如果我们将far改为25就可以看的更清楚了</p>
+<p>​	<style>.ioowtcsscldm{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523134142885.png" class="ioowtcsscldm" alt="image-20260523134142885"></p>
+<h1 id="顶点着色器"><a href="#顶点着色器" class="headerlink" title="顶点着色器"></a>顶点着色器</h1><p>网格是由一个个顶点构成的,这些顶点就是网格各个角落的点,点与点形成了面,每一帧画面Unity都要读取顶点数据,计算这些顶点在屏幕上应该显示的具体位置,然后这些顶点最终呈现在屏幕上(感觉和老电视的示波器差不多),这个过程是通过一系列坐标变换实现的</p>
+<p>​	<style>.gsckedrcgpgb{zoom:67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523140205230.png" class="gsckedrcgpgb" alt="image-20260523140205230"></p>
+<p>首先是从抽象的网格数据开始,这时顶点位置是相对于网格自身的原点来定义的,这个坐标系称之为对象空间(Object Space)</p>
+<p>根据物体的变化位置顶点被转换到世界空间,这时他们的位置是相对于场景的世界原点,然后根据摄像机的位置和参数设置,顶点会被转换到裁剪空间(clip space),此时的物体的坐标就是相对于屏幕的坐标(说人话就是跟皮影戏一样,要想看到皮影戏就必须确保屏幕上为皮影的图形分配位置)</p>
+<p>​	<style>.clxhomdnzimi{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523142321289.png" class="clxhomdnzimi" alt="image-20260523142321289"></p>
+<p>然而不需要了解这种东西,shadergraph会帮我们自动运算处理(虽然要是写shader的话需要手搓)</p>
+<p>完成顶点着色器处理后网格数据会进行光栅化转化也就是把这些图形转换为一个一个的像素而片段着色器会对所有像素进行着色处理并最终呈现物体图像</p>
+<p>​	<style>.erqqbqcdurcc{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143013205.png" class="erqqbqcdurcc" alt="image-20260523143013205"></p>
+<p>回到Unity创建无光照shadergraph</p>
+<p>​	<style>.uwklrmzwpsuy{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143642395.png" class="uwklrmzwpsuy" alt="image-20260523143642395"></p>
+<p>之前我们都是直接用,这里讲讲这里的两个默认节点</p>
+<h2 id="对于Vertex（顶点阶段）"><a href="#对于Vertex（顶点阶段）" class="headerlink" title="对于Vertex（顶点阶段）"></a>对于Vertex（顶点阶段）</h2><p>这是 Shader 的<strong>顶点着色器</strong>部分，负责处理模型的每个顶点：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输出端口</th>
+<th align="left">含义</th>
+<th align="left">默认空间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Position</strong></td>
+<td align="left">顶点在 3D 空间中的坐标</td>
+<td align="left">Object Space（模型本地空间）</td>
+</tr>
+<tr>
+<td align="left"><strong>Normal</strong></td>
+<td align="left">顶点法线方向，用于光照计算</td>
+<td align="left">Object Space</td>
+</tr>
+<tr>
+<td align="left"><strong>Tangent</strong></td>
+<td align="left">顶点切线方向，用于法线贴图等</td>
+<td align="left">Object Space</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Object Space（对象&#x2F;模型空间）</strong>：以模型自身原点为基准的坐标系。比如一个球体，球心就是 (0,0,0)，不管这个球在世界中放在哪里</p>
+</blockquote>
+<hr>
+<h2 id="对于Fragment（片元-像素阶段"><a href="#对于Fragment（片元-像素阶段" class="headerlink" title="对于Fragment（片元&#x2F;像素阶段)"></a>对于Fragment（片元&#x2F;像素阶段)</h2><p>这是 Shader 的<strong>片元着色器</strong>部分，负责计算最终屏幕上每个像素的颜色。默认只暴露了一个：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入端口</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Base Color</strong></td>
+<td align="left">材质的基础颜色&#x2F;漫反射颜色</td>
+</tr>
+</tbody></table>
+<p>Shader Graph 自动帮你做了：</p>
+<ol>
+<li><strong>顶点位置变换</strong>：把 Object Space 的 Position 自动转换到 Clip Space（裁剪空间），这样模型才能正确显示在屏幕上</li>
+<li><strong>法线和切线</strong>：保留在 Object Space，供后续光照计算使用（如果你需要 World Space 的法线，要自己加 <code>Transform</code> 节点转换）</li>
+</ol>
+<h2 id="创建波浪效果"><a href="#创建波浪效果" class="headerlink" title="创建波浪效果"></a>创建波浪效果</h2><p>​	<style>.rswbfbteeeqt{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523214422911.png" class="rswbfbteeeqt" alt="image-20260523214422911"></p>
+<p>我们需要两个浮点数节点–wavespeed(波速,控制每个顶点上下移动的距离)还有wavestrength(波强度,控制顶点移动的距离</p>
+<p>我们需要使用顶点的世界位置作为偏移值,此时需要position位置节点来实现</p>
+<p>​	<style>.shqzezbtcpwc{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215234524.png" class="shqzezbtcpwc" alt="image-20260523215234524"></p>
+<p>在 Unity Shader Graph 的 <strong>Position 节点</strong>中，Space（空间）下拉菜单有 <strong>5 种设置</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">中文含义</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Object</strong></td>
+<td align="left">对象&#x2F;模型空间</td>
+<td align="left">以模型自身原点为基准，模型移动时坐标不变</td>
+</tr>
+<tr>
+<td align="left"><strong>World</strong></td>
+<td align="left">世界空间</td>
+<td align="left">以场景世界原点为基准，模型移动时坐标变化</td>
+</tr>
+<tr>
+<td align="left"><strong>View</strong></td>
+<td align="left">视图&#x2F;观察空间</td>
+<td align="left">以摄像机为基准，Z轴指向摄像机正前方</td>
+</tr>
+<tr>
+<td align="left"><strong>Absolute World</strong></td>
+<td align="left">绝对世界空间</td>
+<td align="left">类似 World，但不受 GPU Instancing 等变换影响（用于大规模地形等）</td>
+</tr>
+<tr>
+<td align="left"><strong>Tangential</strong></td>
+<td align="left">切线空间</td>
+<td align="left">以顶点切线、副切线、法线构建的局部坐标系，常用于法线贴图</td>
+</tr>
+</tbody></table>
+<p>这里我们采用world就可以实现波浪网格在世界坐标系的无缝衔接</p>
+<p>​	<style>.gkfelfbveuyz{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215722984.png" class="gkfelfbveuyz" alt="image-20260523215722984"></p>
+<p>现在添加计时功能,使用time时间节点并乘以波浪速度参数,我们把wavespeed放到multiply的B点,这里是用来设置波浪滚动方向的步骤</p>
+<p>​	<style>.jiovtbaucuuo{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523220842337.png" class="jiovtbaucuuo" alt="image-20260523220842337"></p>
+<p>在 Unity Shader Graph 中，<strong>Position 节点</strong>用 <strong>Split 节点</strong>分离后的四个输出是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输出</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>R</strong></td>
+<td align="left">X 坐标（红色通道）</td>
+</tr>
+<tr>
+<td align="left"><strong>G</strong></td>
+<td align="left">Y 坐标（绿色通道）</td>
+</tr>
+<tr>
+<td align="left"><strong>B</strong></td>
+<td align="left">Z 坐标（蓝色通道）</td>
+</tr>
+<tr>
+<td align="left"><strong>A</strong></td>
+<td align="left">W 分量（齐次坐标，通常为 1）</td>
+</tr>
+</tbody></table>
+<p>然后用split分离节点分离position坐标的各个分量,如果只把x坐标分量叠加到时间参数上,波浪就会产生水平移动效果,如果使用z坐标分量波浪会往另一个方向水平移动也就是垂直之前的方向</p>
+<p>这里若要实现对角线移动效果.需要将x和z坐标分量通过add节点相加,然后将刚才相乘的</p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/05/22/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/TexturePacker%E5%92%8CIDM%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC/"><span class="nav-label">← 上一篇</span><span class="nav-title">TexturePacker和IDM免费版本</span></a></div><div class="post-nav next"><a href="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/"><span class="nav-label">下一篇 →</span><span class="nav-title">了解ShaderGraph-纹理和UV以及Alpha相关</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7&amp;url=%2F2026%2F05%2F22%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FUnityShaderGraph%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E6%25B7%25B1%25E5%25BA%25A6%25E7%25BC%2593%25E5%2586%25B2%25E5%258C%25BA-%25E9%25A1%25B6%25E7%2582%25B9%25E7%259D%2580%25E8%2589%25B2%25E5%2599%25A8-%25E5%2585%2589%25E7%2585%25A7%25E5%259F%25BA%25E7%25A1%2580-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E5%2585%2589%25E7%2585%25A7%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F05%2F22%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FUnityShaderGraph%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E6%25B7%25B1%25E5%25BA%25A6%25E7%25BC%2593%25E5%2586%25B2%25E5%258C%25BA-%25E9%25A1%25B6%25E7%2582%25B9%25E7%259D%2580%25E8%2589%25B2%25E5%2599%25A8-%25E5%2585%2589%25E7%2585%25A7%25E5%259F%25BA%25E7%25A1%2580-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E5%2585%2589%25E7%2585%25A7%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F05%2F22%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FUnityShaderGraph%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E6%25B7%25B1%25E5%25BA%25A6%25E7%25BC%2593%25E5%2586%25B2%25E5%258C%25BA-%25E9%25A1%25B6%25E7%2582%25B9%25E7%259D%2580%25E8%2589%25B2%25E5%2599%25A8-%25E5%2585%2589%25E7%2585%25A7%25E5%259F%25BA%25E7%25A1%2580-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E5%2585%2589%25E7%2585%25A7%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F05%2F22%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FUnityShaderGraph%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E6%25B7%25B1%25E5%25BA%25A6%25E7%25BC%2593%25E5%2586%25B2%25E5%258C%25BA-%25E9%25A1%25B6%25E7%2582%25B9%25E7%259D%2580%25E8%2589%25B2%25E5%2599%25A8-%25E5%2585%2589%25E7%2585%25A7%25E5%259F%25BA%25E7%25A1%2580-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E5%2585%2589%25E7%2585%25A7%2F&amp;title=%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F05%2F22%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FUnityShaderGraph%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E6%25B7%25B1%25E5%25BA%25A6%25E7%25BC%2593%25E5%2586%25B2%25E5%258C%25BA-%25E9%25A1%25B6%25E7%2582%25B9%25E7%259D%2580%25E8%2589%25B2%25E5%2599%25A8-%25E5%2585%2589%25E7%2585%25A7%25E5%259F%25BA%25E7%25A1%2580-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589%25E5%2585%2589%25E7%2585%25A7%2F&amp;title=%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
+
+<script src="/js/wall.js"></script>
+
+<script src="/js/anime.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

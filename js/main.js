@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCodeBlockFolding();
   initAuthorCardAnimation();
   initCodeBlockScroll();
+  initTableHorizontalScroll();
 });
 
 // ===== Typing Effect =====
@@ -711,7 +712,7 @@ function initCodeBlockScroll() {
         // 如果用户使用的是触摸板本身的横向滑动，不干预
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
-        // 检查当前代码块是否真的有横向超出范围的内���
+        // 检查当前代码块是否真的有横向超出范围的内容
         const isScrollable = this.scrollWidth > this.clientWidth;
         if (!isScrollable) return;
 
@@ -734,5 +735,24 @@ function initCodeBlockScroll() {
       },
       { passive: false },
     ); // 必须设置为 false 才能使用 e.preventDefault()
+  });
+}
+
+// ===== Table Horizontal Scroll (表格横向滚动) =====
+function initTableHorizontalScroll() {
+  const tables = document.querySelectorAll(".post-content table");
+  if (!tables.length) return;
+
+  tables.forEach((table) => {
+    // 已经包过就跳过
+    const parent = table.parentElement;
+    if (parent && parent.classList.contains("table-scroll")) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-scroll";
+
+    // 关键：滚动条出现在 wrapper 上
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
   });
 }
