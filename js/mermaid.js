@@ -1,0 +1,560 @@
+/**
+ * mermaid.js
+ *
+ * Works with hexo-filter-mermaid-diagrams, which emits:
+ *   <pre class="mermaid">diagram source text</pre>
+ *
+ * Self-contained fullscreen pan/zoom viewer — no external dependency.
+ */
+
+(function () {
+  "use strict";
+
+  var COLLAPSE_HEIGHT = 360;
+  var MERMAID_CDN =
+    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js";
+
+  var ICON_FULLSCREEN =
+    '<svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
+
+  var ICON_COPY =
+    '<svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
+
+  var ICON_ZOOM_IN =
+    '<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>';
+
+  var ICON_ZOOM_OUT =
+    '<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/></svg>';
+
+  var ICON_ZOOM_RESET =
+    '<svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>';
+
+  /* ------------------------------------------------------------------
+     Load external script once
+     ------------------------------------------------------------------ */
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      if (document.querySelector('script[src="' + src + '"]')) return resolve();
+      var s = document.createElement("script");
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function isDark() {
+    return document.body.classList.contains("dark-mode");
+  }
+
+  /* Use mermaid's built-in colour themes so node fills stay colourful.
+     Only override the accent/primary to match the site's accent colour,
+     and nudge backgrounds to match the card. */
+  function getMermaidConfig() {
+    var dark = isDark();
+    var accent =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent-color")
+        .trim() || "#ff6b6b";
+
+    return {
+      startOnLoad: false,
+      theme: dark ? "dark" : "default",
+      themeVariables: {
+        fontFamily: '"IBM Plex Mono","Fira Code",monospace',
+        // Keep mermaid's colourful defaults; only remap the primary accent
+        // and critical-path colour to the site accent.
+        primaryColor: dark ? "#2d3748" : "#fff4dd",
+        primaryBorderColor: dark ? "#4a5568" : "#aaaaaa",
+        primaryTextColor: dark ? "#e2e8f0" : "#333333",
+        lineColor: dark ? "#718096" : "#777777",
+        critBkgColor: accent,
+        critBorderColor: accent,
+        todayLineColor: accent,
+        activeTaskBkgColor: accent,
+        activeTaskBorderColor: accent,
+        // Card background — so mermaid's own bg rect matches the card
+        background: dark ? "#212121" : "#f5f5f5",
+        edgeLabelBackground: dark ? "#2d2d2d" : "#f0f0f0",
+      },
+      securityLevel: "loose",
+    };
+  }
+
+  /* ------------------------------------------------------------------
+     Find mermaid source blocks
+     ------------------------------------------------------------------ */
+  function findMermaidPres() {
+    var els = Array.from(
+      document.querySelectorAll(".post-content pre.mermaid"),
+    );
+    if (els.length === 0) {
+      els = Array.from(document.querySelectorAll("pre.mermaid"));
+    }
+    return els;
+  }
+
+  /* ------------------------------------------------------------------
+     Self-contained fullscreen viewer
+     ------------------------------------------------------------------ */
+  var viewer = null;
+
+  function getViewer() {
+    if (viewer) return viewer;
+
+    var overlay = document.createElement("div");
+    overlay.className = "mermaid-viewer";
+
+    var stage = document.createElement("div");
+    stage.className = "mermaid-viewer-stage";
+
+    var closeBtn = document.createElement("div");
+    closeBtn.className = "mermaid-viewer-close";
+    closeBtn.innerHTML = "&times;";
+
+    var toolbar = document.createElement("div");
+    toolbar.className = "mermaid-viewer-toolbar";
+
+    overlay.appendChild(stage);
+    overlay.appendChild(closeBtn);
+    overlay.appendChild(toolbar);
+    document.body.appendChild(overlay);
+
+    // Pan/zoom state
+    var scale = 1;
+    var tx = 0;
+    var ty = 0;
+    var isDragging = false;
+    var startX = 0;
+    var startY = 0;
+    var lastTouchX = 0;
+    var lastTouchY = 0;
+    var startDist = 0;
+    var startScale = 1;
+
+    function updateTransform(animate) {
+      stage.style.transition = animate
+        ? "transform 0.3s cubic-bezier(0.25,0.8,0.25,1)"
+        : "none";
+      stage.style.transform =
+        "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+    }
+
+    function resetTransform(animate) {
+      scale = 1;
+      tx = 0;
+      ty = 0;
+      updateTransform(animate !== false);
+    }
+
+    function open(svgEl, source, onToolbar) {
+      stage.innerHTML = "";
+      resetTransform(false);
+
+      if (svgEl) {
+        var clone = svgEl.cloneNode(true);
+
+        // 修复全屏丢失配色的问题：
+        // Mermaid 的内部样式强依赖于 SVG 的 ID。不能直接移除，
+        // 我们给克隆体分配一个新 ID，并同步替换掉 <style> 里的 ID 引用。
+        if (clone.id) {
+          var oldId = clone.id;
+          var newId = oldId + "-fullscreen";
+          clone.id = newId;
+
+          var styleTags = clone.querySelectorAll("style");
+          styleTags.forEach(function (styleTag) {
+            styleTag.textContent = styleTag.textContent
+              .split(oldId)
+              .join(newId);
+          });
+        } else {
+          clone.removeAttribute("id");
+        }
+
+        clone.removeAttribute("style");
+        // Allow SVG content to overflow its own box so labels near edges
+        // are never clipped.
+        clone.setAttribute("overflow", "visible");
+
+        // Compute a pixel size from the viewBox so transform:scale() handles
+        // all zooming without triggering layout.  Reserve vertical space for
+        // the toolbar (~100px) and close button (~80px) → use 72% of height.
+        var vb = clone.getAttribute("viewBox");
+        var vbParts = vb ? vb.trim().split(/[\s,]+/) : [];
+        var vbW = vbParts.length === 4 ? parseFloat(vbParts[2]) : 0;
+        var vbH = vbParts.length === 4 ? parseFloat(vbParts[3]) : 0;
+
+        var maxW = window.innerWidth * 0.88;
+        var maxH = window.innerHeight * 0.72;
+
+        if (vbW > 0 && vbH > 0) {
+          var ratio = Math.min(1, maxW / vbW, maxH / vbH);
+          clone.setAttribute("width", Math.round(vbW * ratio));
+          clone.setAttribute("height", Math.round(vbH * ratio));
+        } else {
+          clone.style.cssText =
+            "display:block;max-width:" +
+            maxW +
+            "px;max-height:" +
+            maxH +
+            "px;" +
+            "width:auto;height:auto;";
+        }
+
+        stage.appendChild(clone);
+      }
+
+      // Toolbar
+      toolbar.innerHTML = "";
+
+      if (typeof onToolbar === "function") {
+        onToolbar(toolbar);
+      }
+
+      if (toolbar.children.length > 0) {
+        var div = document.createElement("div");
+        div.className = "mermaid-viewer-toolbar-divider";
+        toolbar.appendChild(div);
+      }
+
+      // Zoom in
+      var btnIn = document.createElement("button");
+      btnIn.className = "mermaid-viewer-btn";
+      btnIn.setAttribute("data-title", "放大");
+      btnIn.innerHTML = ICON_ZOOM_IN;
+      btnIn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        scale = Math.min(scale * 1.25, 10);
+        updateTransform(true);
+      });
+
+      // Zoom out
+      var btnOut = document.createElement("button");
+      btnOut.className = "mermaid-viewer-btn";
+      btnOut.setAttribute("data-title", "缩小");
+      btnOut.innerHTML = ICON_ZOOM_OUT;
+      btnOut.addEventListener("click", function (e) {
+        e.stopPropagation();
+        scale = Math.max(scale / 1.25, 0.1);
+        updateTransform(true);
+      });
+
+      // Reset
+      var btnReset = document.createElement("button");
+      btnReset.className = "mermaid-viewer-btn";
+      btnReset.setAttribute("data-title", "重置");
+      btnReset.innerHTML = ICON_ZOOM_RESET;
+      btnReset.addEventListener("click", function (e) {
+        e.stopPropagation();
+        resetTransform(true);
+      });
+
+      toolbar.appendChild(btnIn);
+      toolbar.appendChild(btnOut);
+      toolbar.appendChild(btnReset);
+
+      overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    closeBtn.addEventListener("click", close);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!overlay.classList.contains("active")) return;
+      if (e.key === "Escape") close();
+    });
+
+    overlay.addEventListener(
+      "wheel",
+      function (e) {
+        if (!overlay.classList.contains("active")) return;
+        e.preventDefault();
+        var delta = e.deltaY < 0 ? 1.1 : 0.9;
+        scale = Math.min(Math.max(0.1, scale * delta), 10);
+        updateTransform(false);
+      },
+      { passive: false },
+    );
+
+    stage.addEventListener("mousedown", function (e) {
+      if (e.button !== 0) return;
+      isDragging = true;
+      startX = e.clientX - tx;
+      startY = e.clientY - ty;
+      stage.style.cursor = "grabbing";
+      e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", function (e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      tx = e.clientX - startX;
+      ty = e.clientY - startY;
+      updateTransform(false);
+    });
+
+    document.addEventListener("mouseup", function () {
+      if (isDragging) {
+        isDragging = false;
+        stage.style.cursor = "grab";
+      }
+    });
+
+    stage.addEventListener(
+      "touchstart",
+      function (e) {
+        if (e.touches.length === 1) {
+          lastTouchX = e.touches[0].clientX;
+          lastTouchY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+          startDist = Math.hypot(
+            e.touches[1].clientX - e.touches[0].clientX,
+            e.touches[1].clientY - e.touches[0].clientY,
+          );
+          startScale = scale;
+        }
+      },
+      { passive: false },
+    );
+
+    stage.addEventListener(
+      "touchmove",
+      function (e) {
+        e.preventDefault();
+        if (e.touches.length === 1) {
+          tx += e.touches[0].clientX - lastTouchX;
+          ty += e.touches[0].clientY - lastTouchY;
+          lastTouchX = e.touches[0].clientX;
+          lastTouchY = e.touches[0].clientY;
+          updateTransform(false);
+        } else if (e.touches.length === 2) {
+          var newDist = Math.hypot(
+            e.touches[1].clientX - e.touches[0].clientX,
+            e.touches[1].clientY - e.touches[0].clientY,
+          );
+          if (newDist > 0 && startDist > 0) {
+            scale = Math.min(
+              Math.max(0.1, startScale * (newDist / startDist)),
+              10,
+            );
+            updateTransform(false);
+          }
+        }
+      },
+      { passive: false },
+    );
+
+    viewer = { open: open, close: close };
+    return viewer;
+  }
+
+  /* ------------------------------------------------------------------
+     Open viewer for a given block
+     ------------------------------------------------------------------ */
+  function openInViewer(source, svgSourceEl) {
+    var v = getViewer();
+    v.open(svgSourceEl, source, function (toolbar) {
+      var copyBtn = document.createElement("button");
+      copyBtn.className = "mermaid-viewer-btn";
+      copyBtn.setAttribute("data-title", "复制源码");
+      copyBtn.innerHTML = ICON_COPY;
+
+      var copyNotice = document.createElement("span");
+      copyNotice.className = "mermaid-viewer-copy-notice";
+      copyNotice.textContent = "已复制";
+
+      copyBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        function flash() {
+          copyNotice.style.opacity = "1";
+          copyBtn.setAttribute("data-title", "已复制 ✓");
+          setTimeout(function () {
+            copyNotice.style.opacity = "0";
+            copyBtn.setAttribute("data-title", "复制源码");
+          }, 1800);
+        }
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(source).then(flash);
+        } else {
+          var ta = document.createElement("textarea");
+          ta.value = source;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+          flash();
+        }
+      });
+
+      toolbar.appendChild(copyBtn);
+      toolbar.appendChild(copyNotice);
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Render all mermaid blocks
+     ------------------------------------------------------------------ */
+  function renderAll() {
+    var pres = findMermaidPres();
+    if (pres.length === 0) return;
+
+    pres.forEach(function (pre, index) {
+      var source = pre.textContent.trim();
+      if (!source) return;
+
+      var wrapper = document.createElement("div");
+      wrapper.className = "mermaid-wrapper";
+      wrapper.dataset.mermaidSource = source;
+
+      var block = document.createElement("div");
+      block.className = "mermaid-block";
+      block.id = "mermaid-block-" + index;
+
+      // Fullscreen button lives in the wrapper (outside the overflow-clipped
+      // block) so its tooltip is never hidden by overflow:hidden on the block.
+      var fsBtn = document.createElement("button");
+      fsBtn.className = "mermaid-fullscreen-btn";
+      fsBtn.setAttribute("aria-label", "全屏查看");
+      fsBtn.innerHTML = ICON_FULLSCREEN;
+      fsBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        openInViewer(source, block.querySelector("svg"));
+      });
+
+      wrapper.appendChild(block);
+      wrapper.appendChild(fsBtn);
+
+      pre.parentNode.insertBefore(wrapper, pre);
+      pre.remove();
+
+      window.mermaid
+        .render("mermaid-svg-" + index, source)
+        .then(function (result) {
+          var tmp = document.createElement("div");
+          tmp.innerHTML = result.svg;
+          var svgEl = tmp.querySelector("svg");
+          if (svgEl) {
+            block.appendChild(svgEl);
+          } else {
+            block.insertAdjacentHTML("beforeend", result.svg);
+          }
+          applyCollapsible(wrapper, block);
+        })
+        .catch(function (err) {
+          console.error(
+            "[mermaid.js] render error for block " + index + ":",
+            err,
+          );
+          var msg = document.createElement("pre");
+          msg.style.cssText =
+            "color:var(--accent-color,#ff6b6b);font-size:12px;white-space:pre-wrap;padding:12px;";
+          msg.textContent = "[Mermaid Error]\n" + (err.message || String(err));
+          block.appendChild(msg);
+        });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Collapsible — mirrors initCodeBlockFolding in main.js
+     ------------------------------------------------------------------ */
+  function applyCollapsible(wrapper, block) {
+    var svgEl = block.querySelector("svg");
+    if (!svgEl) return;
+
+    var h =
+      svgEl.getBoundingClientRect().height ||
+      (svgEl.viewBox && svgEl.viewBox.baseVal
+        ? svgEl.viewBox.baseVal.height
+        : 0);
+
+    if (h <= COLLAPSE_HEIGHT) return;
+
+    wrapper.classList.add("collapsed");
+
+    var btn = document.createElement("button");
+    btn.className = "mermaid-toggle";
+    btn.setAttribute("data-text", "展开图表");
+
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isCollapsed = wrapper.classList.contains("collapsed");
+      wrapper.classList.toggle("collapsed", !isCollapsed);
+      wrapper.classList.toggle("expanded", isCollapsed);
+      var t = function (s) {
+        return window.i18n && window.i18n.get ? window.i18n.get(s) : s;
+      };
+      btn.setAttribute(
+        "data-text",
+        isCollapsed ? t("折叠图表") : t("展开图表"),
+      );
+    });
+
+    wrapper.appendChild(btn);
+  }
+
+  /* ------------------------------------------------------------------
+     Dark-mode re-render
+     ------------------------------------------------------------------ */
+  function watchDarkMode() {
+    var observer = new MutationObserver(function () {
+      window.mermaid.initialize(getMermaidConfig());
+
+      document.querySelectorAll(".mermaid-wrapper").forEach(function (wrapper) {
+        var source = wrapper.dataset.mermaidSource;
+        var block = wrapper.querySelector(".mermaid-block");
+        if (!source || !block) return;
+
+        var uid =
+          "mermaid-rerender-" +
+          Date.now() +
+          "-" +
+          Math.random().toString(36).slice(2);
+
+        window.mermaid
+          .render(uid, source)
+          .then(function (result) {
+            // Remove only the old SVG / error message; leave other children
+            var old = block.querySelector("svg, pre");
+            if (old) old.remove();
+            var tmp = document.createElement("div");
+            tmp.innerHTML = result.svg;
+            var svgEl = tmp.querySelector("svg");
+            if (svgEl) block.appendChild(svgEl);
+          })
+          .catch(function () {});
+      });
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Entry point
+     ------------------------------------------------------------------ */
+  document.addEventListener("DOMContentLoaded", function () {
+    var pres = findMermaidPres();
+    if (pres.length === 0) return;
+
+    loadScript(MERMAID_CDN)
+      .then(function () {
+        window.mermaid.initialize(getMermaidConfig());
+        renderAll();
+        watchDarkMode();
+      })
+      .catch(function (err) {
+        console.error("[mermaid.js] Failed to load mermaid library:", err);
+      });
+  });
+})();

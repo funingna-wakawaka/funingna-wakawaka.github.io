@@ -322,6 +322,22 @@ document.addEventListener("DOMContentLoaded", function () {
     角色音效: "Character Sound Effects",
     静音: "Mute",
     取消静音: "Unmute",
+
+    //mermaid
+    放大: "Zoom In",
+    缩小: "Zoom Out",
+    重置: "Reset Zoom",
+    复制源码: "Copy Source Code",
+    "已复制 ✓": "Copied ✓",
+    已复制: "Copied",
+    全屏查看: "View Fullscreen",
+    展开图表: "Expand Chart",
+    折叠图表: "Collapse Chart",
+
+    //表格
+    复制表格: "Copy Table",
+    展开表格: "Expand Table",
+    折叠表格: "Collapse Table",
   };
 
   // ==========================================
@@ -374,6 +390,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const dataText = node.getAttribute("data-text");
       if (dataText && translations[dataText]) {
         node.setAttribute("data-text", translations[dataText]);
+      }
+
+      // (F) 翻译 aria-label
+      const ariaLabel = node.getAttribute("aria-label");
+      if (ariaLabel && translations[ariaLabel]) {
+        node.setAttribute("aria-label", translations[ariaLabel]);
       }
 
       // 递归处理子节点
@@ -458,6 +480,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentLang !== "en") return;
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
+        // 监听到属性变化时，触发翻译
+        if (mutation.type === "attributes") {
+          translateNode(mutation.target);
+          return;
+        }
+
         mutation.addedNodes.forEach(translateNode);
         if (mutation.type === "characterData") translateNode(mutation.target);
         if (mutation.type === "childList") {
@@ -465,10 +493,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
     observer.observe(document.body, {
       childList: true,
       subtree: true,
       characterData: true,
+      attributes: true,
+      // 👇 关键修改：把 aria-label 也加入监听阵营！
+      attributeFilter: ["data-title", "aria-label"],
     });
   }
 
