@@ -207,7 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  viewImage.addEventListener(
+  // 将 touchstart 绑定到全屏容器上
+  viewerContainer.addEventListener(
+    // 这里的 viewerContainer 替换为你代码中全屏遮罩的变量名
     "touchstart",
     (e) => {
       if (e.touches.length === 1) {
@@ -221,10 +223,11 @@ document.addEventListener("DOMContentLoaded", function () {
     { passive: false },
   );
 
-  viewImage.addEventListener(
+  // 将 touchmove 也绑定到全屏容器上
+  viewerContainer.addEventListener(
     "touchmove",
     (e) => {
-      e.preventDefault();
+      e.preventDefault(); // 防止双指滑动时整个网页跟着滚动
       if (e.touches.length === 1) {
         const dx = e.touches[0].clientX - lastTouchX;
         const dy = e.touches[0].clientY - lastTouchY;
@@ -234,14 +237,11 @@ document.addEventListener("DOMContentLoaded", function () {
         lastTouchY = e.touches[0].clientY;
         updateTransform();
       } else if (e.touches.length === 2) {
-        const newDist = getDist(e.touches[0], e.touches[1]);
-        if (newDist > 0 && startDist > 0) {
-          scale = Math.min(
-            Math.max(0.1, startScale * (newDist / startDist)),
-            10,
-          );
-          updateTransform();
-        }
+        const currentDist = getDist(e.touches[0], e.touches[1]);
+        scale = startScale * (currentDist / startDist);
+        // 限制缩放比例范围
+        scale = Math.max(0.5, Math.min(scale, 5));
+        updateTransform();
       }
     },
     { passive: false },
