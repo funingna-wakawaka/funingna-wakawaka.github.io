@@ -29,6 +29,12 @@
   var ICON_ZOOM_RESET =
     '<svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>';
 
+  var ICON_ROTATE =
+    '<svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>';
+
+  var ICON_LOCK =
+    '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>';
+
   /* ------------------------------------------------------------------
      Load external script once
      ------------------------------------------------------------------ */
@@ -47,6 +53,10 @@
     return document.body.classList.contains("dark-mode");
   }
 
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
   /* Use mermaid's built-in colour themes so node fills stay colourful.
      Only override the accent/primary to match the site's accent colour,
      and nudge backgrounds to match the card. */
@@ -62,8 +72,6 @@
       theme: dark ? "dark" : "default",
       themeVariables: {
         fontFamily: '"IBM Plex Mono","Fira Code",monospace',
-        // Keep mermaid's colourful defaults; only remap the primary accent
-        // and critical-path colour to the site accent.
         primaryColor: dark ? "#2d3748" : "#fff4dd",
         primaryBorderColor: dark ? "#4a5568" : "#aaaaaa",
         primaryTextColor: dark ? "#e2e8f0" : "#333333",
@@ -73,7 +81,6 @@
         todayLineColor: accent,
         activeTaskBkgColor: accent,
         activeTaskBorderColor: accent,
-        // Card background — so mermaid's own bg rect matches the card
         background: dark ? "#212121" : "#f5f5f5",
         edgeLabelBackground: dark ? "#2d2d2d" : "#f0f0f0",
       },
@@ -105,6 +112,11 @@
     var overlay = document.createElement("div");
     overlay.className = "mermaid-viewer";
 
+    // Mobile uses a flex-centering container (like image-zoom's
+    // .image-viewer-container) so CSS handles fit-to-screen naturally.
+    var container = document.createElement("div");
+    container.className = "mermaid-viewer-container";
+
     var stage = document.createElement("div");
     stage.className = "mermaid-viewer-stage";
 
@@ -115,15 +127,18 @@
     var toolbar = document.createElement("div");
     toolbar.className = "mermaid-viewer-toolbar";
 
-    overlay.appendChild(stage);
+    container.appendChild(stage);
+    overlay.appendChild(container);
     overlay.appendChild(closeBtn);
     overlay.appendChild(toolbar);
     document.body.appendChild(overlay);
 
-    // Pan/zoom state
+    // Pan/zoom/rotate/lock state
     var scale = 1;
     var tx = 0;
     var ty = 0;
+    var rotation = 0;
+    var isLocked = false;
     var isDragging = false;
     var startX = 0;
     var startY = 0;
@@ -132,20 +147,36 @@
     var startDist = 0;
     var startScale = 1;
 
+    // The overlay is a flex container on both desktop and mobile, so the
+    // stage is always CSS-centered. The transform is purely the pan/zoom
+    // offset from that center — no translate(-50%,-50%) needed on either path.
     function updateTransform(animate) {
       stage.style.transition = animate
         ? "transform 0.3s cubic-bezier(0.25,0.8,0.25,1)"
         : "none";
       stage.style.transform =
-        "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+        "translate(" +
+        tx +
+        "px," +
+        ty +
+        "px) rotate(" +
+        rotation +
+        "deg) scale(" +
+        scale +
+        ")";
     }
 
     function resetTransform(animate) {
       scale = 1;
       tx = 0;
       ty = 0;
+      rotation = 0;
       updateTransform(animate !== false);
     }
+
+    // Keep a reference to the mobile lock button so orientationchange can
+    // read its state and resetTransform can clear the active class.
+    var mobileLockBtn = null;
 
     function open(svgEl, source, onToolbar) {
       stage.innerHTML = "";
@@ -154,16 +185,14 @@
       if (svgEl) {
         var clone = svgEl.cloneNode(true);
 
-        // 修复全屏丢失配色的问题：
-        // Mermaid 的内部样式强依赖于 SVG 的 ID。不能直接移除，
-        // 我们给克隆体分配一个新 ID，并同步替换掉 <style> 里的 ID 引用。
+        // Fix fullscreen colour loss: mermaid's internal styles depend on
+        // the SVG's ID, so give the clone a unique suffixed ID and patch
+        // the style tags to match.
         if (clone.id) {
           var oldId = clone.id;
           var newId = oldId + "-fullscreen";
           clone.id = newId;
-
-          var styleTags = clone.querySelectorAll("style");
-          styleTags.forEach(function (styleTag) {
+          clone.querySelectorAll("style").forEach(function (styleTag) {
             styleTag.textContent = styleTag.textContent
               .split(oldId)
               .join(newId);
@@ -173,104 +202,182 @@
         }
 
         clone.removeAttribute("style");
-        // Allow SVG content to overflow its own box so labels near edges
-        // are never clipped.
         clone.setAttribute("overflow", "visible");
 
-        // Compute a pixel size from the viewBox so transform:scale() handles
-        // all zooming without triggering layout.  Reserve vertical space for
-        // the toolbar (~100px) and close button (~80px) → use 72% of height.
-        var vb = clone.getAttribute("viewBox");
-        var vbParts = vb ? vb.trim().split(/[\s,]+/) : [];
-        var vbW = vbParts.length === 4 ? parseFloat(vbParts[2]) : 0;
-        var vbH = vbParts.length === 4 ? parseFloat(vbParts[3]) : 0;
-
-        var maxW = window.innerWidth * 0.88;
-        var maxH = window.innerHeight * 0.72;
-
-        if (vbW > 0 && vbH > 0) {
-          var ratio = Math.min(1, maxW / vbW, maxH / vbH);
-          clone.setAttribute("width", Math.round(vbW * ratio));
-          clone.setAttribute("height", Math.round(vbH * ratio));
+        if (isMobile()) {
+          // On mobile, CSS constrains the SVG via max-width/max-height on the
+          // stage (see .mermaid-viewer-stage in the mobile media query).
+          // Remove any hard-coded pixel dimensions so CSS takes over.
+          clone.removeAttribute("width");
+          clone.removeAttribute("height");
+          clone.style.cssText = "display:block;width:100%;height:auto;";
         } else {
-          clone.style.cssText =
-            "display:block;max-width:" +
-            maxW +
-            "px;max-height:" +
-            maxH +
-            "px;" +
-            "width:auto;height:auto;";
+          // Desktop: compute a pixel size from the viewBox so transform:scale()
+          // handles all zooming without triggering layout.
+          var vb = clone.getAttribute("viewBox");
+          var vbParts = vb ? vb.trim().split(/[\s,]+/) : [];
+          var vbW = vbParts.length === 4 ? parseFloat(vbParts[2]) : 0;
+          var vbH = vbParts.length === 4 ? parseFloat(vbParts[3]) : 0;
+          var maxW = window.innerWidth * 0.88;
+          var maxH = window.innerHeight * 0.72;
+
+          if (vbW > 0 && vbH > 0) {
+            var ratio = Math.min(1, maxW / vbW, maxH / vbH);
+            clone.setAttribute("width", Math.round(vbW * ratio));
+            clone.setAttribute("height", Math.round(vbH * ratio));
+          } else {
+            clone.style.cssText =
+              "display:block;max-width:" +
+              maxW +
+              "px;max-height:" +
+              maxH +
+              "px;width:auto;height:auto;";
+          }
         }
 
         stage.appendChild(clone);
       }
 
-      // Toolbar
+      // ── Build toolbar ──────────────────────────────────────────────
       toolbar.innerHTML = "";
+      mobileLockBtn = null;
 
-      if (typeof onToolbar === "function") {
-        onToolbar(toolbar);
+      if (isMobile()) {
+        // Mobile toolbar: Copy · Lock · Rotate  (image-zoom style)
+        var mobileCopyBtn = document.createElement("button");
+        mobileCopyBtn.className = "mermaid-viewer-btn";
+        mobileCopyBtn.setAttribute("data-title", "复制源码");
+        mobileCopyBtn.innerHTML = ICON_COPY;
+        mobileCopyBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          function flash() {
+            mobileCopyBtn.setAttribute("data-title", "已复制 ✓");
+            setTimeout(function () {
+              mobileCopyBtn.setAttribute("data-title", "复制源码");
+            }, 1800);
+          }
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(source).then(flash);
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = source;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+            flash();
+          }
+        });
+
+        mobileLockBtn = document.createElement("button");
+        mobileLockBtn.className = "mermaid-viewer-btn lock-btn";
+        mobileLockBtn.setAttribute("data-title", "锁定方向");
+        mobileLockBtn.innerHTML = ICON_LOCK;
+        mobileLockBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          isLocked = !isLocked;
+          mobileLockBtn.classList.toggle("active", isLocked);
+        });
+
+        var mobileRotateBtn = document.createElement("button");
+        mobileRotateBtn.className = "mermaid-viewer-btn rotate-btn";
+        mobileRotateBtn.setAttribute("data-title", "旋转90°");
+        mobileRotateBtn.innerHTML = ICON_ROTATE;
+        mobileRotateBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          rotation += 90;
+          updateTransform(true);
+        });
+
+        toolbar.appendChild(mobileCopyBtn);
+        toolbar.appendChild(mobileLockBtn);
+        toolbar.appendChild(mobileRotateBtn);
+      } else {
+        // Desktop toolbar: Copy (from onToolbar callback) · Zoom In · Zoom Out · Reset
+        if (typeof onToolbar === "function") {
+          onToolbar(toolbar);
+        }
+
+        if (toolbar.children.length > 0) {
+          var div = document.createElement("div");
+          div.className = "mermaid-viewer-toolbar-divider";
+          toolbar.appendChild(div);
+        }
+
+        var btnIn = document.createElement("button");
+        btnIn.className = "mermaid-viewer-btn";
+        btnIn.setAttribute("data-title", "放大");
+        btnIn.innerHTML = ICON_ZOOM_IN;
+        btnIn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          scale = Math.min(scale * 1.25, 10);
+          updateTransform(true);
+        });
+
+        var btnOut = document.createElement("button");
+        btnOut.className = "mermaid-viewer-btn";
+        btnOut.setAttribute("data-title", "缩小");
+        btnOut.innerHTML = ICON_ZOOM_OUT;
+        btnOut.addEventListener("click", function (e) {
+          e.stopPropagation();
+          scale = Math.max(scale / 1.25, 0.1);
+          updateTransform(true);
+        });
+
+        var btnReset = document.createElement("button");
+        btnReset.className = "mermaid-viewer-btn";
+        btnReset.setAttribute("data-title", "重置");
+        btnReset.innerHTML = ICON_ZOOM_RESET;
+        btnReset.addEventListener("click", function (e) {
+          e.stopPropagation();
+          resetTransform(true);
+        });
+
+        toolbar.appendChild(btnIn);
+        toolbar.appendChild(btnOut);
+        toolbar.appendChild(btnReset);
       }
 
-      if (toolbar.children.length > 0) {
-        var div = document.createElement("div");
-        div.className = "mermaid-viewer-toolbar-divider";
-        toolbar.appendChild(div);
+      if (isMobile()) {
+        // Animate in: start slightly scaled down, pop to natural size — just
+        // like image-zoom's viewImage which starts opacity:0.5 then fades up.
+        stage.style.transition = "none";
+        stage.style.opacity = "0.5";
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+        void stage.offsetWidth; // force reflow
+        stage.style.transition = "opacity 0.15s ease";
+        stage.style.opacity = "1";
+      } else {
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
-
-      // Zoom in
-      var btnIn = document.createElement("button");
-      btnIn.className = "mermaid-viewer-btn";
-      btnIn.setAttribute("data-title", "放大");
-      btnIn.innerHTML = ICON_ZOOM_IN;
-      btnIn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        scale = Math.min(scale * 1.25, 10);
-        updateTransform(true);
-      });
-
-      // Zoom out
-      var btnOut = document.createElement("button");
-      btnOut.className = "mermaid-viewer-btn";
-      btnOut.setAttribute("data-title", "缩小");
-      btnOut.innerHTML = ICON_ZOOM_OUT;
-      btnOut.addEventListener("click", function (e) {
-        e.stopPropagation();
-        scale = Math.max(scale / 1.25, 0.1);
-        updateTransform(true);
-      });
-
-      // Reset
-      var btnReset = document.createElement("button");
-      btnReset.className = "mermaid-viewer-btn";
-      btnReset.setAttribute("data-title", "重置");
-      btnReset.innerHTML = ICON_ZOOM_RESET;
-      btnReset.addEventListener("click", function (e) {
-        e.stopPropagation();
-        resetTransform(true);
-      });
-
-      toolbar.appendChild(btnIn);
-      toolbar.appendChild(btnOut);
-      toolbar.appendChild(btnReset);
-
-      overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
     }
 
     function close() {
       overlay.classList.remove("active");
       document.body.style.overflow = "";
+      isLocked = false;
+      if (mobileLockBtn) mobileLockBtn.classList.remove("active");
     }
 
     closeBtn.addEventListener("click", close);
     overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) close();
+      if (e.target === overlay || e.target === container) close();
     });
 
     document.addEventListener("keydown", function (e) {
       if (!overlay.classList.contains("active")) return;
       if (e.key === "Escape") close();
+    });
+
+    // Orientation change: reset unless locked (mirrors image-zoom)
+    window.addEventListener("orientationchange", function () {
+      if (!overlay.classList.contains("active")) return;
+      if (isLocked) return;
+      setTimeout(function () {
+        resetTransform(true);
+      }, 300);
     });
 
     overlay.addEventListener(
@@ -309,9 +416,13 @@
       }
     });
 
-    stage.addEventListener(
+    // Touch listeners on overlay so panning works even when the finger
+    // starts on the dark background outside the stage.
+    overlay.addEventListener(
       "touchstart",
       function (e) {
+        if (e.target.closest(".mermaid-viewer-toolbar, .mermaid-viewer-close"))
+          return;
         if (e.touches.length === 1) {
           lastTouchX = e.touches[0].clientX;
           lastTouchY = e.touches[0].clientY;
@@ -326,9 +437,11 @@
       { passive: false },
     );
 
-    stage.addEventListener(
+    overlay.addEventListener(
       "touchmove",
       function (e) {
+        if (e.target.closest(".mermaid-viewer-toolbar, .mermaid-viewer-close"))
+          return;
         e.preventDefault();
         if (e.touches.length === 1) {
           tx += e.touches[0].clientX - lastTouchX;
@@ -363,6 +476,7 @@
   function openInViewer(source, svgSourceEl) {
     var v = getViewer();
     v.open(svgSourceEl, source, function (toolbar) {
+      // Desktop-only copy button (mobile has its own in the unified toolbar)
       var copyBtn = document.createElement("button");
       copyBtn.className = "mermaid-viewer-btn";
       copyBtn.setAttribute("data-title", "复制源码");
@@ -419,8 +533,6 @@
       block.className = "mermaid-block";
       block.id = "mermaid-block-" + index;
 
-      // Fullscreen button lives in the wrapper (outside the overflow-clipped
-      // block) so its tooltip is never hidden by overflow:hidden on the block.
       var fsBtn = document.createElement("button");
       fsBtn.className = "mermaid-fullscreen-btn";
       fsBtn.setAttribute("aria-label", "全屏查看");
@@ -522,7 +634,6 @@
         window.mermaid
           .render(uid, source)
           .then(function (result) {
-            // Remove only the old SVG / error message; leave other children
             var old = block.querySelector("svg, pre");
             if (old) old.remove();
             var tmp = document.createElement("div");

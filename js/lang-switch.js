@@ -219,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Alona encountered an error while requesting AI. Please try again later.",
 
     // 文章
+    文章: "Writings",
     "点击阅读->": "Click to Read ->",
     目录: "Directory",
     无目录: "No Directory",
@@ -338,6 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
     复制表格: "Copy Table",
     展开表格: "Expand Table",
     折叠表格: "Collapse Table",
+
+    //碎碎念
+    万花筒: "Murmur",
+    "暂无碎碎念，去记录点什么吧~": "No murmurs yet, go record something~",
   };
 
   // ==========================================

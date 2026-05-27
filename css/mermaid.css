@@ -447,19 +447,105 @@ body.dark-mode {
 
 /* Mobile */
 @media (max-width: 768px) {
+
+    /* ── Suppress desktop-only elements ─────────────────────────── */
     .mermaid-viewer-btn::after {
         display: none;
     }
 
-    .mermaid-viewer-toolbar {
-        bottom: 18px;
-        padding: 6px 14px;
-        gap: 4px;
+    /* ── Overlay: flex-centering container, matches image-zoom ──── */
+    /* The overlay becomes a full-viewport flex container so the stage
+       is centered by CSS — no JS translate(-50%,-50%) needed. */
+    .mermaid-viewer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        touch-action: none;
     }
 
+    /* Inner container that fills the overlay and flex-centers the stage,
+       matching image-zoom's .image-viewer-container layout. */
+    .mermaid-viewer-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    }
+
+    /* ── Stage: CSS-fitted, not JS-scaled ───────────────────────── */
+    /* Remove the desktop absolute positioning; the flex container
+       centers it. Max sizes leave room for close btn + toolbar. */
+    .mermaid-viewer-stage {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+        max-width: 90%;
+        max-height: 65vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+    }
+
+    /* SVG fills the stage naturally, constrained by the stage max-size */
+    .mermaid-viewer-stage svg {
+        max-width: 100%;
+        max-height: 65vh;
+        width: auto;
+        height: auto;
+    }
+
+    /* ── Toolbar: image-zoom style ──────────────────────────────── */
+    /* Matches .viewer-toolbar in image-zoom.css exactly:
+       bottom pill, frosted glass, space-between layout, 90% width. */
+    .mermaid-viewer-toolbar {
+        bottom: 20px;
+        padding: 8px 25px;
+        width: 90%;
+        gap: 0;
+        justify-content: space-between;
+        /* Re-assert the frosted-glass pill (same as image-zoom) */
+        background: rgba(255, 255, 255, 0.15);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+    }
+
+    /* Hover lift animation disabled on mobile — static on touch */
+    .mermaid-viewer-toolbar:hover {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: none;
+        transform: translateX(-50%);
+    }
+
+    /* Buttons: 45×45px matching image-zoom's .toolbar-btn */
+    .mermaid-viewer-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .mermaid-viewer-btn svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* Lock active state (red, dark bg) matching image-zoom's .toolbar-btn.active */
+    .mermaid-viewer-btn.active {
+        color: #ff6b6b;
+        background: rgba(0, 0, 0, 0.65);
+    }
+
+    /* ── Close button ───────────────────────────────────────────── */
     .mermaid-viewer-close {
-        top: 14px;
-        right: 14px;
+        top: 15px;
+        right: 15px;
         width: 40px;
         height: 40px;
         font-size: 30px;
