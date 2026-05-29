@@ -395,97 +395,52 @@ document.addEventListener('DOMContentLoaded', function() {
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">Tags</h1><div class="post-subtitle"><span>探索与</span> "diary" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> diary</h2><div class="tag-description"> <span>共有</span> 10 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">新的软件灵感</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>最近我发现打开电脑的path路径这些东西很麻烦我开始思考能不能做一个一键打开Windows的path界面,网络适配器,以及
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">Tags</h1><div class="post-subtitle"><span>探索与</span> "diary" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> diary</h2><div class="tag-description"> <span>共有</span> 10 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/18/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%88%91%E8%A7%89%E5%BE%97Blog%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E5%83%8FObsidian%E9%82%A3%E6%A0%B7%E7%9A%84%E8%BD%AF%E4%BB%B6/">我觉得Blog应该做成像Obsidian那样的软件</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>前几天试了一下Obsidian这个做笔记的软件感觉打开了我的思路—–为什么不做一个移动端和PC端都可以同步文章内容的软件呢?
+因为目前主流的静态blog生成器主要有hexo,hugo,astro这三个,但是这三个各有各的优缺点:
+
+hexo简单但是构建速度慢
+hugo构建速度快但是用的是go语言并非前端御三家
+astro上手难度高
+
+因为大多数人其实是吧Blog当做产品说明书或者当做笔记本的,根本没心思折腾那些界面上的东西,更别提学前端了,至于魔改主题什么的也只有程序员和大学生喜欢折腾了
+所以我希望的是一个东西———封装,把一切操作和修改都封装到极致,甚至打开就能用,不需要自己亲自去修改代码什...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-18</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/18/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%88%91%E8%A7%89%E5%BE%97Blog%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E5%83%8FObsidian%E9%82%A3%E6%A0%B7%E7%9A%84%E8%BD%AF%E4%BB%B6/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">新的软件灵感</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>最近我发现打开电脑的path路径这些东西很麻烦我开始思考能不能做一个一键打开Windows的path界面,网络适配器,以及
 设备管理器,磁盘清理等软件,对了,还得结合我之前的DNS的方便切换的想法
-总之,想法就是这,就是实现的难度比较大
-...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-15</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">一个消逝的山村</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我爷去世了,不过也是预料之内的过年放寒假的时候,我爸把他接过来,接过来就算了,还总是不做饭他吃,那时候冰箱里有很多肉,而我又是究极懒人,一般吃外卖或方便面
-我爷以前是厨子,不是你们想象的那种城市里的饭...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-05</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">win加R命令和Windows快捷键</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>以下是一些常用的命令和快捷键,用Chatgpt统计了一下Win+R 命令一、系统工具类
+总...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-15</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">一个消逝的山村</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我爷去世了,不过也是预料之内的过年放寒假的时候,我爸把他接过来,接过来就算了,还总是不做饭他吃,那时候冰箱里有很多肉,而我又是究极懒人,一般吃外卖或方便面
+我爷以前是厨子,不是你们想象的那种城市里的饭...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-05</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">win加R命令和Windows快捷键</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>以下是一些常用的命令和快捷键,用Chatgpt统计了一下Win+R 命令一、系统工具类
 cmd → 命令提示符
 powershell → PowerShell
 taskmgr → 任务管理器
-msco...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">湖边的春天</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>学校旁边有一个特大的湖,去转了一圈(一圈十几公里  狗头狗头狗头)场景一
+msconfig → 系统配置（启动项管理）
+services.msc → 服务管理
+eventvwr → 事件查看器
+perfmon → 性能监视器
+
+二、设置与控制面板
+control → 控制面板
+se...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">湖边的春天</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>学校旁边有一个特大的湖,去转了一圈(一圈十几公里  狗头狗头狗头)场景一
     场景一
-    .knpmemdtxmno{zoom:80%;}
+    .tdqsgarfifdh{zoom:80%;}
 
-.knradhuyctmf{zoom:80%;}
-
-.cuegxcwocbrk{zoom:80%;}
-
-.deycwjunamxv{zoom:80%;}
-
-.dicdlvetpozj{zoom:80%;}
-
-.dgfpmxdevzps{zoom:80...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">清理一下磁盘</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>磁盘又又又又满了以前我都是直接忽视,用deskgenius把D盘分了150G给了C盘,直到今天
-​	.mvramkuoyshl{zoom:33%;}
+.htfccjjhghlu{zoom:80%;}
+...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">清理一下磁盘</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>磁盘又又又又满了以前我都是直接忽视,用deskgenius把D盘分了150G给了C盘,直到今天
+​	.vuwiwuupwoop{zoom:33%;}
 我就纳闷了明明软件都装到D盘怎么C盘还会满
-用Sp...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-28</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%AD%E7%BA%A7%E4%BD%9C%E6%96%8701/">英语六级作文-探索深海的意义</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>中文思路:
+用Sp...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-28</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%AD%E7%BA%A7%E4%BD%9C%E6%96%8701/">英语六级作文-探索深海的意义</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>中文思路:
 深海探索的重要性
-从上个世纪冷战初期到今天的ai时代，成百上千的卫星和探测器已经被人类发射到深空并围绕在地球轨道，部分国家甚至拥有载人航天和登录月球的能力，而一些探测器已经飞出了太阳系，然...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-24</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%AD%E7%BA%A7%E4%BD%9C%E6%96%8701/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/23/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E9%A3%99%E9%A9%AC%E9%87%8E%E9%83%8E%E4%B8%8A%E6%98%A0/">飙马野郎上映</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>JOJO奇妙冒险飙马野郎终于上映了!
+从上个世纪冷战初期到今天的ai时代，成百上千的卫星和探测器已经被人类发射到深空并围绕在地球轨道，部分国家甚至拥有载人航天和登录月球的能力，而一些探测器已经飞出了太阳系，然而我们试图探索其他星球的同时我们却对我们的母星——地球一无所知，尤其是覆盖地球70%面积的海洋 
+众所周知深海领域常年黑暗，高压，充满了死亡的讯息，但随着深海探测器和潜水艇的深入，越来越多生命奇迹展现在我们眼前，海洋生物围绕在海底热泉附近获得热源和矿物质，深海鱼在高压环境下变得扁平，这为我们揭示地球生命的起源有着重大意义。很多年前我们误以为化石能源临近枯竭，但对深海的加大探索我们发现了新的石油天然...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-24</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%AD%E7%BA%A7%E4%BD%9C%E6%96%8701/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/23/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E9%A3%99%E9%A9%AC%E9%87%8E%E9%83%8E%E4%B8%8A%E6%98%A0/">飙马野郎上映</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>JOJO奇妙冒险飙马野郎终于上映了!
 
   
   
 
 
 
-​	.kolscttkxjdu{zoom: 25%;}
-​	.ukckqrqukyjo{}
-​	.woiryfxftftg{zoom: 33%;}
-​	.ejhpshvbreij{}
-目前第一集已经出了,但是国内平台上映不了,所以大家只能去小网站看了
-观后感:  神中神,钱都花在刀刃上了  40分钟就 展现了极强的张力
-就是叙事风格相比之前的变化了很多,漫画我没看过,听说这个动漫不如漫画,但是平心而论,这俩能比吗我去,动漫制作有多难又不是不知道
-大卫社你赶紧把下一集给我端上来,根本不够吃 * ๑乛◡乛๑ *
-...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-23</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E5%8A%A8%E6%BC%AB/">动漫</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/23/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E9%A3%99%E9%A9%AC%E9%87%8E%E9%83%8E%E4%B8%8A%E6%98%A0/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/13/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Hexo%E6%A1%8C%E5%AE%A0%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90/">Hexo桌宠大功告成!!!</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>终于,我去,这个小桌宠被做出来了,真的废了我半条命首先看看我给AI的提示词吧,这次我写的非常非常多,为什么呢? 因为我发现无论给AI提醒多少遍,如果代码只是全部浓缩到单个pug文件的话就会导致一个问题...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/Hexo/">Hexo</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/13/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Hexo%E6%A1%8C%E5%AE%A0%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A1%8C%E5%AE%A0%E5%88%B6%E4%BD%9C/">浏览器桌宠制作</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>之前花了3天时间美化了我的Blog,然后把一些改动PR给了forever218大佬也算是兑现了我之前的想法:双语言主题,美化about界面,数学公式支持等等等等
-感觉和AI沟通的时候,我变得就甲方一样...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-06</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/Hexo/">Hexo</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A1%8C%E5%AE%A0%E5%88%B6%E4%BD%9C/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/02/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%80%81%E5%AE%B6%E7%9A%84%E8%A7%81%E9%97%BB/">老家的见闻</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>回老家给亲戚拜年,不过我不喜欢拜年,反而喜欢老家的风景和动物
-动物篇
-
-  
-  
-
-
-
-
-
-  
-  
-
-
-
-
-
-  
-  
-
-
-
-
-
-  
-  
-
-
-
-
-
-  
-  
-
-
-
-
-
-  
-  
-
-
-
-风景篇.qrfiaofwmymz{zoom:25%;}
-
-.enpcrtshwfwx{zoom:25%;}
-
-.rljdicfnpgmv{zoom:25%;}
-
-.bwbrdnripmej{zoom:...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-02-24</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/02/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%80%81%E5%AE%B6%E7%9A%84%E8%A7%81%E9%97%BB/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+​	.wdgnnpdbiorz{zoom: 25%;}
+​	.tmecnocrliyf{}
+​	.ytujbvkgiawb{zoom: 33%...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-23</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E5%8A%A8%E6%BC%AB/">动漫</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/23/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E9%A3%99%E9%A9%AC%E9%87%8E%E9%83%8E%E4%B8%8A%E6%98%A0/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/13/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Hexo%E6%A1%8C%E5%AE%A0%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90/">Hexo桌宠大功告成!!!</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>终于,我去,这个小桌宠被做出来了,真的废了我半条命首先看看我给AI的提示词吧,这次我写的非常非常多,为什么呢? 因为我发现无论给AI提醒多少遍,如果代码只是全部浓缩到单个pug文件的话就会导致一个问题...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/Hexo/">Hexo</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/13/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Hexo%E6%A1%8C%E5%AE%A0%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A1%8C%E5%AE%A0%E5%88%B6%E4%BD%9C/">浏览器桌宠制作</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>之前花了3天时间美化了我的Blog,然后把一些改动PR给了forever218大佬也算是兑现了我之前的想法:双语言主题,美化about界面,数学公式支持等等等等
+感觉和AI沟通的时候,我变得就甲方一样,一直想让AI实现“五彩斑斓的黑”,而自己懂得只有鸡毛蒜皮,好不容易AI改完后,我又想要第一版了,所以多和AI聊你就知道甲方是什么心理了,站在对立面思考属于是
+在我之前的想法里有一个就是桌宠
+当然这个...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-06</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/Hexo/">Hexo</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A1%8C%E5%AE%A0%E5%88%B6%E4%BD%9C/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
