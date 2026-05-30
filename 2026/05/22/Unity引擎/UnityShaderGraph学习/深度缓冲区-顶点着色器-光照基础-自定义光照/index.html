@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p> 深度缓冲采用非线性映射存储0-1区间的数值,通过为近景物体分配更多数据位来实现高精度渲染</p>
 <p>在渲染物体时会绘制物体的深度值然后与深度缓冲区中的值进行比对这个过程就是深度测试(depth test),当绘制物体的深度值小于或等于缓冲区值时,新物体就会覆盖原有的物体,若绘制的是不透明物体还会更新缓冲区中的值,透明物体一般情况下不会写入深度数据</p>
 <p>然而这些不需要了解,因为这些比对操作由shadergraph自动完成</p>
-<p>​	<style>.afsxqwcgyubh{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522192910972.png" class="afsxqwcgyubh" alt="image-20260522192910972"></p>
+<p>​	<style>.yfqpwfbyxuji{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522192910972.png" class="yfqpwfbyxuji" alt="image-20260522192910972"></p>
 <p>这里我们需要关注这里面的这两个东西—–depth write(深度写入)和depth test(深度测试)</p>
 <p>深度写入功能决定在深度测试通过时,是否更新深度缓冲区数值,默认是auto模式,该模式会自动处理不透明物体并跳过透明物体</p>
 <p>而深度测试功能就是自定义新像素写入时的深度比较方式,系统默认采用L Equal模式也就是<strong>当前深度 ≤ 缓冲区深度</strong></p>
@@ -492,15 +492,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <p>当然也可以启用材质覆盖 <strong>Allow material override</strong>这样就可以在inspector窗口里对单个材质进行设置</p>
-<p>​	<style>.puucdhklmefh{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522194748559.png" class="puucdhklmefh" alt="image-20260522194748559"></p>
+<p>​	<style>.ogqkmripdshj{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522194748559.png" class="ogqkmripdshj" alt="image-20260522194748559"></p>
 <p>而unity会在绘制完所有不透明物体后将整个深度纹理状态复制到相机深度纹理这样着色器就可以访问这个纹理了,不过这个深度纹理仅对透明着色器有意义,对于不透明着色器读取深度纹理时这个纹理会显示为灰色,因为深度纹理不记录透明物体的深度信息</p>
 <h2 id="在URP中使用深度纹理"><a href="#在URP中使用深度纹理" class="headerlink" title="在URP中使用深度纹理"></a>在URP中使用深度纹理</h2><p>如果要在URP中使用深度纹理则需要启用这些文件里的Depth Texture(深度纹理)</p>
-<p>​	<style>.qmasagggxlsi{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522200227723.png" class="qmasagggxlsi" alt="image-20260522200227723"></p>
+<p>​	<style>.nhxcgsvsyomi{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260522200227723.png" class="nhxcgsvsyomi" alt="image-20260522200227723"></p>
 <p>然后我们新建一个无光照的shadergraph</p>
 <p>将surface type改为transparent 也就是透明,然后添加两个颜色节点——ForegroundColor(前景色)和BackgroundColor</p>
-<p>​	<style>.vnlynubqkbsc{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110126447.png" class="vnlynubqkbsc" alt="image-20260523110126447"></p>
+<p>​	<style>.wlpkljeucyzw{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110126447.png" class="wlpkljeucyzw" alt="image-20260523110126447"></p>
 <p>然后我们添加SceneDepth节点,这个默认会使用当前渲染像素的屏幕坐标来采样深度纹理,无需手动输入任何参数</p>
-<p>​	<style>.skjrxrwsvfsf{zoom:80%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110325461.png" class="skjrxrwsvfsf" alt="image-20260523110325461"></p>
+<p>​	<style>.kwwmjnjyxnpe{zoom:80%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523110325461.png" class="kwwmjnjyxnpe" alt="image-20260523110325461"></p>
 <p>Unity Shader Graph 的 <strong>Scene Depth</strong> 节点提供三种 <strong>Sampling（采样模式）</strong>，用于以不同方式解释深度缓冲区的值：</p>
 <table>
 <thead>
@@ -552,35 +552,35 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <p>而做物体轮廓描边效果可以使用Linear01</p>
-<p>​	<style>.dhnirbxsijld{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523111230635.png" class="dhnirbxsijld" alt="image-20260523111230635"></p>
+<p>​	<style>.rjvlddftwvhd{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523111230635.png" class="rjvlddftwvhd" alt="image-20260523111230635"></p>
 <p>然后我们添加Lerp节点</p>
 <p>Lerp是线性插值(Linear Interpolation)的简称,指的是在两个数值之间做平滑过渡</p>
 <p>左侧的A 和B两个输入端口分别接收要混合的数值,T输入则控制混合权重,决定结果偏向A还是B,取值范围0-1</p>
 <blockquote>
 <p>例如T&#x3D;0.25时输出结果就是75%的A加上25%的B</p>
 </blockquote>
-<p>​	<style>.xyhnyyswnyad{zoom: 50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523112323787.png" class="xyhnyyswnyad" alt="image-20260523112323787"></p>
+<p>​	<style>.qkdinroqxtuf{zoom: 50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523112323787.png" class="qkdinroqxtuf" alt="image-20260523112323787"></p>
 <p>我们将前景色ForegroundColor设置为绿色,BackgroundColor后景色设置为白色</p>
 <p>此时的材质显示的是白色</p>
-<p>​	<style>.rklfiiwfhtuh{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125309976.png" class="rklfiiwfhtuh" alt="image-20260523125309976"></p>
+<p>​	<style>.yjstnljdfrzl{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125309976.png" class="yjstnljdfrzl" alt="image-20260523125309976"></p>
 <p>然后我们让视角被这个白色方块遮挡这三个物体</p>
-<p>​	<style>.ypgjsurshxcm{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125448422.png" class="ypgjsurshxcm" alt="image-20260523125448422"></p>
+<p>​	<style>.qkpnbhfdmern{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523125448422.png" class="qkpnbhfdmern" alt="image-20260523125448422"></p>
 <p>我们可以看到①和②号显示为前景色,而③号为白色,说明深度纹理有效</p>
- <style>.rvczbkilhyjt{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131127007.png" class="rvczbkilhyjt" alt="image-20260523131127007">
+ <style>.iomftqrjfynu{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131127007.png" class="iomftqrjfynu" alt="image-20260523131127007">
 
 <p>调整透明度会影响绿色的明暗度,除了这个③号,这里有一个关键的决定性因素——<strong>surface type</strong></p>
-<p>​	<style>.rdbejvzhfriv{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131821930.png" class="rdbejvzhfriv" alt="image-20260523131821930"></p>
+<p>​	<style>.ckbzsmmzukvx{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523131821930.png" class="ckbzsmmzukvx" alt="image-20260523131821930"></p>
 <p>若设置为Opaque就表明这个是不透明材质,若设置为Transparent就是透明材质</p>
-<p>​	<style>.jthiqscqrpvk{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523132305621.png" class="jthiqscqrpvk" alt="image-20260523132305621"></p>
+<p>​	<style>.nnfsgcnlteea{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523132305621.png" class="nnfsgcnlteea" alt="image-20260523132305621"></p>
 <p>我们的③号就是用的Transparency的材质</p>
 <p>不透明材质的物品全部显示为前景色,例如我们将背景色设置为黄色就可以更明显的看出</p>
-<p>​	<style>.vgxmcxtwghml{zoom:25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133132264.png" class="vgxmcxtwghml" alt="image-20260523133132264"></p>
+<p>​	<style>.ujzfrwnwryox{zoom:25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133132264.png" class="ujzfrwnwryox" alt="image-20260523133132264"></p>
 <p>但是我们若将背景物体扩大就很难分辨出来这几个方块的存在</p>
-<p>​	<style>.simwocxnglvl{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133613445.png" class="simwocxnglvl" alt="image-20260523133613445"></p>
+<p>​	<style>.tktcksjmddii{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133613445.png" class="tktcksjmddii" alt="image-20260523133613445"></p>
 <p>尤其是在游戏窗口完全是一片绿色</p>
-<p>​	<style>.lvgtbsvucczj{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133742353.png" class="lvgtbsvucczj" alt="image-20260523133742353"></p>
+<p>​	<style>.lxybyqqknebs{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133742353.png" class="lxybyqqknebs" alt="image-20260523133742353"></p>
 <p>此时我们可以调整主摄像机的Clipping Planes</p>
-<p>​	<style>.mmuvjwikkwvu{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133823071.png" class="mmuvjwikkwvu" alt="image-20260523133823071"></p>
+<p>​	<style>.nmnfmfmtywfb{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523133823071.png" class="nmnfmfmtywfb" alt="image-20260523133823071"></p>
 <p>在 Unity 中，<strong>Clipping Planes（裁剪平面）</strong> 的两个值是：</p>
 <table>
 <thead>
@@ -602,17 +602,17 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <p>如果我们将far改为25就可以看的更清楚了</p>
-<p>​	<style>.ekwgnakgicgs{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523134142885.png" class="ekwgnakgicgs" alt="image-20260523134142885"></p>
+<p>​	<style>.nznlrzmvdjoy{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523134142885.png" class="nznlrzmvdjoy" alt="image-20260523134142885"></p>
 <h1 id="顶点着色器"><a href="#顶点着色器" class="headerlink" title="顶点着色器"></a>顶点着色器</h1><p>网格是由一个个顶点构成的,这些顶点就是网格各个角落的点,点与点形成了面,每一帧画面Unity都要读取顶点数据,计算这些顶点在屏幕上应该显示的具体位置,然后这些顶点最终呈现在屏幕上(感觉和老电视的示波器差不多),这个过程是通过一系列坐标变换实现的</p>
-<p>​	<style>.klvamxrgyhsu{zoom:67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523140205230.png" class="klvamxrgyhsu" alt="image-20260523140205230"></p>
+<p>​	<style>.jixqhkoxgbol{zoom:67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523140205230.png" class="jixqhkoxgbol" alt="image-20260523140205230"></p>
 <p>首先是从抽象的网格数据开始,这时顶点位置是相对于网格自身的原点来定义的,这个坐标系称之为对象空间(Object Space)</p>
 <p>根据物体的变化位置顶点被转换到世界空间,这时他们的位置是相对于场景的世界原点,然后根据摄像机的位置和参数设置,顶点会被转换到裁剪空间(clip space),此时的物体的坐标就是相对于屏幕的坐标(说人话就是跟皮影戏一样,要想看到皮影戏就必须确保屏幕上为皮影的图形分配位置)</p>
-<p>​	<style>.lsemxscwhkds{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523142321289.png" class="lsemxscwhkds" alt="image-20260523142321289"></p>
+<p>​	<style>.qcbsspxvwnve{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523142321289.png" class="qcbsspxvwnve" alt="image-20260523142321289"></p>
 <p>然而不需要了解这种东西,shadergraph会帮我们自动运算处理(虽然要是写shader的话需要手搓)</p>
 <p>完成顶点着色器处理后网格数据会进行光栅化转化也就是把这些图形转换为一个一个的像素而片段着色器会对所有像素进行着色处理并最终呈现物体图像</p>
-<p>​	<style>.kwjdwkxfjhnp{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143013205.png" class="kwjdwkxfjhnp" alt="image-20260523143013205"></p>
+<p>​	<style>.otmxhjtgwbup{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143013205.png" class="otmxhjtgwbup" alt="image-20260523143013205"></p>
 <p>回到Unity创建无光照shadergraph</p>
-<p>​	<style>.exeblpultbwt{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143642395.png" class="exeblpultbwt" alt="image-20260523143642395"></p>
+<p>​	<style>.frccqonzqvch{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523143642395.png" class="frccqonzqvch" alt="image-20260523143642395"></p>
 <p>之前我们都是直接用,这里讲讲这里的两个默认节点</p>
 <h2 id="对于Vertex（顶点阶段）"><a href="#对于Vertex（顶点阶段）" class="headerlink" title="对于Vertex（顶点阶段）"></a>对于Vertex（顶点阶段）</h2><p>这是 Shader 的<strong>顶点着色器</strong>部分，负责处理模型的每个顶点：</p>
 <table>
@@ -661,10 +661,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><strong>顶点位置变换</strong>：把 Object Space 的 Position 自动转换到 Clip Space（裁剪空间），这样模型才能正确显示在屏幕上</li>
 <li><strong>法线和切线</strong>：保留在 Object Space，供后续光照计算使用（如果你需要 World Space 的法线，要自己加 <code>Transform</code> 节点转换）</li>
 </ol>
-<h2 id="创建波浪效果"><a href="#创建波浪效果" class="headerlink" title="创建波浪效果"></a>创建波浪效果</h2><p>​	<style>.epvinmwrvrur{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523214422911.png" class="epvinmwrvrur" alt="image-20260523214422911"></p>
+<h2 id="创建波浪效果"><a href="#创建波浪效果" class="headerlink" title="创建波浪效果"></a>创建波浪效果</h2><p>​	<style>.ycywtpicmlex{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523214422911.png" class="ycywtpicmlex" alt="image-20260523214422911"></p>
 <p>我们需要两个浮点数节点–wavespeed(波速,控制每个顶点上下移动的距离)还有wavestrength(波强度,控制顶点移动的距离</p>
 <p>我们需要使用顶点的世界位置作为偏移值,此时需要position位置节点来实现</p>
-<p>​	<style>.gujgtivckyab{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215234524.png" class="gujgtivckyab" alt="image-20260523215234524"></p>
+<p>​	<style>.skujlusbowuy{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215234524.png" class="skujlusbowuy" alt="image-20260523215234524"></p>
 <p>在 Unity Shader Graph 的 <strong>Position 节点</strong>中，Space（空间）下拉菜单有 <strong>5 种设置</strong>：</p>
 <table>
 <thead>
@@ -701,9 +701,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <p>这里我们采用world就可以实现波浪网格在世界坐标系的无缝衔接</p>
-<p>​	<style>.jbuoccejchon{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215722984.png" class="jbuoccejchon" alt="image-20260523215722984"></p>
+<p>​	<style>.tpgpvhlomqxm{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523215722984.png" class="tpgpvhlomqxm" alt="image-20260523215722984"></p>
 <p>现在添加计时功能,使用time时间节点并乘以波浪速度参数,我们把wavespeed放到multiply的B点,这里是用来设置波浪滚动方向的步骤</p>
-<p>​	<style>.miqdgohmsixv{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523220842337.png" class="miqdgohmsixv" alt="image-20260523220842337"></p>
+<p>​	<style>.xspbebvddkeh{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260523220842337.png" class="xspbebvddkeh" alt="image-20260523220842337"></p>
 <p>在 Unity Shader Graph 中，<strong>Position 节点</strong>用 <strong>Split 节点</strong>分离后的四个输出是：</p>
 <table>
 <thead>
@@ -763,25 +763,25 @@ document.addEventListener('DOMContentLoaded', function() {
 <td align="left"><code>Time → Sine</code> 是最经典的自动动画组合</td>
 </tr>
 </tbody></table>
-  <style>.ouvsrdpuveab{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528172806668.png" class="ouvsrdpuveab" alt="image-20260528172806668">
+  <style>.nhtwwakyogax{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528172806668.png" class="nhtwwakyogax" alt="image-20260528172806668">
 
 <p>然后把计算结果输入正弦函数节点得到y轴偏移量,也就是这样</p>
-<p>​	<style>.lhwccnwmhkye{zoom: 50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528172655774.png" class="lhwccnwmhkye" alt="image-20260528172655774"></p>
-<pre><code>	&lt;style&gt;.fuvqgfmvrznq&#123;zoom: 33%;&#125;&lt;/style&gt;&#123;% asset_img fuvqgfmvrznq image-20260528173008616.png '"""image-20260528173008616"' %&#125;
+<p>​	<style>.rofpvvmqygsy{zoom: 50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528172655774.png" class="rofpvvmqygsy" alt="image-20260528172655774"></p>
+<pre><code>	&lt;style&gt;.trbkbwpbeyog&#123;zoom: 33%;&#125;&lt;/style&gt;&#123;% asset_img trbkbwpbeyog image-20260528173008616.png '"""image-20260528173008616"' %&#125;
 </code></pre>
 <p>然后再用波浪强度wavestrength参数调节偏移量大小,然后将sine输出值和wavestrength相乘</p>
 <p>然后新建一个Vector3节点,保持x和z分量为0,在y轴设置偏移值就得到了偏移向量</p>
 <p>并添加一个position节点,选择object 对象空间坐标系,并用add节点加上我们刚才的y轴的偏移量,然后将结果连接到位置图形的输出端口</p>
 <p>考虑到节点比较多移动起来比较困难,我们可以给节点分组,先用左键选中要分组的节点然后右键点击</p>
-<p>​	<style>.oymfcjdnhnqd{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528180829070.png" class="oymfcjdnhnqd" alt="image-20260528180829070"></p>
+<p>​	<style>.zeivjpovubvp{zoom: 33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528180829070.png" class="zeivjpovubvp" alt="image-20260528180829070"></p>
 <p>然后取个名字就实现分组了</p>
-<p>​	<style>.mslnnnystchk{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528180927809.png" class="mslnnnystchk" alt="image-20260528180927809"></p>
-<p>​	<style>.eyklgllscoay{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528174244354.png" class="eyklgllscoay" alt="image-20260528174244354"></p>
+<p>​	<style>.qasuezyplozn{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528180927809.png" class="qasuezyplozn" alt="image-20260528180927809"></p>
+<p>​	<style>.rfvvbfnvyscr{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528174244354.png" class="rfvvbfnvyscr" alt="image-20260528174244354"></p>
 <p>然后我们像之前那样添加基础色color节点和纹理texture节点来控制纹理和颜色</p>
-<p>​	<style>.pemhmgkxxtyx{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175134336.png" class="pemhmgkxxtyx" alt="image-20260528175134336"></p>
-<p>​	<style>.jjlwhbokvvjl{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175509952.png" class="jjlwhbokvvjl" alt="image-20260528175509952"></p>
+<p>​	<style>.opuyfjsodkzo{zoom: 25%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175134336.png" class="opuyfjsodkzo" alt="image-20260528175134336"></p>
+<p>​	<style>.qpcssfntunwb{zoom:33%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175509952.png" class="qpcssfntunwb" alt="image-20260528175509952"></p>
 <p>这么看可能不是很明显,我将这个plane对象旋转90度就可以看的更清了</p>
-<p>​	<style>.mxkfhscczkyx{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175714069.png" class="mxkfhscczkyx" alt="image-20260528175714069"></p>
+<p>​	<style>.azxuujsoffvw{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528175714069.png" class="azxuujsoffvw" alt="image-20260528175714069"></p>
 <h2 id="实现更精细的波浪"><a href="#实现更精细的波浪" class="headerlink" title="实现更精细的波浪"></a>实现更精细的波浪</h2><p>我们旋转前三角形的边缘是与波浪运动方向保持一致,所以看起来不是太明显,不过仍然是有瑕疵的</p>
 <p>为避免这种情况可以使用高精度网格模型,就是那种好几千个面的模型,这个相当于是将面切成大量的三角形使运动的时候的棱角感不是太明显,但是太吃配置了,如果场景里有大量这样的模型会消耗大量的GPU资源</p>
 <p>还有一种方法是采用曲面细分技术,但是URP没有曲面细分,只有HDRP才有</p>
@@ -790,9 +790,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <blockquote>
 <p>Tessellation（曲面细分）在 HDRP（High Definition Render Pipeline）中是一种<strong>几何层面的细节增强技术</strong>，它允许在 GPU 上动态细分三角形网格，从而在近距离观察时呈现更平滑、更精细的表面，而无需增加原始模型的多边形数量</p>
 </blockquote>
-<p>​	<style>.xiodfwgdpuej{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528181451440.png" class="xiodfwgdpuej" alt="image-20260528181451440"></p>
+<p>​	<style>.hcdmszrirlrd{zoom:50%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528181451440.png" class="hcdmszrirlrd" alt="image-20260528181451440"></p>
 <p>启用这个</p>
-<p>​	<style>.elxvshswzybj{zoom: 80%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528181604233.png" class="elxvshswzybj" alt="image-20260528181604233"></p>
+<p>​	<style>.fcevldlxjkwi{zoom: 80%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528181604233.png" class="fcevldlxjkwi" alt="image-20260528181604233"></p>
 <p>此时Vertex会新增加两个接口</p>
 <p>Tessellation Factor（细分因子）</p>
 <p><strong>作用</strong>：控制<strong>细分程度</strong>——每个原始三角形被切成多少个小三角形</p>
@@ -843,9 +843,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <p>然后我们将最开始的这个位置节点设置从世界坐标(world)切换为绝对世界坐标(absolute world),这个是专门用来生成地形什么的用的</p>
-<p>​	<style>.xfnwsjqbukqd{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528182406531.png" class="xfnwsjqbukqd" alt="image-20260528182406531"></p>
+<p>​	<style>.tkfnjupngpgl{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528182406531.png" class="tkfnjupngpgl" alt="image-20260528182406531"></p>
 <p>然后我们删除掉这个add和position节点,直接用y轴偏移量连接Tessellation Displacement细分置换</p>
-<p>​	<style>.habloriwefre{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528182615094.png" class="habloriwefre" alt="image-20260528182615094"></p>
+<p>​	<style>.bfgvdopqvhtz{zoom: 67%;}</style><img src="/2026/05/22/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260528182615094.png" class="bfgvdopqvhtz" alt="image-20260528182615094"></p>
 <p>此时的Tessellation Factor 曲面因子值默认为1,也就是正常情况,当我们增大x的值就会通过增加顶点来细分网格</p>
 <p>我们可以增加这个x的数值使网格的面数增加,细分系数最高可达硬件上限64</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
