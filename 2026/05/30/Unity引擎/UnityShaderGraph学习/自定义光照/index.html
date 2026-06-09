@@ -434,37 +434,37 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 <p>简而言之就是物体在你观察时变得更易反射的原理</p>
 <p>我们有的时候从unity商店下载的资源会显示不出来,这个是因为渲染管不适配导致的,有的材质之前是用Built in渲染管,而我们使用的是URP渲染管</p>
-<p>​	<style>.upqcmjspapvo{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530110534831.png" class="upqcmjspapvo" alt="image-20260530110534831"></p>
+<p>​	<style>.ijgocuokwbsw{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530110534831.png" class="ijgocuokwbsw" alt="image-20260530110534831"></p>
 <p>我们只需要选中这个material然后改成URP渲染即可</p>
-<p>​	<style>.aukibtplscpx{zoom: 33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530110731455.png" class="aukibtplscpx" alt="image-20260530110731455"></p>
-<p>​	<style>.jepdqqtigzte{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111131209.png" class="jepdqqtigzte" alt="image-20260530111131209"></p>
+<p>​	<style>.iguwuxfpvzpj{zoom: 33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530110731455.png" class="iguwuxfpvzpj" alt="image-20260530110731455"></p>
+<p>​	<style>.urfbkchlebkb{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111131209.png" class="urfbkchlebkb" alt="image-20260530111131209"></p>
 <p>这样就可以使用我们的材质了</p>
 <p>事实上shadergraph已经内置了菲涅尔反射的支持</p>
 <p>比如我们将光滑度smoothness改成0,此时的材质就是一张不反光的普通贴图</p>
 <p>但是如果我们将其数值调大就可以看到明显的反光</p>
-<p>​	<style>.kxutxqqtblep{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111418053.png" class="kxutxqqtblep" alt="image-20260530111418053"></p>
-<p>​	<style>.jwwqocqkfpde{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111536410.png" class="jwwqocqkfpde" alt="image-20260530111536410"></p>
+<p>​	<style>.cfnicpmikjuf{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111418053.png" class="cfnicpmikjuf" alt="image-20260530111418053"></p>
+<p>​	<style>.vifuismcscmu{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530111536410.png" class="vifuismcscmu" alt="image-20260530111536410"></p>
 <p>我们可以自己创建一个material</p>
 <p>首先像之前那样创建基础色和基础纹理,选择无光照unlit着色器</p>
-<p>​	<style>.bmpqecsbjsgl{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112826361.png" class="bmpqecsbjsgl" alt="image-20260530112826361"></p>
+<p>​	<style>.fmklgudvkcij{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112826361.png" class="fmklgudvkcij" alt="image-20260530112826361"></p>
 <p>然后创建菲涅尔节点和浮点类型的Fresnelpower节点控制fresnel的强度</p>
-<p>​	<style>.ousrxxjruble{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112917414.png" class="ousrxxjruble" alt="image-20260530112917414"></p>
+<p>​	<style>.rwcteognsvfj{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112917414.png" class="rwcteognsvfj" alt="image-20260530112917414"></p>
 <p>强度默认为1 改为slider滑块,范围0~20</p>
- <style>.fwcrcvrfeaqo{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113027407.png" class="fwcrcvrfeaqo" alt="image-20260530113027407">
+ <style>.gdgehftsriie{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113027407.png" class="gdgehftsriie" alt="image-20260530113027407">
 
 <p>然后用FresnelColor控制颜色,使用HDR</p>
-<p>​	<style>.iemmpxdidkbj{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113202944.png" class="iemmpxdidkbj" alt="image-20260530113202944"></p>
-<p>​	<style>.yeplrxmznkje{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112746177.png" class="yeplrxmznkje" alt="image-20260530112746177"></p>
+<p>​	<style>.bobuwyeyhkmc{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113202944.png" class="bobuwyeyhkmc" alt="image-20260530113202944"></p>
+<p>​	<style>.pyjshzospckr{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530112746177.png" class="pyjshzospckr" alt="image-20260530112746177"></p>
 <p>我们改动强度值就可以看到这个材质的反光了</p>
-<p>​	<style>.mjluxycothbq{zoom:25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113537246.png" class="mjluxycothbq" alt="image-20260530113537246"></p>
+<p>​	<style>.zyjfvlcsrhtk{zoom:25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260530113537246.png" class="zyjfvlcsrhtk" alt="image-20260530113537246"></p>
 <h2 id="漫反射光"><a href="#漫反射光" class="headerlink" title="漫反射光"></a>漫反射光</h2><div class="hide-toggle">
     <div class="hide-toggle-title">漫反射光的原理</div>
-    <div class="hide-toggle-content"> <style>.hrjblmodbpab{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531104133890.png" class="hrjblmodbpab" alt="image-20260531104133890">
+    <div class="hide-toggle-content"> <style>.nmserghereqm{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531104133890.png" class="nmserghereqm" alt="image-20260531104133890">
 
 <p>我们可以知道漫反射就是法向量夹角成反比</p>
 <p>漫反射的光简化为 n · l</p>
 <p>随着角度的增大,随着角度的增大,点积逐渐减少</p>
-<p>​	<style>.ldtxoogslubq{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531104451185.png" class="ldtxoogslubq" alt="image-20260531104451185"></p>
+<p>​	<style>.grakklcwsokk{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531104451185.png" class="grakklcwsokk" alt="image-20260531104451185"></p>
 <p>核心公式</p>
 <p>漫反射光照强度 ∝ <strong>n · l</strong></p>
 <p>其中：</p>
@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 <p>我们像之前那样创建颜色和纹理节点</p>
- <style>.tiomxcmcxkic{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531105626713.png" class="tiomxcmcxkic" alt="image-20260531105626713">
+ <style>.wozjupdkmpwm{zoom:33%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531105626713.png" class="wozjupdkmpwm" alt="image-20260531105626713">
 
 <h2 id="实现卡通渲染效果"><a href="#实现卡通渲染效果" class="headerlink" title="实现卡通渲染效果"></a>实现卡通渲染效果</h2><p>然后我们实现光源的计算, 这里需要介绍几个节点</p>
 <div class="hide-toggle">
@@ -673,9 +673,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>为了满足这个<strong>n</strong>⋅<strong>l</strong>&#x3D;∣<strong>n</strong>∣∣<strong>l</strong>∣ 我们需要这些节点</p>
 <p>main light direction表示从光源到物体的方向,所以用negate节点取反获得从物体表面到光源的方向,接着计算nagate输出的反向向量与normal vector输出的法线向量的点积</p>
-<p>​	<style>.gkiqqyenpwrx{zoom: 67%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531105932981.png" class="gkiqqyenpwrx" alt="image-20260531105932981"></p>
+<p>​	<style>.fjxkmbnxkwbi{zoom: 67%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531105932981.png" class="fjxkmbnxkwbi" alt="image-20260531105932981"></p>
 <p>以上我们已经完成了光照的计算,有两种实现方式来实现渲染</p>
-<p>​	<style>.hsdeeewdqybb{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531113646090.png" class="hsdeeewdqybb" alt="image-20260531113646090"></p>
+<p>​	<style>.yhodmuhczzwd{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531113646090.png" class="yhodmuhczzwd" alt="image-20260531113646090"></p>
 <p>如图,我们有两个节点,分别为step节点和smoothstep节点,由图像你就可以很清楚的看出二者的区别</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">节点功能</div>
@@ -753,7 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>这两个最明显的区别就是step当in输入值小于edge阈值的时候节点输出0,0是黑色,1是白色,我们可以通过控制阈值实现,不过这个明暗过度非常生硬</p>
 <p>所以smoothstep可以实现平滑过渡,这个函数具有缓冲区域输出值在此区间内会从0平滑过渡到1,所以这个拥有两个边界值,当 in输入值&lt; edge1输出位0 ,当in输入值 &gt; edge2输出为1,如果in输入值位于 edge1和edge2之间,那么输出将会是介于0~1之间的某个值</p>
-<p>​	<style>.dcycoisbshuy{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531133019055.png" class="dcycoisbshuy" alt="image-20260531133019055"></p>
+<p>​	<style>.mgxfgsfebxjk{zoom:50%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531133019055.png" class="mgxfgsfebxjk" alt="image-20260531133019055"></p>
 <p>我们添加一个vector2的值cutoff thresholds用split分割出x和y来控制两个阈值,分别设置为-0.05和0</p>
 <p>不过为了更直观添加一个ambient light strength的浮点节点来控制环境光强度,我们将其设置为(0~1)的slider滑块</p>
 <p><strong>Lerp</strong>（Linear Interpolation，线性插值）是 Shader Graph 中<strong>最常用、最核心的混合节点</strong>，它的作用很简单：</p>
@@ -797,9 +797,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>然后将我们smoothstep的输出值放入T槽,将ambient light strength值放入A槽,B槽保持默认的1,这样我们只需要改动A槽就可以了</p>
 <p>我们将这个材质添加到物体上,但是你可以看到阴影面黑的离谱,这个只需要调整环境光强度即可</p>
-<p>​	<style>.uulyanrklnjv{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531141511789.png" class="uulyanrklnjv" alt="image-20260531141511789"></p>
+<p>​	<style>.ylnisinmsecq{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531141511789.png" class="ylnisinmsecq" alt="image-20260531141511789"></p>
 <p>这样就正常多了,这个可以自己调整x y 还有光照强度尝试一下</p>
-<p>​	<style>.sdxhfylqtyrd{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531141623711.png" class="sdxhfylqtyrd" alt="image-20260531141623711"></p>
+<p>​	<style>.smtoslsuqrsp{zoom: 25%;}</style><img src="/2026/05/30/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%89%E7%85%A7/image-20260531141623711.png" class="smtoslsuqrsp" alt="image-20260531141623711"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
