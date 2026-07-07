@@ -1,0 +1,1124 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/mermaid.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
+
+<link rel="stylesheet" href="/css/table.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #00FFFF;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="/images/18.png" alt="比赛主题--别按那个按钮"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/diary/">diary</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-06-16T04:13:16.000Z">2026-06-16</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>6.4k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>22</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">比赛主题--别按那个按钮</h1><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天好游快爆公布了主题—–别按那个键"><a href="#今天好游快爆公布了主题—–别按那个键" class="headerlink" title="今天好游快爆公布了主题—–别按那个键"></a>今天好游快爆公布了主题—–别按那个键</h1><h2 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h2><p>嘶,好小众的玩法,基本上没见过太多这种类型的游戏,但是果核里包着无穷</p>
+<p>我脑子里想的第一个想法就是恐怖主题,比如按了按钮会触发某种禁忌之类的,按钮推动剧情什么的</p>
+<p>或者玩家按了之后就会随机死亡或者获得奖励什么的</p>
+<p>没什么头绪,于是我去看看群友怎么想的———结果跟我想的一样,甚至有人想做类似黄油那种按了按钮出特殊cg……反正我能想到的大家都能想到,开摆了,就随便做做吧</p>
+<p>我的初步想法是类似我的世界的幸运方块的那种,每按一次,就会有不一样的惊喜</p>
+<p>不过“别按”则说明按下去一定要有惩罚机制,但是游戏的机制是必须要按,但是也没说一定是玩家按</p>
+<p>既然没有什么玩法的话就整活吧,比如阻止小猫按按钮,按了就嘎巴一下死了</p>
+<h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><p>简单做了一个关卡选择逻辑和开始封面</p>
+<p>​	<style>.zbjjflaudtoh{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617152617377.png" class="zbjjflaudtoh" alt="image-20260617152617377"></p>
+<p>​	<style>.xjysnordieko{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617150801384.png" class="xjysnordieko" alt="image-20260617150801384"></p>
+<p>然后确立画风为可爱画风,不过为节省时间,我直接用AI生图(其实是没有美术搭子而我是手残党只会画像素 😭)</p>
+<p>​	<style>.ordjwfawtoot{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617153930848.png" class="ordjwfawtoot" alt="image-20260617153930848"></p>
+ <style>.gkbmkbyrkpge{zoom: 25%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617154045974.png" class="gkbmkbyrkpge" alt="image-20260617154045974">
+
+<p>然后简单实现游戏的选择关卡进入场景,打开设置,退出游戏,返回场景的闭环</p>
+<p>然后用AI画一些猫猫头</p>
+<p>​	<style>.ftfpejfbgnse{zoom: 25%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617220640486.png" class="ftfpejfbgnse" alt="image-20260617220640486"></p>
+<p>突然想到可以添加薛定鄂的猫的神秘感,因为按钮象征着不确定性</p>
+<p>​	<style>.ertoogcmpbsb{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617225317376.png" class="ertoogcmpbsb" alt="image-20260617225317376"></p>
+<p>​	<style>.sqwjfgjujbsp{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617225259125.png" class="sqwjfgjujbsp" alt="image-20260617225259125"></p>
+<p>考虑到背景是静态的非常的单调,我决定将这个图分层例如将小猫和背景分开</p>
+<p>​	<style>.cfexxguebnyv{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260617230424278.png" class="cfexxguebnyv" alt="image-20260617230424278"></p>
+<p>还有十几天,不着急</p>
+<h2 id="第三天"><a href="#第三天" class="headerlink" title="第三天"></a>第三天</h2><p>增加了按钮的事件判定,这个按钮会影响剧情(结果是没时间做)</p>
+<p>​	<style>.invajwnktwwf{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260618143340207.png" class="invajwnktwwf" alt="image-20260618143340207"></p>
+<p>​	<style>.ppdoquusvlso{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260618143253173.png" class="ppdoquusvlso" alt="image-20260618143253173"></p>
+<p>然后增加喵喵气泡框,并绑定事件</p>
+<p>​	<style>.aubfkadrwont{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260618200928453.png" class="aubfkadrwont" alt="image-20260618200928453"></p>
+<p>然后给按钮上一个发光效果,使用shadergragh创建材质</p>
+<p>​	<style>.puzhgshtxjed{zoom: 25%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260618204526790.png" class="puzhgshtxjed" alt="image-20260618204526790"></p>
+<p>然后得到这样的效果,然后给按钮添加点击音效</p>
+<p>​	<style>.ahldzjymurcn{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619131835297.png" class="ahldzjymurcn" alt="image-20260619131835297"></p>
+<p>然后来制作设置界面</p>
+<p>通常的游戏设置界面最基本的元素就是如下这些,然后才是窗口比例,垂直同步,分辨率什么的</p>
+<p>​	<style>.jrwoxouymbyg{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619154612049.png" class="jrwoxouymbyg" alt="image-20260619154612049"></p>
+<p>然后花了大量时间制作这些东西的UI</p>
+<p>​	<style>.nqqalolghflp{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619204944829.png" class="nqqalolghflp" alt="image-20260619204944829"></p>
+<p>​	<style>.qnypcqhmhxzj{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619231133890.png" class="qnypcqhmhxzj" alt="image-20260619231133890"></p>
+<p>然后调整了一下实现所有游戏场景都能打开这个面板</p>
+<p>​	<style>.htlporvryglv{zoom: 50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619234524273.png" class="htlporvryglv" alt="image-20260619234524273"></p>
+<p>遇到一个小Bug</p>
+<p>​	<style>.egabfpvomeap{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619234758341.png" class="egabfpvomeap" alt="image-20260619234758341"></p>
+<p>​	<style>.gwbntirxtmso{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260619235934922.png" class="gwbntirxtmso" alt="image-20260619235934922"></p>
+<p>结果发现是一个关于单例的大bug</p>
+<p>​	<style>.dxwvrtdhjfdg{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620125459766.png" class="dxwvrtdhjfdg" alt="image-20260620125459766"></p>
+<p>​		<style>.mbdmctspkdbz{zoom: 50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620131507783.png" class="mbdmctspkdbz" alt="image-20260620131507783"></p>
+<p>​	<style>.miekmnpfieci{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620132008128.png" class="miekmnpfieci" alt="image-20260620132008128"></p>
+<p>不过修好了,终于要开始下一步了——音量的设置本地存储</p>
+<h2 id="第四天"><a href="#第四天" class="headerlink" title="第四天"></a>第四天</h2><p>目前实现了将游戏界面和数据分离(有点像前端和后端数据库的关系)</p>
+<p>​	<style>.gbbwxnutkjns{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620145232694.png" class="gbbwxnutkjns" alt="image-20260620145232694"></p>
+<p>将音量设置存储到这里</p>
+<p>​	<style>.resmnrwbxuyv{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620145347036.png" class="resmnrwbxuyv" alt="image-20260620145347036"></p>
+<p>在其他游戏场景也能使用,测试成功一半</p>
+<p>​	<style>.swssjjqicqyx{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620145525541.png" class="swssjjqicqyx" alt="image-20260620145525541"></p>
+<p>但是还需要关联对应的bgm和音效这些东西</p>
+<p>然后在调整的过程中又遇到一堆Bug了,直接给我干懵了,然后就是浪费了大量时间也没修好</p>
+<p>​	<style>.akhpetyxbttw{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260620171153399.png" class="akhpetyxbttw" alt="image-20260620171153399"></p>
+<p>好想吐,现在真的一点不想看电脑屏幕了,现在是端午节第二天,明天就是第三天了,今天先休息半天吧</p>
+<h2 id="第五天"><a href="#第五天" class="headerlink" title="第五天"></a>第五天</h2><p>今天上午终于把这个逻辑蜘蛛网捋清了,之前一直想着使用单例，结果就是造成了单例的滥用，导致逻辑出现了混乱,而且之前一直想着播放音频通过click里的play()来省事,结果发现根本不可控</p>
+<p>采用audiomanager通过预制体控制游戏场景的音乐音量,支持通过id或者UIButtonSFX</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AudioManager.Instance.PlaySFX(<span class="string">&quot;CatMeowClip&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>或者直接改内存</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ApplyVolume(SettingsManager.Load());</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ApplyVolume</span>(<span class="params">SettingsData data</span>)</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span> (bgmSource == <span class="literal">null</span> || data == <span class="literal">null</span>)</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">       bgmSource.volume = data.masterVolume * data.bgmVolume;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>果然睡一觉起来就是不一样</p>
+<p>​	<style>.zxqgbwqcsweq{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260621145745923.png" class="zxqgbwqcsweq" alt="image-20260621145745923"></p>
+<p>终于可以开始做游戏了,QQ群里的大佬们的游戏都快完成了……..没必要焦虑,做好自己能做到吧!</p>
+<p>首先先加入剧情系统</p>
+<p>​	<style>.yehmykubebix{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260621161058942.png" class="yehmykubebix" alt="image-20260621161058942"></p>
+<p>​	<style>.glmegdqgjvmu{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260621161122668.png" class="glmegdqgjvmu" alt="image-20260621161122668"></p>
+<p>然后又是将AI图拆分(因为AI的图并不能直接使用,结果是和之前一样还要自己手动用数位板+魔棒工具抠图修图……..浪费几个小时)</p>
+<p>​	<style>.cbotipagonoh{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260621170708211.png" class="cbotipagonoh" alt="image-20260621170708211"></p>
+<p>对了,突然想到可以恶搞一下玩家,然后“更新”95%的时候突然跳出来这个小猫吓玩家一跳然后找玩家要吃的</p>
+<p>(猜猜看为什么我会产生这个灵感?  如果不是今天下午的时候Photoshop和Unity突然把Windows卡死机重启然后我的东西没保存………..那才叫欲哭无泪)</p>
+<p>​	<style>.jhwcamprurcr{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260621192021047.png" class="jhwcamprurcr" alt="image-20260621192021047"></p>
+<p>很好,明天就可以加入玩法了,现在剧情系统部分已经做完了,没保存的也重新做了一遍</p>
+<h2 id="第六天"><a href="#第六天" class="headerlink" title="第六天"></a>第六天</h2><p>完善了一下剧情系统的逻辑,把StoryController改成StoryManager,并实现可复用性</p>
+<p>​	<style>.uqpphrwmmpnb{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260622143521133.png" class="uqpphrwmmpnb" alt="image-20260622143521133"></p>
+<p>将剧情以调用的形式使用,然后给每个剧情单一ID,只出现一次,并写入json文件</p>
+<p>​	<style>.ovbyaqklgcxr{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260623140141004.png" class="ovbyaqklgcxr" alt="image-20260623140141004"></p>
+<p>只需要在任何脚本里使用这一句就可以调用剧情</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StoryManager.Instance.PlayStory(<span class="string">&quot;剧情ID&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.ujgscsejpqvt{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260623140342387.png" class="ujgscsejpqvt" alt="image-20260623140342387"></p>
+<p>很好,没有问题</p>
+<p>​	<style>.fywvlxicpwlv{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260623140924194.png" class="fywvlxicpwlv" alt="image-20260623140924194"></p>
+<p>我重新构思了世界观剧情:</p>
+<h3 id="背景一"><a href="#背景一" class="headerlink" title="背景一"></a>背景一</h3><p>公元4026年，地球生态不堪重负, 人类急需新的家园，在对深空的不断探索过程中,人类偶然在天王星旁发现了虫洞,虫洞是五维空间，在好奇心的驱使下,人类向虫洞发射了很多探测器,令人惊喜的是在虫洞的另一边也有一个太阳系—–半驼鹿系,距离虫洞口大概地火距离的位置存在一个类地行星———“喵星”，而且通过虫洞一瞬间就能到达彼岸</p>
+<p>“喵星”之所以叫喵星是因为它只有五个大陆,从太空看,大陆围成了猫爪子的形状,其余区域都是海洋,和远古地球很相似,没有进化出任何高等生物,只有微生物和这个星球的植物，而且喵星有很多独特的矿物质</p>
+<p>在经过探测器登陆带回的大量影像和资料以及样本显示,这毋庸置疑是人类的理想家园, 喵星的表面温度，重力和体积甚至连空气的比例都和地球极度相似, 而且也有一个和月球一样的卫星</p>
+<p>人类第一步就是发射了很多改造型智能机器人去喵星搭建基地和改造生态，也送过少量宇航员前去探索并成功返回,但是迟迟不敢送大量人类去殖民</p>
+<p>随着现实压力的激增，人们开始把目光投向这个陌生又熟悉的星球，因此，经过志愿招募和选拔，三千人(男女1:1,年龄20-40岁)乘坐造价不菲的独一无二的高科技生态飞船—-开拓者号，带着最顶尖的科技以及大量生物胚胎和种子前往新的家园作为降临者</p>
+<p>然而，众人没想到的是，当开拓者号跨越虫洞后，不到两天虫洞体积开始大幅缩小，并屏蔽一切电磁波，发射的探测器全部失联，开拓者号无法返航也无法接收信息，人们都快疯了，国家们之间互相指责彼此的轻举妄动</p>
+<p>为了对勇士们负责也迫于舆论压力，政府们在第五天就联合派出敢死队“信使号”小型飞船来给虫洞的另一侧传递信息，然而此时人们并不知道虫洞的时间性质已经发生了改动，原本一瞬间就能到达变成了需要花费一小时，等到信使号到达虫洞另一侧后发现，虫洞由双向的变成了单向的，已经无法返航，而且这边已经过了45年</p>
+<p>主角曾经参与过开拓者号的建造，是工程师之一，当出问题的时候主角自告奋勇前往担任信使号船员,然而信使号在进入喵星大气层时出故障坠毁解体，只有主角活了下来</p>
+<p>故事的开头就是信使号的主角所在的舱在降落伞的缓冲下坠落到小橘家背后的丛林，小小橘是一只小橘猫，她正在散步，被突如其来的巨响吓了一跳，便前往凑热闹，靠近看发现是飞船，结果舱门自己打开了，主角醒来发现自己变成了猫——一只可爱的“小灰猫”(不过是人类体型的)，并且受伤了</p>
+<p>主角因为脑震荡(其实是因为“广播”系统)失去了部分记忆，忘记了自己是谁，包括自己的身份，以及开拓者号还有信使号，但唯独坚定自己是人类，小橘误以为他脑袋撞昏了，便把主角带到家里</p>
+<h3 id="背景二"><a href="#背景二" class="headerlink" title="背景二"></a>背景二</h3><p>开拓者号在第二天发现虫洞消失了,联络不上地球且已经无法返航了,所有船员陷入了极度的恐慌</p>
+<p>好在在船长的指挥下所有人安顿了下来,最终他们决定将希望彻底寄托到喵星</p>
+<p>降临到喵星之后,他们拆除了飞船并建立了临时政府,开拓喵星,因为之前已经派过很多机器人来开荒了,所以这里现在生意盎然,有着和地球一样的森林和湖泊</p>
+<p>起初一切发展良好,社会有序,这里的法律和规则和地球一样,区别在于男女必须结婚,而且要额外收养一个胚胎婴儿</p>
+<p>而农作物和牲畜经过基因改良也适应了当地的环境,不过动物的形态逐渐发生了很大的变化</p>
+<p>但是在第12年的时候出现了一种病毒—凋零,似乎是因为人类的到访进化出来的,而且只针对人类,感染者会以肉眼可见的速度衰老,比埃博拉,新冠和黑死病都恐怖,人们研制了很多解药,但是只能抑制,而且外星病毒的抗性和适应力极其强大,很快,不到一年时间,人类有700余人因为病毒丧生</p>
+<p>这对才3000人的人类打击巨大,在此过程中分裂出了三派</p>
+<p>左派认为应该修改人类的DNA,提升人类的适应力,成为新人类,中派认为应该听天由命享受现在,右派则认为应该研制抗体来免疫病毒,坚持人类自身</p>
+<p>左派的一个成员在研究的过程中偶然发现了将人类胚胎转换为猫形态对凋灵病毒完全免疫,他证明了转换后的猫仍然具有人类的智慧而且猫的体型可以长到正常人类的体型,而且只有转化为猫形态才能保留智慧,其他形态会发生退化—–也就是巨大喵星人,而且寿命和人类一致</p>
+<p>后来左派组织进行了这个计划—–将成年人类转换为猫,实验当然成功了,没有任何副作用,志愿者成为猫之后的生活与人类无异,甚至相比人类能更好的适应喵星的环境,通过用“广播”技术可以将人类变成猫, “广播”就是一个以核能源驱动的转换装置,因为转换过程需要巨量的计算需要消耗大量资源</p>
+<p>当然这个过程没有痛苦,变身者在进入“广播”的实验范围内会先进入昏迷然后身体发生变形变成猫的形态,但是能保持现有的记忆,而且是变身是否可逆尚不清楚</p>
+<p>很快这个实验就被中派和右派得知了,他们当然不能接受这样的结果,因为这已经违背了现有的道德,在经过无数次沟通之下,左派仍坚持将人类的下一代全部变成猫,于是战争就开始了,因为未来武器的发达战争十分惨烈</p>
+<p>最终三年后左派战败,左派起初一共700余人,战争末尾的时候只剩下20人,被包围的剩下的人没有投降而是启用了一直没有用过的杀手锏,将广播的范围第一次调整为全球并启动,然后这些人开枪自杀了,但是操作产生的巨大功率导致系统出现了异常,所有人都变成了猫,此时剩下的人还有2800左右但是绝大多数人的智力却下降了而且记忆损失,退化到了2000年前的人类水平,导致没有人会使用他们现有的科技了,昔日的高科技,早已在之前长期战争和无人维护的情况下下逐渐变成了废墟和垃圾,被大自然的力量掩埋,这些人就地取材重新建造了房屋,由于之前的能量供给站都被破坏了以现有的能力无法维修,他们重新使用了2000年前的“电能”</p>
+<p>当主角造访喵星的时候,这里已经建立了一个猫咪小社会,而且分裂成了很多个小镇,极少数保留记忆者(而且这些人年龄差不多已经六七十岁了)曾经尝试过恢复人类形态,但由于对“广播”技术的原理一无所知,而且失忆的人们并不相信他们所说的话,而且不敢破坏“广播”担心会产生毁灭性打击,于是在无数次失败后放弃了,并封锁了“广播”,必须要9个管理者的身份卡才能打开,他们还为喵族后代传下了一个传说“在一个深山里有一个远古遗迹,绝对不能触碰里面的按键,否则会被恶魔诅咒不久后就会死亡”的传说</p>
+<p>OK,不画大饼了,继续做游戏吧</p>
+<h2 id="第七天"><a href="#第七天" class="headerlink" title="第七天"></a>第七天</h2><p>开始制作主角的几个状态</p>
+<p>​	<style>.eryipuikgowd{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624164208451.png" class="eryipuikgowd" alt="image-20260624164208451"></p>
+<p>​	  <style>.utfdkumdkznr{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624192005465.png" class="utfdkumdkznr" alt="image-20260624192005465"></p>
+<p>然后增加物品系统</p>
+<p>​	<style>.lqqlykaeqcbz{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624202827948.png" class="lqqlykaeqcbz" alt="image-20260624202827948"></p>
+<p>然后制作了关卡解锁系统</p>
+<p>在每一关里使用可以解锁下一关,通关信息会存储到json文件里</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SettingsManager.UnlockLevel(<span class="string">&quot;level_2&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.pvnjhhkkjhys{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624211433610.png" class="pvnjhhkkjhys" alt="image-20260624211433610"></p>
+<p>实验了一下,效果非常的好</p>
+<p>​	<style>.fxvyjkoxsblj{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624225626316.png" class="fxvyjkoxsblj" alt="image-20260624225626316"></p>
+<p>已经自动写入了json存储文件</p>
+<p>​	<style>.oczhhrefwoki{zoom: 50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260624225725285.png" class="oczhhrefwoki" alt="image-20260624225725285"></p>
+<p>累死我了,今天又做了不少东西</p>
+<p>现在已经轻车熟路了,接下来只需要安心的制作剧情和搭建场景了,而且做完背包系统后就不能再做这些功能上的了,不然没时间了,一来我还要期末考试,二来是剩余时间不到13天了</p>
+<h2 id="第八天"><a href="#第八天" class="headerlink" title="第八天"></a>第八天</h2><p>遇到了一个字体上的Bug</p>
+<p>​	<style>.nubkmeyyokbq{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625135207095.png" class="nubkmeyyokbq" alt="image-20260625135207095"></p>
+<p>开始的时候误以为是字体的问题,花了一些时间发现是因为TMP Dynamic字体图集atlas被塞满导致的</p>
+<p>只需要把那个蓝色的F字体文件里的这两个改成4096就可以了,当然也可以调更高,并apply应用字体</p>
+<p>​	<style>.pdmcnbbeoboo{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625135415836.png" class="pdmcnbbeoboo" alt="image-20260625135415836"></p>
+<p>​	<style>.riodyzvchdue{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625135630508.png" class="riodyzvchdue" alt="image-20260625135630508"></p>
+<p>考虑到我不可能一个场景一个地图,这样会大大加剧管理难度,所以我让同一个场景多个地图</p>
+<p>最开始是这个方法</p>
+<p>​	<style>.wmwschvzpwwr{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625152415365.png" class="wmwschvzpwwr" alt="image-20260625152415365"></p>
+<p>​	<style>.dvlewqorcrhi{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625152503377.png" class="dvlewqorcrhi" alt="image-20260625152503377"></p>
+<p>后来发现这个好麻烦,看的心累,然后就换了一个最简单的方法,用ID传送</p>
+<p>现在真的很痛苦,虽然我已经知道接下来要怎么走了,但是在这么短的时间一个人完成这么多快累死我了,即使有AI帮我</p>
+<p>痛苦归痛苦,继续做吧,引入Cinemachine让摄像机跟着玩家</p>
+<p>​	<style>.jctplcijtjnp{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625194225515.png" class="jctplcijtjnp" alt="image-20260625194225515"></p>
+<p>然后遇到了超级大Bug,差点让我两眼一黑,最终,Claude终于找到了是为什么</p>
+<p>​	<style>.fyowbojdiuye{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625215205807.png" class="fyowbojdiuye" alt="image-20260625215205807"></p>
+<p>只需要在这些个地图的顶部保留一些连接就行了</p>
+<p>​	<style>.cipptgcuowhy{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627000853227.png" class="cipptgcuowhy" alt="image-20260627000853227"></p>
+<p>然后diss一下Chatgpt</p>
+<p>​	<style>.qyswooyfjtmc{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260625215754272.png" class="qyswooyfjtmc" alt="image-20260625215754272"></p>
+<p>但是这样会导致右边会看到游戏背景,所以我把用一种跟蓄电池一样连电线一样的做法将这几个场景顶部的碰撞体连到一起</p>
+<p>遇到了一个小Bug———-当玩家点击返回按钮的时候,由于我之前的玩家是单例,所有场景都会保留第一次生成的玩家,所以会在不该生成玩家的场景生成,最终决定取消玩家的单例,改为在需要玩家的场景用生成器实例化一个玩家</p>
+<h2 id="第九天"><a href="#第九天" class="headerlink" title="第九天"></a>第九天</h2><p>今天开始制作背包系统,并优化和修复传送点逻辑,今天吸取了一个教训,就是不要在剧情上下功夫,我觉得没有必要把功夫浪费在剧情和背景上,应该将注意力集中在玩法上,所以我将前面的世界观和剧情全部推翻</p>
+<p>原本是想要拉两个室友一起一起参加的,后来发现,他们也帮不上什么忙,嗯,所以就这样吧,我还是一个人,solo solo solo </p>
+<p>这里又遇到了一个新的剧情播放的Bug 一直不知道为什么</p>
+<p>​	<style>.vbmnqbbbsfuf{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627213856109.png" class="vbmnqbbbsfuf" alt="image-20260627213856109"></p>
+<p>最后结果是我自己捣鼓半天找到的,无能的Claude~~</p>
+<p>​	<style>.xfjkvtwmsttp{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627214326863.png" class="xfjkvtwmsttp" alt="image-20260627214326863"></p>
+<p>然后是优化了存档系统,增加了存档重置的逻辑</p>
+<p>​	<style>.ykyeenvdwaqn{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627225422822.png" class="ykyeenvdwaqn" alt="image-20260627225422822"></p>
+<p>至于背包系统我之前做过一次,但是忘掉了,所以复习一下吧,依旧麦扣老师小课堂</p>
+<p>​	<style>.owslrdptnimq{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627234115223.png" class="owslrdptnimq" alt="image-20260627234115223"></p>
+<p>​		<style>.jxqgkobcofqy{zoom: 25%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260627234147420.png" class="jxqgkobcofqy" alt="image-20260627234147420"></p>
+<p>然后研究了一下滚动界面这个东西</p>
+<p>​	<style>.zdhpqoxweqqg{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260628134113076.png" class="zdhpqoxweqqg" alt="image-20260628134113076"></p>
+<p>关于Chatgpt有一个破毛病就是总是让我二选一,我今天终于受不了了</p>
+<p>​	<style>.nqirytevgiwn{zoom: 33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260628200153646.png" class="nqirytevgiwn" alt="image-20260628200153646"></p>
+<p>然后解决了这个竖直滚动条的问题,只需要加上这个即可</p>
+<p>​	<style>.axlidmpchyzn{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260628211446018.png" class="axlidmpchyzn" alt="image-20260628211446018"></p>
+<h2 id="第十天"><a href="#第十天" class="headerlink" title="第十天"></a>第十天</h2><p>感觉昨天做的背包系统太垃圾了,用起来浑身难受,先让Chatgpt把我的提示词翻译成英语然后让Claude在帮我重新设计了一个更好用的</p>
+<p>​	<style>.oilzbdtekeex{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260629204913833.png" class="oilzbdtekeex" alt="image-20260629204913833"></p>
+<p>​	<style>.bzngjljwcxvk{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260629210808004.png" class="bzngjljwcxvk" alt="image-20260629210808004"></p>
+<p>然后把物品的scriptableobject信息放到这个Resources文件夹,每次启动游戏的时候自动加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ItemData[] allItems = Resources.LoadAll&lt;ItemData&gt;(&quot;Items&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>​	<style>.ncnihopkwdlz{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260629223649829.png" class="ncnihopkwdlz" alt="image-20260629223649829"></p>
+<p>OK,非常成功,只是目前物品不能拖动</p>
+<p>​	<style>.iofvhqkngoqf{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260629224125451.png" class="iofvhqkngoqf" alt="image-20260629224125451"></p>
+<h2 id="第十一天"><a href="#第十一天" class="headerlink" title="第十一天"></a>第十一天</h2><p>我高兴的太早了,第二天再看看的时候又出现这种莫名奇妙的错误</p>
+<p>而且这个Bug很玄学,一方面是只有这个场景会出现这两个bug,如果每次运行游戏都出现倒没什么,但问题就在于有的时候有有的时候没有,非常的奇怪,其中第一个Bug最严重</p>
+<p>​	<style>.nvpfooiceilp{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630131641765.png" class="nvpfooiceilp" alt="image-20260630131641765"></p>
+<p>然后花了两个小时找原因,彻底没脾气了</p>
+<p>​	<style>.ytrqfxxppswv{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630141645765.png" class="ytrqfxxppswv" alt="image-20260630141645765"></p>
+<p>​	<style>.erswrnqiuvyw{zoom: 33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630141715815.png" class="erswrnqiuvyw" alt="image-20260630141715815"></p>
+<p>然后剩下的这个因为场景的物品的销毁产生的Bug影响不是很大,至少不会阻碍游戏的游玩</p>
+<p>不过还是修了一下——–把那个要销毁并显示在背包里的物品放到层级窗口的根目录即可</p>
+<p>​	<style>.vojlendqcwxo{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630140613517.png" class="vojlendqcwxo" alt="image-20260630140613517"></p>
+<p>OK ,终于没有Bug了,然后把之前做的背包面板跟这个背包里的物品联系</p>
+<p>​	<style>.hpslbzxxqyii{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630144432655.png" class="hpslbzxxqyii" alt="image-20260630144432655"></p>
+<p>​	<style>.uykgdwibgcmk{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630152931507.png" class="uykgdwibgcmk" alt="image-20260630152931507"></p>
+<p>然后先打包成exe看看是否能玩,可以,但是我觉得1K的窗口比全屏观感要更好,全屏下我感觉很别扭因为猫太大了</p>
+<p>​	 <style>.mvampmchooyo{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260630160013890.png" class="mvampmchooyo" alt="image-20260630160013890"></p>
+<p>原本是想对安卓做一个支持的,不过感觉没什么时间了</p>
+<p>唉,不想做了,反正这游戏也是一个垃圾,而且我没什么经验,会的只是鸡毛蒜皮,这还是第一次做一个有关卡选择和存档的游戏</p>
+<p>但是我也不想荒废这么多天的成果,还是看看怎么利用好现在已经设计好的系统吧</p>
+<p>这里就开始做第二个场景吧</p>
+<p>依旧和Chatgpt battle</p>
+<p>​	<style>.bobdyzklmyuk{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260701005304371.png" class="bobdyzklmyuk" alt="image-20260701005304371"></p>
+<p>最后觉得它除了第一个做的挺好看的其他的做的挺垃圾的,还是自己搭建场景吧</p>
+<h2 id="第十八天"><a href="#第十八天" class="headerlink" title="第十八天"></a>第十八天</h2><p>摆烂了几天,然后把大部分时间用来期末复习</p>
+<p>还是继续做吧,既然这个东西已经是一个垃圾了,那么再让它变得更烂有何不可呢</p>
+<p>首先制作了合成系统,使用scriptable object存储配方</p>
+<p>​	<style>.itdtcfjkiube{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260703153545190.png" class="itdtcfjkiube" alt="image-20260703153545190"></p>
+<p>​	<style>.deombldenpbo{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260703153612648.png" class="deombldenpbo" alt="image-20260703153612648"></p>
+<p>点击合成按钮,从内存中直接修改,若材料只有一个,则抹除,若材料不止一个,则减少相应的数量</p>
+<p>​	<style>.sthkvqyibdpb{zoom: 50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260703153753567.png" class="sthkvqyibdpb" alt="image-20260703153753567"></p>
+<p>此时这两个东西就永久消失了,烤鱼的数量加一</p>
+<p>​	<style>.mvznqhpgchbm{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260703153831337.png" class="mvznqhpgchbm" alt="image-20260703153831337"></p>
+<p>逻辑是如果材料正确且数量充足的时候,合成栏会出现生成物,并且生成按钮可以按</p>
+<p>如果材料正确但是是数量不足的时候,合成栏会出现生成物,但是生成按钮不能按</p>
+<p>如果材料不正确,则既不会有生成物,也不能按按钮</p>
+<p>至于场景我也不知道啥样的场景好看,然后就用了卷轴滚动视差的方法,让背后的白云跟着玩家滚动</p>
+<p>​	<style>.wrstmmnrjevt{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260703155108854.png" class="wrstmmnrjevt" alt="image-20260703155108854"></p>
+<p>而且今天我发现一个很恐怖的事就是,我之前一直以为小橘是AI图,毕竟我是在AI网站上找的这个角色原型</p>
+<p>后来经过多次对比发现这个居然是真人画的而且已经做成了游戏—–糖葫芦大师 ,一个幼儿向的可爱画风游戏,我之前用的那个角色是在游戏的商店的第四个模块的宠物系统的最底层的一个售价9900代币的一个宠物角色</p>
+<p>这妥妥的侵权啊,于是我不得不替换掉了所有有关小橘的图,幸亏我只在剧情里使用了这个图</p>
+<p>然后就是优化(叠屎山)了一下合成逻辑,让AI修复了一个隐藏Bug</p>
+<p>​	<style>.zkzohmgfpbhb{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260704000518348.png" class="zkzohmgfpbhb" alt="image-20260704000518348"></p>
+<p>发现这个单例的bug还挺严重的</p>
+<p>​	<style>.nelwdwklunnk{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260704002654886.png" class="nelwdwklunnk" alt="image-20260704002654886"></p>
+<p>最后成功做出来了合成系统</p>
+<p>​	<style>.vtyuzojoypyy{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260704030128828.png" class="vtyuzojoypyy" alt="image-20260704030128828"></p>
+<p>然后还有物品提交逻辑什么的就不提了</p>
+<h2 id="第二十天"><a href="#第二十天" class="headerlink" title="第二十天"></a>第二十天</h2><p>昨天又摆烂了一天,感觉做的实在是太廉价了,根本没有什么玩法,因为我放弃了之前的宏大的世界观所以新的剧情和游戏主题八竿子打不到,这么短的时间也不可能重做了,还是加一个交易系统吧,也不想游戏过于无聊,于是我开始许愿了</p>
+<p>​	<style>.xlwtueqvcgow{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260706002427176.png" class="xlwtueqvcgow" alt="image-20260706002427176"></p>
+<h2 id="第二十一天"><a href="#第二十一天" class="headerlink" title="第二十一天"></a>第二十一天</h2><p>然后又是一顿倒腾,昨天晚上通宵完成了,从下午2点开始到早上8点,一直在找bug,做地图什么的</p>
+<p>等做完反应过来的时候,天已经亮了,已经是最后一天了,游戏做到最后完全是在瞎做,就是剧本对话瞎写,场景瞎布置,物品信息瞎填,然后做了一个结束画面写上结语和使用的音频作者信息就草草结尾了,然后大脑一片混沌</p>
+<p>然后上午填了填相关的材料文件,就提交了,然后进入审核阶段(说实在,我真的不好意思上传…….做的太垃圾了,但是还是硬的头皮上传了)</p>
+<p>​	 <style>.whuvgjyhptwx{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260707221823373.png" class="whuvgjyhptwx" alt="image-20260707221823373"></p>
+<p>回顾一下这一整晚的做的东西(垃圾)</p>
+<p>​	<style>.jjgzyjqzurkz{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260707222059993.png" class="jjgzyjqzurkz" alt="image-20260707222059993"></p>
+<p>以及纯AI生成的一百多张素材</p>
+<p>​	<style>.ipapacaootwj{zoom:50%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260707222322644.png" class="ipapacaootwj" alt="image-20260707222322644"></p>
+<p>​	<style>.veqzvtdjwzor{zoom:33%;}</style><img src="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/image-20260707222458480.png" class="veqzvtdjwzor" alt="image-20260707222458480"></p>
+<p>通过这次gamejam也学到了很多东西,也看到了人与人之间的巨大差距,很多大佬的创意和玩法非常的好</p>
+<p>不过这是我第一次做一个完整流程的游戏,第一次在游戏加入设置和存档,剧情以及背包还有合成系统,第一次认识到单例和scriptable object的重要性</p>
+<p>而且也意识到了个人的力量是极其有限的,要么有极其丰富的经验,要么有厉害的大佬团队,否则对我这种会的不多的也太艰难了</p>
+<p>然后就是大多数时候,想象力丰富没有什么用,首先执行力必要要满足才行,不然容易变成思想上的巨人行动上的矮子,如果不推翻前面想的那些乱七八糟的世界观,根本不可能做完,其实还是经验不够的原因,想不出来什么创意玩法,经典的玩法不够,内容来凑,这样会导致游戏是一次性筷子,只能用一次</p>
+<p>​	</p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/"><span class="nav-label">← 上一篇</span><span class="nav-title">Claude小桌宠</span></a></div><div class="post-nav next"><a href="/2026/06/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/unity%E7%9A%84MCP/"><span class="nav-label">下一篇 →</span><span class="nav-title">unity的MCP</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98--%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE&amp;url=%2F2026%2F06%2F16%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%25AF%2594%25E8%25B5%259B%25E4%25B8%25BB%25E9%25A2%2598%25E5%2588%25AB%25E6%258C%2589%25E9%2582%25A3%25E4%25B8%25AA%25E6%258C%2589%25E9%2592%25AE%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F06%2F16%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%25AF%2594%25E8%25B5%259B%25E4%25B8%25BB%25E9%25A2%2598%25E5%2588%25AB%25E6%258C%2589%25E9%2582%25A3%25E4%25B8%25AA%25E6%258C%2589%25E9%2592%25AE%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F06%2F16%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%25AF%2594%25E8%25B5%259B%25E4%25B8%25BB%25E9%25A2%2598%25E5%2588%25AB%25E6%258C%2589%25E9%2582%25A3%25E4%25B8%25AA%25E6%258C%2589%25E9%2592%25AE%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F06%2F16%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%25AF%2594%25E8%25B5%259B%25E4%25B8%25BB%25E9%25A2%2598%25E5%2588%25AB%25E6%258C%2589%25E9%2582%25A3%25E4%25B8%25AA%25E6%258C%2589%25E9%2592%25AE%2F&amp;title=%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98--%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F06%2F16%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%25AF%2594%25E8%25B5%259B%25E4%25B8%25BB%25E9%25A2%2598%25E5%2588%25AB%25E6%258C%2589%25E9%2582%25A3%25E4%25B8%25AA%25E6%258C%2589%25E9%2592%25AE%2F&amp;title=%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98--%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/06/16/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%AF%94%E8%B5%9B%E4%B8%BB%E9%A2%98%E5%88%AB%E6%8C%89%E9%82%A3%E4%B8%AA%E6%8C%89%E9%92%AE/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
+  envId: 'https://twikoo-five-ruby.vercel.app',
+  el: '#twikoo',
+  region: '',
+  path: 'window.location.pathname',
+  visitor: true,
+  onCommentLoaded: function () {
+    console.log('Twikoo评论加载成功');
+  }
+});</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  z-index: 9998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/chisato.png');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/takina.png');
+}
+.sakana-box .sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  const script = document.createElement('script');
+  script.src = '/js/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+
+  // 3. 移动端拦截：根据 config.yml 决定是否在手机端加载
+  // 通过屏幕宽度和 User-Agent 双重检测移动端设备
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  // 获取 Hexo 注入的配置，如果未配置则默认按 false (不启用) 处理
+  const mobileEnabled = window.theme && window.theme.pet && window.theme.pet.mobile_enable;
+
+  if (isMobile && !mobileEnabled) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove(); // 销毁 DOM，防止残留不可见的空容器阻挡点击
+    return; // 终止初始化，不执行后续的重度 Canvas 与动画逻辑
+  }
+
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img src="/images/0.png" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/mermaid.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
+
+<script src="/js/wall.js"></script>
+
+<script src="/js/anime.js"></script>
+
+<script src="/js/table.js"></script>
+<!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.png","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
