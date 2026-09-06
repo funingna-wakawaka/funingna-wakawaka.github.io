@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/reader-settings.js"></script>
+<script>(function() {
   // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -434,12 +436,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>然后我们在另外一个文件启用</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- test_module.lua 文件</span></span><br><span class="line"><span class="comment">-- module 模块为上文提到到 module.lua</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;module&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">module</span>.constant)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.func3()</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.eenpuahxffvh{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.png" class="eenpuahxffvh" alt="image-20260413202737035"></p>
-<p>​	<style>.cdnqtbkcgcnt{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.png" class="cdnqtbkcgcnt" alt="image-20260413202759729"></p>
+<p>​	<style>.kksbirqnzoyf{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.png" class="kksbirqnzoyf" alt="image-20260413202737035"></p>
+<p>​	<style>.hawgqrjtglek{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.png" class="hawgqrjtglek" alt="image-20260413202759729"></p>
 <p>但是大家可能会遇到的误区就是误以为模块里定义的表名就是文件名,其实不是的,</p>
 <p>此时我们就可以把这个module.lua当做命名空间,然后modele.lua里面的属性和函数视作C#里的静态static函数,使用直接用点语法就行</p>
-<p>​	<style>.ehylkljjpuqp{zoom: 25%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.png" class="ehylkljjpuqp" alt="image-20260413203756002"></p>
- <style>.zmvnehbpdicz{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.png" class="zmvnehbpdicz" alt="image-20260413203812059">
+<p>​	<style>.vicwstxuyoii{zoom: 25%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.png" class="vicwstxuyoii" alt="image-20260413203756002"></p>
+ <style>.cxhuohvqpdsv{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.png" class="cxhuohvqpdsv" alt="image-20260413203812059">
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">require函数的原理</div>
@@ -449,9 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Lua 会做一件事： <strong>到一堆“固定路径”里去找 module.lua</strong>,也就是它会尝试从 Lua 文件或 C 程序库中加载模块</p>
 <p>require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH(这里我用的是我自定义的LUA_HOME,因为我的是lua5.4) 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。</p>
 <p>其实就是我们设置的path路径</p>
-<p>​	<style>.kubbhckgeavr{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.png" class="kubbhckgeavr" alt="image-20260413212716317"></p>
+<p>​	<style>.lpavdpkunvig{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.png" class="lpavdpkunvig" alt="image-20260413212716317"></p>
 <p>lua会去这个路径package.path去找路径</p>
-<p>​	<style>.yknxcxgldmyy{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.png" class="yknxcxgldmyy" alt="image-20260413211400410"></p>
+<p>​	<style>.thbntnrwtdwb{zoom:33%;}</style><img src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.png" class="thbntnrwtdwb" alt="image-20260413211400410"></p>
 <p>而在这些路径里</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua;D:\ZeroBraneStudio\lua-5.1.5-52\5.1\lua\?.luac  </span><br></pre></td></tr></table></figure>
 
@@ -980,8 +982,15 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
-</script><script>window.theme = {
+</script><script>window.theme = (function () {
+  var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"toc":true,"cover":true,"article_view":true,"language":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
@@ -989,5 +998,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   article_list: {"card_size":"normal","view_mode":"modal"},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
+  };
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

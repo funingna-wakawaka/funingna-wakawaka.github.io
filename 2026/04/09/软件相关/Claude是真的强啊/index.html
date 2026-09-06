@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/reader-settings.js"></script>
+<script>(function() {
   // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -416,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>首先就是打开美国节点的VPN(注意:你的梯子的质量一定要非常非常好,否则秒封),然后去淘宝买美国电话号码服务</p>
 <iframe src="/demos/plants_vs_zombies_game.html" width="100%" height="520" frameborder="0" style="border-radius:12px;"></iframe>
 
-<p>​		<style>.judssiiydpyr{zoom:33%;}</style><img src="/2026/04/09/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E6%98%AF%E7%9C%9F%E7%9A%84%E5%BC%BA%E5%95%8A/image-20260409132420705.png" class="judssiiydpyr" alt="image-20260409132420705"></p>
+<p>​		<style>.irgwzcsxikdi{zoom:33%;}</style><img src="/2026/04/09/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E6%98%AF%E7%9C%9F%E7%9A%84%E5%BC%BA%E5%95%8A/image-20260409132420705.png" class="irgwzcsxikdi" alt="image-20260409132420705"></p>
 <p>因为咱们也用不上太高大上的内容所以免费版本就够用了</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -923,8 +925,15 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
-</script><script>window.theme = {
+</script><script>window.theme = (function () {
+  var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"toc":true,"cover":true,"article_view":true,"language":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
@@ -932,5 +941,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   article_list: {"card_size":"normal","view_mode":"modal"},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
+  };
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

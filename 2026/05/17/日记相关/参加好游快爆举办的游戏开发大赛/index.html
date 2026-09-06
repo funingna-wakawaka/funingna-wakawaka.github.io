@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/reader-settings.js"></script>
+<script>(function() {
   // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -410,8 +412,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近看到好游快爆举办的一个游戏开发大赛"><a href="#最近看到好游快爆举办的一个游戏开发大赛" class="headerlink" title="最近看到好游快爆举办的一个游戏开发大赛"></a>最近看到好游快爆举办的一个游戏开发大赛</h1><p>​	<style>.glntvsghvwov{zoom:50%;}</style><img src="/2026/05/17/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%8F%82%E5%8A%A0%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86%E4%B8%BE%E5%8A%9E%E7%9A%84%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A4%A7%E8%B5%9B/image-20260517160318448.png" class="glntvsghvwov" alt="image-20260517160318448"></p>
-<p>​	<style>.muwmxpeuhufy{zoom:67%;}</style><img src="/2026/05/17/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%8F%82%E5%8A%A0%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86%E4%B8%BE%E5%8A%9E%E7%9A%84%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A4%A7%E8%B5%9B/image-20260517160409595.png" class="muwmxpeuhufy" alt="image-20260517160409595"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近看到好游快爆举办的一个游戏开发大赛"><a href="#最近看到好游快爆举办的一个游戏开发大赛" class="headerlink" title="最近看到好游快爆举办的一个游戏开发大赛"></a>最近看到好游快爆举办的一个游戏开发大赛</h1><p>​	<style>.xrkuywycnqle{zoom:50%;}</style><img src="/2026/05/17/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%8F%82%E5%8A%A0%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86%E4%B8%BE%E5%8A%9E%E7%9A%84%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A4%A7%E8%B5%9B/image-20260517160318448.png" class="xrkuywycnqle" alt="image-20260517160318448"></p>
+<p>​	<style>.arcgaffbonee{zoom:67%;}</style><img src="/2026/05/17/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%8F%82%E5%8A%A0%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86%E4%B8%BE%E5%8A%9E%E7%9A%84%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A4%A7%E8%B5%9B/image-20260517160409595.png" class="arcgaffbonee" alt="image-20260517160409595"></p>
 <p>原本是觉得自己是菜鸡没必要凑热闹,但是——–如果不去试试感受一下大佬们降维打击的话,自己永远都是菜鸡,而且反正参加也没有什么成本,中途退出也没有惩罚</p>
 <p>参赛时间两个月,我觉得边做边学还是可以的</p>
 <p>加油吧</p>
@@ -920,8 +922,15 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
-</script><script>window.theme = {
+</script><script>window.theme = (function () {
+  var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"toc":true,"cover":true,"article_view":true,"language":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
@@ -929,5 +938,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   article_list: {"card_size":"normal","view_mode":"modal"},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
+  };
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

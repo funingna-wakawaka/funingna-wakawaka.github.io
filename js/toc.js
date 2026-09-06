@@ -4,11 +4,26 @@
  */
 
 document.addEventListener("DOMContentLoaded", function () {
+  // ★ 读者设置:隐藏目录时不初始化
+  if (window.__readerSettings && window.__readerSettings.toc === "hide") return;
+
   // 获取文章内容区域
   const postContent = document.querySelector(".post-content");
 
   // 如果文章内容区域不存在，则不执行后续操作
-  if (!postContent) return;
+  if (!postContent) {
+    // ★ pjax 回到非文章页时,移除遗留的移动端目录按钮/面板/遮罩
+    //   (它们挂在 body 和 button-container 上,不会随内容区一起被换掉)
+    [
+      ".mobile-toc-toggle",
+      ".mobile-toc-panel",
+      ".mobile-toc-overlay",
+    ].forEach(function (sel) {
+      const el = document.querySelector(sel);
+      if (el) el.remove();
+    });
+    return;
+  }
 
   // 获取目录容器
   const tocContainer = document.getElementById("table-of-contents");

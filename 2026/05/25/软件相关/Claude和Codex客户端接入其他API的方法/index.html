@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/reader-settings.js"></script>
+<script>(function() {
   // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -413,23 +415,23 @@ document.addEventListener('DOMContentLoaded', function() {
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近CCswitch新增加了对Claude客户端的支持"><a href="#最近CCswitch新增加了对Claude客户端的支持" class="headerlink" title="最近CCswitch新增加了对Claude客户端的支持"></a>最近CCswitch新增加了对Claude客户端的支持</h1><p>之前我们使用的是CLI  ,不过客户端其实更好用</p>
 <p>首先下载Codex和Claude的客户端(不是CLI)</p>
 <p>第一次的时候需要登录,众所周知,Claude很贵,Codex也不便宜,而且免费额度很少,而且充值很难</p>
-<p>​	<style>.rihurebhdwff{zoom: 25%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112826020.png" class="rihurebhdwff" alt="image-20260525112826020"></p>
+<p>​	<style>.ewncdiesktlx{zoom: 25%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112826020.png" class="ewncdiesktlx" alt="image-20260525112826020"></p>
 <p>我们首先接入Openrouter</p>
-<p>​	<style>.chuxjxdkaoah{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113038372.png" class="chuxjxdkaoah" alt="image-20260525113038372"></p>
-<p>​	<style>.unrigdhwxrwm{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112501945.png" class="unrigdhwxrwm" alt="image-20260525112501945"></p>
+<p>​	<style>.gufoxdzctbjf{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113038372.png" class="gufoxdzctbjf" alt="image-20260525113038372"></p>
+<p>​	<style>.ibpnrhryxlhj{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112501945.png" class="ibpnrhryxlhj" alt="image-20260525112501945"></p>
 <p>记得启用1M上下文超长记忆</p>
-<p>​	<style>.vgrinvgiyhpn{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113109432.png" class="vgrinvgiyhpn" alt="image-20260525113109432"></p>
+<p>​	<style>.unjocyxyihyd{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113109432.png" class="unjocyxyihyd" alt="image-20260525113109432"></p>
 <p>然后重启客户端就会发现不需要登录了,直接使用我们的API</p>
 <p>模型记得选medium避免AI想的太多浪费算力</p>
-<p>​	<style>.rlsqtlrkziky{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113522101.png" class="rlsqtlrkziky" alt="image-20260525113522101"></p>
-<p>​	<style>.mndoixdjntyn{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113222321.png" class="mndoixdjntyn" alt="image-20260525113222321"></p>
+<p>​	<style>.zylewypwiwjg{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113522101.png" class="zylewypwiwjg" alt="image-20260525113522101"></p>
+<p>​	<style>.brsjkktiuihf{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113222321.png" class="brsjkktiuihf" alt="image-20260525113222321"></p>
 <p>但是坏消息是,我的会显示地区不支持,估计是梯子的问题,但是Claude code CLI还是可以的,所以没招了,目前暂时放弃Claude客户端吧</p>
-<p>​	<style>.edtmrtexnues{zoom:50%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525125228626.png" class="edtmrtexnues" alt="image-20260525125228626"></p>
+<p>​	<style>.lhremvuekafy{zoom:50%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525125228626.png" class="lhremvuekafy" alt="image-20260525125228626"></p>
 <p>by the way,Github进一步削减了copilot学生包,我无敌的Gemini 3.1 pro没了……..只剩下了无能的Gpt 5.2</p>
-<p>​	<style>.sbcglnqnvrbc{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160433667.png" class="sbcglnqnvrbc" alt="image-20260526160433667"></p>
+<p>​	<style>.imopjogecrbj{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160433667.png" class="imopjogecrbj" alt="image-20260526160433667"></p>
 <p>​	</p>
 <p>(这下知道那些一天花费十几亿token的人是怎么做到的了,高级模型+CLI,花的不快才怪,不过有这钱还不如买点吃的玩的,给AI实在是感觉太亏了,我可是两小时花掉了70块啊我去)</p>
-<p>​	<style>.skqoosihskfx{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160640245.png" class="skqoosihskfx" alt="image-20260526160640245"></p>
+<p>​	<style>.butiwqdyqunt{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160640245.png" class="butiwqdyqunt" alt="image-20260526160640245"></p>
 <blockquote>
 <p>而且更重要的是,这东西又不是绝对正确的,因为他们很多时候都不按照我的指令干活,再加上我有点强迫症,必须迭代很多版本才能让我满意</p>
 </blockquote>
@@ -938,8 +940,15 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
-</script><script>window.theme = {
+</script><script>window.theme = (function () {
+  var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"toc":true,"cover":true,"article_view":true,"language":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
@@ -947,5 +956,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   article_list: {"card_size":"normal","view_mode":"modal"},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
+  };
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

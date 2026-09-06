@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title><script>(function() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/reader-settings.js"></script>
+<script>(function() {
   // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
@@ -411,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近一直在学Flutter-不过现在都AI时代了-我更想利用AI来创造东西"><a href="#最近一直在学Flutter-不过现在都AI时代了-我更想利用AI来创造东西" class="headerlink" title="最近一直在学Flutter,不过现在都AI时代了,我更想利用AI来创造东西"></a>最近一直在学Flutter,不过现在都AI时代了,我更想利用AI来创造东西</h1><p>还是老样子,使用codex</p>
-<p>​	<style>.tbfhdzxdkout{zoom:50%;}</style><img src="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%BD%BF%E7%94%A8Codex%E5%88%B6%E4%BD%9CFlutter%E7%9B%B8%E5%86%8C%E8%BD%AF%E4%BB%B6/image-20260428213449268.png" class="tbfhdzxdkout" alt="image-20260428213449268"></p>
+<p>​	<style>.gidpcokrrcqh{zoom:50%;}</style><img src="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%BD%BF%E7%94%A8Codex%E5%88%B6%E4%BD%9CFlutter%E7%9B%B8%E5%86%8C%E8%BD%AF%E4%BB%B6/image-20260428213449268.png" class="gidpcokrrcqh" alt="image-20260428213449268"></p>
 <p>因为最开始我只是想制作一个简单的小相册,但是我不会写高大上的提示词</p>
 <p>于是我让它自己写: 你是一个有10年经验的flutter工程师……..</p>
 <p>让它自己设计软件的架构,目录树,功能等这些东西</p>
@@ -424,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>接下来才是最痛苦的时刻,那就是软件内报错</p>
 <p>也就是代码不会报错,编辑器不显示问题,但是进入手机apk软件就各种问题</p>
 <p>而且刚开始还有这种直接在手机上报错,但是接着USB的电脑上的调试终端没有任何显示</p>
-<p>​	<style>.ovywlrdsshcn{zoom:25%;}</style><img src="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%BD%BF%E7%94%A8Codex%E5%88%B6%E4%BD%9CFlutter%E7%9B%B8%E5%86%8C%E8%BD%AF%E4%BB%B6/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260428214927_5_39.jpg" class="ovywlrdsshcn" alt="微信图片_20260428214927_5_39"></p>
+<p>​	<style>.phtohmsmrqkc{zoom:25%;}</style><img src="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%BD%BF%E7%94%A8Codex%E5%88%B6%E4%BD%9CFlutter%E7%9B%B8%E5%86%8C%E8%BD%AF%E4%BB%B6/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260428214927_5_39.jpg" class="phtohmsmrqkc" alt="微信图片_20260428214927_5_39"></p>
 <p>而且最开始由于报错内容过长而且由于突破了父容器无法查看我不知道怎么截取手机上的错误问了chatgpt十几遍踩了很多坑(gpt其实是不知道到底是什么错误导致的一直乱提建议)</p>
 <p>突然我想到一件事——-子组件长度过长既然会撑破父容器,那么可不可以使用<strong>SingleChildScrollView</strong>实现滚动界面这样就可以通过滚动截屏获取完整的报错了?</p>
 <p>我先让codex帮我增加这个SingleChildScrollView给当前子组件,果然成功了,得到了完整的代码报错的日志</p>
@@ -937,8 +939,15 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
-</script><script>window.theme = {
+</script><script>window.theme = (function () {
+  var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"toc":true,"cover":true,"article_view":true,"language":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
@@ -946,5 +955,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   article_list: {"card_size":"normal","view_mode":"modal"},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
+  };
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
