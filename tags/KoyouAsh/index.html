@@ -48,6 +48,10 @@
 <link rel="stylesheet" href="/css/music-player.css">
 
 <link rel="stylesheet" href="/css/table.css">
+
+<link rel="stylesheet" href="/css/wall.css">
+
+<link rel="stylesheet" href="/css/anime.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -395,12 +399,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关标签</h1><div class="post-subtitle"><span>探索与</span> "koyouAsh" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> koyouAsh</h2><div class="tag-description"> <span>共有</span> 1 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">unity中的地图系统</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一下地图系统,这个相对简单​	.qdirnabmxcol{zoom:33%;}
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关标签</h1><div class="post-subtitle"><span>探索与</span> "koyouAsh" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> koyouAsh</h2><div class="tag-description"> <span>共有</span> 1 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">unity中的地图系统</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一下地图系统,这个相对简单​	.iyuitncbkppu{zoom:33%;}
 首先我们在Hierarchy(层级)窗口里右键
 然后2D object(二维对象)-&gt;tilemap(瓦片地图)-&gt;rectangular(矩形瓦片)
 这里我们管2D游戏里的地图统称tilemap即瓦片,这个在其他游戏引擎里也是相同的定义,瓦片就是附着在游戏地图上的“贴图”
 创建完成之后就会看到层级窗口出现了这个东西,不管你选择什么类型的瓦片都是以Grid(网格) 作为父对象的
-​	.fcsnfhfekuzj{zoom: 25%;}
+​	.luvhspthussh{zoom: 25%;}
 但是有什么用呢?这时候就需要一个东西了—–那就是瓦片面板 t...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-26</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
@@ -480,6 +484,11 @@ document.addEventListener('DOMContentLoaded', function() {
   background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
   background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
 }
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
 </style><script>document.addEventListener('DOMContentLoaded', function() {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
@@ -493,6 +502,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
 
   const script = document.createElement('script');
   script.src = '/js/sakana.min.js';
@@ -841,6 +866,10 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/anime.js"></script>
 
 <script src="/js/table.js"></script>
+
+<script src="/js/pjax-init.js"></script>
+
+<script src="/js/last-read-pin.js"></script>
 <!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.png","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 

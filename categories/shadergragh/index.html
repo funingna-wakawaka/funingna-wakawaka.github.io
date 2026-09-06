@@ -48,6 +48,10 @@
 <link rel="stylesheet" href="/css/music-player.css">
 
 <link rel="stylesheet" href="/css/table.css">
+
+<link rel="stylesheet" href="/css/wall.css">
+
+<link rel="stylesheet" href="/css/anime.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -397,12 +401,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关分类</h1><div class="post-subtitle"><span>探索与</span> "shadergragh" <span>相关的所有文章</span></div></div><div class="category-content"><div class="category-posts"><div class="category-header"><div class="category-info"><h2 class="category-name"> <i class="fas fa-folder"></i> shadergragh</h2><div class="category-description"><span>共有</span> 1 <span>篇文章</span></div></div><div class="category-back"><a href="/categories/"><i class="fas fa-arrow-left"></i> 返回所有分类</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/">光照基础</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>本篇来了解一下unity中的光照光照分为漫反射光和全反射光
 场景光源主要分为两类:手动添加的实际光源平行光或点光源还有环境光照,后者包括物体间的的间接光反射和天空盒光照
-​	.xbwbpyhhcbva{zoom: 25%;}
+​	.blydjmrgkpxm{zoom: 25%;}
 我们选择光照渲染 lit shader graph
 
 Unity 的 Lit Shader（光照着色器）是 URP（Universal Render Pipeline，通用渲染管线）和 HDRP（High Definition Render Pipeline，高清渲染管线）中的核心光照材质系统。它定义了物体表面如何与光源交互，决定了渲染的真实感程度
 
-​	.xmoqnxs...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-05-29</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/shadergragh/">shadergragh</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+​	.evmcymb...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-05-29</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/shadergragh/">shadergragh</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
@@ -481,6 +485,11 @@ Unity 的 Lit Shader（光照着色器）是 URP（Universal Render Pipeline，�
   background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
   background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
 }
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
 </style><script>document.addEventListener('DOMContentLoaded', function() {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
@@ -494,6 +503,22 @@ Unity 的 Lit Shader（光照着色器）是 URP（Universal Render Pipeline，�
 
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
 
   const script = document.createElement('script');
   script.src = '/js/sakana.min.js';
@@ -842,6 +867,10 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/anime.js"></script>
 
 <script src="/js/table.js"></script>
+
+<script src="/js/pjax-init.js"></script>
+
+<script src="/js/last-read-pin.js"></script>
 <!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.png","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 

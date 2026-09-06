@@ -48,6 +48,10 @@
 <link rel="stylesheet" href="/css/music-player.css">
 
 <link rel="stylesheet" href="/css/table.css">
+
+<link rel="stylesheet" href="/css/wall.css">
+
+<link rel="stylesheet" href="/css/anime.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -395,19 +399,23 @@ document.addEventListener('DOMContentLoaded', function() {
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关标签</h1><div class="post-subtitle"><span>探索与</span> "love2d" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> love2d</h2><div class="tag-description"> <span>共有</span> 6 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/">love2d学习第六天--lua模块与包</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天我们继续学习lua里的模块还有包首先说一下这两个东西的概念
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关标签</h1><div class="post-subtitle"><span>探索与</span> "love2d" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> love2d</h2><div class="tag-description"> <span>共有</span> 7 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/09/05/Love2d%E7%9B%B8%E5%85%B3/github%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BAlove2D%E5%B7%A5%E4%BD%9C%E6%B5%81/">github自动构建love2D工作流</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天采用Github action来自动打包love2d游戏为多平台软件3亿token一天花完太魔幻了但也不是不行狗头狗头狗头
+GithubActionGitHub Actions 是一种持续集成和持续交付 (CI&#x2F;CD) 平台，可用于自动执行生成、测试和部署管道
+可以创建在将更改推送到存储库或将合并拉取请求部署到生产环境时运行测试的工作流
+...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-09-05</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/09/05/Love2d%E7%9B%B8%E5%85%B3/github%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BAlove2D%E5%B7%A5%E4%BD%9C%E6%B5%81/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/">love2d学习第六天--lua模块与包</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天我们继续学习lua里的模块还有包首先说一下这两个东西的概念
 模块(module)Lua 的模块是由变量、函数等已知元素组成的 table,然后把需要导出的常量、函数放入其中
-特殊之处就是模块返回值 就是这个表
-123456789101112-- utils.lualocal utils = &#123;&#125;function utils.add(a, b)    return a + bendfunction utils.sub(a, b)    return a - bendreturn utils
-但是怎么用呢,其实,Lua 模块 ≈ C# 的 命名空间 + 静态类 + 单例实例...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/10/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%94%E5%A4%A9/">love2d学习第五天--数组和迭代器</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我们继续来学一些东西多维数组数组这东西咱们之前其实已经学过了,基本上没什么说的了,因为lua里面数组字典都是一个东西
+特殊之处就是模块返回值...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/10/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%94%E5%A4%A9/">love2d学习第五天--数组和迭代器</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我们继续来学一些东西多维数组数组这东西咱们之前其实已经学过了,基本上没什么说的了,因为lua里面数组字典都是一个东西
 但是有一个东西不得不提那就是table的数组的一面的多维数组性
-说人话就是和其他语...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-10</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/10/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%94%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/">love2d学习第四天--字符串和运算符</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一点新的东西可变参数之前讲函数的时候忘记了这个可变参数,不过说实话我感觉这玩意会诞生估计是lua语言制作者用来偷懒的
+说人话就是和其他语...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-10</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/10/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%94%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/">love2d学习第四天--字符串和运算符</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>今天来了解一点新的东西可变参数之前讲函数的时候忘记了这个可变参数,不过说实话我感觉这玩意会诞生估计是lua语言制作者用来偷懒的
 这个东西某种程度上还挺好用的,但是只能在函数function里使用
-正常...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-02-05</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/">love2d学习第三天--学习lua循环和if else语句</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>ok,我们上一篇中已经了解一大堆玩意了,不过还是冰山一角,那么今天学学循环和if else语句吧如果你学过其他语言,绝对 对循环有回家一样的亲切感,同样的,什么for循环,while循环,do …while循环在lua中也是一样的
-而且if else你绝对老熟悉了
-前面我们挖了一个坑(就是数组的遍历部分),接下来可以讲讲了
-没学过的小伙伴可以看一下定义:
-循环是程序中用于重复执行某段代码（循环体）...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-24</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/14/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%8C%E5%A4%A9/">love2d学习第二天--学习lua的基本语法和关键字</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>首先在学习Love2d之前我们先熟悉该引擎所依赖的语言—–Lua(这里我们就用lua5.4吧,毕竟功能多)第一个程序:输出Hello Genshin Impact其实上一篇我们已经输出过这句话了,不过...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-14</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/14/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%8C%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%80%E5%A4%A9/">love2d学习第一天--配置love2d环境和lua的环境</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>配置love2d环境和lua的环境这个教程大家不要把我当做专业的lua大佬,这其实是我个人的学习笔记,我只是习惯以给别人讲述的方式学习新知识,毕竟我也是第一次学lua,望周知~(￣0￣)&#x2F;1...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%80%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+正常的代参函数是这样的
+1234local function numberAdd(a, b, c)    return a + b + cendprint(numberCount(1, 2, 3)) --...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-02-05</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/">love2d学习第三天--学习lua循环和if else语句</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>ok,我们上一篇中已经了解一大堆玩意了,不过还是冰山一角,那么今天学学循环和if else语句吧如果你学过其他语言,绝对 对循环有回家一样的亲切感,同样的,什么for循环,while循环,do …wh...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-24</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/14/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%8C%E5%A4%A9/">love2d学习第二天--学习lua的基本语法和关键字</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>首先在学习Love2d之前我们先熟悉该引擎所依赖的语言—–Lua(这里我们就用lua5.4吧,毕竟功能多)第一个程序:输出Hello Genshin Impact其实上一篇我们已经输出过这句话了,不过...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-14</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/14/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%BA%8C%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2025/12/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%80%E5%A4%A9/">love2d学习第一天--配置love2d环境和lua的环境</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>配置love2d环境和lua的环境这个教程大家不要把我当做专业的lua大佬,这其实是我个人的学习笔记,我只是习惯以给别人讲述的方式学习新知识,毕竟我也是第一次学lua,望周知~(￣0￣)&#x2F;1——love2d引擎下载首先我们进入love2d的官方网站下载love2d引擎
+点击此处下载love2d引擎
+.csdankkwyvtx{zoom: 33%;}
+
+选择你对应的电脑配置进行下载即可
+下载完成之后你会发现,这个引擎不像Unity,UnrealEngine和Godot那样拥有复杂的界面,而是一个这个样子,什么都没有,也就是说这就是一个框架
+.vfwekrfkbepi{zoom: 33%...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2025-12-13</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="post-meta-right"><a class="read-more" href="/2025/12/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%80%E5%A4%A9/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
@@ -486,6 +494,11 @@ document.addEventListener('DOMContentLoaded', function() {
   background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
   background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
 }
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
 </style><script>document.addEventListener('DOMContentLoaded', function() {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
@@ -499,6 +512,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
 
   const script = document.createElement('script');
   script.src = '/js/sakana.min.js';
@@ -847,6 +876,10 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/anime.js"></script>
 
 <script src="/js/table.js"></script>
+
+<script src="/js/pjax-init.js"></script>
+
+<script src="/js/last-read-pin.js"></script>
 <!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.png","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 

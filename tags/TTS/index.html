@@ -48,6 +48,10 @@
 <link rel="stylesheet" href="/css/music-player.css">
 
 <link rel="stylesheet" href="/css/table.css">
+
+<link rel="stylesheet" href="/css/wall.css">
+
+<link rel="stylesheet" href="/css/anime.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -398,8 +402,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关标签</h1><div class="post-subtitle"><span>探索与</span> "TTS" <span>相关的所有文章</span></div></div><div class="tags-content"><!-- 显示特定标签的文章列表--><div class="tag-posts"><div class="tag-header"><div class="tag-info"><h2 class="tag-name"> <i class="fas fa-tag"></i> TTS</h2><div class="tag-description"> <span>共有</span> 1 <span>篇文章</span></div></div><div class="tag-back"><a href="/tags/"><i class="fas fa-arrow-left"></i> 返回所有标签</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/">Azure的AI-Speech服务</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>上次我们已经获得了Azure的学生包了因为我们其实已经白嫖了DigitalOcean 的服务器的服务了,然后又白嫖了阿里的token
 最近新出来Deepseek V4的模型,这个阿里同样是可以支持的
 首先在Azure的搜索栏搜索Speech然后点击进入
-​	.iacmnyjnrgcj{zoom:25%;}
-​	.tavihoewtqkx{zoom: 25%;}
+​	.trvwjnedcorf{zoom:25%;}
+​	.rcjmgmbiugwa{zoom: 25%;}
 
 
 Subscription（订阅） 选你的学生订阅（Azure for Students）
@@ -483,6 +487,11 @@ Region（地区） (Asia P...</p></div><div class="post-item-meta"><div class="p
   background-image: url('https://raw.githubusercontent.com/itorr/sakana/main/html/blue00f4.png');
   background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
 }
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
 </style><script>document.addEventListener('DOMContentLoaded', function() {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
@@ -496,6 +505,22 @@ Region（地区） (Asia P...</p></div><div class="post-item-meta"><div class="p
 
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
 
   const script = document.createElement('script');
   script.src = '/js/sakana.min.js';
@@ -844,6 +869,10 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 <script src="/js/anime.js"></script>
 
 <script src="/js/table.js"></script>
+
+<script src="/js/pjax-init.js"></script>
+
+<script src="/js/last-read-pin.js"></script>
 <!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.png","/images/2.png","/images/4.png","/images/5.png","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 

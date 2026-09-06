@@ -15,12 +15,16 @@ document.addEventListener("DOMContentLoaded", function () {
   initCodeBlockFolding();
   initAuthorCardAnimation();
   initCodeBlockScroll();
+  initAuthorCardPullCord();
 });
 
 // ===== Typing Effect =====
 function initTypingEffect() {
   const typingElement = document.getElementById("typing-text");
   if (!typingElement) return;
+  // pjax: 封面元素常驻不替换,只允许启动一次,否则多个打字循环会互相覆盖
+  if (typingElement.dataset.typingBound) return;
+  typingElement.dataset.typingBound = "1";
 
   // Get typing text from theme config or use default
   const typingText =
@@ -111,6 +115,10 @@ function initMobileMenu() {
   const navMenu = document.querySelector(".nav-menu");
 
   if (!navToggle || !navMenu) return;
+
+  // pjax: 导航栏常驻不替换,重复绑定会让开关互相抵消(点一下开又立刻关)
+  if (navToggle.dataset.menuBound) return;
+  navToggle.dataset.menuBound = "1";
 
   navToggle.addEventListener("click", function () {
     navMenu.classList.toggle("active");
@@ -298,6 +306,9 @@ function initButtonContainer() {
 
 // ===== Back to Top =====
 function initBackToTop() {
+  // pjax: 按钮挂在 body 上常驻,不重复创建,否则会叠出一摞按钮
+  if (document.querySelector(".back-to-top")) return;
+
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
 
@@ -337,6 +348,77 @@ function initBackToTop() {
       top: 0,
       behavior: "smooth",
     });
+  });
+}
+
+// ===== Author Card Pull Cord (拉绳台灯式收起/展开名片) =====
+function initAuthorCardPullCord() {
+  const section = document.querySelector(".author-card-section");
+  if (!section) return;
+
+  const foldable = section.querySelector(".author-card-foldable");
+  const cord = section.querySelector(".author-card-pull-cord");
+  if (!foldable || !cord || cord.dataset.cordBound) return;
+  cord.dataset.cordBound = "1";
+
+  const setLabel = (folded) => {
+    const text = folded ? "展开名片" : "收起名片";
+    cord.dataset.title = text;
+    cord.setAttribute("aria-label", text);
+  };
+
+  // 折叠/展开:max-height 过渡需要先固定当前高度再归零/展开才会平滑
+  const setFolded = (folded) => {
+    if (folded) {
+      foldable.style.maxHeight = foldable.scrollHeight + "px";
+      void foldable.offsetHeight; // 强制回流,让过渡有起点
+      foldable.classList.add("folded");
+      foldable.style.maxHeight = "0px";
+    } else {
+      foldable.classList.remove("folded");
+      foldable.style.maxHeight = foldable.scrollHeight + "px";
+      clearTimeout(foldable._mhTimer);
+      // 展开完成后解除高度限制,避免窗口缩放时内容被裁剪
+      foldable._mhTimer = setTimeout(() => {
+        if (!foldable.classList.contains("folded")) {
+          foldable.style.maxHeight = "";
+        }
+      }, 650);
+    }
+    setLabel(folded);
+  };
+
+  // 恢复上次状态(无动画,避免进页面就闪一段折叠动画)
+  // ★ 用 localStorage 持久保存,关掉浏览器再打开也记得
+  if (localStorage.getItem("authorCardFolded") === "1") {
+    foldable.classList.add("no-anim", "folded");
+    foldable.style.maxHeight = "0px";
+    setLabel(true);
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => foldable.classList.remove("no-anim")),
+    );
+  }
+
+  const yank = () => {
+    cord.classList.remove("yanking");
+    void cord.offsetWidth; // 重置动画
+    cord.classList.add("yanking");
+  };
+  cord.addEventListener("animationend", () => cord.classList.remove("yanking"));
+
+  const toggle = () => {
+    const folded = !foldable.classList.contains("folded");
+    localStorage.setItem("authorCardFolded", folded ? "1" : "0");
+    yank();
+    setFolded(folded);
+  };
+
+  cord.addEventListener("click", toggle);
+  cord.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggle();
+    }
   });
 }
 
@@ -381,6 +463,10 @@ function showNotification(message, type = "success") {
 function initHeaderScroll() {
   const header = document.querySelector(".header");
   if (!header) return;
+
+  // pjax: 头部常驻,滚动监听只绑一次
+  if (header.dataset.scrollBound) return;
+  header.dataset.scrollBound = "1";
 
   let lastScroll = 0;
 
@@ -443,11 +529,18 @@ function initFormValidation() {
 
 // ===== Go to Comments =====
 function initGoToComments() {
-  // 只在文章页面显示评论按钮
-  if (!document.querySelector(".post-content")) return;
+  // pjax: 从文章页切走时,移除遗留在 body 上的悬浮按钮
+  if (!document.querySelector(".post-content")) {
+    const staleBtn = document.querySelector(".go-to-comments");
+    if (staleBtn) staleBtn.remove();
+    return;
+  }
 
   // 只在有评论区域时显示按钮
   if (!document.querySelector(".comments-section")) return;
+
+  // pjax: 按钮挂在 body 上常驻,不重复创建
+  if (document.querySelector(".go-to-comments")) return;
 
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
@@ -494,6 +587,9 @@ function initGoToComments() {
 
 // ===== Dark Mode Toggle =====
 function initDarkMode() {
+  // pjax: 按钮挂在 body 上常驻,不重复创建
+  if (document.querySelector(".dark-mode-toggle")) return;
+
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
 

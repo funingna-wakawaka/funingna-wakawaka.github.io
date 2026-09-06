@@ -1,5 +1,10 @@
 // 文章模态窗口功能
 document.addEventListener("DOMContentLoaded", function () {
+  // ★ 模态窗口 iframe 内不再创建第二层模态(否则会 blog 套 blog 套 blog)。
+  //   iframe 内点击分类/标签等非文章链接由 pjax-init 接管:通知父页面关闭模态并跳转;
+  //   iframe 内文章之间的跳转(上一篇/下一篇/相关文章)保留原有体验。
+  if (window.self !== window.top) return;
+
   // 检查是否启用模态窗口模式，且屏幕宽度足够大
   const isSmallScreen = window.innerWidth <= 768;
 
@@ -148,8 +153,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function addClickEventToLinks() {
       // ★★★ 新增：加入了 .search-result-link 选择器 ★★★
       // ★★★ 新增：加入了 .archive-post-title a 选择器，修复归档页标题不触发模态窗口的问题 ★★★
+      // ★★★ 新增：加入了 .post-item-title a 选择器，修复分类/相关标签/相关分类页标题不触发模态窗口的问题 ★★★
       const articleLinks = document.querySelectorAll(
-        ".article-title a, .article-image a, .read-more, .search-result-link, .archive-post-title a",
+        ".article-title a, .article-image a, .read-more, .search-result-link, .archive-post-title a, .post-item-title a",
       );
 
       articleLinks.forEach((link) => {
@@ -181,7 +187,8 @@ document.addEventListener("DOMContentLoaded", function () {
           // 1. 如果点击的是标题链接，直接取自己的文本
           else if (
             this.parentElement.classList.contains("article-title") ||
-            this.parentElement.classList.contains("archive-post-title")
+            this.parentElement.classList.contains("archive-post-title") ||
+            this.parentElement.classList.contains("post-item-title")
           ) {
             initialTitle = this.textContent.trim();
           } else {
