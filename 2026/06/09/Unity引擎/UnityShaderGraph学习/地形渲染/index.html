@@ -410,14 +410,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/shadergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我们今天学习Unity的地形渲染"><a href="#我们今天学习Unity的地形渲染" class="headerlink" title="我们今天学习Unity的地形渲染"></a>我们今天学习Unity的地形渲染</h1><p>​	<style>.hsycyeqkivci{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609222218244.png" class="hsycyeqkivci" alt="image-20260609222218244"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/shadergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我们今天学习Unity的地形渲染"><a href="#我们今天学习Unity的地形渲染" class="headerlink" title="我们今天学习Unity的地形渲染"></a>我们今天学习Unity的地形渲染</h1><p>​	<style>.zofdfsinwlcn{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609222218244.png" class="zofdfsinwlcn" alt="image-20260609222218244"></p>
 <p>我们可以看这个shader脚本的前五个属性</p>
-<p>​	<style>.xlvqkzhnsrcv{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609223440526.png" class="xlvqkzhnsrcv" alt="image-20260609223440526"></p>
-<p>​	<style>.fqgkwhecbfod{zoom: 50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609223343531.png" class="fqgkwhecbfod" alt="image-20260609223343531"></p>
+<p>​	<style>.gbliogdochrh{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609223440526.png" class="gbliogdochrh" alt="image-20260609223440526"></p>
+<p>​	<style>.xqthtfedgkha{zoom: 50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609223343531.png" class="xqthtfedgkha" alt="image-20260609223343531"></p>
 <h2 id="创建地形分层shader"><a href="#创建地形分层shader" class="headerlink" title="创建地形分层shader"></a>创建地形分层shader</h2><p>首先创建一个有光照lit的shadergraph</p>
 <p>然后添加如下节点</p>
 <p>由于这些材质会默然在inspector暴露参数,我们需要取消勾选每一个“Exposed”不再暴露在inspector  (注意: 如果你是unity 6 用户,取消勾选 <strong>show in inspector</strong>)   ,然后勾选每一个sprite的 Use Tilling and offset(平铺与偏移),并将Fragment里的smoothness平滑值设为0(这个我们之前说过,当这个不为0时材质表面上会出现一层像陶瓷轴一样的反光,这里我们不需要这个效果)</p>
-<p>​	<style>.sxnhiltwouub{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609224633721.png" class="sxnhiltwouub" alt="image-20260609224633721"></p>
+<p>​	<style>.ykdnlnrohgii{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260609224633721.png" class="ykdnlnrohgii" alt="image-20260609224633721"></p>
 <blockquote>
 <p><strong>Use Tiling and Offset</strong> 用于控制纹理是否自动应用材质面板中的 <strong>Tiling（平铺）</strong> 和 <strong>Offset（偏移）</strong> 参数。启用后，Shader 会自动对 UV 执行 <code>UV × Tiling + Offset</code> 计算，使开发者和美术能够直接在材质球中调整纹理的重复次数和偏移位置，而无需修改 Shader Graph。对于普通贴图材质通常建议开启，对于已经手动处理 UV 的效果（如流动纹理、Triplanar、世界空间映射等）则通常关闭以避免重复计算。</p>
 </blockquote>
@@ -430,10 +430,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>蓝色通道对应的是第三层,也就是Sprite2</p>
 <p>alpha通道对应的是第四层,也就是Sprite3</p>
 <p>而这里为了实现这个效果,可以直接用各个sprite层直接乘以control层的各个颜色的通道值,然后依此相加,最后将效果叠加到基础色上</p>
-<p>​	<style>.xmcwckfmdeeo{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610145110710.png" class="xmcwckfmdeeo" alt="image-20260610145110710"></p>
+<p>​	<style>.owqdfarlebiq{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610145110710.png" class="owqdfarlebiq" alt="image-20260610145110710"></p>
 <p>目前已经可以实现分层了,但是为了让山体地形更真实,我们需要特殊处理一下</p>
 <p>需要获取地形表面的法向量,检测y轴分量,若接近1或者-1就是近乎水平的地面,若接近0表示检测到的是斜坡地形</p>
-<p>​	<style>.vgmdkcuppays{zoom:33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610150448245.png" class="vgmdkcuppays" alt="image-20260610150448245"></p>
+<p>​	<style>.wkeqwxseljyz{zoom:33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610150448245.png" class="wkeqwxseljyz" alt="image-20260610150448245"></p>
 <p>我们添加两个浮点参数: </p>
 <p>normal start 用于控制y分量阈值用于判定岩石面的起始位置,设置为默认值为0.5取值范围0-1的slider</p>
 <p>normal end 用于控制岩石面的终止边界,默认值设为0.6取值范围0-1的slider</p>
@@ -441,16 +441,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>这里复习一下这个节点:   当输入值小于第一个边界值时,节点输出0,当数值大于edge2时,节点输出1,当输入值介于两者之间的时候,输出值会呈现为从0-1的平滑过渡曲线</p>
 <p>可以看到球体垂直面显示的是黑色,而顶部平坦区域显示为白色,这里不会出现全黑的情况,因为在unity实际地形环境中发现向量的y分量不会出现负值</p>
 <p>然后我们把第一层和第二层使用smoothstep传入的参数来线性插值,并和control节点的R通道相乘</p>
-<p>​	<style>.lsgmxnuwtqev{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610145535261.png" class="lsgmxnuwtqev" alt="image-20260610145535261"></p>
+<p>​	<style>.pqovuuqoqric{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610145535261.png" class="pqovuuqoqric" alt="image-20260610145535261"></p>
 <p>我们从模型网站下载一个山体的obj免费模型,然后添加合适的材质图通过调整参数来修改山体的效果,这样就可以实现了山体的材质(不过如字面意思,这就是贴图,和无人深空,荒野大镖客,黑神话悟空这些可交互地形这些没法比)</p>
-<p>​	<style>.rxijutmraauh{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141153134.png" class="rxijutmraauh" alt="image-20260610141153134"></p>
-<p>​	<style>.dmwnfgwlkpdn{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141036656.png" class="dmwnfgwlkpdn" alt="image-20260610141036656"></p>
-<p>​	<style>.ittlbeaujaxz{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141102609.png" class="ittlbeaujaxz" alt="image-20260610141102609"></p>
-<p>​	<style>.knmpaldgelqf{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141248666.png" class="knmpaldgelqf" alt="image-20260610141248666"></p>
-<h2 id="扫描地形效果"><a href="#扫描地形效果" class="headerlink" title="扫描地形效果"></a>扫描地形效果</h2><p>我们做一个扫描地形的效果	<style>.mwcgegesrtcw{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610152728848.png" class="mwcgegesrtcw" alt="image-20260610152728848"></p>
+<p>​	<style>.hnvxfovfwtrd{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141153134.png" class="hnvxfovfwtrd" alt="image-20260610141153134"></p>
+<p>​	<style>.rzxyblvvbrvx{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141036656.png" class="rzxyblvvbrvx" alt="image-20260610141036656"></p>
+<p>​	<style>.wdultgyacyxy{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141102609.png" class="wdultgyacyxy" alt="image-20260610141102609"></p>
+<p>​	<style>.mfjifhbxsssg{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610141248666.png" class="mfjifhbxsssg" alt="image-20260610141248666"></p>
+<h2 id="扫描地形效果"><a href="#扫描地形效果" class="headerlink" title="扫描地形效果"></a>扫描地形效果</h2><p>我们做一个扫描地形的效果	<style>.kmyxrfdhlydt{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610152728848.png" class="kmyxrfdhlydt" alt="image-20260610152728848"></p>
 <p>添加一个颜色节点并设置为HDR</p>
-<p>​	<style>.btdjtxpmhiji{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610155558083.png" class="btdjtxpmhiji" alt="image-20260610155558083"></p>
- <style>.txeugzurtkgo{zoom: 67%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610153039280.png" class="txeugzurtkgo" alt="image-20260610153039280">
+<p>​	<style>.unjgqmfjgmrq{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610155558083.png" class="unjgqmfjgmrq" alt="image-20260610155558083"></p>
+ <style>.jhdhphhiglcu{zoom: 67%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610153039280.png" class="jhdhphhiglcu" alt="image-20260610153039280">
 
 <p>由于手动控制地形扫描效果过于麻烦,我们可以使用C#脚本</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WorldScanner</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> scanSpeed;</span><br><span class="line">    <span class="keyword">public</span> Terrain terrain;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Material terrainMaterial;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> scanDistance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        terrainMaterial = terrain.materialTemplate;</span><br><span class="line">        scanDistance = <span class="number">1000f</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            Vector3 mousePos = Input.mousePosition;</span><br><span class="line">            <span class="keyword">if</span> (Physics.Raycast(Camera.main.ScreenPointToRay(mousePos), <span class="keyword">out</span> RaycastHit hitInfo))</span><br><span class="line">            &#123;</span><br><span class="line">                terrainMaterial.SetVector(<span class="string">&quot;_ScanOrigin&quot;</span>, hitInfo.point);</span><br><span class="line">                scanDistance = <span class="number">0.0f</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scanDistance += scanSpeed * Time.deltaTime;</span><br><span class="line">        terrainMaterial.SetFloat(<span class="string">&quot;_ScanDistance&quot;</span>, scanDistance);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -461,9 +461,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>但是之前我们为了节省时间直接从素材网站上下载的山的模型</p>
 <h2 id="unity其实自带了地形系统"><a href="#unity其实自带了地形系统" class="headerlink" title="unity其实自带了地形系统"></a>unity其实自带了地形系统</h2><p>其实我们可以自己刷一个,首先创建一个terrain</p>
-<p>​	<style>.ivkrmgxyowkl{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610161121265.png" class="ivkrmgxyowkl" alt="image-20260610161121265"></p>
+<p>​	<style>.mhoouqgkfhrx{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610161121265.png" class="mhoouqgkfhrx" alt="image-20260610161121265"></p>
 <p>然后切换为set height并选择合适的笔刷来绘制地形</p>
-<p>​	<style>.nhxsuaokgqbj{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610162403233.png" class="nhxsuaokgqbj" alt="image-20260610162403233"></p>
+<p>​	<style>.jpdjlqqnmrfe{zoom: 25%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610162403233.png" class="jpdjlqqnmrfe" alt="image-20260610162403233"></p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">6个绘图模式说明</div>
     <div class="hide-toggle-content"><h3 id="1-Set-Height（设置高度）"><a href="#1-Set-Height（设置高度）" class="headerlink" title="1. Set Height（设置高度）"></a>1. <strong>Set Height（设置高度）</strong></h3><ul>
@@ -575,11 +575,11 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 <p>画好地图后来给地图上材质,首先切换为PaintTexture模式</p>
-<p>​	<style>.ckokoudsykky{zoom:33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610193756855.png" class="ckokoudsykky" alt="image-20260610193756855"></p>
+<p>​	<style>.tlihaukikihm{zoom:33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610193756855.png" class="tlihaukikihm" alt="image-20260610193756855"></p>
 <p>我们点击添加图层,添加纹理并绘制,当然没有的话也可以用现有的texture来create一个</p>
-<style>.mdumxvceckni{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610203726521.png" class="mdumxvceckni" alt="image-20260610203726521">
+<style>.vhpalyyzbkek{zoom: 33%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610203726521.png" class="vhpalyyzbkek" alt="image-20260610203726521">
 
-<p>​	<style>.ndmjsibhvvpr{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610205514247.png" class="ndmjsibhvvpr" alt="image-20260610205514247"></p>
+<p>​	<style>.vhhrslwfygda{zoom:50%;}</style><img src="/2026/06/09/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%B0%E5%BD%A2%E6%B8%B2%E6%9F%93/image-20260610205514247.png" class="vhhrslwfygda" alt="image-20260610205514247"></p>
 <p>然后我们的一坨山脉就做好了</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -981,7 +981,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -1091,7 +1092,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

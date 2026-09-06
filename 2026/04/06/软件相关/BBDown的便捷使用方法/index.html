@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="BBDown是一个很厉害的哔哩哔哩下载软件-可惜是命令行工具"><a href="#BBDown是一个很厉害的哔哩哔哩下载软件-可惜是命令行工具" class="headerlink" title="BBDown是一个很厉害的哔哩哔哩下载软件,可惜是命令行工具"></a>BBDown是一个很厉害的哔哩哔哩下载软件,可惜是命令行工具</h1><p>而我最讨厌命令行,只要看到重复性执行的命令行我就想用bat脚本偷懒</p>
- <style>.mcjxmkbqotud{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/BBDown%E7%9A%84%E4%BE%BF%E6%8D%B7%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/image-20260406195956796.png" class="mcjxmkbqotud" alt="image-20260406195956796">
+ <style>.tsqqsnsmudeu{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/BBDown%E7%9A%84%E4%BE%BF%E6%8D%B7%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/image-20260406195956796.png" class="tsqqsnsmudeu" alt="image-20260406195956796">
 
 <p>我让ai给我写的powershell脚本如下</p>
 <p>保存ps1格式</p>
@@ -822,7 +822,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -932,7 +933,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

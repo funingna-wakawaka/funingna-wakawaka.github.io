@@ -412,12 +412,12 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/shadergragh/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergragh</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="本篇来了解一下unity中的光照"><a href="#本篇来了解一下unity中的光照" class="headerlink" title="本篇来了解一下unity中的光照"></a>本篇来了解一下unity中的光照</h1><p>光照分为漫反射光和全反射光</p>
 <p>场景光源主要分为两类:手动添加的实际光源平行光或点光源还有环境光照,后者包括物体间的的间接光反射和天空盒光照</p>
-<p>​	<style>.iahiguncfhil{zoom: 25%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529140930779.png" class="iahiguncfhil" alt="image-20260529140930779"></p>
+<p>​	<style>.zrsesqqifxmg{zoom: 25%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529140930779.png" class="zrsesqqifxmg" alt="image-20260529140930779"></p>
 <p>我们选择光照渲染 lit shader graph</p>
 <blockquote>
 <p>Unity 的 <strong>Lit Shader</strong>（光照着色器）是 URP（Universal Render Pipeline，通用渲染管线）和 HDRP（High Definition Render Pipeline，高清渲染管线）中的核心光照材质系统。它定义了物体表面如何与光源交互，决定了渲染的真实感程度</p>
 </blockquote>
-<p>​	<style>.jkagmrettuwb{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529141058068.png" class="jkagmrettuwb" alt="image-20260529141058068"></p>
+<p>​	<style>.vaoxshmfxbeb{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529141058068.png" class="vaoxshmfxbeb" alt="image-20260529141058068"></p>
 <p>Unity的Lit着色器采用PBR(Physically Based Rendering,基于物理的渲染)技术,简称为PBR(基于物理渲染),其核心是向Unity描述物体的物理特性</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">参数说明</div>
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <p>unity会自动计算物体表面的漫反射和镜面反射强度,base color输出代表物体的反照率颜色(即表面基础反射色),其运行机制与无光照unlit 着色器中的表现完全一致</p>
-<p>​	<style>.ltwpbejbyyoi{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529142652203.png" class="ltwpbejbyyoi" alt="image-20260529142652203"></p>
+<p>​	<style>.lldmprolsrpu{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529142652203.png" class="lldmprolsrpu" alt="image-20260529142652203"></p>
 <p>然后我们了解一下这个黑白贴图的类型</p>
 <table>
 <thead>
@@ -567,11 +567,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody></table>
 <h2 id="高度贴图"><a href="#高度贴图" class="headerlink" title="高度贴图"></a>高度贴图</h2><p>然后添加纹理节点并添加纹理</p>
-<p>​	<style>.gsgfwntxltoi{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529143029430.png" class="gsgfwntxltoi" alt="image-20260529143029430"></p>
+<p>​	<style>.lmrdhsvaoolm{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529143029430.png" class="lmrdhsvaoolm" alt="image-20260529143029430"></p>
 <p>不过这个只是在视觉效果上改变,不会改变实际的模型</p>
-<p>​	<style>.vblcohpgcsiq{zoom: 67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529143527553.png" class="vblcohpgcsiq" alt="image-20260529143527553"></p>
+<p>​	<style>.tkuxpwlowucj{zoom: 67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529143527553.png" class="tkuxpwlowucj" alt="image-20260529143527553"></p>
 <p>然后再添加一个HeightMap Texture的纹理节点,然后再和Parallax mapping(视差贴图)节点相连,这个节点会结合高度图和特定算法参数来动态调整基底贴图的UV坐标,然后通过高度图和特定算法参数动态调整UV坐标</p>
-<p>​	<style>.porpyverbfpy{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529144214106.png" class="porpyverbfpy" alt="image-20260529144214106"></p>
+<p>​	<style>.whpcxippbxei{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529144214106.png" class="whpcxippbxei" alt="image-20260529144214106"></p>
 <p>左侧输入参数</p>
 <table>
 <thead>
@@ -650,17 +650,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <td align="left">(0, 0, 0, 1)</td>
 </tr>
 </tbody></table>
-<h2 id="法线贴图"><a href="#法线贴图" class="headerlink" title="法线贴图"></a>法线贴图</h2><p>​	<style>.chfxlyleasqw{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529144747813.png" class="chfxlyleasqw" alt="image-20260529144747813"></p>
+<h2 id="法线贴图"><a href="#法线贴图" class="headerlink" title="法线贴图"></a>法线贴图</h2><p>​	<style>.ouwjgzsjtaza{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529144747813.png" class="ouwjgzsjtaza" alt="image-20260529144747813"></p>
 <p>法线贴图的效果看起来和位移贴图差不多,不过存在很多区别:</p>
 <p>① 位移贴图通过模拟在Z轴上的位移来制造深度假象</p>
 <p>② 法线贴图是改变每个像素的表面法线方向,相当于告诉渲染引擎这个像素的实际朝向与模型几何表面不一致</p>
 <p>法线贴图和位移贴图配合使用可以产生逼真的渲染效果</p>
-<p>​	<style>.auxvpqmyanfx{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529145549890.png" class="auxvpqmyanfx" alt="image-20260529145549890"></p>
+<p>​	<style>.gzdsthddvsxk{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529145549890.png" class="gzdsthddvsxk" alt="image-20260529145549890"></p>
 <p>然后我们添加一个叫做normal texture的2d纹理并选择normalmap模式</p>
 <p>此时我们可以看到这个变成了一种淡淡的紫色</p>
-<p>​	<style>.kqxwszqjldvh{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529145951892.png" class="kqxwszqjldvh" alt="image-20260529145951892"></p>
+<p>​	<style>.rmemmrtrrbzp{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529145951892.png" class="rmemmrtrrbzp" alt="image-20260529145951892"></p>
 <p>然后我们把之间用位移贴图处理过的UV贴图坐标和这个sample texture2d的UV相连,并将type类型设置为normal  法线贴图,并将输出结果连到法线图的主输出端口Normal (Tangent Space) </p>
-<p>​	<style>.usnveesilevw{zoom: 50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529150418455.png" class="usnveesilevw" alt="image-20260529150418455"></p>
+<p>​	<style>.puqytbvqtczp{zoom: 50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529150418455.png" class="puqytbvqtczp" alt="image-20260529150418455"></p>
 <p>我们可以了解一下这个workflow mode工作流模式</p>
 <table>
 <thead>
@@ -711,18 +711,18 @@ document.addEventListener('DOMContentLoaded', function() {
 <td>兼容旧项目&#x2F;传统管线</td>
 </tr>
 </tbody></table>
-<p>​	<style>.issfweiwrmrx{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529150815803.png" class="issfweiwrmrx" alt="image-20260529150815803"></p>
+<p>​	<style>.qverdongqsyo{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529150815803.png" class="qverdongqsyo" alt="image-20260529150815803"></p>
 <p>高光模式允许直接调节反射高光的色彩属性</p>
- <style>.svudlqqymygy{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151257776.png" class="svudlqqymygy" alt="image-20260529151257776">
+ <style>.guelcdkxixkd{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151257776.png" class="guelcdkxixkd" alt="image-20260529151257776">
 
 <p>我们添加一个浮点类型的metallic并设置为滑块模式(这个是在inspector窗口调节的)</p>
-<h2 id="粗糙度贴图"><a href="#粗糙度贴图" class="headerlink" title="粗糙度贴图"></a>粗糙度贴图</h2><p>​	<style>.dqwtqrsobosb{zoom:67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151459189.png" class="dqwtqrsobosb" alt="image-20260529151459189"></p>
-<p>​	<style>.dmevepqpzpll{zoom:67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151707087.png" class="dmevepqpzpll" alt="image-20260529151707087"></p>
+<h2 id="粗糙度贴图"><a href="#粗糙度贴图" class="headerlink" title="粗糙度贴图"></a>粗糙度贴图</h2><p>​	<style>.rcyskretkven{zoom:67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151459189.png" class="rcyskretkven" alt="image-20260529151459189"></p>
+<p>​	<style>.vkjzqrmtsvkx{zoom:67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529151707087.png" class="vkjzqrmtsvkx" alt="image-20260529151707087"></p>
 <p>粗糙度贴图中黑色表示表面极度光滑,白色表示材质表面极度粗糙,不过unity中白色表示完美平滑</p>
 <p>为了消除这个差异我们需要反转</p>
 <p>我们需要添加一个Roughness texture节点,并选择红色通道输出,因为这是单通道灰度贴图,可以随便选择一个通道,不限于红色通道 R</p>
 <p>然后连接反转节点 one minus进行黑白颜色反转,然后将处理后的值连接到smoothness平滑度通道</p>
-<p>​	<style>.syfxinlwwnse{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529152220226.png" class="syfxinlwwnse" alt="image-20260529152220226"></p>
+<p>​	<style>.puleqjknijvr{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529152220226.png" class="puleqjknijvr" alt="image-20260529152220226"></p>
 <p><strong>One Minus</strong> 节点就是数学上的 <strong>1 - x</strong>，对每个通道单独做减法。</p>
 <p>功能</p>
 <p>plain</p>
@@ -759,19 +759,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </tbody></table>
 <p>本质上就是<strong>反转数值</strong>——黑的变白，白的变黑，中间灰互相颠倒</p>
 <p>虽然我们得到的材质跟十几年的老游戏画质一样,不过问题不大</p>
-<p>​	<style>.ehqlgujrvssc{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162230985.png" class="ehqlgujrvssc" alt="image-20260529162230985"></p>
+<p>​	<style>.ueavtgvygqzb{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162230985.png" class="ueavtgvygqzb" alt="image-20260529162230985"></p>
 <h2 id="自发光贴图"><a href="#自发光贴图" class="headerlink" title="自发光贴图"></a>自发光贴图</h2><p>现在我们需要添加自发光颜色属性</p>
 <p>先添加一个颜色节点,然后将模式设置为HDR</p>
- <style>.qeuiyvlkggdm{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162646727.png" class="qeuiyvlkggdm" alt="image-20260529162646727">
+ <style>.mpkowwfdcutk{zoom: 33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162646727.png" class="mpkowwfdcutk" alt="image-20260529162646727">
 
 <p>然后就可以使用超高强度的颜色值</p>
-<p>​	<style>.sijfflmfihmv{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162857707.png" class="sijfflmfihmv" alt="image-20260529162857707"></p>
-<p>​	<style>.axqbwpaspqxi{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163251814.png" class="axqbwpaspqxi" alt="image-20260529163251814"></p>
+<p>​	<style>.cxwkwichveju{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529162857707.png" class="cxwkwichveju" alt="image-20260529162857707"></p>
+<p>​	<style>.icnkvqbrcjrv{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163251814.png" class="icnkvqbrcjrv" alt="image-20260529163251814"></p>
 <p>可以看到小球发光了,但是由于这个是我们在创建URP项目的时候自动添加的功能—–global volume</p>
 <p>如果没有的话可以点击这里添加</p>
-<p>​	<style>.gmtxrvadhlpo{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163441757.png" class="gmtxrvadhlpo" alt="image-20260529163441757"></p>
+<p>​	<style>.agysnfwnywdu{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163441757.png" class="agysnfwnywdu" alt="image-20260529163441757"></p>
 <p>就是这个东西</p>
-<p>​	<style>.zhyfoxurlbrr{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163841707.png" class="zhyfoxurlbrr" alt="image-20260529163841707"></p>
+<p>​	<style>.iyfdkvpdrwah{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529163841707.png" class="iyfdkvpdrwah" alt="image-20260529163841707"></p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">Global Volume</div>
     <div class="hide-toggle-content"><blockquote>
@@ -919,25 +919,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>相比你也看到了inspector里面有很多属性,比如Bloom,Vignette什么的</p>
 <p>每个volume都是单个profile文件配置的,例如我们现在使用的就是这个默认的SamepleSceneProfile</p>
-<p>​	<style>.ynzldulozucs{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164616056.png" class="ynzldulozucs" alt="image-20260529164616056"></p>
+<p>​	<style>.jhqqbexdkbfj{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164616056.png" class="jhqqbexdkbfj" alt="image-20260529164616056"></p>
 <p>当然我们还可以选择自己创建一个</p>
-<p>​	<style>.tmrfljwiweff{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164724268.png" class="tmrfljwiweff" alt="image-20260529164724268"></p>
+<p>​	<style>.ovmgohaxnufr{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164724268.png" class="ovmgohaxnufr" alt="image-20260529164724268"></p>
 <p>可以在这里找到</p>
-<p>​	<style>.nxjpvwyxttkd{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171245332.png" class="nxjpvwyxttkd" alt="image-20260529171245332"></p>
+<p>​	<style>.bdlolhwhpuzs{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171245332.png" class="bdlolhwhpuzs" alt="image-20260529171245332"></p>
 <p>创建完了之后并使用发现没有任何属性,小球也不发光了</p>
-<p>​	<style>.tfiywjjpfejm{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164821902.png" class="tfiywjjpfejm" alt="image-20260529164821902"></p>
+<p>​	<style>.iqsngtmtbtly{zoom:50%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529164821902.png" class="iqsngtmtbtly" alt="image-20260529164821902"></p>
 <p>我们可以通过add override添加子属性</p>
-<p>​	<style>.egyyfguvlphx{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165011991.png" class="egyyfguvlphx" alt="image-20260529165011991"></p>
+<p>​	<style>.uoqjstigiqmg{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165011991.png" class="uoqjstigiqmg" alt="image-20260529165011991"></p>
 <p>我们可以调节强度大小intensity,默认为0 不发光,数值越高发光越亮</p>
-<p>​	<style>.hevdaojlyrmo{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165250048.png" class="hevdaojlyrmo" alt="image-20260529165250048"></p>
-<p>​	<style>.fszvuoverfjq{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165428855.png" class="fszvuoverfjq" alt="image-20260529165428855"></p>
-<h2 id="环境光遮蔽贴图"><a href="#环境光遮蔽贴图" class="headerlink" title="环境光遮蔽贴图"></a>环境光遮蔽贴图</h2><p>​	<style>.vlapqtqplbtk{zoom: 67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529170037850.png" class="vlapqtqplbtk" alt="image-20260529170037850"></p>
+<p>​	<style>.lxtxwxlgjmnb{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165250048.png" class="lxtxwxlgjmnb" alt="image-20260529165250048"></p>
+<p>​	<style>.bbquhshxrvse{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529165428855.png" class="bbquhshxrvse" alt="image-20260529165428855"></p>
+<h2 id="环境光遮蔽贴图"><a href="#环境光遮蔽贴图" class="headerlink" title="环境光遮蔽贴图"></a>环境光遮蔽贴图</h2><p>​	<style>.owklqvoghoph{zoom: 67%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529170037850.png" class="owklqvoghoph" alt="image-20260529170037850"></p>
 <p>比如某些模型上面会出现孔洞什么的,在现实中,对于那些小坑会显示出黑影,月球就是一个最好的例子,比如月亮上的黑斑就是陨石砸的坑</p>
 <p>在unity中就是使用环境光遮蔽贴图可以标识物体表面各部位受环境光遮蔽的效果的程度即被环境光遮挡的情况</p>
 <p>我们需要和之前一样的操作,用材质连接环境光遮蔽通道</p>
-<p>​	<style>.pnhmtarjcztt{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171106980.png" class="pnhmtarjcztt" alt="image-20260529171106980"></p>
+<p>​	<style>.bidrktfdswlt{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171106980.png" class="bidrktfdswlt" alt="image-20260529171106980"></p>
 <p>去掉自发光节点恢复成普通不发光的材质,现在来看是不是很真实呢(说实话,这个让我想起了玩早期GTA的时候的那个粗糙的建模了 <font color='#FFD700'>狗头狗头</font>)</p>
-<p>​	<style>.yvqkggeepsda{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171458169.png" class="yvqkggeepsda" alt="image-20260529171458169"></p>
+<p>​	<style>.mxgnycgthvgz{zoom:33%;}</style><img src="/2026/05/29/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/image-20260529171458169.png" class="mxgnycgthvgz" alt="image-20260529171458169"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1338,7 +1338,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -1448,7 +1449,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

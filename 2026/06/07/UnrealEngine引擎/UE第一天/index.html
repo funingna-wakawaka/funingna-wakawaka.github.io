@@ -410,13 +410,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/UE/"><i class="fas fa-tag" style="margin-right: 3px"> </i>UE</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来看看Unreal-Engine-也就是虚幻引擎"><a href="#今天来看看Unreal-Engine-也就是虚幻引擎" class="headerlink" title="今天来看看Unreal Engine,也就是虚幻引擎"></a>今天来看看Unreal Engine,也就是虚幻引擎</h1><style>.zcneiniphubq{zoom: 25%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607194707527.png" class="zcneiniphubq" alt="image-20260607194707527">
+</script><div class="post-tags"><a class="tag" href="/tags/UE/"><i class="fas fa-tag" style="margin-right: 3px"> </i>UE</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来看看Unreal-Engine-也就是虚幻引擎"><a href="#今天来看看Unreal-Engine-也就是虚幻引擎" class="headerlink" title="今天来看看Unreal Engine,也就是虚幻引擎"></a>今天来看看Unreal Engine,也就是虚幻引擎</h1><style>.ytzrmefvrpub{zoom: 25%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607194707527.png" class="ytzrmefvrpub" alt="image-20260607194707527">
 
-<p>​	<style>.kbwfqelwctvg{zoom: 33%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607195321996.png" class="kbwfqelwctvg" alt="image-20260607195321996"></p>
+<p>​	<style>.rgygvpdhcogj{zoom: 33%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607195321996.png" class="rgygvpdhcogj" alt="image-20260607195321996"></p>
 <p>这个大概和Unity差不多,类似scene game hierarchy inspector 和asset窗口</p>
-<p>​	<style>.nlgwjkoocewj{zoom:50%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607200822635.png" class="nlgwjkoocewj" alt="image-20260607200822635"></p>
+<p>​	<style>.rtgkstjbtghm{zoom:50%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607200822635.png" class="rtgkstjbtghm" alt="image-20260607200822635"></p>
 <p>这样调整一下布局是不是就恍然大悟了,所以会unity的话学UE 和Godot这些也会降低学习成本是这样的</p>
-<p>​	<style>.gvyugnzpspbo{zoom:33%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607201140812.png" class="gvyugnzpspbo" alt="image-20260607201140812"></p>
+<p>​	<style>.qekqambryqnx{zoom:33%;}</style><img src="/2026/06/07/UnrealEngine%E5%BC%95%E6%93%8E/UE%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260607201140812.png" class="qekqambryqnx" alt="image-20260607201140812"></p>
 <p>但是虚幻引擎非常的吃电脑配置,我的电脑是办公本,不适合UE这种,运行游戏场景时非常的卡,不过unity的还可以</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -818,7 +818,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -928,7 +929,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

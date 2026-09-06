@@ -411,8 +411,8 @@ document.addEventListener('DOMContentLoaded', function() {
 然后新建一个空文件夹并在终端执行
 1npm create astro@latest
 
-​	.mvkfbxpjusqm{zoom:25%;}
-​	.zbhxplhvksgl{zoom: 33%;}
+​	.rbyoheokjebm{zoom:25%;}
+​	.rmdnxfzcwiub{zoom: 33%;}
 
 src...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-09-04</span><span class="post-category"> <i class="fas fa-folder"></i><a href="/categories/Astro/">Astro</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/09/04/Astro%E7%9B%B8%E5%85%B3/Astro%E5%85%A5%E9%97%A8/">阅读全文 <i class="fas fa-arrow-right"></i></a></div></div></div></div></div></div></div></article></div></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
@@ -779,7 +779,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -889,7 +890,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>

@@ -411,15 +411,15 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="前段时间刷视频看到一个Claude小桌宠-还挺好玩的于是我也下载了一个"><a href="#前段时间刷视频看到一个Claude小桌宠-还挺好玩的于是我也下载了一个" class="headerlink" title="前段时间刷视频看到一个Claude小桌宠,还挺好玩的于是我也下载了一个"></a>前段时间刷视频看到一个Claude小桌宠,还挺好玩的于是我也下载了一个</h1><p>就是这个<a target="_blank" rel="noopener" href="https://github.com/rullerzhou-afk/clawd-on-desk"><font color='#40E0D0'>点击前往下载</font></a></p>
-<p>​	<style>.fcjoytwqextl{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234557546.png" class="fcjoytwqextl" alt="image-20260621234557546"></p>
+<p>​	<style>.cbfiewcrglun{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234557546.png" class="cbfiewcrglun" alt="image-20260621234557546"></p>
 <p>喏,长这样</p>
-<p>​	<style>.negffyfqnude{zoom:33%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234704872.png" class="negffyfqnude" alt="image-20260621234704872"></p>
+<p>​	<style>.uuclvliyhuxy{zoom:33%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234704872.png" class="uuclvliyhuxy" alt="image-20260621234704872"></p>
 <p>把它抓起来就是这样</p>
-<p>​	<style>.utfjaihhmyhv{zoom: 67%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234753770.png" class="utfjaihhmyhv" alt="image-20260621234753770"></p>
+<p>​	<style>.kciebzmdxsmj{zoom: 67%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234753770.png" class="kciebzmdxsmj" alt="image-20260621234753770"></p>
 <p>当然这个东西也不是纯摆设,还是有点用的</p>
-<p>​	<style>.othneelncvbq{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234933048.png" class="othneelncvbq" alt="image-20260621234933048"></p>
+<p>​	<style>.fdyrqsdfdned{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234933048.png" class="fdyrqsdfdned" alt="image-20260621234933048"></p>
 <p>但是!   这个是Electron写的,十分的吃配置,所以综合来看没什么用</p>
-<p>​	<style>.jcscgwypzwyy{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621235043308.png" class="jcscgwypzwyy" alt="image-20260621235043308"></p>
+<p>​	<style>.ncdrffburzuf{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621235043308.png" class="ncdrffburzuf" alt="image-20260621235043308"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -820,7 +820,8 @@ function initDesktopPet() {
   if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
     pretextInteraction = new PetPretextInteraction({
       repelRadius: window.theme.pet.pretext_interaction.repel_radius,
-      throttleMs: window.theme.pet.pretext_interaction.throttle_ms
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
     });
   }
 
@@ -930,7 +931,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
-  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50}},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
 };
 </script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-heart.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script></body></html>
