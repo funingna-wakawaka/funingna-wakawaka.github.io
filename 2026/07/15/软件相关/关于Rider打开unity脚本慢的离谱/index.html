@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>尤其是unity , 当rider加载unity项目时都要好几分钟,C#脚本编译速度就更别提了</p>
 <p>之前在网上看到一个大佬给出了方法就是调整GC上限什么的</p>
 <p>就是在rider下载文件夹里找到这个文件,用记事本打开</p>
-<p>​	<style>.tdoytiawqfti{zoom: 80%;}</style><img src="/2026/07/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%85%B3%E4%BA%8ERider%E6%89%93%E5%BC%80unity%E8%84%9A%E6%9C%AC%E6%85%A2%E7%9A%84%E7%A6%BB%E8%B0%B1/image-20260715134545058.png" class="tdoytiawqfti" alt="image-20260715134545058"></p>
+<p>​	<style>.xfhsnncpxgtv{zoom: 80%;}</style><img src="/2026/07/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%85%B3%E4%BA%8ERider%E6%89%93%E5%BC%80unity%E8%84%9A%E6%9C%AC%E6%85%A2%E7%9A%84%E7%A6%BB%E8%B0%B1/image-20260715134545058.png" class="xfhsnncpxgtv" alt="image-20260715134545058"></p>
 <p>然后调整堆内存上限为4096m 下限为1024m  m代表MB</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms1024m</span><br><span class="line">-Xmx4096m</span><br></pre></td></tr></table></figure>
 
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>然后增加一句字符串共用什么的来节省内存(可加可不加)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseStringDeduplication</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.ypqduplqojcf{zoom:50%;}</style><img src="/2026/07/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%85%B3%E4%BA%8ERider%E6%89%93%E5%BC%80unity%E8%84%9A%E6%9C%AC%E6%85%A2%E7%9A%84%E7%A6%BB%E8%B0%B1/image-20260715134654936.png" class="ypqduplqojcf" alt="image-20260715134654936"></p>
+<p>​	<style>.viiexjsbmjdr{zoom:50%;}</style><img src="/2026/07/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%85%B3%E4%BA%8ERider%E6%89%93%E5%BC%80unity%E8%84%9A%E6%9C%AC%E6%85%A2%E7%9A%84%E7%A6%BB%E8%B0%B1/image-20260715134654936.png" class="viiexjsbmjdr" alt="image-20260715134654936"></p>
 <p>然后保存重启,就会发现rider流畅了很多,以前滚动界面上的代码都一卡一卡的</p>
 <p>不过我还是喜欢用VScode或者Trae这种,就是配置麻烦了点</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
@@ -933,6 +933,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
 </script><script>window.theme = {
+  image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
