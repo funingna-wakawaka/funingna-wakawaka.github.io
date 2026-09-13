@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -422,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天我们来利用DigitalOcean搭建VPN"><a href="#今天我们来利用DigitalOcean搭建VPN" class="headerlink" title="今天我们来利用DigitalOcean搭建VPN"></a>今天我们来利用DigitalOcean搭建VPN</h1><p>之前白嫖了digitalocean的200$的代金卷,而且租了两台服务器,不过租的都是Ubuntu而且节点都在纽约,非常不适合作为VPN,因为纽约在地球那一边,延迟百分百高,想了一下我关掉了一台,保留了我之前部署MC服务器以及AstrBot的那个服务器(原本是想着一台用来练手,一台用来使用的 ┭┮﹏┭┮)</p>
 <p>不过这个代金卷确实是真的,昨天就真的扣了一点钱,太好啦</p>
-<p>​	<style>.cdohqegsnkbb{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423170529633.png" class="cdohqegsnkbb" alt="image-20260423170529633"></p>
+<p>​	<style>.exooqopwuoks{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423170529633.png" class="exooqopwuoks" alt="image-20260423170529633"></p>
 <p>OK,不废话了</p>
 <h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>首先我们选择合适的服务器</p>
 <blockquote>
@@ -432,17 +439,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>即<strong>1 Intel vCPU - 1 GB RAM - 35 GB NVMe SSD - 1000 GB Transfer (自带 Docker)</strong></p>
 <p>然后允许IPV6和性能检测</p>
 </blockquote>
-<p>​	<style>.gxcbjshbhgwz{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423170955658.png" class="gxcbjshbhgwz" alt="image-20260423170955658"></p>
-<h2 id="然后在Termius中连接IP"><a href="#然后在Termius中连接IP" class="headerlink" title="然后在Termius中连接IP"></a>然后在Termius中连接IP</h2><p>​	<style>.vwcgnmysxduy{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171405591.png" class="vwcgnmysxduy" alt="image-20260423171405591"></p>
+<p>​	<style>.bekmvwrdcsda{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423170955658.png" class="bekmvwrdcsda" alt="image-20260423170955658"></p>
+<h2 id="然后在Termius中连接IP"><a href="#然后在Termius中连接IP" class="headerlink" title="然后在Termius中连接IP"></a>然后在Termius中连接IP</h2><p>​	<style>.lggdysjvycce{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171405591.png" class="lggdysjvycce" alt="image-20260423171405591"></p>
 <h2 id="开启swap"><a href="#开启swap" class="headerlink" title="开启swap"></a>开启swap</h2><p>至于上面的报错</p>
 <blockquote>
 <p>Security Alert </p>
 <p>This connection is not secure. Please avoid entering sensitive information until TLS is activated for data protection</p>
 </blockquote>
 <p>这是因为我们没有添加SSL证书,我下面会说,你们一步一步的来就行</p>
-<p>​	<style>.nhhkkyzbsfvn{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423213040918.png" class="nhhkkyzbsfvn" alt="image-20260423213040918"></p>
+<p>​	<style>.bjixwvykryrd{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423213040918.png" class="bjixwvykryrd" alt="image-20260423213040918"></p>
 <p>在Termius中输入开启2G虚拟内存</p>
-<p>​	<style>.fnqqtmylnulr{zoom: 67%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423213938613.png" class="fnqqtmylnulr" alt="image-20260423213938613"></p>
+<p>​	<style>.pcxverrpxyxl{zoom: 67%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423213938613.png" class="pcxverrpxyxl" alt="image-20260423213938613"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fallocate -l 2G /swapfile</span><br><span class="line">chmod 600 /swapfile</span><br><span class="line">mkswap /swapfile</span><br><span class="line">swapon /swapfile</span><br><span class="line">echo &#x27;/swapfile none swap sw 0 0&#x27; | sudo tee -a /etc/fstab</span><br></pre></td></tr></table></figure>
 
 <p>执行完没有任何报错，就说明虚拟内存加好了，以后服务器会稳定很多</p>
@@ -451,15 +458,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)</span><br></pre></td></tr></table></figure>
 
 <p>得到</p>
-<p>​	<style>.iscctswbscqx{zoom: 25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171703902.png" class="iscctswbscqx" alt="image-20260423171703902"></p>
+<p>​	<style>.lkwpcdcyfhjd{zoom: 25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171703902.png" class="lkwpcdcyfhjd" alt="image-20260423171703902"></p>
 <p>然后<strong>OK</strong></p>
-<p>​	<style>.wwzjypyfvjau{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171840149.png" class="wwzjypyfvjau" alt="image-20260423171840149"></p>
+<p>​	<style>.mcvumcpryzrv{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423171840149.png" class="mcvumcpryzrv" alt="image-20260423171840149"></p>
 <p>这里我们不用管直接<strong>Enter</strong> 按回车键就行了,这里的意思是</p>
 <blockquote>
 <p><strong>系统刚刚更新了一些底层的运行库，以下这些系统服务还在使用旧版本的库，你需要重启这些服务来应用更新吗？</strong></p>
 <p>答案肯定是确定的,对于这台刚刚新建的准备用来做 VPN 的服务器来说，重启是最安全省事的选择</p>
 </blockquote>
-<p>​	<style>.tufchoxcdpht{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423172154428.png" class="tufchoxcdpht" alt="image-20260423172154428"></p>
+<p>​	<style>.eljshocpnbln{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423172154428.png" class="eljshocpnbln" alt="image-20260423172154428"></p>
 <blockquote>
 <p>Would you like to customize the Panel Port settings? (If not, a random port will be applied) [y&#x2F;n]:     </p>
 <p><strong>输入y并回车</strong></p>
@@ -499,16 +506,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <p><strong>直接输入回车默认</strong></p>
 </blockquote>
 <p>意思是申请安全证书需要用哪个端口？<strong>默认用 80 端口就行</strong></p>
-<p>​	<style>.qrevnflbmhew{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423174049365.png" class="qrevnflbmhew" alt="image-20260423174049365"></p>
+<p>​	<style>.tcwanfanfatk{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423174049365.png" class="tcwanfanfatk" alt="image-20260423174049365"></p>
 <p>然后我们就安装好了,但是会报错说证书没有安装成功,这个其实无所谓的,因为这个用http访问就行了</p>
 <p>安装证书不成功的话</p>
-<p>​	<style>.mijcmhdhybbn{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215219334.png" class="mijcmhdhybbn" alt="image-20260423215219334"></p>
+<p>​	<style>.mjtypcwqacgq{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215219334.png" class="mjtypcwqacgq" alt="image-20260423215219334"></p>
 <p>先选择选择 19 <strong>SSL Certificate Management</strong>(SSL证书管理)</p>
 <p>然后选择选项6 <strong>Get SSL for IP Address (6-day cert, auto-renews)</strong></p>
-<p>​	<style>.jnwvewffhhtt{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215350405.png" class="jnwvewffhhtt" alt="image-20260423215350405"></p>
-<p>​	<style>.hccxvfufmovk{zoom: 33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215601675.png" class="hccxvfufmovk" alt="image-20260423215601675"></p>
+<p>​	<style>.tevbmpoypvnv{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215350405.png" class="tevbmpoypvnv" alt="image-20260423215350405"></p>
+<p>​	<style>.ifblkmoemfeb{zoom: 33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215601675.png" class="ifblkmoemfeb" alt="image-20260423215601675"></p>
 <p>此时我们进入浏览器使用https的链接,发现上方的报错消失了!  因为我们已经添加成功了SSL证书</p>
-<p>​	<style>.kfeucvtrkyco{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423222136179.png" class="kfeucvtrkyco" alt="image-20260423222136179"></p>
+<p>​	<style>.idvzpwmirswm{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423222136179.png" class="idvzpwmirswm" alt="image-20260423222136179"></p>
 <p>因为安装成功的话可以使用浏览器访问https(访问成功的话就会跳转到登录界面,我下面会讲)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://168.144.39.143:8080/yizjJiLvcyxVXL2lst/    //我的是这样,你们的后面的字母和我的不一样</span><br></pre></td></tr></table></figure>
 
@@ -519,21 +526,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>依旧</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x-ui</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.hsgndlndiqst{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423214053365.png" class="hsgndlndiqst" alt="image-20260423214053365"></p>
+<p>​	<style>.uotbfxzgarcd{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423214053365.png" class="uotbfxzgarcd" alt="image-20260423214053365"></p>
 <p>然后确认刷新url的英文字母(一定要刷新,如果你的已经泄露了)</p>
 <p>当然也可以在面板的**“面板设置” (Panel Settings)**里的url 路径里改成你记得住的单词  (对了,可以自定义界面的语言,比如简体中文或者英语什么的,我推荐英语,不容易出错,中文的话可能有翻译错误)</p>
-<p>​	<style>.ljyyrqubrgdv{zoom:50%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215900900.png" class="ljyyrqubrgdv" alt="image-20260423215900900"></p>
-<style>.lvrywmagffvv{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175058759.png" class="lvrywmagffvv" alt="image-20260423175058759">
+<p>​	<style>.qrjzrdsstrbq{zoom:50%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423215900900.png" class="qrjzrdsstrbq" alt="image-20260423215900900"></p>
+<style>.jmhgjrccylgv{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175058759.png" class="jmhgjrccylgv" alt="image-20260423175058759">
 
 <p>但是你会发现密码和用户名不知道是什么,因为我们根本没有设置</p>
 <p>首先打开 x-ui 管理菜单</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x-ui</span><br></pre></td></tr></table></figure>
 
-<p>​	<style>.xoohofyadtcd{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175400607.png" class="xoohofyadtcd" alt="image-20260423175400607"></p>
+<p>​	<style>.cllodygewpbq{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175400607.png" class="cllodygewpbq" alt="image-20260423175400607"></p>
 <p><strong>选择选项6</strong>  来重置用户名和密码</p>
-<p>​	<style>.ikgcssafkuja{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175913900.png" class="ikgcssafkuja" alt="image-20260423175913900"></p>
+<p>​	<style>.ggzeuftbifve{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423175913900.png" class="ggzeuftbifve" alt="image-20260423175913900"></p>
 <p>然后刷新浏览器登录进入界面</p>
-<p>​	<style>.xzmvwmwfxjdn{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423180005435.png" class="xzmvwmwfxjdn" alt="image-20260423180005435"></p>
+<p>​	<style>.gcotddeahdvt{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423180005435.png" class="gcotddeahdvt" alt="image-20260423180005435"></p>
 <p>ok到这里就第一步就大功告成了!</p>
 <p>然后是第二步</p>
 <h2 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h2><p>然后在termius里关闭防火墙对这个端口的阻拦并刷新一下浏览器就能打开刚才的链接,你就会看到我们熟悉的登录界面啦!</p>
@@ -541,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <h2 id="创建-VLESS-Reality-节点"><a href="#创建-VLESS-Reality-节点" class="headerlink" title="创建 VLESS-Reality 节点"></a>创建 VLESS-Reality 节点</h2><p>在面板左侧菜单栏，点击 <strong>“入站列表” (Inbounds)</strong></p>
 <p>然后点击页面上的 <strong>“添加入站” (Add Inbound)</strong> </p>
-<p>​	<style>.pejgmpdcgunj{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423192728813.png" class="pejgmpdcgunj" alt="image-20260423192728813"></p>
+<p>​	<style>.adpprqznxkms{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423192728813.png" class="adpprqznxkms" alt="image-20260423192728813"></p>
 <p>然后</p>
 <blockquote>
 <ol>
@@ -586,9 +593,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </blockquote>
 <p>当然其他的协议比如vmess shadowsocks http wireguard tun hysteria等协议</p>
 <p>除了一个trojan,因为传统的 Trojan 协议 <strong>强制要求你必须拥有一个域名（网址）+ 真实的 SSL 证书</strong>。如果你只有 IP 地址，Trojan 是没法正常工作的</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>​	<style>.awzyvlceorgo{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423211525923.png" class="awzyvlceorgo" alt="image-20260423211525923"></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>​	<style>.opsdjgccrgtk{zoom:33%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423211525923.png" class="opsdjgccrgtk" alt="image-20260423211525923"></p>
 <p>找一些支持vless协议的vpn软件例如<a target="_blank" rel="noopener" href="https://github.com/MatsuriDayo/NekoBoxForAndroid"><font color='#40E0D0'>NekoBox</font></a> 扫这个二维码导入就行了</p>
-<p>​	<style>.ydmdwppjaehh{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423211716501.png" class="ydmdwppjaehh" alt="image-20260423211716501"></p>
+<p>​	<style>.cxfxupesjeww{zoom:25%;}</style><img src="/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/image-20260423211716501.png" class="cxfxupesjeww" alt="image-20260423211716501"></p>
 <p>通过这个我知道了一个非常重要的信息———流量本身不限量,限量的是VPN商,他们通过限量来赚钱</p>
 <p>这个梯子快的离谱,我把这个分享给我的好基友,他用了之后当场取消了之前在机场的订阅用我这个  <font color='#FF1493'>狗头狗头狗头</font></p>
 <h2 id="怎么样-是不是很简单呢-这种东西其实没有我们想象的那么复杂"><a href="#怎么样-是不是很简单呢-这种东西其实没有我们想象的那么复杂" class="headerlink" title="怎么样,是不是很简单呢,这种东西其实没有我们想象的那么复杂"></a>怎么样,是不是很简单呢,这种东西其实没有我们想象的那么复杂</h2></div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
@@ -1060,6 +1067,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -1120,16 +1129,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

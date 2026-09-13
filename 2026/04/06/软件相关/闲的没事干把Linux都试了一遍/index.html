@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -420,42 +427,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/Linux/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Linux</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我好奇其他的Linux长什么样子-虽然早就知道linux的KDE和GNOME主题比较常用"><a href="#我好奇其他的Linux长什么样子-虽然早就知道linux的KDE和GNOME主题比较常用" class="headerlink" title="我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用"></a>我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用</h1><p>​	<style>.ywimjyakgpqw{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406201716638.png" class="ywimjyakgpqw" alt="image-20260406201716638"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/Linux/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Linux</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="我好奇其他的Linux长什么样子-虽然早就知道linux的KDE和GNOME主题比较常用"><a href="#我好奇其他的Linux长什么样子-虽然早就知道linux的KDE和GNOME主题比较常用" class="headerlink" title="我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用"></a>我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用</h1><p>​	<style>.slloevxrqmtj{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406201716638.png" class="slloevxrqmtj" alt="image-20260406201716638"></p>
 <p>然后我都试了一下,debian我也试了一下,啥都没有,就是一个壳子,懒得配置,然后我又删了</p>
-<h2 id="Kali"><a href="#Kali" class="headerlink" title="Kali"></a>Kali</h2><p>​	<style>.unpqveetwfsq{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202206732.png" class="unpqveetwfsq" alt="image-20260406202206732"></p>
+<h2 id="Kali"><a href="#Kali" class="headerlink" title="Kali"></a>Kali</h2><p>​	<style>.ymfoxmynfkuv{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202206732.png" class="ymfoxmynfkuv" alt="image-20260406202206732"></p>
 <p>这个我下载之后没什么用但是又舍不得删(因为配置巨复杂),况且是虚拟机没什么能耐,不过UI挺好看的,可惜本质上是渗透工具</p>
-<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2> <style>.dfmvohaggkxj{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202508035.png" class="dfmvohaggkxj" alt="image-20260406202508035">
+<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2> <style>.gydietxgvkcd{zoom:25%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202508035.png" class="gydietxgvkcd" alt="image-20260406202508035">
 
 <p>这个就不用说了吧,开发者最在乎Debian ubuntu和Arch了</p>
-<h2 id="Nyarch"><a href="#Nyarch" class="headerlink" title="Nyarch"></a>Nyarch</h2> <style>.jsohifobtunx{zoom: 33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202806811.png" class="jsohifobtunx" alt="image-20260406202806811">
+<h2 id="Nyarch"><a href="#Nyarch" class="headerlink" title="Nyarch"></a>Nyarch</h2> <style>.blllixdbkoni{zoom: 33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406202806811.png" class="blllixdbkoni" alt="image-20260406202806811">
 
 <h2 id="CentOS-stream"><a href="#CentOS-stream" class="headerlink" title="CentOS stream"></a>CentOS stream</h2><p>centos7非常老,操作起来很恶心,而这个是新版本</p>
- <style>.ufoioyjkxprd{zoom: 67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203140316.png" class="ufoioyjkxprd" alt="image-20260406203140316">
+ <style>.ukxxxqsmfybh{zoom: 67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203140316.png" class="ukxxxqsmfybh" alt="image-20260406203140316">
 
-<h2 id="Linuxmint"><a href="#Linuxmint" class="headerlink" title="Linuxmint"></a>Linuxmint</h2><style>.uiqjcquofwxf{zoom:67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203310281.png" class="uiqjcquofwxf" alt="image-20260406203310281">
+<h2 id="Linuxmint"><a href="#Linuxmint" class="headerlink" title="Linuxmint"></a>Linuxmint</h2><style>.kypcgvmauibv{zoom:67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203310281.png" class="kypcgvmauibv" alt="image-20260406203310281">
 
-<h2 id="Manjaro"><a href="#Manjaro" class="headerlink" title="Manjaro"></a>Manjaro</h2><style>.sqpptmioqkqz{zoom:67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203600340.png" class="sqpptmioqkqz" alt="image-20260406203600340">
+<h2 id="Manjaro"><a href="#Manjaro" class="headerlink" title="Manjaro"></a>Manjaro</h2><style>.jpmpfyjpmoyp{zoom:67%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203600340.png" class="jpmpfyjpmoyp" alt="image-20260406203600340">
 
-<h2 id="Fedora"><a href="#Fedora" class="headerlink" title="Fedora"></a>Fedora</h2> <style>.djooymqysxmt{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203724513.png" class="djooymqysxmt" alt="image-20260406203724513">
+<h2 id="Fedora"><a href="#Fedora" class="headerlink" title="Fedora"></a>Fedora</h2> <style>.yyqhxoxtxdny{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203724513.png" class="yyqhxoxtxdny" alt="image-20260406203724513">
 
-<h2 id="Deepin-最像Windows"><a href="#Deepin-最像Windows" class="headerlink" title="Deepin(最像Windows)"></a>Deepin(最像Windows)</h2><style>.ulnxrehkiewv{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203856084.png" class="ulnxrehkiewv" alt="image-20260406203856084">
+<h2 id="Deepin-最像Windows"><a href="#Deepin-最像Windows" class="headerlink" title="Deepin(最像Windows)"></a>Deepin(最像Windows)</h2><style>.gwcmkkdnvocj{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406203856084.png" class="gwcmkkdnvocj" alt="image-20260406203856084">
 
-<h2 id="Rocky"><a href="#Rocky" class="headerlink" title="Rocky"></a>Rocky</h2><style>.tkawtucxvnsj{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204002022.png" class="tkawtucxvnsj" alt="image-20260406204002022">
+<h2 id="Rocky"><a href="#Rocky" class="headerlink" title="Rocky"></a>Rocky</h2><style>.sdijrnuypymy{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204002022.png" class="sdijrnuypymy" alt="image-20260406204002022">
 
-<h2 id="Pop-OS"><a href="#Pop-OS" class="headerlink" title="Pop!OS"></a>Pop!OS</h2><style>.sphiltkfbffq{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204220188.png" class="sphiltkfbffq" alt="image-20260406204220188">
+<h2 id="Pop-OS"><a href="#Pop-OS" class="headerlink" title="Pop!OS"></a>Pop!OS</h2><style>.gcgfnycjmulw{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204220188.png" class="gcgfnycjmulw" alt="image-20260406204220188">
 
-<h2 id="ZorinOS"><a href="#ZorinOS" class="headerlink" title="ZorinOS"></a>ZorinOS</h2> <style>.tspgvvierlrz{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204508161.png" class="tspgvvierlrz" alt="image-20260406204508161">
+<h2 id="ZorinOS"><a href="#ZorinOS" class="headerlink" title="ZorinOS"></a>ZorinOS</h2> <style>.tyiodacccmim{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204508161.png" class="tyiodacccmim" alt="image-20260406204508161">
 
-<h2 id="EndeavourOS"><a href="#EndeavourOS" class="headerlink" title="EndeavourOS"></a>EndeavourOS</h2> <style>.yjkqeosdyzgi{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204635398.png" class="yjkqeosdyzgi" alt="image-20260406204635398">
+<h2 id="EndeavourOS"><a href="#EndeavourOS" class="headerlink" title="EndeavourOS"></a>EndeavourOS</h2> <style>.ufxmiatveyzm{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204635398.png" class="ufxmiatveyzm" alt="image-20260406204635398">
 
-<h2 id="Alma"><a href="#Alma" class="headerlink" title="Alma"></a>Alma</h2><style>.xzunkmpvslxy{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204814528.png" class="xzunkmpvslxy" alt="image-20260406204814528">
+<h2 id="Alma"><a href="#Alma" class="headerlink" title="Alma"></a>Alma</h2><style>.yiecqghsmclf{zoom:50%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406204814528.png" class="yiecqghsmclf" alt="image-20260406204814528">
 
 <p>说实话,都差不多</p>
 <p>这些linux还喜欢搞什么排名</p>
-<p>​	<style>.nirredvuypxj{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211238632.png" class="nirredvuypxj" alt="image-20260406211238632"></p>
-<p>​	<style>.hvhhznduvkyq{zoom: 33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211317883.png" class="hvhhznduvkyq" alt="image-20260406211317883"></p>
-<p>​	<style>.trpulirgwwdo{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211405040.png" class="trpulirgwwdo" alt="image-20260406211405040"></p>
-<p>​	<style>.vxrtiqlcsxws{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211442854.png" class="vxrtiqlcsxws" alt="image-20260406211442854"></p>
+<p>​	<style>.ippdikbrwbnp{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211238632.png" class="ippdikbrwbnp" alt="image-20260406211238632"></p>
+<p>​	<style>.mzxyvsrtmnlm{zoom: 33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211317883.png" class="mzxyvsrtmnlm" alt="image-20260406211317883"></p>
+<p>​	<style>.blhaplnefhkv{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211405040.png" class="blhaplnefhkv" alt="image-20260406211405040"></p>
+<p>​	<style>.jesjjcjjjidt{zoom:33%;}</style><img src="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/image-20260406211442854.png" class="jesjjcjjjidt" alt="image-20260406211442854"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -925,6 +932,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -985,16 +994,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

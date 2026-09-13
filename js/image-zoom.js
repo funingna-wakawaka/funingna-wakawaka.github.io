@@ -33,6 +33,14 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // ★ 幂等守卫:direct 模式下文章页经 pjax 加载,pjax 换页会重新派发
+    //   DOMContentLoaded;若无守卫,每换一页就往 body 叠加一个一模一样的
+    //   查看器,点击空白/关闭按钮一次只关掉最上层,看起来就要点很多次。
+    //   查看器节点挂在 body(pjax 只替换 main),单实例可跨页面复用,
+    //   打开时的图片列表是点击当下查询的,无需重建。
+    if (window.__imageViewerInit) return;
+    window.__imageViewerInit = true;
+
     /* ============ 配置 ============ */
     const cfg = Object.assign(
       {
@@ -75,6 +83,9 @@
         <button class="toolbar-btn lock-btn" data-title="正向锁定">${icons.lock}</button>
         <button class="toolbar-btn download-btn" data-title="保存图片">${icons.download}</button>
       </div>
+      <div class="viewer-close" aria-label="关闭">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </div>
       <div class="viewer-thumbs"></div>
     `;
     document.body.appendChild(imageViewer);
@@ -92,6 +103,7 @@
     const btnLock = imageViewer.querySelector(".lock-btn");
     const btnDownload = imageViewer.querySelector(".download-btn");
     const thumbsEl = imageViewer.querySelector(".viewer-thumbs");
+    const viewerClose = imageViewer.querySelector(".viewer-close");
 
     // 手动触发一次翻译(动态插入的元素)
     if (window.i18n && window.i18n.translateNode) {
@@ -330,6 +342,12 @@
       link.remove();
     });
 
+    // 右上角关闭按钮(电脑端/手机端常驻,不受"隐藏控件"状态影响)
+    viewerClose.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeViewer();
+    });
+
     /* ============ 双击缩放(点击哪里放大哪里;手机端双击仅用于复原) ============ */
     function toggleZoomAt(clientX, clientY) {
       if (state.zoomed) {
@@ -376,7 +394,7 @@
     let lastImgClick = 0; // 识别双击:300ms 内第二次 mouseup 取消待定的切换
     imageViewer.addEventListener("mousedown", (e) => {
       if (!imageViewer.classList.contains("active")) return;
-      if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs, .viewer-peek"))
+      if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs, .viewer-peek, .viewer-close"))
         return;
       drag = { startX: e.clientX, startY: e.clientY, dx: 0, dy: 0 };
       // 放大状态下按住图片 → 准备平移
@@ -602,7 +620,7 @@
       "touchstart",
       (e) => {
         if (!imageViewer.classList.contains("active")) return;
-        if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs")) {
+        if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs, .viewer-close")) {
           // 触摸起点在控件上:重置滑动状态,避免随后的点击被当成滑动
           touch.moved = false;
           touch.onControls = true;
@@ -631,7 +649,7 @@
       "touchmove",
       (e) => {
         if (!imageViewer.classList.contains("active")) return;
-        if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs"))
+        if (e.target.closest(".viewer-toolbar, .nav-btn, .viewer-thumbs, .viewer-close"))
           return;
         e.preventDefault();
 

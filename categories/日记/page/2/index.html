@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -410,19 +417,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><article class="post-container"><div class="post-header"><h1 class="post-title">相关分类</h1><div class="post-subtitle"><span>探索与</span> "日记" <span>相关的所有文章</span></div></div><div class="category-content"><div class="category-posts"><div class="category-header"><div class="category-info"><h2 class="category-name"> <i class="fas fa-folder"></i> 日记</h2><div class="category-description"><span>共有</span> 10 <span>篇文章</span></div></div><div class="category-back"><a href="/categories/"><i class="fas fa-arrow-left"></i> 返回所有分类</a></div></div><div class="post-list"><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Gemini%E7%9A%84CLI%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Gemini的CLI使用方法</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>Gemini CLI和Codex一样,个人版有免费额度但是由于gemini的CLI还不是太完善(也不知道是不是Google故意的),登录的时候始终登录不了,显示地区不支持
-​	.kixtynvwcsfv{zoom:33%;}
+​	.jchbjjtutgkf{zoom:33%;}
 所以我的对策是,不要登录,而是用API
 首先前往Gemini的ai studio的官网  点击跳转
-​	.qyclwmugowrc{zoom: 25%;}
+​	.vhkwtcjbnhxl{zoom: 25%;}
 然后创建一个API,然后在CLI中填入,就可以用了
-​	.wycgbtyzhddr{zoom:33%;}
+​	.wlextuhtzvwb{zoom:33%;}
 但是没有sandbox,这个很重要,没有沙箱隔离这玩意可能在你电脑上乱删乱改
 所以首先我们去下载Docker并注...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-20</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Gemini%E7%9A%84CLI%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/18/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%88%91%E8%A7%89%E5%BE%97Blog%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E5%83%8FObsidian%E9%82%A3%E6%A0%B7%E7%9A%84%E8%BD%AF%E4%BB%B6/">我觉得Blog应该做成像Obsidian那样的软件</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>前几天试了一下Obsidian这个做笔记的软件感觉打开了我的思路—–为什么不做一个移动端和PC端都可以同步文章内容的软件呢?
 因为目前主流的静态blog生成器主要有hexo,hugo,astro这三个...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-18</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/18/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%88%91%E8%A7%89%E5%BE%97Blog%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E5%83%8FObsidian%E9%82%A3%E6%A0%B7%E7%9A%84%E8%BD%AF%E4%BB%B6/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">新的软件灵感</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>最近我发现打开电脑的path路径这些东西很麻烦我开始思考能不能做一个一键打开Windows的path界面,网络适配器,以及
 设备管理器,磁盘清理等软件,对了,还得结合我之前的DNS的方便切换的想法
-总...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-15</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/">闲的没事干把Linux都试了一遍</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用​	.ywimjyakgpqw{zoom:25%;}
+总...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-15</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/15/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%81%B5%E6%84%9F/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--medium"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/">闲的没事干把Linux都试了一遍</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我好奇其他的Linux长什么样子,虽然早就知道linux的KDE和GNOME主题比较常用​	.slloevxrqmtj{zoom:25%;}
 然后我都试了一下,debian我也试了一下,啥都没有,就是一个壳子,懒得配置,然后我又删了
-Kali​	.unpqveetwfsq{zoom:25%;}
+Kali​	.ymfoxmynfkuv{zoom:25%;}
 这个我下载之后没什么用但是又舍不得删(因为配置巨复杂),况且是虚拟机没什么能耐,不过UI挺好看的,可惜本...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-06</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/Linux/">Linux</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E9%97%B2%E7%9A%84%E6%B2%A1%E4%BA%8B%E5%B9%B2%E6%8A%8ALinux%E9%83%BD%E8%AF%95%E4%BA%86%E4%B8%80%E9%81%8D/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">一个消逝的山村</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>我爷去世了,不过也是预料之内的过年放寒假的时候,我爸把他接过来,接过来就算了,还总是不做饭他吃,那时候冰箱里有很多肉,而我又是究极懒人,一般吃外卖或方便面
 我爷以前是厨子,不是你们想象的那种城市里的饭...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-04-05</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/04/05/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%B8%AA%E6%B6%88%E9%80%9D%E7%9A%84%E5%B1%B1%E6%9D%91/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">win加R命令和Windows快捷键</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>以下是一些常用的命令和快捷键,用Chatgpt统计了一下Win+R 命令一、系统工具类
 cmd → 命令提示符
@@ -430,26 +437,26 @@ powershell → PowerShell
 taskmgr → 任务管理器
 msco...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/win%E5%8A%A0R%E5%91%BD%E4%BB%A4%E5%92%8CWindows%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--large"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">湖边的春天</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>学校旁边有一个特大的湖,去转了一圈(一圈十几公里  狗头狗头狗头)场景一
     场景一
-    .brrilseebqzn{zoom:80%;}
+    .kqvgtvssylyz{zoom:80%;}
 
-.ybkwldyhuxrc{zoom:80%;}
+.rcgibsofdjsa{zoom:80%;}
 
-.xfshkhjhupls{zoom:80%;}
+.ffginefhjlkz{zoom:80%;}
 
-.pymtwozzzosu{zoom:80%;}
+.zrhykrfexcmf{zoom:80%;}
 
-.tywpeetftozl{zoom:80%;}
+.lrsmxhrjlqsl{zoom:80%;}
 
-.wgcithishbyk{zoom:80%;}
+.vtkmohjtvbfn{zoom:80%;}
 
-.bxcpvgbgcfss{zoom:80%;}
+.xgrycwpurcdw{zoom:80%;}
 
-.nnlhmqgiydse{zoom:80%;}
+.svsymchvvvdt{zoom:80%;}
 
-.fgfvziwdguqs{zoom:80%;}
+.upqwqimeukrj{zoom:80%;}
 
-.cqnjmtyuwane{zoo...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">清理一下磁盘</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>磁盘又又又又满了以前我都是直接忽视,用deskgenius把D盘分了150G给了C盘,直到今天
-​	.dyzqnxiunrki{zoom:33%;}
+.pirqjkfyxtyh{zoo...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-29</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/29/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%B9%96%E8%BE%B9%E7%9A%84%E6%98%A5%E5%A4%A9/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">清理一下磁盘</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>磁盘又又又又满了以前我都是直接忽视,用deskgenius把D盘分了150G给了C盘,直到今天
+​	.tjpjymymtfoe{zoom:33%;}
 我就纳闷了明明软件都装到D盘怎么C盘还会满
 用Sp...</p></div><div class="post-item-meta"><div class="post-meta-left"><span class="post-date"><i class="far fa-calendar"></i> 2026-03-28</span><span class="post-tag"><i class="fas fa-tag"></i><a href="/tags/diary/">diary</a></span></div><div class="post-meta-right"><a class="read-more" href="/2026/03/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%B8%85%E7%90%86%E4%B8%80%E4%B8%8B%E7%A3%81%E7%9B%98/">阅读全文<i class="fas fa-arrow-right"></i></a></div></div></div></div><!-- 根据索引创建不同大小的卡片--><div class="post-item post-item--small"><div class="post-item-inner"><div class="post-item-title"><a href="/2026/03/24/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%AD%E7%BA%A7%E4%BD%9C%E6%96%8701/">英语六级作文-探索深海的意义</a></div><div class="post-item-excerpt"><!-- 使用 strip_html 过滤器移除 HTML 标签后再截取文本--><p>中文思路:
 深海探索的重要性
@@ -889,6 +896,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -949,16 +958,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

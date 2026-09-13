@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -422,11 +429,11 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/Linux/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Linux</a><a class="tag" href="/tags/VPS/"><i class="fas fa-tag" style="margin-right: 3px"> </i>VPS</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="关于DigitalOcean取消学生代金卷-我就不再买他们的黑服务器了-阿里云服务器最近打折68一年可以试一下"><a href="#关于DigitalOcean取消学生代金卷-我就不再买他们的黑服务器了-阿里云服务器最近打折68一年可以试一下" class="headerlink" title="关于DigitalOcean取消学生代金卷,我就不再买他们的黑服务器了,阿里云服务器最近打折68一年可以试一下"></a>关于DigitalOcean取消学生代金卷,我就不再买他们的黑服务器了,阿里云服务器最近打折68一年可以试一下</h1><p>我直接拿下,因为我还要制作vpn所以挑了一个比较近的菲律宾,这样延迟就不会太高</p>
 <p>然后预装了一个docker</p>
-<p>​	<style>.qsgcgkmqritw{zoom: 25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911101829768.png" class="qsgcgkmqritw" alt="image-20260911101829768"></p>
+<p>​	<style>.sqtseddcodki{zoom: 25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911101829768.png" class="sqtseddcodki" alt="image-20260911101829768"></p>
 <p>到手之后由于我不喜欢它自带的那个远程连接workbench的界面所以用termius连接吧</p>
-<p>​	<style>.uhrxikdhsimu{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911102237688.png" class="uhrxikdhsimu" alt="image-20260911102237688"></p>
-<p>​	<style>.ywpgpntcsbkm{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911103648546.png" class="ywpgpntcsbkm" alt="image-20260911103648546"></p>
-<p>​	<style>.njsihlfuyjmh{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911102429203.png" class="njsihlfuyjmh" alt="image-20260911102429203"></p>
+<p>​	<style>.gwqxklnekycv{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911102237688.png" class="gwqxklnekycv" alt="image-20260911102237688"></p>
+<p>​	<style>.yzrdfhhjapfv{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911103648546.png" class="yzrdfhhjapfv" alt="image-20260911103648546"></p>
+<p>​	<style>.calovuprcmsj{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911102429203.png" class="calovuprcmsj" alt="image-20260911102429203"></p>
 <h2 id="然后先查看真实配置"><a href="#然后先查看真实配置" class="headerlink" title="然后先查看真实配置"></a>然后先查看真实配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br></pre></td></tr></table></figure>
 
 <p>得到cpu信息如下,确实是2核</p>
@@ -468,23 +475,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>ok,已开启</p>
 <h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>先看看防火墙状态,阿里云已经默认开了防火墙</p>
-<p>​	<style>.jegiumiwyxfm{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911104852900.png" class="jegiumiwyxfm" alt="image-20260911104852900"></p>
+<p>​	<style>.kxclvfjnbfkb{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911104852900.png" class="kxclvfjnbfkb" alt="image-20260911104852900"></p>
 <p>所以无需操作</p>
 <p>不过我们先添加8080端口到防火墙白名单,等会x-ui面板用8080端口</p>
-<p>​	<style>.ysprbigancmg{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911110655086.png" class="ysprbigancmg" alt="image-20260911110655086"></p>
+<p>​	<style>.wxfsehtvxjgh{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911110655086.png" class="wxfsehtvxjgh" alt="image-20260911110655086"></p>
 <p>然后按照我<a href="https://funingna-wakawaka.github.io/2026/04/23/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/DigitalOcean%E6%90%AD%E5%BB%BAVPN/">这个文章</a>来制作vpn,虽然xray最近更新了但是变化不大,就是多了一个数据库选择项</p>
 <p>我们选择sqlite  也就是1</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">═══════════════════════════════════════════</span><br><span class="line">     Database Selection                    </span><br><span class="line">═══════════════════════════════════════════</span><br><span class="line">  1) SQLite     (default — recommended <span class="keyword">for</span> &lt; 500 clients)</span><br><span class="line">  2) PostgreSQL (recommended <span class="keyword">for</span> high client counts / many nodes)</span><br><span class="line">Choose [1]: </span><br></pre></td></tr></table></figure>
 
 <p>然后一顿操作…..获得野生3X-UI面板一枚,剩下的不说了按照文章操作即可,只是有一个变动就是我们添加入站之后还需要添加客户端并把入站附加进去</p>
-<p>​	<style>.absbuneykyfh{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911112314350.png" class="absbuneykyfh" alt="image-20260911112314350"></p>
+<p>​	<style>.vmyywtpuctns{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911112314350.png" class="vmyywtpuctns" alt="image-20260911112314350"></p>
 <p>也就是我们在入站创建入站之后此时不能直接用</p>
-<p>​	<style>.vgksndrkysqq{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134404556.png" class="vgksndrkysqq" alt="image-20260911134404556"></p>
+<p>​	<style>.lfddnkxuhqyj{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134404556.png" class="lfddnkxuhqyj" alt="image-20260911134404556"></p>
 <p>需要再创建一个客户端并关联入站</p>
-<p>​	<style>.fgbpprglsyzk{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134437396.png" class="fgbpprglsyzk" alt="image-20260911134437396"></p>
-<p>​	<style>.ndmbsebjvgax{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134515516.png" class="ndmbsebjvgax" alt="image-20260911134515516"></p>
+<p>​	<style>.kwsglibuslhx{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134437396.png" class="kwsglibuslhx" alt="image-20260911134437396"></p>
+<p>​	<style>.joyhqnktkyub{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134515516.png" class="joyhqnktkyub" alt="image-20260911134515516"></p>
 <p>而且需要将这个Flow改为<code>xtls-rprx-vision</code></p>
-<p>​	<style>.eqlejbnnjsts{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134118701.png" class="eqlejbnnjsts" alt="image-20260911134118701"></p>
+<p>​	<style>.yulfkofpiahj{zoom:25%;}</style><img src="/2026/09/11/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%B4%AD%E4%B9%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20260911134118701.png" class="yulfkofpiahj" alt="image-20260911134118701"></p>
 <p>此时用v2rayNG扫码导入即可</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -955,6 +962,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -1015,16 +1024,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

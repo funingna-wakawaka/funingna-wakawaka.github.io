@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -421,9 +428,9 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/Unity/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Unity</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="昨天审核通过了可以参加了但是我没什么头绪-这里在BattleScene场景搭建纸牌游戏吧"><a href="#昨天审核通过了可以参加了但是我没什么头绪-这里在BattleScene场景搭建纸牌游戏吧" class="headerlink" title="昨天审核通过了可以参加了但是我没什么头绪,这里在BattleScene场景搭建纸牌游戏吧"></a>昨天审核通过了可以参加了但是我没什么头绪,这里在BattleScene场景搭建纸牌游戏吧</h1><h2 id="安装Splines"><a href="#安装Splines" class="headerlink" title="安装Splines"></a>安装Splines</h2><p>Unity 的 <strong>Splines 工具</strong> 是一套用于创建、编辑和使用平滑曲线的内置系统，主要用于路径动画、物体运动轨迹、程序化生成等场景</p>
-<p>​	<style>.molnekhrfjfs{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519123849320.png" class="molnekhrfjfs" alt="image-20260519123849320"></p>
-<p>​	<style>.ceylfxnnuszu{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519124144305.png" class="ceylfxnnuszu" alt="image-20260519124144305"></p>
-<p>​	<style>.iythdcmttjeb{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519125122873.png" class="iythdcmttjeb" alt="image-20260519125122873"></p>
+<p>​	<style>.gsrjyrfaqwfj{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519123849320.png" class="gsrjyrfaqwfj" alt="image-20260519123849320"></p>
+<p>​	<style>.xpabbtlocury{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519124144305.png" class="xpabbtlocury" alt="image-20260519124144305"></p>
+<p>​	<style>.pncvdooebxyu{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519125122873.png" class="pncvdooebxyu" alt="image-20260519125122873"></p>
 <p>选取三个点,并设成对称位置,像使用PS的钢笔工具一样拉成一条曲线</p>
 <p>然后使用移动工具,点击中间的那个点并点击splines工具,选择Bezier(贝塞尔曲线)里的Mirrored</p>
 <div class="hide-toggle">
@@ -496,14 +503,14 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 <p>沿X轴拖动这个黄色的圈改变曲线形状直到形成一个好看的弧度,然后搭载相关脚本</p>
-<p>​	<style>.risshvwpfhkk{zoom: 33%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519130358327.png" class="risshvwpfhkk" alt="image-20260519130358327"></p>
+<p>​	<style>.jcstltsqkznq{zoom: 33%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519130358327.png" class="jcstltsqkznq" alt="image-20260519130358327"></p>
 <p>然后将其移动到界面的底部充当手牌区域,启动游戏,按下空格键生成卡牌</p>
-<p>​	<style>.epsllxitkdtx{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519141053911.png" class="epsllxitkdtx" alt="image-20260519141053911"></p>
+<p>​	<style>.ibkbskmfnhhu{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519141053911.png" class="ibkbskmfnhhu" alt="image-20260519141053911"></p>
 <p>然后实现自定义<strong>ScriptableObject</strong> 对象</p>
 <blockquote>
 <p>[CreateAssetMenu(menuName &#x3D; “Data&#x2F;CardData”)]</p>
 </blockquote>
-<p>​	<style>.hvojpzwzuadb{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519150536724.png" class="hvojpzwzuadb" alt="image-20260519150536724"></p>
+<p>​	<style>.ssieizbhsoyw{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260519150536724.png" class="ssieizbhsoyw" alt="image-20260519150536724"></p>
 <h2 id="关于2d转3d场景"><a href="#关于2d转3d场景" class="headerlink" title="关于2d转3d场景"></a>关于2d转3d场景</h2><p>众所周知Unity是没有像godot和cocos那种的纯2d场景的,本质上就是换一个摄像机projection投影模式</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">相关知识</div>
@@ -524,14 +531,14 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 <p>很明显我们需要改成透视模式</p>
-<p>​	<style>.jbxkfzktboux{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260521232750534.png" class="jbxkfzktboux" alt="image-20260521232750534"></p>
+<p>​	<style>.ohmwsrbtpjku{zoom:25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260521232750534.png" class="ohmwsrbtpjku" alt="image-20260521232750534"></p>
 <p>此时就可以看到我们的立方体了</p>
-<p>​	<style>.ofpvuhnksgxw{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260521233044620.png" class="ofpvuhnksgxw" alt="image-20260521233044620"></p>
-<h2 id="天空盒的切换"><a href="#天空盒的切换" class="headerlink" title="天空盒的切换"></a>天空盒的切换</h2><p>​	<style>.dqxctliiybza{zoom:33%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522131948553.png" class="dqxctliiybza" alt="image-20260522131948553"></p>
- <style>.becqgrurrege{zoom: 50%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522132014186.png" class="becqgrurrege" alt="image-20260522132014186">
+<p>​	<style>.llsnhthllryl{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260521233044620.png" class="llsnhthllryl" alt="image-20260521233044620"></p>
+<h2 id="天空盒的切换"><a href="#天空盒的切换" class="headerlink" title="天空盒的切换"></a>天空盒的切换</h2><p>​	<style>.qxktgbyshckb{zoom:33%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522131948553.png" class="qxktgbyshckb" alt="image-20260522131948553"></p>
+ <style>.bujxdhluzccy{zoom: 50%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522132014186.png" class="bujxdhluzccy" alt="image-20260522132014186">
 
 <p>当然也可以这样</p>
-<p>​	<style>.rsrplmlufgnz{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522132537566.png" class="rsrplmlufgnz" alt="image-20260522132537566"></p>
+<p>​	<style>.nkbveulmajvg{zoom: 25%;}</style><img src="/2026/05/19/Unity%E5%BC%95%E6%93%8E/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/%E6%81%8B%E7%8B%B1%E7%89%8C%E5%B1%80%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E5%A4%A9/image-20260522132537566.png" class="nkbveulmajvg" alt="image-20260522132537566"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1001,6 +1008,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -1061,16 +1070,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

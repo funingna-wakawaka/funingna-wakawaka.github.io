@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -421,15 +428,15 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="前段时间刷视频看到一个Claude小桌宠-还挺好玩的于是我也下载了一个"><a href="#前段时间刷视频看到一个Claude小桌宠-还挺好玩的于是我也下载了一个" class="headerlink" title="前段时间刷视频看到一个Claude小桌宠,还挺好玩的于是我也下载了一个"></a>前段时间刷视频看到一个Claude小桌宠,还挺好玩的于是我也下载了一个</h1><p>就是这个<a target="_blank" rel="noopener" href="https://github.com/rullerzhou-afk/clawd-on-desk"><font color='#40E0D0'>点击前往下载</font></a></p>
-<p>​	<style>.zqmbucngetym{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234557546.png" class="zqmbucngetym" alt="image-20260621234557546"></p>
+<p>​	<style>.yjfjgpzsjowl{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234557546.png" class="yjfjgpzsjowl" alt="image-20260621234557546"></p>
 <p>喏,长这样</p>
-<p>​	<style>.gkhmanpgitwn{zoom:33%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234704872.png" class="gkhmanpgitwn" alt="image-20260621234704872"></p>
+<p>​	<style>.xbyjzmjpmpuu{zoom:33%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234704872.png" class="xbyjzmjpmpuu" alt="image-20260621234704872"></p>
 <p>把它抓起来就是这样</p>
-<p>​	<style>.xgpkpbhyncdx{zoom: 67%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234753770.png" class="xgpkpbhyncdx" alt="image-20260621234753770"></p>
+<p>​	<style>.gugkwaydlgkl{zoom: 67%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234753770.png" class="gugkwaydlgkl" alt="image-20260621234753770"></p>
 <p>当然这个东西也不是纯摆设,还是有点用的</p>
-<p>​	<style>.vhocywgosqfg{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234933048.png" class="vhocywgosqfg" alt="image-20260621234933048"></p>
+<p>​	<style>.qbebgysnefsu{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621234933048.png" class="qbebgysnefsu" alt="image-20260621234933048"></p>
 <p>但是!   这个是Electron写的,十分的吃配置,所以综合来看没什么用</p>
-<p>​	<style>.wjoicvyholza{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621235043308.png" class="wjoicvyholza" alt="image-20260621235043308"></p>
+<p>​	<style>.ljnijxrtsfck{zoom:50%;}</style><img src="/2026/06/21/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%B0%8F%E6%A1%8C%E5%AE%A0/image-20260621235043308.png" class="ljnijxrtsfck" alt="image-20260621235043308"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -899,6 +906,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -959,16 +968,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

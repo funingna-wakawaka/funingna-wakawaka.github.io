@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -423,18 +430,18 @@ document.addEventListener('DOMContentLoaded', function() {
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="好了-之前的都白嫖过了-只剩下MongoDB数据库了"><a href="#好了-之前的都白嫖过了-只剩下MongoDB数据库了" class="headerlink" title="好了,之前的都白嫖过了,只剩下MongoDB数据库了"></a>好了,之前的都白嫖过了,只剩下MongoDB数据库了</h1><p>原本我是觉得这玩意除了当twikoo的评论存储就没什么用,但是白给的不要白不要</p>
 <p>首先我们用学生认证过的github账号直接注册mongoDB</p>
 <p><a target="_blank" rel="noopener" href="https://www.mongodb.com/students"><font color='#40E0D0'>点击跳转</font></a></p>
-<p>​	<style>.wpebbsrjshzl{zoom:25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506194421885.png" class="wpebbsrjshzl" alt="image-20260506194421885"></p>
+<p>​	<style>.lnnaulsoshol{zoom:25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506194421885.png" class="lnnaulsoshol" alt="image-20260506194421885"></p>
 <p>左边的这个玩意就是一个代金卷,可以在这里激活,有效期一年</p>
- <style>.jnicxyjjsprm{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506194604357.png" class="jnicxyjjsprm" alt="image-20260506194604357">
+ <style>.jprvarnojeli{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506194604357.png" class="jprvarnojeli" alt="image-20260506194604357">
 
 <p>这个如字面意思就是数据库,大家可以在这里创建项目,这个本身是不要钱的(所以我不明白给代金卷的意义是什么,社区版的已经完全够用了)</p>
 <p>可以参考我之前写的这个<a href="https://funingna-wakawaka.github.io/2026/02/02/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%86/"><font color='#FF1493'>点击阅读</font></a></p>
-<p>​	<style>.ascwulkgbtfc{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195012093.png" class="ascwulkgbtfc" alt="image-20260506195012093"></p>
+<p>​	<style>.lqgsbwieifmr{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195012093.png" class="lqgsbwieifmr" alt="image-20260506195012093"></p>
 <p>至于右边的大学认证啥玩意的大家想学就学</p>
-<p>​	<style>.xcwkravyuxol{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195653235.png" class="xcwkravyuxol" alt="image-20260506195653235"></p>
-<p>​	<style>.edxuixpdkuzp{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195928299.png" class="edxuixpdkuzp" alt="image-20260506195928299"></p>
+<p>​	<style>.onjvgynyhmgs{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195653235.png" class="onjvgynyhmgs" alt="image-20260506195653235"></p>
+<p>​	<style>.suncjenvdvnn{zoom: 25%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506195928299.png" class="suncjenvdvnn" alt="image-20260506195928299"></p>
 <p>其实唯一用的上的也就这两个了</p>
-<p>​	<style>.zjonsutubinp{zoom:33%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506200248695.png" class="zjonsutubinp" alt="image-20260506200248695"></p>
+<p>​	<style>.cozfxhggyfss{zoom:33%;}</style><img src="/2026/05/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MongoDB%E5%AD%A6%E7%94%9F%E5%8C%85%E4%BD%BF%E7%94%A8/image-20260506200248695.png" class="cozfxhggyfss" alt="image-20260506200248695"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -904,6 +911,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -964,16 +973,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

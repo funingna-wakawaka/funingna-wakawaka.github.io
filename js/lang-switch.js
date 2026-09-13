@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     首页: "Home",
     "© 2025 胡杨怕火. 保留所有权利.":
       "© 2025 Huyangpahuo. All rights reserved.",
+    "向下滚动探索更多": "Scroll Down to Explore More",
 
     // 关于
     暂无数据: "No Data",
@@ -409,6 +410,25 @@ document.addEventListener("DOMContentLoaded", function () {
     电脑端缩略图: "Desktop Thumbnails",
     落叶效果: "Falling Leaves",
     启用落叶: "Enable Leaves",
+    首页图片: "Hero Image",
+    启用首页图片: "Enable Hero Image",
+    无感刷新: "Instant Refresh",
+    启用无感刷新: "Enable Instant Refresh",
+    显示顶部横幅: "Show Top Banner",
+    作者卡片: "Author Card",
+    宽度: "Width",
+    卡片大小: "Card Size",
+    标准: "Normal",
+    大: "Large",
+
+    //分类页文件夹视图(仅电脑端)
+    竖排: "List",
+    文件夹: "Folders",
+    网格视图: "Grid View",
+    列表视图: "List View",
+    按日期: "By Date",
+    按字母: "By Name",
+    该分类下暂无文章: "No posts in this category",
 
     //碎碎念
     万花筒: "Murmur",

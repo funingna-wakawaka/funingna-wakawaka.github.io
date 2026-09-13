@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -421,32 +428,32 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="盘点最近遇到的好事和坏事"><a href="#盘点最近遇到的好事和坏事" class="headerlink" title="盘点最近遇到的好事和坏事"></a>盘点最近遇到的好事和坏事</h1><h2 id="好事"><a href="#好事" class="headerlink" title="好事"></a>好事</h2><h3 id="美团原神冰变杯"><a href="#美团原神冰变杯" class="headerlink" title="美团原神冰变杯"></a>美团原神冰变杯</h3><p>幸好我一直点手速快,不然就抢不到了,还能吃个冰淇淋</p>
-<p>​	<style>.psgxhqloqvee{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903194743685.png" class="psgxhqloqvee" alt="image-20260903194743685"></p>
+<p>​	<style>.znkfovwedlqy{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903194743685.png" class="znkfovwedlqy" alt="image-20260903194743685"></p>
 <h3 id="金海豚参赛小游戏"><a href="#金海豚参赛小游戏" class="headerlink" title="金海豚参赛小游戏"></a>金海豚参赛小游戏</h3><p>有接近400人玩了我的垃圾小游戏No kitty,至少还有人玩了还算欣慰吧</p>
-<p>​	<style>.hhtntniatbow{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903194850915.png" class="hhtntniatbow" alt="image-20260903194850915"></p>
+<p>​	<style>.ffyshggjiuwn{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903194850915.png" class="ffyshggjiuwn" alt="image-20260903194850915"></p>
 <h3 id="PayPal申诉成功"><a href="#PayPal申诉成功" class="headerlink" title="PayPal申诉成功"></a>PayPal申诉成功</h3><p>也是吸取了教训,打开VPN的时候千万不要打开PayPal,否则就会被限制账号</p>
 <p>客服也挺好的,半小时就给我解封了,以后可以用PayPal收款付款了</p>
 <p>对了,其实没有mastercard和visa的话,招商银行和建设银行的银联其实可以支持外汇,不过要去银行办理</p>
-<p>​	<style>.qmcfresxxxhi{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903200520153.png" class="qmcfresxxxhi" alt="image-20260903200520153"></p>
+<p>​	<style>.ccglwnpeebem{zoom: 25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903200520153.png" class="ccglwnpeebem" alt="image-20260903200520153"></p>
 <h3 id="英语六级擦边过了"><a href="#英语六级擦边过了" class="headerlink" title="英语六级擦边过了"></a>英语六级擦边过了</h3><p>记得考前就写了3张真题,听力基本上瞎选的</p>
 <p>然后就考了429,至少不需要重考了,刷分感觉没有必要</p>
 <p>因为我觉得考试和现实是两回事</p>
 <h3 id="Spine-4-3-23被破解了"><a href="#Spine-4-3-23被破解了" class="headerlink" title="Spine 4.3.23被破解了"></a>Spine 4.3.23被破解了</h3><p>有QQ群大佬借助ai逆向出来的,真的是时代变了,估计这个就是目前首个被破解的版本</p>
 <p>以后可以用spine做游戏人物了</p>
-<p>​	<style>.ynshsrfsaobm{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903203313411.png" class="ynshsrfsaobm" alt="image-20260903203313411"></p>
+<p>​	<style>.vghgnipyqodh{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903203313411.png" class="vghgnipyqodh" alt="image-20260903203313411"></p>
 <h3 id="Telegram账号找回"><a href="#Telegram账号找回" class="headerlink" title="Telegram账号找回"></a>Telegram账号找回</h3><p>最近办理了银行卡海外支付后,花了1美元订阅(印度尼西亚区)高级版一个星期,而且找回了之前的账号,非常nice</p>
-<p>​	<style>.jyhokpkyqqxo{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260904110638147.png" class="jyhokpkyqqxo" alt="image-20260904110638147"></p>
+<p>​	<style>.hdwhottdpjgu{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260904110638147.png" class="hdwhottdpjgu" alt="image-20260904110638147"></p>
 <h3 id="Zcode又发了好多token"><a href="#Zcode又发了好多token" class="headerlink" title="Zcode又发了好多token"></a>Zcode又发了好多token</h3><p>我直接化身王多鱼,一天给它造完</p>
-<p>​	<style>.hdxifsdroeoj{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260904210406554.png" class="hdxifsdroeoj" alt="image-20260904210406554"></p>
+<p>​	<style>.pyjkeorwdytr{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260904210406554.png" class="pyjkeorwdytr" alt="image-20260904210406554"></p>
 <p>先搓一个love2d游戏</p>
-<p>​	<style>.iuspgciijvyk{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260905134757364.png" class="iuspgciijvyk" alt="image-20260905134757364"></p>
+<p>​	<style>.ipksidxfevuj{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260905134757364.png" class="ipksidxfevuj" alt="image-20260905134757364"></p>
 <p>再把博客支持pjax并升级样式</p>
-<p>​	<style>.qteuqyqjqqyv{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260905192607826.png" class="qteuqyqjqqyv" alt="image-20260905192607826"></p>
+<p>​	<style>.kwfbtkfvyxnp{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260905192607826.png" class="kwfbtkfvyxnp" alt="image-20260905192607826"></p>
 <h2 id="坏事"><a href="#坏事" class="headerlink" title="坏事"></a>坏事</h2><h3 id="DigitalOcean扣费"><a href="#DigitalOcean扣费" class="headerlink" title="DigitalOcean扣费"></a>DigitalOcean扣费</h3><p>DigitalOcean偷偷取消了学生200美元的代金卷导致我扣了13美元而且不退款</p>
 <p>原以为可以免费用一年的两台服务器只用了4个月,搞得我不得不暂时关掉,胆子真是肥嘟嘟</p>
 <p>等以后需要学习服务器和linux还有Docker的时候再开吧</p>
-<p>​	<style>.utlygpmxgpwm{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903195045081.png" class="utlygpmxgpwm" alt="image-20260903195045081"></p>
-<p>​	<style>.wshqcvxnhhkj{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903195650516.png" class="wshqcvxnhhkj" alt="image-20260903195650516"></p>
+<p>​	<style>.xninhqrcnzuc{zoom:25%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903195045081.png" class="xninhqrcnzuc" alt="image-20260903195045081"></p>
+<p>​	<style>.sdwkfrtkpdgj{zoom:33%;}</style><img src="/2026/09/03/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%9C%80%E8%BF%91%E7%9A%84%E5%96%9C%E4%B8%8E%E6%82%B2/image-20260903195650516.png" class="sdwkfrtkpdgj" alt="image-20260903195650516"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -916,6 +923,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -976,16 +985,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

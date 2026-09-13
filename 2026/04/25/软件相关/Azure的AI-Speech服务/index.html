@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -423,8 +430,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script><div class="post-tags"><a class="tag" href="/tags/TTS/"><i class="fas fa-tag" style="margin-right: 3px"> </i>TTS</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="上次我们已经获得了Azure的学生包了"><a href="#上次我们已经获得了Azure的学生包了" class="headerlink" title="上次我们已经获得了Azure的学生包了"></a>上次我们已经获得了Azure的学生包了</h1><p>因为我们其实已经白嫖了DigitalOcean 的服务器的服务了,然后又白嫖了阿里的token</p>
 <p>最近新出来Deepseek V4的模型,这个阿里同样是可以支持的</p>
 <p>首先在Azure的搜索栏搜索Speech然后点击进入</p>
-<p>​	<style>.ikjurjwfpjeh{zoom:25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425195415495.png" class="ikjurjwfpjeh" alt="image-20260425195415495"></p>
-<p>​	<style>.tibodpocalnr{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425195235855.png" class="tibodpocalnr" alt="image-20260425195235855"></p>
+<p>​	<style>.gsbmfjbxgwyb{zoom:25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425195415495.png" class="gsbmfjbxgwyb" alt="image-20260425195415495"></p>
+<p>​	<style>.vbtrzmicycgx{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425195235855.png" class="vbtrzmicycgx" alt="image-20260425195235855"></p>
 <blockquote>
 <ul>
 <li><strong>Subscription（订阅）</strong><br> 选你的学生订阅（Azure for Students）</li>
@@ -446,22 +453,22 @@ document.addEventListener('DOMContentLoaded', function() {
 <hr>
 <p>然后点：<br> <strong>Review + Create → Create</strong></p>
 </blockquote>
-<p>​	<style>.dfyskbqpfnjh{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201240192.png" class="dfyskbqpfnjh" alt="image-20260425201240192"></p>
+<p>​	<style>.dtmgcufrnrrq{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201240192.png" class="dtmgcufrnrrq" alt="image-20260425201240192"></p>
 <p>然后</p>
-<p>​	<style>.ugwyxxbkurfe{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201728523.png" class="ugwyxxbkurfe" alt="image-20260425201728523"></p>
+<p>​	<style>.rwwmcfcqmogy{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201728523.png" class="rwwmcfcqmogy" alt="image-20260425201728523"></p>
 <p>找到这个</p>
-<p>​	<style>.lqoyulewsxln{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201803900.png" class="lqoyulewsxln" alt="image-20260425201803900"></p>
+<p>​	<style>.poxwyipnxxpm{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425201803900.png" class="poxwyipnxxpm" alt="image-20260425201803900"></p>
 <p>然后复制</p>
-<p>​	<style>.jhtmhfpbibzh{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425202126231.png" class="jhtmhfpbibzh" alt="image-20260425202126231"></p>
-<h2 id="打开Airi"><a href="#打开Airi" class="headerlink" title="打开Airi"></a>打开Airi</h2><p>​	<style>.curbiobyoyny{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425202210977.png" class="curbiobyoyny" alt="image-20260425202210977"></p>
+<p>​	<style>.hnnzpkjvzfgn{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425202126231.png" class="hnnzpkjvzfgn" alt="image-20260425202126231"></p>
+<h2 id="打开Airi"><a href="#打开Airi" class="headerlink" title="打开Airi"></a>打开Airi</h2><p>​	<style>.ofgvvlyklkkz{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425202210977.png" class="ofgvvlyklkkz" alt="image-20260425202210977"></p>
 <p>然后挑一个你喜欢的声音然后启用这个模块就行了</p>
-<p>​	<style>.laishfouddvc{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425203539010.png" class="laishfouddvc" alt="image-20260425203539010"></p>
-<h2 id="除此之外我们还能白嫖openAI模型"><a href="#除此之外我们还能白嫖openAI模型" class="headerlink" title="除此之外我们还能白嫖openAI模型"></a>除此之外我们还能白嫖openAI模型</h2><p>​	<style>.wbtxsjltmddh{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504191807895.png" class="wbtxsjltmddh" alt="image-20260504191807895"></p>
+<p>​	<style>.hsgyoyrnsjjc{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260425203539010.png" class="hsgyoyrnsjjc" alt="image-20260425203539010"></p>
+<h2 id="除此之外我们还能白嫖openAI模型"><a href="#除此之外我们还能白嫖openAI模型" class="headerlink" title="除此之外我们还能白嫖openAI模型"></a>除此之外我们还能白嫖openAI模型</h2><p>​	<style>.lkjsizivhvoj{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504191807895.png" class="lkjsizivhvoj" alt="image-20260504191807895"></p>
 <p>然后获得API就可以了</p>
-<p>​	<style>.myljleagrika{zoom: 33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504192150362.png" class="myljleagrika" alt="image-20260504192150362"></p>
-<p>​	<style>.htfobpwpbduj{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504215215270.png" class="htfobpwpbduj" alt="image-20260504215215270"></p>
+<p>​	<style>.yvirfsyqqzjy{zoom: 33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504192150362.png" class="yvirfsyqqzjy" alt="image-20260504192150362"></p>
+<p>​	<style>.dmkthfqfbbqr{zoom: 25%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504215215270.png" class="dmkthfqfbbqr" alt="image-20260504215215270"></p>
 <p>然后在<strong>Deployments</strong>里面自己挑一个模型部署,但是———不好用,感觉不太聪明</p>
-<p>​	<style>.gxzmkmjuivnb{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504192331364.png" class="gxzmkmjuivnb" alt="image-20260504192331364"></p>
+<p>​	<style>.amtjtszohnpe{zoom:33%;}</style><img src="/2026/04/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Azure%E7%9A%84AI-Speech%E6%9C%8D%E5%8A%A1/image-20260504192331364.png" class="amtjtszohnpe" alt="image-20260504192331364"></p>
 <p>直接接入CC-switch就可以了,但是不要高强度消耗不然不到两个月就无了</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -932,6 +939,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -992,16 +1001,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

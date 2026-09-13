@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -422,37 +429,37 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><p>​	</p>
 <h2 id="①-AstrBot"><a href="#①-AstrBot" class="headerlink" title="① AstrBot"></a>① AstrBot</h2><p><a target="_blank" rel="noopener" href="https://github.com/AstrBotDevs/AstrBot"><font color='#40E0D0'>下载地址</font></a></p>
-<p>​	<style>.qehvtfjgpnjb{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172614008.png" class="qehvtfjgpnjb" alt="image-20260320172614008"></p>
+<p>​	<style>.ssbfbubqlqxh{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172614008.png" class="ssbfbubqlqxh" alt="image-20260320172614008"></p>
 <p>这是新发现的一个软件,和openclaw很像,或者说,是更安全的版本,听说openclaw会擅自删东西和暴露信息所以我就不给自己找麻烦了</p>
 <p>配置就不说了</p>
-<p>​	<style>.jpbgqrkisdsc{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172849817.png" class="jpbgqrkisdsc" alt="image-20260320172849817"></p>
-<p>​	<style>.lwaqxtyhecun{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172913652.png" class="lwaqxtyhecun" alt="image-20260320172913652"></p>
+<p>​	<style>.hpbxyxnptywo{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172849817.png" class="hpbxyxnptywo" alt="image-20260320172849817"></p>
+<p>​	<style>.hnswubrsfhyl{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320172913652.png" class="hnswubrsfhyl" alt="image-20260320172913652"></p>
 <p>这里我搞了一个QQ机器人,就是QQ群机器人,不过我还没有研究明白这个</p>
 <p>机器人的功能就是通过插件实现的</p>
 <p>这里可以上传zip文件,文件主要是python脚本,这里我让AI帮我写了几个脚本</p>
-<p>​	<style>.ldzbldjsbwwh{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173133319.png" class="ldzbldjsbwwh" alt="image-20260320173133319"></p>
-<p>​	<style>.nlrjjcguerfj{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173204061.png" class="nlrjjcguerfj" alt="image-20260320173204061"></p>
+<p>​	<style>.bqdjtrmlcljt{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173133319.png" class="bqdjtrmlcljt" alt="image-20260320173133319"></p>
+<p>​	<style>.sxocgcbudqqb{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173204061.png" class="sxocgcbudqqb" alt="image-20260320173204061"></p>
 <p>这里我是打算做一个输入“&#x2F;检测博客”就能获取到Blog最新发布的文章的功能</p>
-<p>​	<style>.xehcfrhdmgfo{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173453870.png" class="xehcfrhdmgfo" alt="image-20260320173453870"></p>
+<p>​	<style>.muvohfeykknw{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320173453870.png" class="muvohfeykknw" alt="image-20260320173453870"></p>
 <p>唯一的缺点就是我电脑不能关,只要电脑关了就用不了了,也就是说我必须搞个服务器</p>
 <p>现在的版本还是太简单了功能太少了,只能放进去目标网址获得该blog发布的第一篇文章的信息</p>
 <p>我想做那种发布一篇后,机器人自动通知,而且只通知第一次,目前不知道怎么做到</p>
 <h2 id="②-kazumi"><a href="#②-kazumi" class="headerlink" title="② kazumi"></a>② kazumi</h2><p><a target="_blank" rel="noopener" href="https://github.com/Predidit/Kazumi"><font color='#40E0D0'>下载地址</font></a></p>
-<p>​	<style>.uizvitdeihij{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320174538731.png" class="uizvitdeihij" alt="image-20260320174538731"></p>
+<p>​	<style>.wskuxvjkdgfi{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320174538731.png" class="wskuxvjkdgfi" alt="image-20260320174538731"></p>
 <p>如果要看番的话,你只有两种途径—–第一:正规平台充钱,第二:盗版网站白嫖</p>
 <p>你要是富哥不差那俩钱可以不下载这个,直接年度大会员走起</p>
 <p>我们都知道,盗版网站最可恶的就是广告满天飞和澳门新葡京以及自定义跳转链接(技术是把双刃剑,前端技术如是说也)</p>
 <p>而这个软件没有任何广告,界面也非常好看,强烈推荐(当然市面上类似的免费看番的软件多的去了,但没广告的真没几个)</p>
 <h2 id="③-Flutter"><a href="#③-Flutter" class="headerlink" title="③ Flutter"></a>③ Flutter</h2><p>这个不是软件,是框架,我只是听说这个可以做APP所以了解了一下</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/flutter/flutter"><font color='#40E0D0'>点击下载</font></a></p>
-<p>​	<style>.xqvubggmnxxp{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320175435534.png" class="xqvubggmnxxp" alt="image-20260320175435534"></p>
+<p>​	<style>.nlibpdlonsdq{zoom:33%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320175435534.png" class="nlibpdlonsdq" alt="image-20260320175435534"></p>
 <p>在VScode使用flutter sdk来制作东西(感觉好像 Android sdk啊)</p>
-<p>​	<style>.qxcupqfhmfkw{zoom: 25%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320175526248.png" class="qxcupqfhmfkw" alt="image-20260320175526248"></p>
+<p>​	<style>.hnvrjqwyyjdk{zoom: 25%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320175526248.png" class="hnvrjqwyyjdk" alt="image-20260320175526248"></p>
 <h2 id="④-Mihon-和-Tachiyomi"><a href="#④-Mihon-和-Tachiyomi" class="headerlink" title="④ Mihon 和 Tachiyomi"></a>④ Mihon 和 Tachiyomi</h2><p><a target="_blank" rel="noopener" href="https://github.com/mihonapp/mihon"><font color='#40E0D0'>Mihon下载链接</font></a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/ZhanZiyuan/tachiyomi"><font color='#40E0D0'>Tachiyomi下载链接</font></a></p>
 <p>这个俩是一样的,mihon是继承的已经归档的Tachiyomi的软件的新版本</p>
 <p>由于是手机看漫画的软件所以不多说了</p>
-<p>​	<style>.lonagbvzdhcz{zoom:25%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320184502143.png" class="lonagbvzdhcz" alt="image-20260320184502143"></p>
+<p>​	<style>.rixvicyvwofp{zoom:25%;}</style><img src="/2026/03/20/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BD%AF%E4%BB%B6/image-20260320184502143.png" class="rixvicyvwofp" alt="image-20260320184502143"></p>
 <p><a target="_blank" rel="noopener" href="https://ivonblog.com/posts/mihon-manga-reader/"><font color='#40E0D0'>使用说明</font></a></p>
 <p>这是漫画源,当然这个源吧R18居多<font color='#FFD700'>狗头狗头狗头</font></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json</span><br><span class="line"></span><br><span class="line">https://raw.githubusercontent.com/LittleSurvival/copymanga-copy20/repo/index.min.json</span><br></pre></td></tr></table></figure>
@@ -927,6 +934,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -987,16 +996,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

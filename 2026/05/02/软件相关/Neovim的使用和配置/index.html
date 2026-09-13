@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -420,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="Neovim-Linux用户肯定老熟悉了-但是对Windows用户来说一点也不好用"><a href="#Neovim-Linux用户肯定老熟悉了-但是对Windows用户来说一点也不好用" class="headerlink" title="Neovim,Linux用户肯定老熟悉了,但是对Windows用户来说一点也不好用"></a>Neovim,Linux用户肯定老熟悉了,但是对Windows用户来说一点也不好用</h1><p>​	<style>.wdgjmzifpulg{zoom: 25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502194147446.png" class="wdgjmzifpulg" alt="image-20260502194147446"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="Neovim-Linux用户肯定老熟悉了-但是对Windows用户来说一点也不好用"><a href="#Neovim-Linux用户肯定老熟悉了-但是对Windows用户来说一点也不好用" class="headerlink" title="Neovim,Linux用户肯定老熟悉了,但是对Windows用户来说一点也不好用"></a>Neovim,Linux用户肯定老熟悉了,但是对Windows用户来说一点也不好用</h1><p>​	<style>.uxbczcnrublb{zoom: 25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502194147446.png" class="uxbczcnrublb" alt="image-20260502194147446"></p>
 <p>不过这个还是提供了Windows版本的,我们就来学学怎么用吧       </p>
 <table>
 <thead>
@@ -488,20 +495,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>得到<code>D:\Neovim\nvim-data\nvim-data</code>就说明已经配置到D盘了</p>
 <p>然后我们前往这个<a target="_blank" rel="noopener" href="https://github.com/linxuan-sys/nvim"><font color='#FF1493'>仓库</font></a>下载大佬配置好的文件</p>
 <p>在你的<code>C:\Users\用户名\AppData\Local</code>里将仓库里的整个nvim文件夹粘贴进去并重启Neovim就可以看到正在下载插件</p>
-<p>​	<style>.erwsvepdwxnn{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502214717492.png" class="erwsvepdwxnn" alt="image-20260502214717492"></p>
+<p>​	<style>.thtsvsvdafug{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502214717492.png" class="thtsvsvdafug" alt="image-20260502214717492"></p>
 <p>然后等待全部下载完成重启Neovim</p>
-<p>​	<style>.luotbmwzhsyv{zoom:25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502220905653.png" class="luotbmwzhsyv" alt="image-20260502220905653"></p>
+<p>​	<style>.lktvkyxeyaad{zoom:25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502220905653.png" class="lktvkyxeyaad" alt="image-20260502220905653"></p>
 <p>要输入命令的话使用“<font color='#40E0D0'> :</font>  “键盘快捷键,按回车可以取消输入</p>
-<p>​	<style>.lcmdshhiragu{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502221128869.png" class="lcmdshhiragu" alt="image-20260502221128869"></p>
+<p>​	<style>.boqbqlnqhhir{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502221128869.png" class="boqbqlnqhhir" alt="image-20260502221128869"></p>
 <p>按e键变成这样</p>
-<p>​	<style>.ukcjlktwbbeg{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502221421696.png" class="ukcjlktwbbeg" alt="image-20260502221421696"></p>
+<p>​	<style>.eknsbpycsuaf{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502221421696.png" class="eknsbpycsuaf" alt="image-20260502221421696"></p>
 <p>按X键进入Lasy插件市场(这里说明一下,Lazy就是一个插件管理器,也是最好用的),可以挑选你想用的插件下载重启就行啦(注意,如果你下载了部分插件可能会导致冲突或者覆盖掉当前主题)</p>
-<p>​	<style>.effmkqszoahg{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260503001058200.png" class="effmkqszoahg" alt="image-20260503001058200"></p>
+<p>​	<style>.exbstdhdbtsa{zoom:33%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260503001058200.png" class="exbstdhdbtsa" alt="image-20260503001058200"></p>
 <p>而使用nvim的方式比如在cmd或powershell输入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvim .      //当前目录作为项目打开</span><br><span class="line">或者</span><br><span class="line">nvim D:\project\mygame     //打开指定文件夹</span><br></pre></td></tr></table></figure>
 
 <p>就可以打开文件了</p>
-<p>​	<style>.ydjctnepyitn{zoom:25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502235650552.png" class="ydjctnepyitn" alt="image-20260502235650552"></p>
+<p>​	<style>.beczukmmfgvu{zoom:25%;}</style><img src="/2026/05/02/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Neovim%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/image-20260502235650552.png" class="beczukmmfgvu" alt="image-20260502235650552"></p>
 <p>但是我是真的习惯不了,毕竟我都是VScode老用户了,而且这种纯终端的真的用起来就像坐牢一样,况且我就不信这东西能比得上我装了155个插件的VScode</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -972,6 +979,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -1032,16 +1041,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

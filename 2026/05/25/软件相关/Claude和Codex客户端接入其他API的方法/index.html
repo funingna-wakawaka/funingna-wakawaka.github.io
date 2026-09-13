@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -423,23 +430,23 @@ document.addEventListener('DOMContentLoaded', function() {
 </script><div class="post-tags"><a class="tag" href="/tags/software/"><i class="fas fa-tag" style="margin-right: 3px"> </i>software</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="最近CCswitch新增加了对Claude客户端的支持"><a href="#最近CCswitch新增加了对Claude客户端的支持" class="headerlink" title="最近CCswitch新增加了对Claude客户端的支持"></a>最近CCswitch新增加了对Claude客户端的支持</h1><p>之前我们使用的是CLI  ,不过客户端其实更好用</p>
 <p>首先下载Codex和Claude的客户端(不是CLI)</p>
 <p>第一次的时候需要登录,众所周知,Claude很贵,Codex也不便宜,而且免费额度很少,而且充值很难</p>
-<p>​	<style>.arodtpqfbcmg{zoom: 25%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112826020.png" class="arodtpqfbcmg" alt="image-20260525112826020"></p>
+<p>​	<style>.wufwglwmrihk{zoom: 25%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112826020.png" class="wufwglwmrihk" alt="image-20260525112826020"></p>
 <p>我们首先接入Openrouter</p>
-<p>​	<style>.evtfcpkrcbde{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113038372.png" class="evtfcpkrcbde" alt="image-20260525113038372"></p>
-<p>​	<style>.soyiqgbqgsfs{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112501945.png" class="soyiqgbqgsfs" alt="image-20260525112501945"></p>
+<p>​	<style>.mzobtumfgcxu{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113038372.png" class="mzobtumfgcxu" alt="image-20260525113038372"></p>
+<p>​	<style>.tqovvlrkajwc{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525112501945.png" class="tqovvlrkajwc" alt="image-20260525112501945"></p>
 <p>记得启用1M上下文超长记忆</p>
-<p>​	<style>.estekohywgvd{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113109432.png" class="estekohywgvd" alt="image-20260525113109432"></p>
+<p>​	<style>.ywscjducfquu{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113109432.png" class="ywscjducfquu" alt="image-20260525113109432"></p>
 <p>然后重启客户端就会发现不需要登录了,直接使用我们的API</p>
 <p>模型记得选medium避免AI想的太多浪费算力</p>
-<p>​	<style>.fiieftxtpkkh{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113522101.png" class="fiieftxtpkkh" alt="image-20260525113522101"></p>
-<p>​	<style>.myndzfgnglnl{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113222321.png" class="myndzfgnglnl" alt="image-20260525113222321"></p>
+<p>​	<style>.kgifmtncymba{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113522101.png" class="kgifmtncymba" alt="image-20260525113522101"></p>
+<p>​	<style>.fxmuhrwzwdgr{zoom:33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525113222321.png" class="fxmuhrwzwdgr" alt="image-20260525113222321"></p>
 <p>但是坏消息是,我的会显示地区不支持,估计是梯子的问题,但是Claude code CLI还是可以的,所以没招了,目前暂时放弃Claude客户端吧</p>
-<p>​	<style>.ydzpaytvqdzj{zoom:50%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525125228626.png" class="ydzpaytvqdzj" alt="image-20260525125228626"></p>
+<p>​	<style>.icdccskhoxyr{zoom:50%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260525125228626.png" class="icdccskhoxyr" alt="image-20260525125228626"></p>
 <p>by the way,Github进一步削减了copilot学生包,我无敌的Gemini 3.1 pro没了……..只剩下了无能的Gpt 5.2</p>
-<p>​	<style>.khndcevqjfpj{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160433667.png" class="khndcevqjfpj" alt="image-20260526160433667"></p>
+<p>​	<style>.ogmbbtrncvri{zoom: 33%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160433667.png" class="ogmbbtrncvri" alt="image-20260526160433667"></p>
 <p>​	</p>
 <p>(这下知道那些一天花费十几亿token的人是怎么做到的了,高级模型+CLI,花的不快才怪,不过有这钱还不如买点吃的玩的,给AI实在是感觉太亏了,我可是两小时花掉了70块啊我去)</p>
-<p>​	<style>.lqvciunlksxp{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160640245.png" class="lqvciunlksxp" alt="image-20260526160640245"></p>
+<p>​	<style>.lwrhkxoyqcrm{zoom:67%;}</style><img src="/2026/05/25/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/Claude%E5%92%8CCodex%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E5%85%B6%E4%BB%96API%E7%9A%84%E6%96%B9%E6%B3%95/image-20260526160640245.png" class="lwrhkxoyqcrm" alt="image-20260526160640245"></p>
 <blockquote>
 <p>而且更重要的是,这东西又不是绝对正确的,因为他们很多时候都不按照我的指令干活,再加上我有点强迫症,必须迭代很多版本才能让我满意</p>
 </blockquote>
@@ -912,6 +919,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -972,16 +981,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

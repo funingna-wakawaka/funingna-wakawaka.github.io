@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -424,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>这里我推荐几个软件以及免费音源</p>
 <p>① MusicFree</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/maotoumao/MusicFree"><font color='#40E0D0'>下载MusicFree</font></a></p>
-<p>​	<style>.jjpcechtynrv{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206224104567.png" class="jjpcechtynrv" alt="image-20260206224104567"></p>
+<p>​	<style>.rpoaztenwfkk{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206224104567.png" class="rpoaztenwfkk" alt="image-20260206224104567"></p>
 <p>我就不卖关子了,我直接说我们要导入的插件(即免费音源),直接导入json或者js就行</p>
 <p>有些估计不能用了,你们全都试一下就知道了,反正我的都试了一遍可以用</p>
 <p>或者你也可以直接根据js链接找到插件作者看看有没有更完整的</p>
@@ -437,20 +444,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>② Listen1</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/listen1/listen1_desktop"><font color='#40E0D0'>下载Listen1</font></a></p>
 <p>这个也可以的,也可以免费听歌,自带音源</p>
-<p>​	<style>.ifoujexoupyw{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206233413230.png" class="ifoujexoupyw" alt="image-20260206233413230"></p>
+<p>​	<style>.xmgmrskhhtzb{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206233413230.png" class="xmgmrskhhtzb" alt="image-20260206233413230"></p>
 <p>③LX music</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/lyswhut/lx-music-desktop"><font color='#40E0D0'>下载LX music</font></a></p>
-<p>洛雪也是曾经的王,可惜被资本做局了陨落了…<style>.cvspwpcgtoyr{zoom:33%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206233913399.png" class="cvspwpcgtoyr" alt="image-20260206233913399"></p>
+<p>洛雪也是曾经的王,可惜被资本做局了陨落了…<style>.tzrgqvcjolii{zoom:33%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206233913399.png" class="tzrgqvcjolii" alt="image-20260206233913399"></p>
 <p>你要是还执着这个,我就给你目前相对较好的六音音源吧,你看看这个网站去下载吧</p>
 <p><a target="_blank" rel="noopener" href="https://www.sixyin.com/8498.html"><font color='#40E0D0'>洛雪音乐助手+六音自定义音源 v1.2.1-六音</font></a></p>
 <p>④ YesPlayMusic</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/qier222/YesPlayMusic"><font color='#40E0D0'>下载YesPlayMusic</font></a></p>
 <p>这个也非常好用,自带音源</p>
-<p>​	<style>.vvmcgcvilgwf{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206234332564.png" class="vvmcgcvilgwf" alt="image-20260206234332564"></p>
+<p>​	<style>.hojltmkvecxq{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206234332564.png" class="hojltmkvecxq" alt="image-20260206234332564"></p>
 <p>⑤ Splayer</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/imsyy/SPlayer"><font color='#40E0D0'>下载Splayer</font></a></p>
 <p>这个也是自带音源,还行</p>
-<p>​	<style>.uasojhbsssyw{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206234601759.png" class="uasojhbsssyw" alt="image-20260206234601759"></p>
+<p>​	<style>.jtcmcugmobyl{zoom: 25%;}</style><img src="/2026/02/06/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/MusicFree%E9%9F%B3%E4%B9%90%E6%BA%90/image-20260206234601759.png" class="jtcmcugmobyl" alt="image-20260206234601759"></p>
 <p>当然还有好多好多这样的软件,比如<a target="_blank" rel="noopener" href="https://github.com/wangchenyan/ponymusic"><font color='#40E0D0'>ponymusic</font></a>  <a target="_blank" rel="noopener" href="https://github.com/nukeop/nuclear"><font color='#40E0D0'>nuclear</font></a>  <a target="_blank" rel="noopener" href="https://github.com/any-listen/any-listen-desktop"><font color='#40E0D0'>any-listen</font></a>  <a target="_blank" rel="noopener" href="https://github.com/KRTirtho/spotube"><font color='#40E0D0'>Spotube</font></a>   <a target="_blank" rel="noopener" href="https://github.com/algerkong/AlgerMusicPlayer"><font color='#40E0D0'>AlgerMusicPlayer</font></a></p>
 <p>不过我觉得下载一两个就差不多了,多了也没什么用,反正都是用来听歌的,你们要是不喜欢以上的所有软件也可以自己去github上找,我估计类似的有一两百个,我挑的几个都是中文支持性好且社区最活跃的几个,因为这种可以听得歌更多而且作者更新更加频繁对设备适配性更好</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
@@ -922,6 +929,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -982,16 +991,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},

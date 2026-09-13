@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="/css/categories-accordion.css">
 
+<link rel="stylesheet" href="/css/categories-explorer.css">
+
 <link rel="stylesheet" href="/css/highlight.css">
 
 <link rel="stylesheet" href="/css/toc.css">
@@ -75,9 +77,14 @@
 </style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
   var cover = document.getElementById('blog-cover');
   if (!cover) return;
-  
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
   // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
-  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
     // 立即隐藏，避免任何闪烁和遮挡
     cover.style.display = 'none';
   } else {
@@ -420,11 +427,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h2 id="今天打开电脑玩终末地弹出来这个窗口"><a href="#今天打开电脑玩终末地弹出来这个窗口" class="headerlink" title="今天打开电脑玩终末地弹出来这个窗口"></a>今天打开电脑玩终末地弹出来这个窗口</h2> <style>.ryebksqyejxd{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128163519419.png" class="ryebksqyejxd" alt="image-20260128163519419">
+</script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h2 id="今天打开电脑玩终末地弹出来这个窗口"><a href="#今天打开电脑玩终末地弹出来这个窗口" class="headerlink" title="今天打开电脑玩终末地弹出来这个窗口"></a>今天打开电脑玩终末地弹出来这个窗口</h2> <style>.qbzgvrykfvmd{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128163519419.png" class="qbzgvrykfvmd" alt="image-20260128163519419">
 
 <p>于是我就去下载了这个升级程序,于是我掉进陷阱了</p>
 <p>升级完了之后之后,电脑连不上网了,当时这个  WiFi  的图标就没了</p>
- <style>.rgxwlktxvlzd{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128163819122.png" class="rgxwlktxvlzd" alt="image-20260128163819122">
+ <style>.yhkgjoxvqfwv{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128163819122.png" class="yhkgjoxvqfwv" alt="image-20260128163819122">
 
 <p>然后我就开始问好几个AI  找视频或者文本教程  把几乎所有方法都试了一遍 甚至初始化了系统网络就是没有一点用  我恨我自己手欠 明明点击 “忽略并继续”  游戏也是可以正常玩的 （ T￢T )</p>
 <p>于是准备去重装系统前我又不死心,又去翻B站里的评论看看有没有类似的情况,终于,找到了!!!   感谢这个大佬,这个是大佬的原话,给大佬跪了</p>
@@ -437,40 +444,40 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>注意CLSID是“C”开头”.”不是，要在翻到下面才看的到，亲测好了。大家可以试一试。</p>
 </blockquote>
 <p>现在网络又回来了</p>
- <style>.luwjsyoikfiw{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128164935652.png" class="luwjsyoikfiw" alt="image-20260128164935652">
+ <style>.uzigtimnpwmi{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128164935652.png" class="uzigtimnpwmi" alt="image-20260128164935652">
 
- <style>.mnwsrbvbifyg{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165650338.png" class="mnwsrbvbifyg" alt="image-20260128165650338">
+ <style>.bcriiktzkizu{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165650338.png" class="bcriiktzkizu" alt="image-20260128165650338">
 
 <p>你可以看到有些你们比较陌生或者熟悉的网络比如VMware——没错,这玩意就是罪魁祸首,但是我当时不知道电脑上的虚拟机居然会夺舍实体机的网络,这个后面再说,如果你们之前也下载了虚拟机后遇到了这个问题也可以看看</p>
 <h2 id="①-查找错误代号是否56"><a href="#①-查找错误代号是否56" class="headerlink" title="① 查找错误代号是否56"></a>① 查找错误代号是否56</h2><p>因为在此之前问AI试错的时候我已经知道我的网络问题是56了,但就是不知道问题出在哪</p>
 <p>大家可以在这个地方看自己的网络问题号</p>
 <p>首先  <font color='#FF0000'> win+X  </font> 点击 设备管理器</p>
- <style>.pfqdsfwkfsso{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165540656.png" class="pfqdsfwkfsso" alt="image-20260128165540656">
+ <style>.qxdindwsukto{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165540656.png" class="qxdindwsukto" alt="image-20260128165540656">
 
 <p>找到电脑上的网卡比如Inter wifi 6 ax201,此时你们的应该图标右下角会有一个三角形的黄色警告  而且其他的子驱动基本上也全都会出现警告,右键这个inter驱动不要删除也不要禁用再启用更不要更新,我已经试过了没有用的  </p>
- <style>.jonyvagiiymk{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165843749.png" class="jonyvagiiymk" alt="image-20260128165843749">
+ <style>.cmpmvgwdblhe{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128165843749.png" class="cmpmvgwdblhe" alt="image-20260128165843749">
 
 <p> 直接<font color='#FF0000'>右键</font>点击<font color='#FF0000'>属性</font></p>
- <style>.ptmsbklltfve{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128170142472.png" class="ptmsbklltfve" alt="image-20260128170142472">
+ <style>.udyzlorgfmrn{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128170142472.png" class="udyzlorgfmrn" alt="image-20260128170142472">
 
 <p>在此之前我这里显示的是错误56,不过现在恢复正常了</p>
- <style>.sluwtfwxlvsn{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128170359255.png" class="sluwtfwxlvsn" alt="image-20260128170359255">
+ <style>.topcennwifgj{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128170359255.png" class="topcennwifgj" alt="image-20260128170359255">
 
 <h2 id="②-删除注册表"><a href="#②-删除注册表" class="headerlink" title="② 删除注册表"></a>② 删除注册表</h2><p>这里就按照大佬的步骤,把VMware的注册表删了</p>
- <style>.jchbcxjseesl{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128164400799.png" class="jchbcxjseesl" alt="image-20260128164400799">
+ <style>.krgwntpzismx{zoom:33%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128164400799.png" class="krgwntpzismx" alt="image-20260128164400799">
 
 <p>自己找到这个注册表路径,然后直接删掉,注意,仔细一个字一个字的核对,千万不要删错了,这里我已经删掉了</p>
 <blockquote>
 <p>HKEY_CLASSES_ROOT\CLSID{3d09c1ca-2bcc-40b7-b9bb-3f3ec143a87b}</p>
 </blockquote>
- <style>.wyenlieiiofp{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128171123075.png" class="wyenlieiiofp" alt="image-20260128171123075">
+ <style>.emwnidmxcfky{zoom:50%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128171123075.png" class="emwnidmxcfky" alt="image-20260128171123075">
 
 <p>然后重启电脑,稍等片刻就可以看到WiFi的图标又出现了!!!</p>
 <p>电脑本体网络是没有问题了</p>
 <p>我们看看虚拟机此时是否正常</p>
- <style>.mlhlrkkwhmdf{zoom: 25%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128171758487.png" class="mlhlrkkwhmdf" alt="image-20260128171758487">
+ <style>.ifwsvxrvfdhp{zoom: 25%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128171758487.png" class="ifwsvxrvfdhp" alt="image-20260128171758487">
 
- <style>.uthasbhxfzfu{zoom: 25%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128172234740.png" class="uthasbhxfzfu" alt="image-20260128172234740">
+ <style>.gjhhbeoqabbd{zoom: 25%;}</style><img src="/2026/01/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%A0%B4%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8D%E4%B8%8A%E7%BD%91%E4%BA%86/image-20260128172234740.png" class="gjhhbeoqabbd" alt="image-20260128172234740">
 
 <p>可以看到kali和ubuntu联网正常</p>
 <p>这里我只能解决我这种装了VMware虚拟机的电脑的问题,其他的错误代码比如43或者是10你们去找别的教程吧,不过大家千万不要冲动,三思而后行,一定不要自己乱删东西或者直接把电脑重装系统了,找到最低成本的恢复方法才是正解</p>
@@ -943,6 +950,8 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
 
 <script src="/js/categories-accordion.js"></script>
 
+<script src="/js/categories-explorer.js"></script>
+
 <script src="/js/highlight.js"></script>
 
 <script src="/js/load-more.js"></script>
@@ -1003,16 +1012,20 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 </script><script>window.theme = (function () {
   var base = {
   image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
-  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"article_view":true,"image_viewer":true,"falling_leaves":true}},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
   music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.png","opacity":0.8},
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.png","/images/2.png","/images/4.png","/images/5.jpg","/images/6.png","/images/7.png","/images/8.png","/images/9.png","/images/10.png","/images/11.png","/images/12.png","/images/14.png","/images/15.png","/images/16.png","/images/18.png","/images/20.png","/images/21.png"]},
+  hero: {"enable":true,"background_image":"/images/24.png","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多"},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.png"}},
+  author_card: {"enable":true,"avatar":"/images/0.png","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.png","width":"large","intro_banner":"/images/1.png","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
   ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   last_read_pin: {"enable":true},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
