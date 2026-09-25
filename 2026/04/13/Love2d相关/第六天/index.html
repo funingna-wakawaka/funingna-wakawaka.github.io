@@ -528,12 +528,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <span class="built_in">module</span>.func3()</span><br></code></pre></div></div>
 
-<p>​	<style>.fbvgcmwhvise{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.webp" class="fbvgcmwhvise" alt="image-20260413202737035"></p>
-<p>​	<style>.wlmkkshuxxns{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.webp" class="wlmkkshuxxns" alt="image-20260413202759729"></p>
+<p>​	<style>.vmcwrmluyktj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202737035.webp" class="vmcwrmluyktj" alt="image-20260413202737035"></p>
+<p>​	<style>.bmpyirqjlevl{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413202759729.webp" class="bmpyirqjlevl" alt="image-20260413202759729"></p>
 <p>但是大家可能会遇到的误区就是误以为模块里定义的表名就是文件名,其实不是的,</p>
 <p>此时我们就可以把这个module.lua当做命名空间,然后modele.lua里面的属性和函数视作C#里的静态static函数,使用直接用点语法就行</p>
-<p>​	<style>.znzoqkxhmlti{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.webp" class="znzoqkxhmlti" alt="image-20260413203756002"></p>
- <style>.vxeiheagvlyj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.webp" class="vxeiheagvlyj" alt="image-20260413203812059">
+<p>​	<style>.qxinvgtkeelr{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203756002.webp" class="qxinvgtkeelr" alt="image-20260413203756002"></p>
+ <style>.nvwlxfnnrohi{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413203812059.webp" class="nvwlxfnnrohi" alt="image-20260413203812059">
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">require函数的原理</div>
@@ -543,9 +543,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Lua 会做一件事： <strong>到一堆“固定路径”里去找 module.lua</strong>,也就是它会尝试从 Lua 文件或 C 程序库中加载模块</p>
 <p>require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH(这里我用的是我自定义的LUA_HOME,因为我的是lua5.4) 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。</p>
 <p>其实就是我们设置的path路径</p>
-<p>​	<style>.ejdfoblfokxc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.webp" class="ejdfoblfokxc" alt="image-20260413212716317"></p>
+<p>​	<style>.yrfyypnsleqn{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413212716317.webp" class="yrfyypnsleqn" alt="image-20260413212716317"></p>
 <p>lua会去这个路径package.path去找路径</p>
-<p>​	<style>.igygnrqwohxt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.webp" class="igygnrqwohxt" alt="image-20260413211400410"></p>
+<p>​	<style>.gelbuvcbqarz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/13/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260413211400410.webp" class="gelbuvcbqarz" alt="image-20260413211400410"></p>
 <p>而在这些路径里</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\lua\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\?\init.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?.lua;D:\ZeroBraneStudio\lua-5.4.2_Win64_bin\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua;D:\ZeroBraneStudio\lua-5.1.5-52\5.1\lua\?.luac  </span><br></code></pre></div></div>
 

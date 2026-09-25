@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<h3 id="命名构造（Dart-特有，很常用）"><a href="#命名构造（Dart-特有，很常用）" class="headerlink" title="命名构造（Dart 特有，很常用）"></a>命名构造（Dart 特有，很常用）</h3><p>​	<style>.nrsxmsmvwcyl{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416143744161.webp" class="nrsxmsmvwcyl" alt="image-20260416143744161"></p>
+<h3 id="命名构造（Dart-特有，很常用）"><a href="#命名构造（Dart-特有，很常用）" class="headerlink" title="命名构造（Dart 特有，很常用）"></a>命名构造（Dart 特有，很常用）</h3><p>​	<style>.rgfghpdobwcx{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416143744161.webp" class="rgfghpdobwcx" alt="image-20260416143744161"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; args) &#123;
   Player player = Player.NPC(<span class="string">&#x27;帽子米塔&#x27;</span>, <span class="number">100</span>);
   <span class="built_in">print</span>(<span class="string">&#x27;玩家名字：<span class="subst">$&#123;player.name&#125;</span>, 玩家血量：<span class="subst">$&#123;player.hp&#125;</span>&#x27;</span>);
@@ -664,7 +664,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>​	<style>.gfcyyghrfgdu{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416154014857.webp" class="gfcyyghrfgdu" alt="image-20260416154014857"></p>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>​	<style>.wkmnyqdpetxw{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416154014857.webp" class="wkmnyqdpetxw" alt="image-20260416154014857"></p>
 <p>这个上面已经演示过了,格式就是这样,用来简化代码</p>
 <h2 id="公有属性和私有属性"><a href="#公有属性和私有属性" class="headerlink" title="公有属性和私有属性"></a>公有属性和私有属性</h2><p>学过C#和java还有JavaScript的都知道public和private这两个东西,通常来说在这些语言中是默认属性和函数私有的,只有显式声明public才会变成公有</p>
 <p>不过,在Dart里,默认的属性是共有的,(这点和lua很像,lua也是只有标注locla关键字才是私有)</p>
@@ -705,7 +705,7 @@ document.addEventListener('DOMContentLoaded', function() {
 &#125;</span><br></code></pre></div></div>
 
 <p>这里看到报错了,因为我们把gender设置为私有属性,别的文件无法访问</p>
-<p>​	<style>.afxsxalgcugf{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416173331577.webp" class="afxsxalgcugf" alt="image-20260416173331577"></p>
+<p>​	<style>.nyocydmorged{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416173331577.webp" class="nyocydmorged" alt="image-20260416173331577"></p>
 <p>导入的话就是用<code>import</code>来导入相对路径的文件,例如</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;test.dart&#x27;</span>;
 <span class="keyword">import</span> <span class="string">&#x27;1111/closed.dart&#x27;</span>;
@@ -806,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;enemy.dart&#x27;</span> <span class="keyword">as</span> enemy <span class="keyword">hide</span> A;</span><br></code></pre></div></div>
 
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是面向对象的三大特点:继承,多态,封装之一,就是子类会获得父类的所有属性和方法,封装这个最好理解,比如函数本身就是封装,你在使用函数的时候无需在意函数内部怎么实现的,只需要学会怎么使用这个函数提供的功能即可</p>
-<p>​	<style>.qtgomlbihzxz{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416191201330.webp" class="qtgomlbihzxz" alt="image-20260416191201330"></p>
+<p>​	<style>.togusodroisp{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416191201330.webp" class="togusodroisp" alt="image-20260416191201330"></p>
 <h3 id="extends关键字"><a href="#extends关键字" class="headerlink" title="extends关键字"></a>extends关键字</h3><p>Dart 是<strong>单继承语言</strong>，也就是一个类只能继承一个父类</p>
 <p>和C#差不多,不过和Java更像,C#中使用的是“:”来继承父类或者接口</p>
 <p>在Dart中使用的是extends</p>
@@ -1016,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>这东西我个人觉得非常好用,至少比继承好用</p>
 <p>不过还存在一个问题,如果不同的mixin里面存在相同名字的方法,就会发生覆盖的现象,后添加的会覆盖先添加的</p>
-<p>​	<style>.nwgugpmtiejm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416204322018.webp" class="nwgugpmtiejm" alt="image-20260416204322018"></p>
+<p>​	<style>.myddebnylvzp{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/16/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260416204322018.webp" class="myddebnylvzp" alt="image-20260416204322018"></p>
 <p>例如我们如果把A,B都混合进C类,后添加的B的同名方法和属性会覆盖A的</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">mixin</span> A &#123;
   <span class="keyword">void</span> say() &#123;
