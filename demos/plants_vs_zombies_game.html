@@ -1,0 +1,397 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  #game-root { font-family: var(--font-sans); background: #2d5a1b; min-height: 520px; user-select: none; position: relative; border-radius: var(--border-radius-lg); overflow: hidden; }
+  #top-bar { background: #1a3a0a; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 2px solid #4a8a20; }
+  #sun-counter { background: #f5c842; color: #6b4a00; font-weight: 500; font-size: 14px; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
+  #plant-shop { display: flex; gap: 6px; flex: 1; }
+  .shop-item { background: #3a6b1a; border: 2px solid #6ab030; border-radius: 8px; padding: 4px 8px; cursor: pointer; font-size: 11px; color: #c8f080; text-align: center; min-width: 64px; transition: background 0.15s; }
+  .shop-item:hover { background: #4a8a20; }
+  .shop-item.selected { border-color: #f5c842; background: #4a8a20; }
+  .shop-item.too-expensive { opacity: 0.4; cursor: not-allowed; }
+  .shop-item .cost { color: #f5c842; font-size: 10px; }
+  #wave-info { color: #c8f080; font-size: 13px; margin-left: auto; }
+  #game-area { display: grid; grid-template-rows: repeat(5, 80px); position: relative; }
+  .lane { display: flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.2); position: relative; background: linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.1)); }
+  .lane:nth-child(odd) { background: rgba(0,0,0,0.08); }
+  #grid-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; grid-template-rows: repeat(5, 80px); grid-template-columns: repeat(9, 1fr); pointer-events: none; }
+  .grid-cell { border: 1px solid rgba(255,255,255,0.04); position: relative; }
+  #game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 400px; pointer-events: none; }
+  #clickable-grid { position: absolute; top: 0; left: 0; width: 100%; height: 400px; display: grid; grid-template-rows: repeat(5, 80px); grid-template-columns: repeat(9, 1fr); }
+  .click-cell { cursor: crosshair; }
+  .click-cell:hover { background: rgba(255,255,255,0.08); border-radius: 4px; }
+  #msg { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: #f5c842; padding: 6px 16px; border-radius: 20px; font-size: 13px; pointer-events: none; transition: opacity 0.5s; white-space: nowrap; }
+  #overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 100; border-radius: var(--border-radius-lg); }
+  #overlay h2 { color: #f5c842; font-size: 28px; font-weight: 500; }
+  #overlay p { color: #c8f080; font-size: 14px; text-align: center; max-width: 280px; }
+  #overlay button { background: #4a8a20; border: 2px solid #6ab030; color: #c8f080; padding: 10px 28px; border-radius: 8px; font-size: 15px; cursor: pointer; }
+  #overlay button:hover { background: #5a9a28; }
+  #lives-bar { display: flex; gap: 4px; }
+  .heart { color: #ff4444; font-size: 16px; }
+  #shovel-btn { background: #8b4513; border: 2px solid #c0712a; border-radius: 8px; padding: 4px 10px; cursor: pointer; font-size: 11px; color: #f5d080; }
+  #shovel-btn.selected { border-color: #f5c842; }
+</style>
+
+<div id="game-root">
+  <div id="top-bar">
+    <div id="sun-counter">☀ <span id="sun-val">100</span></div>
+    <div id="plant-shop">
+      <div class="shop-item selected" data-plant="sunflower" onclick="selectPlant('sunflower',this)">🌻<br>Sunflower<br><span class="cost">50☀</span></div>
+      <div class="shop-item" data-plant="peashooter" onclick="selectPlant('peashooter',this)">🌿<br>Peashooter<br><span class="cost">100☀</span></div>
+      <div class="shop-item" data-plant="wallnut" onclick="selectPlant('wallnut',this)">🥜<br>Wall-nut<br><span class="cost">50☀</span></div>
+      <div class="shop-item" data-plant="iceshooter" onclick="selectPlant('iceshooter',this)">❄<br>Snow Pea<br><span class="cost">175☀</span></div>
+      <div class="shop-item" data-plant="cherry" onclick="selectPlant('cherry',this)">🍒<br>Cherry Bomb<br><span class="cost">150☀</span></div>
+    </div>
+    <div id="shovel-btn" onclick="selectShovel()">⛏ Shovel</div>
+    <div id="lives-bar"><span class="heart">♥</span><span class="heart">♥</span><span class="heart">♥</span></div>
+    <div id="wave-info">Wave <span id="wave-num">1</span></div>
+  </div>
+  <div id="game-area">
+    <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
+    <canvas id="game-canvas" width="720" height="400"></canvas>
+    <div id="clickable-grid"></div>
+  </div>
+  <div id="msg" id="msg">Select a plant and click the grid to place it!</div>
+  <div id="overlay">
+    <h2>🌿 Plants vs Zombies</h2>
+    <p>Plant sunflowers for sun, then use peashooters, wall-nuts, snow peas, and cherry bombs to stop the zombie horde!</p>
+    <button onclick="startGame()">Start Game!</button>
+  </div>
+</div>
+
+<script>
+const COLS = 9, ROWS = 5;
+const CELL_W = 80, CELL_H = 80;
+const PLANT_COSTS = { sunflower: 50, peashooter: 100, wallnut: 50, iceshooter: 175, cherry: 150 };
+const PLANT_EMOJIS = { sunflower: '🌻', peashooter: '🌿', wallnut: '🥜', iceshooter: '❄', cherry: '🍒' };
+
+let state = {
+  sun: 100, wave: 1, lives: 3, running: false,
+  plants: {}, projectiles: [], zombies: [],
+  sunDrops: [], selectedPlant: 'sunflower', usingShovel: false,
+  tick: 0, nextZombie: 120, zombiesLeft: 8, gameOver: false, won: false
+};
+
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  const rect = document.getElementById('game-area').getBoundingClientRect();
+  canvas.width = rect.width || 720;
+  canvas.style.width = '100%';
+}
+
+function buildGrid() {
+  const grid = document.getElementById('clickable-grid');
+  grid.innerHTML = '';
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'click-cell';
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.onclick = () => onCellClick(r, c);
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function selectPlant(name, el) {
+  state.selectedPlant = name;
+  state.usingShovel = false;
+  document.querySelectorAll('.shop-item').forEach(e => e.classList.remove('selected'));
+  document.getElementById('shovel-btn').classList.remove('selected');
+  el.classList.add('selected');
+}
+
+function selectShovel() {
+  state.usingShovel = !state.usingShovel;
+  document.querySelectorAll('.shop-item').forEach(e => e.classList.remove('selected'));
+  document.getElementById('shovel-btn').classList.toggle('selected', state.usingShovel);
+}
+
+function onCellClick(r, c) {
+  if (!state.running) return;
+  const key = r + ',' + c;
+  if (state.usingShovel) {
+    if (state.plants[key]) { delete state.plants[key]; showMsg('Plant removed!'); }
+    return;
+  }
+  if (c >= COLS - 1) { showMsg("Can't plant there!"); return; }
+  const cost = PLANT_COSTS[state.selectedPlant];
+  if (state.sun < cost) { showMsg('Not enough sun! ☀'); return; }
+  if (state.plants[key]) { showMsg('Already a plant here!'); return; }
+  state.sun -= cost;
+  state.plants[key] = { type: state.selectedPlant, hp: state.selectedPlant === 'wallnut' ? 150 : (state.selectedPlant === 'cherry' ? 1 : 30), r, c, cooldown: 0, frozen: 0 };
+  updateSun();
+}
+
+function showMsg(txt) {
+  const m = document.getElementById('msg');
+  m.textContent = txt;
+  m.style.opacity = 1;
+  clearTimeout(m._t);
+  m._t = setTimeout(() => m.style.opacity = 0, 2000);
+}
+
+function updateSun() {
+  document.getElementById('sun-val').textContent = state.sun;
+  document.querySelectorAll('.shop-item').forEach(el => {
+    const cost = PLANT_COSTS[el.dataset.plant];
+    el.classList.toggle('too-expensive', state.sun < cost);
+  });
+}
+
+function cellX(c) { return (canvas.width / COLS) * c + (canvas.width / COLS) * 0.5; }
+function cellY(r) { return r * CELL_H + CELL_H * 0.5; }
+
+function spawnZombie() {
+  const types = ['normal', 'cone', ...(state.wave >= 2 ? ['bucket'] : []), ...(state.wave >= 3 ? ['runner'] : [])];
+  const t = types[Math.floor(Math.random() * types.length)];
+  const row = Math.floor(Math.random() * ROWS);
+  state.zombies.push({
+    type: t, r: row,
+    x: canvas.width + 20,
+    hp: t === 'bucket' ? 130 : t === 'cone' ? 70 : t === 'runner' ? 30 : 40,
+    maxHp: t === 'bucket' ? 130 : t === 'cone' ? 70 : t === 'runner' ? 30 : 40,
+    speed: t === 'runner' ? 0.9 : 0.35,
+    frozen: 0, eating: null, eatTimer: 0
+  });
+}
+
+function gameTick() {
+  if (!state.running) return;
+  state.tick++;
+
+  // Sun from sunflowers
+  Object.values(state.plants).forEach(p => {
+    if (p.type === 'sunflower') {
+      p.cooldown = (p.cooldown || 0) + 1;
+      if (p.cooldown >= 240) {
+        p.cooldown = 0;
+        const x = cellX(p.c) + (Math.random() - 0.5) * 30;
+        const y = cellY(p.r) - 20;
+        state.sunDrops.push({ x, y, vy: -1.5, life: 80, collected: false });
+      }
+    }
+  });
+
+  // Auto-collect sun drops
+  state.sunDrops.forEach(s => {
+    s.y += s.vy; s.vy += 0.1; s.life--;
+    if (!s.collected && s.life < 40) { s.collected = true; state.sun += 25; updateSun(); }
+  });
+  state.sunDrops = state.sunDrops.filter(s => s.life > 0);
+
+  // Peashooter shooting
+  Object.values(state.plants).forEach(p => {
+    if (p.type !== 'peashooter' && p.type !== 'iceshooter') return;
+    const rowZombies = state.zombies.filter(z => z.r === p.r && z.x > cellX(p.c));
+    if (rowZombies.length === 0) return;
+    p.cooldown = (p.cooldown || 0) + 1;
+    if (p.cooldown >= 60) {
+      p.cooldown = 0;
+      state.projectiles.push({ x: cellX(p.c) + 20, y: cellY(p.r), r: p.r, speed: 4, type: p.type === 'iceshooter' ? 'ice' : 'pea', dmg: 20 });
+    }
+  });
+
+  // Cherry bomb
+  Object.values(state.plants).forEach((p, _, arr) => {
+    if (p.type !== 'cherry') return;
+    p.fuseTimer = (p.fuseTimer || 0) + 1;
+    if (p.fuseTimer >= 90) {
+      const ex = cellX(p.c), ey = cellY(p.r);
+      state.zombies = state.zombies.filter(z => {
+        const dx = z.x - ex, dy = cellY(z.r) - ey;
+        if (Math.sqrt(dx*dx+dy*dy) < 120) { return false; }
+        return true;
+      });
+      const key = p.r + ',' + p.c;
+      delete state.plants[key];
+      state.sunDrops.push({ x: ex, y: ey, vy: -3, life: 5, collected: false, explode: true });
+    }
+  });
+
+  // Move projectiles
+  state.projectiles.forEach(proj => {
+    proj.x += proj.speed;
+    state.zombies.forEach(z => {
+      if (z.r === proj.r && Math.abs(z.x - proj.x) < 18) {
+        z.hp -= proj.dmg;
+        if (proj.type === 'ice') z.frozen = 120;
+        proj.x = 9999;
+      }
+    });
+  });
+  state.projectiles = state.projectiles.filter(p => p.x < canvas.width + 20);
+
+  // Move & eat zombies
+  state.zombies.forEach(z => {
+    const spd = z.frozen > 0 ? z.speed * 0.3 : z.speed;
+    if (z.frozen > 0) z.frozen--;
+    z.eating = null;
+    let blocked = false;
+    for (let c2 = COLS - 2; c2 >= 0; c2--) {
+      const key = z.r + ',' + c2;
+      const plant = state.plants[key];
+      if (plant && Math.abs(z.x - cellX(c2)) < 30) {
+        blocked = true; z.eating = key;
+        z.eatTimer = (z.eatTimer || 0) + 1;
+        if (z.eatTimer >= 30) { z.eatTimer = 0; plant.hp -= 10; if (plant.hp <= 0) delete state.plants[key]; }
+        break;
+      }
+    }
+    if (!blocked) { z.x -= spd; z.eatTimer = 0; }
+    if (z.x < 0) {
+      state.lives--;
+      updateLives();
+      z.x = 9999;
+      if (state.lives <= 0) { endGame(false); }
+    }
+  });
+  state.zombies = state.zombies.filter(z => z.hp > 0 && z.x < canvas.width + 40);
+
+  // Spawn zombies
+  state.nextZombie--;
+  if (state.nextZombie <= 0 && state.zombiesLeft > 0) {
+    spawnZombie();
+    state.zombiesLeft--;
+    state.nextZombie = Math.max(60, 180 - state.wave * 15);
+  }
+
+  // Wave complete
+  if (state.zombiesLeft === 0 && state.zombies.length === 0 && !state.gameOver) {
+    state.wave++;
+    if (state.wave > 5) { endGame(true); return; }
+    document.getElementById('wave-num').textContent = state.wave;
+    state.zombiesLeft = 6 + state.wave * 2;
+    state.nextZombie = 200;
+    showMsg('Wave ' + state.wave + '!');
+  }
+
+  draw();
+  if (state.running) requestAnimationFrame(gameTick);
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cw = canvas.width / COLS;
+
+  // Plants
+  Object.values(state.plants).forEach(p => {
+    const x = cellX(p.c), y = cellY(p.r);
+    if (p.type === 'wallnut') {
+      ctx.fillStyle = p.hp > 80 ? '#b87c1e' : p.hp > 40 ? '#a06010' : '#7a4a08';
+      ctx.beginPath(); ctx.arc(x, y, 22, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#f5d080';
+      const lines = p.hp > 80 ? 0 : p.hp > 40 ? 2 : 4;
+      for (let i = 0; i < lines; i++) {
+        ctx.fillRect(x - 8 + i * 5, y - 5, 2, 10);
+      }
+    }
+    ctx.font = '32px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (p.type !== 'wallnut') ctx.fillText(PLANT_EMOJIS[p.type], x, y);
+    if (p.type === 'wallnut') ctx.font = '14px serif', ctx.fillText('🥜', x, y);
+
+    // HP bar
+    if (p.type === 'wallnut' || p.hp < 30) {
+      const maxHp = p.type === 'wallnut' ? 150 : 30;
+      const pct = p.hp / maxHp;
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.fillRect(x - 18, y + 24, 36, 5);
+      ctx.fillStyle = pct > 0.5 ? '#4f4' : pct > 0.25 ? '#ff4' : '#f44';
+      ctx.fillRect(x - 18, y + 24, 36 * pct, 5);
+    }
+  });
+
+  // Projectiles
+  state.projectiles.forEach(proj => {
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, 6, 0, Math.PI*2);
+    ctx.fillStyle = proj.type === 'ice' ? '#88ccff' : '#4a8a20';
+    ctx.fill();
+    if (proj.type === 'ice') { ctx.strokeStyle = '#fff'; ctx.lineWidth = 1; ctx.stroke(); }
+  });
+
+  // Zombies
+  state.zombies.forEach(z => {
+    const y = cellY(z.r);
+    const wobble = Math.sin(state.tick * 0.1 + z.x) * 2;
+    ctx.save();
+    ctx.translate(z.x, y + wobble);
+    if (z.frozen > 0) ctx.globalAlpha = 0.7;
+
+    // Body
+    const bodyColor = z.type === 'bucket' ? '#888' : z.type === 'cone' ? '#e67e22' : z.type === 'runner' ? '#a83' : '#8fbc8f';
+    ctx.fillStyle = bodyColor;
+    ctx.fillRect(-12, -20, 24, 30);
+
+    // Head
+    ctx.fillStyle = '#c8a870';
+    ctx.fillRect(-10, -38, 20, 20);
+
+    // Eyes
+    ctx.fillStyle = '#ff4444';
+    ctx.fillRect(-6, -33, 5, 5);
+    ctx.fillRect(2, -33, 5, 5);
+
+    // Hat
+    if (z.type === 'cone') { ctx.fillStyle = '#e67e22'; ctx.beginPath(); ctx.moveTo(-10,-18); ctx.lineTo(0,-42); ctx.lineTo(10,-18); ctx.closePath(); ctx.fill(); }
+    if (z.type === 'bucket') { ctx.fillStyle = '#aaa'; ctx.fillRect(-12,-42,24,14); }
+
+    if (z.frozen > 0) { ctx.fillStyle = 'rgba(130,200,255,0.35)'; ctx.fillRect(-12,-38,24,50); }
+    ctx.restore();
+
+    // HP bar
+    const pct = z.hp / z.maxHp;
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillRect(z.x - 18, y + 18, 36, 5);
+    ctx.fillStyle = pct > 0.5 ? '#4f4' : pct > 0.25 ? '#ff4' : '#f44';
+    ctx.fillRect(z.x - 18, y + 18, 36 * pct, 5);
+  });
+
+  // Sun drops
+  state.sunDrops.forEach(s => {
+    if (s.explode) {
+      ctx.fillStyle = 'rgba(255,120,0,0.6)'; ctx.beginPath(); ctx.arc(s.x, s.y, 50, 0, Math.PI*2); ctx.fill();
+      return;
+    }
+    ctx.font = '22px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.globalAlpha = Math.min(1, s.life / 20);
+    ctx.fillText('☀', s.x, s.y);
+    ctx.globalAlpha = 1;
+  });
+}
+
+function updateLives() {
+  const bar = document.getElementById('lives-bar');
+  bar.innerHTML = '';
+  for (let i = 0; i < state.lives; i++) bar.innerHTML += '<span class="heart">♥</span>';
+}
+
+function endGame(won) {
+  state.running = false; state.gameOver = true;
+  const ov = document.getElementById('overlay');
+  ov.innerHTML = `<h2>${won ? '🌻 You Win!' : '🧟 Game Over'}</h2>
+    <p>${won ? 'You survived all 5 waves! The lawn is safe!' : 'The zombies broke through your defenses!'}</p>
+    <button onclick="startGame()">Play Again</button>`;
+  ov.style.display = 'flex';
+}
+
+function startGame() {
+  resizeCanvas();
+  state = {
+    sun: 100, wave: 1, lives: 3, running: true,
+    plants: {}, projectiles: [], zombies: [],
+    sunDrops: [], selectedPlant: 'sunflower', usingShovel: false,
+    tick: 0, nextZombie: 200, zombiesLeft: 8, gameOver: false, won: false
+  };
+  document.getElementById('wave-num').textContent = '1';
+  document.getElementById('overlay').style.display = 'none';
+  updateSun(); updateLives();
+  buildGrid();
+  requestAnimationFrame(gameTick);
+}
+
+buildGrid();
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+</script>

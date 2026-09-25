@@ -1,0 +1,454 @@
+/* ===== Code Highlight Styles ===== */
+
+:root {
+  --hl-color: #8F93A2;
+  --hl-bg: #2a2a2a;
+  --hltools-bg: #0d0f15;
+  --hltools-color: #8F93A2;
+  --hlnumber-bg: #0F111A;
+  --hlnumber-color: rgba(143, 147, 162, 0.5);
+  --hlscrollbar-bg: #1a1d29;
+  --hlexpand-bg: linear-gradient(180deg, rgba(15, 17, 26, 0.6), rgba(15, 17, 26, 0.9));
+}
+
+/* 亮色模式样式 */
+html:not(.dark-mode),
+body:not(.dark-mode) {
+  --hl-color: #90A4AE;
+  --hl-bg: #F6F8FA;
+  --hltools-bg: #f1f3f5;
+  --hltools-color: var(--text-color);
+  --hlnumber-bg: #F6F8FA;
+  --hlnumber-color: rgba(144, 164, 174, 0.5);
+  --hlscrollbar-bg: #e8eaed;
+  --hlexpand-bg: linear-gradient(180deg, rgba(246, 248, 250, 0.6), rgba(246, 248, 250, 0.9));
+}
+
+/* 代码块基本样式 */
+#article-container pre,
+#article-container code {
+  font-size: 0.9rem;
+  /* 
+   * === 关键修改 ===
+   * 1. 删除了 'Fira Code' (它是罪魁祸首)
+   * 2. 改用 Monaco (Mac) 或 Consolas (Windows) 优先
+   */
+  font-family: Monaco, Consolas, 'Courier New', monospace !important;
+  
+  /* === 双重保险：强制禁用所有形式的连字 === */
+  -webkit-font-variant-ligatures: none !important;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+  text-rendering: optimizeSpeed !important;
+}
+
+#article-container code {
+  padding: 2px 4px;
+  background: var(--background-color);
+  color: var(--accent-color);
+  border-radius: var(--radius-sm);
+}
+
+#article-container pre {
+  overflow: auto;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  background: var(--hl-bg);
+  color: var(--hl-color);
+  line-height: 1.6;
+  border-radius: var(--radius-md);
+}
+
+#article-container pre code {
+  padding: 0;
+  background: none;
+  color: var(--hl-color);
+  text-shadow: none;
+}/* 代码行号 */
+.gutter {
+  -webkit-user-select: none;
+  user-select: none;
+  display: table-cell;
+  vertical-align: top;
+  padding: 0;
+  background: var(--hlnumber-bg);
+  border-right: 1px solid var(--border-color);
+}.code {
+  display: table-cell;
+  vertical-align: top;
+  width: 100%;
+  padding: 0;
+}
+
+.code pre {
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+}/* 标记行 */
+.line.marked {
+  background-color: rgba(129, 140, 248, 0.1);
+}/* 代码高亮颜色 */
+.highlight .comment,
+.highlight .quote {
+  color: rgba(101, 115, 126, 0.8);
+}
+
+.highlight .keyword,
+.highlight .selector-tag,
+.highlight .addition {
+  color: #C792EA;
+}
+
+.highlight .number,
+.highlight .string,
+.highlight .meta .string,
+.highlight .literal,
+.highlight .doctag,
+.highlight .regexp {
+  color: #F78C6C;
+}
+
+.highlight .title,
+.highlight .section,
+.highlight .name,
+.highlight .selector-id,
+.highlight .selector-class {
+  color: #FFCB6B;
+}
+
+.highlight .attribute,
+.highlight .attr,
+.highlight .variable,
+.highlight .template-variable,
+.highlight .class .title,
+.highlight .type {
+  color: #FFCB6B;
+}
+
+.highlight .symbol,
+.highlight .bullet,
+.highlight .subst,
+.highlight .meta,
+.highlight .meta .keyword,
+.highlight .selector-attr,
+.highlight .selector-pseudo,
+.highlight .link {
+  color: #EEFFFF;
+}
+
+.highlight .built_in,
+.highlight .deletion {
+  color: #FF5370;
+}
+
+.highlight .formula {
+  background: rgba(255, 83, 112, 0.1);
+}
+
+.highlight .emphasis {
+  font-style: italic;
+}
+
+.highlight .strong {
+  font-weight: bold;
+}/* ---- codecard 明暗适配变量:暗色(默认,即参考站配色) ---- */
+:root {
+  --cc-bg: #0e0d0c;
+  --cc-bg-solid: rgba(14, 13, 12, 0.96);
+  --cc-header-bg: #131110;
+  --cc-border: #23211e;
+  --cc-border-strong: #4a4640;
+  --cc-hover-bg: #1a1815;
+  --cc-text: #e7e2d9;
+  --cc-dim: #908877;
+  --cc-gutter: #57534b;
+  /* token 配色(暗色 = Gruvbox) */
+  --cc-keyword: #d49060;
+  --cc-string: #8fb87a;
+  --cc-number: #d8a657;
+  --cc-func: #c88660;
+  --cc-attr: #dbb176;
+  --cc-punct: #a8a099;
+  --cc-comment: #908877;
+}
+
+/* ---- 亮色:浅色卡片 + 柔和 token ---- */
+body:not(.dark-mode) {
+  --cc-bg: #faf9f7;
+  --cc-bg-solid: rgba(250, 249, 247, 0.96);
+  --cc-header-bg: #f1efeb;
+  --cc-border: #e4e0d8;
+  --cc-border-strong: #c9c3b8;
+  --cc-hover-bg: #e9e5dd;
+  --cc-text: #3b372f;
+  --cc-dim: #a09a8f;
+  --cc-gutter: #b5afa3;
+  --cc-keyword: #b35c2e;
+  --cc-string: #6a8f3c;
+  --cc-number: #b07d2a;
+  --cc-func: #9c6a1f;
+  --cc-attr: #8a6d3b;
+  --cc-punct: #7d7870;
+  --cc-comment: #9a9488;
+}
+
+/* =====================================================
+   代码块 v2 (.codecard) — 参考 Astro 博客的深色卡片设计
+   结构由 scripts/filters/highlight.js 构建期生成:
+   .codecard > .codecard-header + .codecard-body
+                                    ├ .codecard-gutter (行号,sticky)
+                                    └ pre.codecard-pre > code
+   交互(复制/折叠)由 js/highlight.js 负责。
+   ===================================================== */
+
+.post-content .codecard {
+  position: relative;
+  background: var(--cc-bg);
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  margin: 1.4em 0;
+  overflow: hidden;
+}
+
+.post-content .codecard .codecard-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.95rem;
+  border-bottom: 1px solid var(--cc-border);
+  background: var(--cc-header-bg);
+}
+
+.post-content .codecard .codecard-lang {
+  font-family: var(--font-mono, "Fira Code", Monaco, Consolas, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cc-dim);
+}
+
+.post-content .codecard .codecard-notice {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--cc-string);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.post-content .codecard .codecard-copy {
+  order: 3;
+  margin-left: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--cc-border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--cc-dim);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.post-content .codecard .codecard-copy:hover {
+  color: var(--cc-text);
+  border-color: var(--cc-border-strong);
+  background: var(--cc-hover-bg);
+}
+
+.post-content .codecard .codecard-body {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  /* ★ 隐藏横向滚动条:主题滚动条是强调色(青色),折叠/展开时出现
+     会像一条贯穿代码块的亮线;滚轮/触摸/拖动仍然可以滚动 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.post-content .codecard .codecard-body::-webkit-scrollbar {
+  display: none;
+}
+
+.post-content .codecard .codecard-gutter {
+  flex: 0 0 auto;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--cc-bg);
+  padding: 0.85em 0.68em 0.85em 0.95em;
+  text-align: right;
+  color: var(--cc-gutter);
+  font-family: var(--font-mono, "Fira Code", Monaco, Consolas, monospace);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  user-select: none;
+  -webkit-user-select: none;
+  border-right: 1px solid var(--cc-border);
+}
+
+.post-content .codecard .codecard-gutter span {
+  display: block;
+}
+
+.post-content .codecard pre.codecard-pre {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0.85em 1.1em 0.85em 0.85em;
+  overflow: visible;
+  background: transparent;
+  color: var(--cc-text);
+  font-family: var(--font-mono, "Fira Code", Monaco, Consolas, monospace);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  tab-size: 4;
+  /* ★ 重置 main.css 中 .post-content pre 泄漏的样式:
+     width/max-width 会让 pre 盒子钉死在可视宽度,长代码行"可见溢出"
+     到盒子外;box-shadow 则在盒子右边缘画出一条灰色竖线,
+     横向滚动越过边界时就能看到 */
+  width: auto;
+  max-width: none;
+  box-shadow: none;
+  position: static;
+}
+
+.post-content .codecard pre.codecard-pre code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* ---- 折叠态(客户端按高度加 .foldable/.folded) ---- */
+.post-content .codecard.folded .codecard-body {
+  max-height: var(--code-max-height, 300px);
+  overflow: hidden;
+}
+
+.post-content .codecard .codecard-fold {
+  display: none;
+  width: 100%;
+  padding: 0.5rem 0 0.65rem;
+  border: none;
+  border-top: 1px solid transparent;
+  background: linear-gradient(transparent, var(--cc-bg-solid));
+  color: var(--cc-dim);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding-top: 2.2rem;
+  transition: color 0.2s ease;
+}
+
+.post-content .codecard.foldable .codecard-fold {
+  display: flex;
+}
+
+.post-content .codecard.foldable:not(.folded) .codecard-fold {
+  position: static;
+  background: var(--cc-header-bg);
+  border-top: 1px solid #23211e;
+  padding-top: 0.5rem;
+}
+
+.post-content .codecard .codecard-fold:hover {
+  color: var(--cc-text);
+}
+
+.post-content .codecard .codecard-fold::after {
+  content: "▾";
+  font-size: 0.7rem;
+  transition: transform 0.25s ease;
+}
+
+.post-content .codecard.foldable:not(.folded) .codecard-fold::after {
+  transform: rotate(180deg);
+}
+
+/* ---- token 配色(Gruvbox 系,与参考站一致;深色卡片两种模式下都不变) ---- */
+.post-content .codecard-pre .comment,
+.post-content .codecard-pre .quote {
+  color: var(--cc-dim);
+  font-style: italic;
+}
+.post-content .codecard-pre .keyword,
+.post-content .codecard-pre .selector-tag,
+.post-content .codecard-pre .literal,
+.post-content .codecard-pre .section,
+.post-content .codecard-pre .doctag,
+.post-content .codecard-pre .type {
+  color: var(--cc-keyword);
+}
+.post-content .codecard-pre .string,
+.post-content .codecard-pre .regexp,
+.post-content .codecard-pre .addition,
+.post-content .codecard-pre .link {
+  color: var(--cc-string);
+}
+.post-content .codecard-pre .number,
+.post-content .codecard-pre .symbol,
+.post-content .codecard-pre .bullet {
+  color: var(--cc-number);
+}
+.post-content .codecard-pre .title,
+.post-content .codecard-pre .title.function_,
+.post-content .codecard-pre .built_in,
+.post-content .codecard-pre .class .title {
+  color: var(--cc-func);
+}
+.post-content .codecard-pre .attr,
+.post-content .codecard-pre .attribute,
+.post-content .codecard-pre .variable,
+.post-content .codecard-pre .template-variable,
+.post-content .codecard-pre .property {
+  color: var(--cc-attr);
+}
+.post-content .codecard-pre .meta,
+.post-content .codecard-pre .meta .keyword {
+  color: var(--cc-punct);
+}
+.post-content .codecard-pre .tag .name {
+  color: var(--cc-keyword);
+}
+.post-content .codecard-pre .tag .attr {
+  color: var(--cc-attr);
+}
+.post-content .codecard-pre .name,
+.post-content .codecard-pre .selector-id,
+.post-content .codecard-pre .selector-class {
+  color: var(--cc-func);
+}
+.post-content .codecard-pre .punctuation,
+.post-content .codecard-pre .operator {
+  color: var(--cc-punct);
+}
+.post-content .codecard-pre .deletion {
+  color: #c14a4a;
+}
+
+/* 折叠按钮箭头旋转(展开态朝上) */
+.post-content .codecard .codecard-fold .codecard-fold-arrow {
+  font-size: 0.7rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.post-content .codecard.foldable:not(.folded) .codecard-fold .codecard-fold-arrow {
+  transform: rotate(180deg);
+}

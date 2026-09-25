@@ -1,0 +1,585 @@
+/* 文章内容中的图片悬浮效果 */
+.post-content img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 4px;
+}
+
+.post-content img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+/* =========================================================
+   图片查看器
+   背景:暗色模式 = 透明黑 / 亮色模式 = 模糊透明白
+   ========================================================= */
+.image-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  overflow: hidden;
+  /* 亮色模式:模糊透明白 */
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+body.dark-mode .image-viewer {
+  /* 暗色模式:透明黑 */
+  background: rgba(0, 0, 0, 0.88);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.image-viewer.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================================================
+   舞台(承载滑动切换动画)
+   ========================================================= */
+.viewer-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.view-image {
+  max-width: 92%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transform-origin: center center;
+}
+
+body.dark-mode .view-image {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* 手机端:上下留空白(用于点击退出),图片等比铺满剩余空间 */
+.image-viewer.mobile .view-image {
+  max-width: 100%;
+  max-height: calc(100% - 150px);
+}
+
+/* =========================================================
+   两侧半透明预览图(peek 模式)
+   ========================================================= */
+.viewer-peek {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10002;
+  transition: opacity 0.35s ease, background 0.35s ease;
+  overflow: hidden;
+}
+
+.viewer-peek.prev {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+}
+
+.viewer-peek.next {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+}
+
+.viewer-peek img {
+  width: 110px;
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  opacity: 0.35; /* 降低阿尔法值 */
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.viewer-peek:hover img {
+  opacity: 0.9;
+  transform: scale(1.04);
+}
+
+/* 按钮模式下隐藏 peek;peek 模式下隐藏按钮 */
+.image-viewer.mode-buttons .viewer-peek {
+  display: none !important;
+}
+
+.image-viewer.mode-peek .nav-btn {
+  display: none !important;
+}
+
+/* =========================================================
+   上一张/下一张按钮(buttons 模式)
+   ========================================================= */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: none;
+  color: #ffffff;
+  font-size: 30px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10002;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.nav-btn.disabled {
+  opacity: 0.25 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+.nav-btn.prev {
+  left: 40px;
+}
+
+.nav-btn.next {
+  right: 40px;
+}
+
+/* =========================================================
+   工具栏(旋转/锁定/保存)—— 电脑端位于正上方,默认隐藏
+   ========================================================= */
+.viewer-toolbar {
+  position: absolute;
+  top: 0; /* 紧贴查看界面上边缘 */
+  left: 50%;
+  transform: translateX(-50%) translateY(-16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 9px 22px;
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 0 0 50px 50px; /* 上边缘贴平,下方圆角 */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  z-index: 10004;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+body.dark-mode .viewer-toolbar {
+  background: rgba(40, 40, 40, 0.6);
+}
+
+/* 显示状态(鼠标靠近顶部出现) */
+.viewer-toolbar.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toolbar-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: var(--text-color, #333);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+body.dark-mode .toolbar-btn {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.toolbar-btn svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+  transition: fill 0.2s ease;
+}
+
+.toolbar-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
+  transform: scale(1.1);
+}
+
+body.dark-mode .toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.toolbar-btn.active {
+  color: var(--accent-color, #ff6b6b);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================
+   右上角关闭按钮(电脑端/手机端常驻,不随控件显隐变化)
+   ========================================================= */
+.viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 10006; /* 高于工具栏(10004)与两侧预览(10002),胶片模式下也可见 */
+  transition: background 0.25s ease, transform 0.25s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+.viewer-close svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.viewer-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.08);
+}
+
+body.dark-mode .viewer-close {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+body.dark-mode .viewer-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* =========================================================
+   底部缩略图
+   ========================================================= */
+.viewer-thumbs {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 86%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10003;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+body.dark-mode .viewer-thumbs {
+  background: rgba(30, 30, 30, 0.55);
+}
+
+.viewer-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== 缩略图 v2(参考 PhotoSwipe 胶片条) =====
+   固定槽位 + 中心裁剪:竖长图不再变成细长条,视觉整齐;
+   悬停有放大提亮阴影的动感;当前项主题色描边+微升。 */
+.viewer-thumbs {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  padding: 6px 10px;
+  border-radius: 14px;
+  scrollbar-width: none;
+}
+
+.viewer-thumbs .thumb {
+  flex: 0 0 auto;
+  height: 60px;
+  width: 84px; /* 固定横版槽位 */
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid rgba(128, 128, 128, 0.25);
+  background: rgba(0, 0, 0, 0.25);
+  transition:
+    border-color 0.22s ease,
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+  filter: saturate(0.85) brightness(0.85);
+}
+
+.viewer-thumbs .thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* 竖长图中心裁剪 */
+  pointer-events: none;
+}
+
+.viewer-thumbs .thumb:hover {
+  transform: translateY(-4px) scale(1.08);
+  filter: saturate(1.1) brightness(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+
+.viewer-thumbs .thumb.active {
+  border-color: var(--accent-color, #ff6b6b);
+  transform: translateY(-2px) scale(1.04);
+  filter: saturate(1.05) brightness(1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* 拖动滚动条时禁用子元素过渡,保证跟手 */
+.viewer-thumbs.dragging .thumb {
+  transition: none;
+}
+.viewer-thumbs.dragging {
+  scroll-behavior: auto;
+  cursor: grabbing;
+}
+
+/* ===== 大图拖动手感:抓手光标 ===== */
+.image-viewer .viewer-stage,
+.mermaid-viewer-stage,
+.table-viewer-stage {
+  cursor: grab;
+}
+.image-viewer .viewer-stage.panning,
+.mermaid-viewer-stage.panning,
+.table-viewer-stage.panning {
+  cursor: grabbing;
+}
+
+/* =========================================================
+   Tooltip(显示在按钮/导航下方)
+   ========================================================= */
+.toolbar-btn::after,
+.nav-btn::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 125%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  line-height: normal;
+}
+
+.toolbar-btn:hover::after,
+.nav-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+  top: 115%;
+}
+
+/* 按钮交互动画 */
+@keyframes spin-icon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.toolbar-btn.rotate-btn:hover svg {
+  animation: spin-icon 0.4s ease-out forwards;
+}
+
+@keyframes shake-icon {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+.toolbar-btn.lock-btn:hover svg {
+  animation: shake-icon 0.4s ease-in-out;
+}
+
+@keyframes bounce-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.toolbar-btn.download-btn:hover svg {
+  animation: bounce-icon 0.6s infinite ease-in-out;
+}
+
+/* =========================================================
+   手机端
+   ========================================================= */
+@media (max-width: 768px) {
+  .toolbar-btn::after,
+  .nav-btn::after {
+    display: none;
+  }
+
+  /* 关闭按钮:手机端略小并避开状态栏安全区 */
+  .viewer-close {
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 14px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .viewer-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* 工具栏保持在底部(位置不变) */
+  .image-viewer .viewer-toolbar,
+  .image-viewer.mobile .viewer-toolbar {
+    top: auto;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 8px 16px;
+    gap: 6px;
+  }
+
+  .image-viewer.mobile .viewer-toolbar.visible,
+  .image-viewer.mobile .viewer-toolbar {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* 缩略图:工具栏上方,横向滚动 */
+  .viewer-thumbs {
+    bottom: 88px;
+    max-width: 94%;
+    gap: 8px;
+    padding: 6px 10px;
+  }
+
+  .viewer-thumbs .thumb {
+    height: 52px;
+  }
+
+  /* 手机端不显示上一张/下一张按钮 */
+  .image-viewer.mobile .nav-btn {
+    display: none !important;
+  }
+
+  /* peek 面板窄一些 */
+  .viewer-peek {
+    width: 64px;
+  }
+
+  .viewer-peek img {
+    width: 54px;
+    max-height: 40vh;
+  }
+
+  /* 单击隐藏控件(工具栏/缩略图)时的状态 */
+  .image-viewer.controls-hidden .viewer-toolbar,
+  .image-viewer.controls-hidden .viewer-thumbs {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+  }
+
+  .image-viewer.controls-hidden .viewer-toolbar {
+    transform: translateX(-50%);
+  }
+}
+
+/* 胶片模式(手机端缩小手势):两侧露出前后图片 */
+.image-viewer.filmstrip .viewer-stage {
+  transition: transform 0.2s ease-out;
+}
+
+.image-viewer.filmstrip .viewer-peek img {
+  opacity: 0.75;
+  transform: scale(0.92);
+}
+
+/* 非手机端隐藏控件切换逻辑不适用 */
+@media (min-width: 769px) {
+  .image-viewer.controls-hidden .viewer-toolbar,
+  .image-viewer.controls-hidden .viewer-thumbs {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* 电脑端:单击图片后隐藏"切换类"控件(左右缩略图/上一张下一张按钮/底部缩略图)。
+     工具栏(选择/锁定/下载)显隐独立,不受影响。再次单击图片恢复。 */
+  .image-viewer.ui-hidden .viewer-peek,
+  .image-viewer.ui-hidden .nav-btn,
+  .image-viewer.ui-hidden .viewer-thumbs {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .image-viewer.ui-hidden .nav-btn.prev {
+    transform: translateY(-50%) translateX(-10px);
+  }
+
+  .image-viewer.ui-hidden .nav-btn.next {
+    transform: translateY(-50%) translateX(10px);
+  }
+}

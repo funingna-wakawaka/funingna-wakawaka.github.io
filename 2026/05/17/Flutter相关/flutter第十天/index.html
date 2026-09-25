@@ -1,0 +1,1886 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/core/reader-settings.js"></script>
+<script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/core/main.css">
+
+<link rel="stylesheet" href="/css/components/tags.css">
+
+<link rel="stylesheet" href="/css/pages/categories.css">
+
+<link rel="stylesheet" href="/css/pages/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/pages/categories-explorer.css">
+
+<link rel="stylesheet" href="/css/components/highlight.css">
+
+<link rel="stylesheet" href="/css/components/toc.css">
+
+<link rel="stylesheet" href="/css/components/image-zoom.css">
+
+<link rel="stylesheet" href="/css/components/mermaid.css">
+
+<link rel="stylesheet" href="/css/components/share.css">
+
+<link rel="stylesheet" href="/css/components/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/components/search.css">
+
+<link rel="stylesheet" href="/css/core/scrollbar.css">
+
+<link rel="stylesheet" href="/css/components/timeline.css">
+
+<link rel="stylesheet" href="/css/components/ai-theme.css">
+
+<link rel="stylesheet" href="/css/components/loading-animation.css">
+
+<link rel="stylesheet" href="/css/components/article-modal.css">
+
+<link rel="stylesheet" href="/css/components/music-player.css">
+
+<link rel="stylesheet" href="/css/components/table.css">
+
+<link rel="stylesheet" href="/css/components/hero-effects.css">
+
+<link rel="stylesheet" href="/css/pages/about.css">
+
+<link rel="stylesheet" href="/css/pages/wall.css">
+
+<link rel="stylesheet" href="/css/pages/anime.css">
+
+<link rel="stylesheet" href="/css/pages/link.css">
+
+<link rel="stylesheet" href="/css/pages/murmur.css">
+
+<link rel="stylesheet" href="/css/pages/404.css">
+
+<link rel="stylesheet" href="/css/components/cursor.css">
+
+<link rel="stylesheet" href="/css/components/carousel.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #00FFFF;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content {
+  text-align: center; z-index: 10; pointer-events: none;
+  /* 标题/作者为装饰文字,拨动水波纹时禁止被选中 */
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+  const cover = document.getElementById('blog-cover');
+  if (cover && cover.style.display !== 'none') {
+    const startBtn = document.getElementById('start-journey');
+
+    // ★ 性能修改:THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
+    //   境内访问不稳定时封面会长时间黑屏等待)。
+    import('/js/vendor/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+
+    // ★ 性能修改:第二个 WebGL 实例延迟创建。
+    //   原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
+    //   但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
+    //   改为首次轮播切换前 1.5 秒才创建并加载图。
+    let app2 = null;
+    function getApp2() {
+      if (!app2) app2 = setupApp(canvas2);
+      return app2;
+    }
+
+    let currentSlide = 0;
+    let activeApp = 1;
+
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      setTimeout(() => {
+        // 封面已被关闭就不再创建第二个 WebGL 实例
+        if (cover.classList.contains('slide-up') || cover.style.display === 'none') return;
+        getApp2().loadImage(coverImages[1]);
+      }, 3500);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => getApp2().loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000);
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2 && app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/18.webp" alt="flutter-网络请求"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-05-17T06:09:42.000Z">2026-05-17</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.1k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>15</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">flutter-网络请求</h1><script>(function () {
+  try {
+    var __articleModalTitle = "flutter-网络请求";
+    if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
+      window.parent.postMessage(
+        { type: 'article-modal-title-update', title: __articleModalTitle },
+        window.location.origin
+      );
+    }
+  } catch (e) {}
+})();
+</script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来学学flutter的网络请求"><a href="#今天来学学flutter的网络请求" class="headerlink" title="今天来学学flutter的网络请求"></a>今天来学学flutter的网络请求</h1><h2 id="Dio插件的使用"><a href="#Dio插件的使用" class="headerlink" title="Dio插件的使用"></a>Dio插件的使用</h2><p><code>dio</code> 是 Flutter 里最常用的 HTTP 网络请求库之一，很多项目都会用它替代原生的 <code>http</code> 包，因为它功能更完整</p>
+<p>(话说看到这个Dio我就想起了某个埃及艳妇 <font color='#FFD700'>狗头狗头狗头</font>)</p>
+<p>OK回归正题</p>
+<p>首先根目录执行</p>
+<div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">flutter pub add dio</span><br></code></pre></div></div>
+
+<p>打开你的<strong>pubspec.yaml</strong>文件</p>
+<p>可以看到这个</p>
+<div class="codecard" data-lang="yaml"><div class="codecard-header"><span class="codecard-lang">YAML</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div><pre class="codecard-pre"><code class="language-yaml"><span class="attr">dependencies:</span>
+  <span class="attr">flutter:</span>
+    <span class="attr">sdk:</span> <span class="string">flutter</span>
+
+  <span class="comment"># The following adds the Cupertino Icons font to your application.</span>
+  <span class="comment"># Use with the CupertinoIcons class for iOS style icons.</span>
+  <span class="attr">cupertino_icons:</span> <span class="string">^1.0.8</span>
+  <span class="attr">dio:</span> <span class="string">^5.9.2</span>     <span class="comment">#dio下载完成</span></span><br></code></pre></div></div>
+
+<p>基本使用</p>
+<blockquote>
+<p>Dio().get(地址).then().catchError()</p>
+</blockquote>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;
+  runApp(MaterialApp(home: HomePage()));
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;
+  <span class="keyword">const</span> HomePage(&#123;<span class="keyword">super</span>.key&#125;);
+
+  <span class="meta">@override</span>
+  State&lt;HomePage&gt; createState() =&gt; _HomePageState();
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">_HomePageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">HomePage</span>&gt; </span>&#123;
+  <span class="built_in">String</span> text = <span class="string">&quot;点击获取数据&quot;</span>;
+
+  <span class="keyword">void</span> getData() <span class="keyword">async</span> &#123;
+    Response response = <span class="keyword">await</span> Dio().<span class="keyword">get</span>(<span class="string">&#x27;https://genshin.hoyoverse.com/en/&#x27;</span>);
+
+    setState(() &#123;
+      text = response.data.toString();
+    &#125;);
+  &#125;
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="keyword">return</span> Scaffold(
+      appBar: AppBar(title: Text(<span class="string">&quot;原神网页&quot;</span>), centerTitle: <span class="keyword">true</span>),
+
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(<span class="number">20</span>),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: getData,
+                  child: Text(<span class="string">&quot;获取网页&quot;</span>, style: TextStyle(fontSize: <span class="number">18</span>)),
+                ),
+
+                SizedBox(height: <span class="number">20</span>),
+
+                Text(text, textAlign: TextAlign.center),
+              ],
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: getData,
+        child: Icon(Icons.refresh),
+      ),
+    );
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+  <style>.tvlafrhibvlu{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260517163247875.webp" class="tvlafrhibvlu" alt="image-20260517163247875">
+
+<h2 id="封装Dio工具"><a href="#封装Dio工具" class="headerlink" title="封装Dio工具"></a>封装Dio工具</h2><p>​	<style>.pkcxzjepywmz{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260614195619480.webp" class="pkcxzjepywmz" alt="image-20260614195619480"></p>
+<blockquote>
+<p>建立连接 → 发送数据 → 等待服务器返回<br>    ↑           ↑             ↑<br>connect     send        receive</p>
+</blockquote>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio(); <span class="comment">// 创建Dio实例</span>
+  DioUtils() &#123;
+    _dio.options.baseUrl = <span class="string">&#x27;https://github.com/&#x27;</span>; <span class="comment">// 基础地址</span>
+    _dio.options.connectTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 连接超时,类型为Duration</span>
+    _dio.options.sendTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 发送超时,类型为Duration</span>
+    _dio.options.receiveTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 响应超时,类型为Duration</span>
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<p>我们可以创建Dio工具类和实例对象,但是这种写法较为繁琐</p>
+<h3 id="使用“-”级操作符"><a href="#使用“-”级操作符" class="headerlink" title="使用“..”级操作符"></a>使用“..”级操作符</h3><p>作用是对同一个对象连续调用多个属性或方法时，不需要反复写对象名</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio(); <span class="comment">// 创建Dio实例</span>
+  DioUtils() &#123;
+   
+    _dio.options
+      ..baseUrl =
+          <span class="string">&#x27;https://github.com/&#x27;</span> <span class="comment">// 基础地址</span>
+      ..connectTimeout =
+          <span class="built_in">Duration</span>(seconds: <span class="number">5</span>) <span class="comment">// 连接超时,类型为Duration</span>
+      ..sendTimeout =
+          <span class="built_in">Duration</span>(seconds: <span class="number">5</span>) <span class="comment">// 发送超时,类型为Duration</span>
+      ..receiveTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 响应超时,类型为Duration</span>
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div><pre class="codecard-pre"><code class="language-dart"><span class="comment">// ❌ 不用级联：重复写对象名</span>
+<span class="keyword">var</span> buffer = <span class="built_in">StringBuffer</span>();
+buffer.write(<span class="string">&#x27;Hello&#x27;</span>);
+buffer.write(<span class="string">&#x27; &#x27;</span>);
+buffer.write(<span class="string">&#x27;World&#x27;</span>);
+<span class="keyword">var</span> result = buffer.toString();
+
+<span class="comment">// ✅ 用级联：链式调用，更简洁</span>
+<span class="keyword">var</span> result = (<span class="built_in">StringBuffer</span>()
+  ..write(<span class="string">&#x27;Hello&#x27;</span>)
+  ..write(<span class="string">&#x27; &#x27;</span>)
+  ..write(<span class="string">&#x27;World&#x27;</span>))
+  .toString();</span><br></code></pre></div></div>
+
+<h3 id="使用BaseOptions"><a href="#使用BaseOptions" class="headerlink" title="使用BaseOptions"></a>使用BaseOptions</h3><p>flutter 的 <code>BaseOptions</code> 是 <strong>Dio</strong> 网络库中的核心配置类，用于定义全局请求的基础参数。它本身不是 Flutter SDK 的一部分，而是来自 <code>dio</code> 包</p>
+<p><code>BaseOptions</code> 封装了所有 HTTP 请求的<strong>默认配置</strong>，创建 Dio 实例时传入，后续所有请求都会继承这些基础参数</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: <span class="string">&#x27;https://github.com/&#x27;</span>,
+      connectTimeout: <span class="built_in">Duration</span>(seconds: <span class="number">5</span>),
+      sendTimeout: <span class="built_in">Duration</span>(seconds: <span class="number">5</span>),
+      receiveTimeout: <span class="built_in">Duration</span>(seconds: <span class="number">5</span>),
+    ),
+  );
+&#125;</span><br></code></pre></div></div>
+
+<h3 id="Dio拦截器-Interceptors"><a href="#Dio拦截器-Interceptors" class="headerlink" title="Dio拦截器(Interceptors)"></a>Dio拦截器(Interceptors)</h3><p>拦截器是 Dio 的核心机制，允许你在<strong>请求发出前</strong>和<strong>响应返回后</strong>插入自定义逻辑，实现统一的日志、鉴权、错误处理、缓存等</p>
+<p>Flutter 里的 <code>Dio</code> 拦截器（<code>Interceptors</code>）主要用于<strong>统一处理请求、响应、错误</strong>，比如：</p>
+<ul>
+<li>自动添加 Token</li>
+<li>打印网络日志</li>
+<li>刷新 Token</li>
+<li>统一错误处理</li>
+<li>请求加密&#x2F;解密</li>
+<li>Loading 状态管理</li>
+</ul>
+<p>Dio 的拦截器语法核心是继承 <code>Interceptor</code>，然后重写三个方法：</p>
+<div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-plaintext">onRequest()
+onResponse()
+onError()</span><br></code></pre></div></div>
+
+<h4 id="三个阶段执行顺序"><a href="#三个阶段执行顺序" class="headerlink" title="三个阶段执行顺序"></a>三个阶段执行顺序</h4><p>一次请求：</p>
+<div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div><pre class="codecard-pre"><code class="language-plaintext">dio.get()
+    |
+    ↓
+onRequest()
+    |
+    ↓
+服务器
+    |
+    ↓
+onResponse()
+    |
+    ↓
+业务代码</span><br></code></pre></div></div>
+
+<p>如果失败：</p>
+<div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><pre class="codecard-pre"><code class="language-plaintext">dio.get()
+    |
+    ↓
+onRequest()
+    |
+    ↓
+服务器
+    |
+    ↓
+onError()</span><br></code></pre></div></div>
+
+<h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h4><p>先导入：</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;</span><br></code></pre></div></div>
+
+<p>创建 Dio：</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">final</span> dio = Dio();</span><br></code></pre></div></div>
+
+<p>添加拦截器：</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-dart">dio.interceptors.add(
+  MyInterceptor(),
+);</span><br></code></pre></div></div>
+
+<p>定义拦截器：</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span></div><pre class="codecard-pre"><code class="language-dart"><span class="class"><span class="keyword">class</span> <span class="title">MyInterceptor</span> <span class="keyword">extends</span> <span class="title">Interceptor</span> </span>&#123;  
+
+  <span class="meta">@override</span>
+  <span class="keyword">void</span> onRequest(
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+  ) &#123;
+
+    <span class="built_in">print</span>(<span class="string">&quot;请求地址: <span class="subst">$&#123;options.uri&#125;</span>&quot;</span>);
+
+    handler.next(options);
+  &#125;
+
+
+  <span class="meta">@override</span>
+  <span class="keyword">void</span> onResponse(
+      Response response,
+      ResponseInterceptorHandler handler,
+  ) &#123;
+
+    <span class="built_in">print</span>(<span class="string">&quot;响应数据: <span class="subst">$&#123;response.data&#125;</span>&quot;</span>);
+
+    handler.next(response);
+  &#125;
+
+
+  <span class="meta">@override</span>
+  <span class="keyword">void</span> onError(
+      DioException err,
+      ErrorInterceptorHandler handler,
+  ) &#123;
+
+    <span class="built_in">print</span>(<span class="string">&quot;请求失败: <span class="subst">$&#123;err.message&#125;</span>&quot;</span>);
+
+    handler.next(err);
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<h4 id="handler-三种操作"><a href="#handler-三种操作" class="headerlink" title="handler 三种操作"></a>handler 三种操作</h4><h5 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h5><div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">handler.next(options);</span><br></code></pre></div></div>
+
+<p>意思： 处理完了，继续发送请求</p>
+<h5 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h5><div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">handler.next(response);</span><br></code></pre></div></div>
+
+<p>意思:  继续返回数据</p>
+<h5 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h5><div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">handler.next(err);</span><br></code></pre></div></div>
+
+<p>意思:  继续抛错误</p>
+<h3 id="我们先试一下在终端输出"><a href="#我们先试一下在终端输出" class="headerlink" title="我们先试一下在终端输出"></a>我们先试一下在终端输出</h3><p>其中onRequest()  onResponse()  onError()函数里的参数可以直接写参数名,无需声明类型</p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() <span class="keyword">async</span> &#123;
+  Dio dio = Dio();
+
+  dio.interceptors.add(
+    InterceptorsWrapper(
+      <span class="comment">// 请求前</span>
+      onRequest: (options, handler) &#123;
+        <span class="built_in">print</span>(<span class="string">&quot;===发送请求===&quot;</span>);
+        <span class="built_in">print</span>(<span class="string">&quot;请求地址: <span class="subst">$&#123;options.uri&#125;</span>&quot;</span>);
+
+        handler.next(options);
+      &#125;,
+
+      <span class="comment">// 成功返回</span>
+      onResponse: (response, handler) &#123;
+        <span class="built_in">print</span>(<span class="string">&quot;===收到响应===&quot;</span>);
+        <span class="built_in">print</span>(response.data);
+
+        handler.next(response);
+      &#125;,
+
+      <span class="comment">// 出错</span>
+      onError: (error, handler) &#123;
+        <span class="built_in">print</span>(<span class="string">&quot;===发生错误===&quot;</span>);
+        <span class="built_in">print</span>(error.message);
+
+        handler.next(error);
+      &#125;,
+    ),
+  );
+
+  <span class="keyword">try</span> &#123;
+    Response res = <span class="keyword">await</span> dio.<span class="keyword">get</span>(
+      <span class="string">&#x27;https://jsonplaceholder.typicode.com/posts/1&#x27;</span>,
+    );
+
+    <span class="built_in">print</span>(<span class="string">&quot;===最终结果===&quot;</span>);
+    <span class="built_in">print</span>(res.data);
+  &#125; <span class="keyword">catch</span> (e) &#123;
+    <span class="built_in">print</span>(e);
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio(); <span class="comment">// 创建Dio实例</span>
+
+  <span class="comment">//设置基础地址和超时时间</span>
+  DioUtils() &#123;
+    _dio.options
+      ..baseUrl =
+          <span class="string">&#x27;https://jsonplaceholder.typicode.com&#x27;</span> <span class="comment">// 基础地址</span>
+      ..connectTimeout =
+          <span class="built_in">Duration</span>(seconds: <span class="number">5</span>) <span class="comment">// 连接超时,类型为Duration</span>
+      ..sendTimeout =
+          <span class="built_in">Duration</span>(seconds: <span class="number">5</span>) <span class="comment">// 发送超时,类型为Duration</span>
+      ..receiveTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 响应超时,类型为Duration</span>
+
+    <span class="comment">// 添加请求拦截器</span>
+    _addInterceptors();
+  &#125;
+
+  <span class="comment">// 添加拦截器</span>
+  <span class="keyword">void</span> _addInterceptors() &#123;
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        <span class="comment">// 请求拦截器</span>
+        onRequest: (context, handler) &#123;
+          handler.next(context);
+        &#125;,
+        <span class="comment">// 响应拦截器</span>
+        onResponse: (context, handler) &#123;
+          <span class="comment">//http状态码为2XX成功,3XX跳转,4XX错误,5XX服务器错误</span>
+          <span class="keyword">if</span> (context.statusCode! &gt;= <span class="number">200</span> &amp;&amp; context.statusCode! &lt; <span class="number">300</span>) &#123;
+            handler.next(context);
+            <span class="keyword">return</span>;
+          &#125;
+          <span class="comment">// 其他状态码视为错误,抛出异常</span>
+          handler.reject(DioException(requestOptions: context.requestOptions));
+        &#125;,
+        <span class="comment">// 错误拦截器</span>
+        onError: (context, handler) &#123;
+          handler.reject(context);
+        &#125;,
+      ),
+    );
+  &#125;
+
+  <span class="comment">//向外暴露get方法,封装请求</span>
+  Future&lt;Response&gt; <span class="keyword">get</span>(<span class="built_in">String</span> url, &#123;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt;? params&#125;) &#123;
+    <span class="keyword">return</span> _dio.<span class="keyword">get</span>(url, queryParameters: params);
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<h3 id="然后与MaterialApp结合"><a href="#然后与MaterialApp结合" class="headerlink" title="然后与MaterialApp结合"></a>然后与MaterialApp结合</h3><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;
+  runApp(<span class="keyword">const</span> MaterialApp(home: DioDemoPage()));
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioDemoPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;
+  <span class="keyword">const</span> DioDemoPage(&#123;<span class="keyword">super</span>.key&#125;);
+
+  <span class="meta">@override</span>
+  State&lt;DioDemoPage&gt; createState() =&gt; _DioDemoPageState();
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">_DioDemoPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">DioDemoPage</span>&gt; </span>&#123;
+  <span class="keyword">final</span> Dio dio = Dio();
+
+  <span class="built_in">String</span> result = <span class="string">&quot;点击按钮发送请求&quot;</span>;
+
+  <span class="meta">@override</span>
+  <span class="keyword">void</span> initState() &#123;
+    <span class="keyword">super</span>.initState();
+
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        <span class="comment">// 请求前</span>
+        onRequest: (options, handler) &#123;
+          <span class="built_in">print</span>(<span class="string">&quot;===== 请求拦截器 =====&quot;</span>);
+          <span class="built_in">print</span>(<span class="string">&quot;请求地址: <span class="subst">$&#123;options.uri&#125;</span>&quot;</span>);
+
+          handler.next(options);
+        &#125;,
+
+        <span class="comment">// 请求成功</span>
+        onResponse: (response, handler) &#123;
+          <span class="built_in">print</span>(<span class="string">&quot;===== 响应拦截器 =====&quot;</span>);
+          <span class="built_in">print</span>(<span class="string">&quot;状态码: <span class="subst">$&#123;response.statusCode&#125;</span>&quot;</span>);
+
+          handler.next(response);
+        &#125;,
+
+        <span class="comment">// 请求失败</span>
+        onError: (error, handler) &#123;
+          <span class="built_in">print</span>(<span class="string">&quot;===== 错误拦截器 =====&quot;</span>);
+          <span class="built_in">print</span>(error.message);
+
+          handler.next(error);
+        &#125;,
+      ),
+    );
+  &#125;
+
+  Future&lt;<span class="keyword">void</span>&gt; loadData() <span class="keyword">async</span> &#123;
+    <span class="keyword">try</span> &#123;
+      Response response = <span class="keyword">await</span> dio.<span class="keyword">get</span>(
+        <span class="string">&quot;https://jsonplaceholder.typicode.com/posts/1&quot;</span>,
+      );
+
+      setState(() &#123;
+        result = response.data.toString();
+      &#125;);
+    &#125; <span class="keyword">catch</span> (e) &#123;
+      setState(() &#123;
+        result = e.toString();
+      &#125;);
+    &#125;
+  &#125;
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="keyword">return</span> Scaffold(
+      appBar: AppBar(title: <span class="keyword">const</span> Text(<span class="string">&quot;Dio拦截器演示&quot;</span>), centerTitle: <span class="keyword">true</span>),
+      body: Padding(
+        padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">16</span>),
+        child: Center(
+          child: Column(
+            children: [
+              ElevatedButton(onPressed: loadData, child: <span class="keyword">const</span> Text(<span class="string">&quot;发送请求&quot;</span>)),
+              <span class="keyword">const</span> SizedBox(height: <span class="number">20</span>),
+              Expanded(child: SingleChildScrollView(child: Text(result))),
+            ],
+          ),
+        ),
+      ),
+    );
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<h2 id="初始化获取数据"><a href="#初始化获取数据" class="headerlink" title="初始化获取数据"></a>初始化获取数据</h2><p>我们使用测试网站<a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/">https://jsonplaceholder.typicode.com/</a></p>
+<p>我们可以使用如下后缀来测试数据</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/posts">&#x2F;posts</a></td>
+<td>100 posts</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/comments">&#x2F;comments</a></td>
+<td>500 comments</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/albums">&#x2F;albums</a></td>
+<td>100 albums</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/photos">&#x2F;photos</a></td>
+<td>5000 photos</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/todos">&#x2F;todos</a></td>
+<td>200 todos</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/users">&#x2F;users</a></td>
+<td>10 users</td>
+</tr>
+</tbody></table>
+<p>这里我们使用&#x2F;posts&#x2F;1获得第一篇测试文章的数据</p>
+<table>
+<thead>
+<tr>
+<th>GET</th>
+<th><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/posts">&#x2F;posts</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/posts/1">&#x2F;posts&#x2F;1</a></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/posts/1/comments">&#x2F;posts&#x2F;1&#x2F;comments</a></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><a target="_blank" rel="noopener" href="https://jsonplaceholder.typicode.com/comments?postId=1">&#x2F;comments?postId&#x3D;1</a></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>&#x2F;posts</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>&#x2F;posts&#x2F;1</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>&#x2F;posts&#x2F;1</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>&#x2F;posts&#x2F;1</td>
+</tr>
+</tbody></table>
+<p>​	<style>.pnquqbkbsvfs{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170625979.webp" class="pnquqbkbsvfs" alt="image-20260718170625979"></p>
+<p>对比一下网站内容,完全一致</p>
+<p>​	<style>.vvvfnifpytvc{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170658143.webp" class="vvvfnifpytvc" alt="image-20260718170658143"></p>
+<div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;
+  runApp(<span class="keyword">const</span> MaterialApp(home: MainPage()));
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;
+  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);
+
+  <span class="meta">@override</span>
+  State&lt;MainPage&gt; createState() =&gt; _MainPageState();
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">_MainPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MainPage</span>&gt; </span>&#123;
+  <span class="built_in">String</span> result = <span class="string">&#x27;点击获取数据&#x27;</span>;
+  <span class="comment">//初始化</span>
+  <span class="keyword">void</span> initState() &#123;
+    <span class="comment">//使用initState()方法初始化</span>
+    <span class="keyword">super</span>.initState();
+  &#125;
+
+  <span class="keyword">void</span> _getChannels() <span class="keyword">async</span> &#123;
+    DioUtils util = DioUtils();
+
+    <span class="keyword">try</span> &#123;
+      <span class="comment">// 获取数据</span>
+      Response&lt;<span class="built_in">dynamic</span>&gt; response = <span class="keyword">await</span> util.<span class="keyword">get</span>(<span class="string">&#x27;/posts/1&#x27;</span>);
+      setState(() &#123;
+        result = response.data.toString();
+      &#125;);
+      <span class="built_in">print</span>(response);
+    &#125; <span class="keyword">catch</span> (e) &#123;
+      setState(() &#123;
+        result = e.toString();
+      &#125;);
+      <span class="built_in">print</span>(e);
+    &#125;
+  &#125;
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="keyword">return</span> Scaffold(
+      appBar: AppBar(title: Text(<span class="string">&#x27;Dio&#x27;</span>)),
+
+      body: Padding(
+        padding: EdgeInsets.all(<span class="number">16</span>),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(onPressed: _getChannels, child: Text(<span class="string">&quot;获取数据&quot;</span>)),
+              <span class="keyword">const</span> SizedBox(height: <span class="number">20</span>),
+              Expanded(child: SingleChildScrollView(child: Text(result))),
+            ],
+          ),
+        ),
+      ),
+    );
+  &#125;
+&#125;
+
+<span class="comment">//Dio 工具类</span>
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio(); <span class="comment">// 创建Dio实例</span>
+
+  <span class="comment">//设置基础地址和超时时间</span>
+  DioUtils() &#123;
+    _dio.options
+      ..baseUrl =
+          <span class="string">&#x27;https://jsonplaceholder.typicode.com&#x27;</span> <span class="comment">// 基础地址</span>
+      ..connectTimeout =
+          <span class="built_in">Duration</span>(seconds: <span class="number">5</span>) <span class="comment">// 连接超时,类型为Duration</span>
+      <span class="comment">// ..sendTimeout =</span>
+      <span class="comment">//     Duration(seconds: 5) // 发送超时,类型为Duration</span>
+      ..receiveTimeout = <span class="built_in">Duration</span>(seconds: <span class="number">5</span>); <span class="comment">// 响应超时,类型为Duration</span>
+
+    <span class="comment">// 添加请求拦截器</span>
+    _addInterceptors();
+  &#125;
+
+  <span class="comment">// 添加拦截器</span>
+  <span class="keyword">void</span> _addInterceptors() &#123;
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        <span class="comment">// 请求拦截器</span>
+        onRequest: (context, handler) &#123;
+          handler.next(context);
+        &#125;,
+        <span class="comment">// 响应拦截器</span>
+        onResponse: (context, handler) &#123;
+          <span class="comment">//http状态码为2XX成功,3XX跳转,4XX错误,5XX服务器错误</span>
+          <span class="keyword">if</span> (context.statusCode! &gt;= <span class="number">200</span> &amp;&amp; context.statusCode! &lt; <span class="number">300</span>) &#123;
+            handler.next(context);
+            <span class="keyword">return</span>;
+          &#125;
+          <span class="comment">// 其他状态码视为错误,抛出异常</span>
+          handler.reject(DioException(requestOptions: context.requestOptions));
+        &#125;,
+        <span class="comment">// 错误拦截器</span>
+        onError: (context, handler) &#123;
+          handler.reject(context);
+        &#125;,
+      ),
+    );
+  &#125;
+
+  <span class="comment">//向外暴露get方法,封装请求</span>
+  Future&lt;Response&lt;<span class="built_in">dynamic</span>&gt;&gt; <span class="keyword">get</span>(<span class="built_in">String</span> url, &#123;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt;? params&#125;) &#123;
+    <span class="keyword">return</span> _dio.<span class="keyword">get</span>(url, queryParameters: params);
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<h2 id="web端跨域问题"><a href="#web端跨域问题" class="headerlink" title="web端跨域问题"></a>web端跨域问题</h2><p>默认情况下,flutter运行 web 端加载网络资源会报跨域可能提示错误,解决方法是:</p>
+<p>首先在flutter&#x2F;packages&#x2F;flutter_tools&#x2F;lib&#x2F;src&#x2F;web&#x2F;chrome.dart里添加’–disable-web-security’,</p>
+<p>​	<style>.jothlfwejxfc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903222328495.webp" class="jothlfwejxfc" alt="image-20260903222328495"></p>
+<p>然后删除flutter&#x2F;bin&#x2F;cache&#x2F;下的 <strong>flutter_tools.snaphot</strong>和<strong>flutter_tools.stamp</strong>缓存文件</p>
+<p>最后执行 flutter doctor -v </p>
+<p>然后重新运行项目</p>
+<p>这个我们单独在一篇文章里解释</p>
+<h2 id="父传子实现"><a href="#父传子实现" class="headerlink" title="父传子实现"></a>父传子实现</h2><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span><span>113</span><span>114</span><span>115</span><span>116</span><span>117</span><span>118</span><span>119</span><span>120</span><span>121</span><span>122</span><span>123</span><span>124</span><span>125</span><span>126</span><span>127</span><span>128</span><span>129</span><span>130</span><span>131</span><span>132</span><span>133</span><span>134</span><span>135</span><span>136</span><span>137</span><span>138</span><span>139</span><span>140</span><span>141</span><span>142</span><span>143</span><span>144</span><span>145</span><span>146</span><span>147</span><span>148</span><span>149</span><span>150</span><span>151</span><span>152</span><span>153</span><span>154</span><span>155</span><span>156</span><span>157</span><span>158</span><span>159</span><span>160</span><span>161</span><span>162</span><span>163</span><span>164</span><span>165</span><span>166</span><span>167</span><span>168</span><span>169</span><span>170</span><span>171</span><span>172</span><span>173</span><span>174</span><span>175</span><span>176</span><span>177</span><span>178</span><span>179</span><span>180</span><span>181</span><span>182</span><span>183</span><span>184</span><span>185</span><span>186</span><span>187</span><span>188</span><span>189</span><span>190</span><span>191</span><span>192</span><span>193</span><span>194</span><span>195</span><span>196</span><span>197</span><span>198</span><span>199</span><span>200</span><span>201</span><span>202</span><span>203</span><span>204</span><span>205</span><span>206</span><span>207</span><span>208</span><span>209</span><span>210</span><span>211</span><span>212</span><span>213</span><span>214</span><span>215</span><span>216</span><span>217</span><span>218</span><span>219</span><span>220</span><span>221</span><span>222</span><span>223</span><span>224</span><span>225</span><span>226</span><span>227</span><span>228</span><span>229</span><span>230</span><span>231</span><span>232</span><span>233</span><span>234</span><span>235</span><span>236</span><span>237</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
+<span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
+
+<span class="keyword">void</span> main() &#123;
+  runApp(
+    <span class="keyword">const</span> MaterialApp(debugShowCheckedModeBanner: <span class="keyword">false</span>, home: MainPage()),
+  );
+&#125;
+
+<span class="comment">// =========================</span>
+<span class="comment">// 数据模型</span>
+<span class="comment">// =========================</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">PinData</span> </span>&#123;
+  <span class="keyword">final</span> <span class="built_in">String</span> title;
+  <span class="keyword">final</span> <span class="built_in">String</span> imageUrl;
+
+  PinData(&#123;<span class="keyword">required</span> <span class="keyword">this</span>.title, <span class="keyword">required</span> <span class="keyword">this</span>.imageUrl&#125;);
+&#125;
+
+<span class="comment">// =========================</span>
+<span class="comment">// 父组件</span>
+<span class="comment">// =========================</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;
+  <span class="keyword">const</span> MainPage(&#123;<span class="keyword">super</span>.key&#125;);
+
+  <span class="meta">@override</span>
+  State&lt;MainPage&gt; createState() =&gt; _MainPageState();
+&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">_MainPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MainPage</span>&gt; </span>&#123;
+  <span class="comment">// 父组件保存数据</span>
+  <span class="built_in">List</span>&lt;PinData&gt; pins = [];
+
+  <span class="built_in">bool</span> loading = <span class="keyword">false</span>;
+
+  <span class="comment">// 获取数据</span>
+  Future&lt;<span class="keyword">void</span>&gt; _getChannels() <span class="keyword">async</span> &#123;
+    DioUtils util = DioUtils();
+
+    setState(() &#123;
+      loading = <span class="keyword">true</span>;
+    &#125;);
+
+    <span class="keyword">try</span> &#123;
+      Response response = <span class="keyword">await</span> util.<span class="keyword">get</span>(<span class="string">&#x27;/posts&#x27;</span>);
+
+      <span class="built_in">List</span> data = response.data;
+
+      setState(() &#123;
+        pins = data.map((item) &#123;
+          <span class="keyword">return</span> PinData(
+            title: item[<span class="string">&#x27;title&#x27;</span>],
+
+            <span class="comment">// 暂时使用随机图片测试</span>
+            imageUrl: <span class="string">&#x27;https://picsum.photos/300/<span class="subst">$&#123;<span class="number">300</span> + item[<span class="string">&#x27;id&#x27;</span>] * <span class="number">20</span>&#125;</span>&#x27;</span>,
+          );
+        &#125;).toList();
+
+        loading = <span class="keyword">false</span>;
+      &#125;);
+    &#125; <span class="keyword">catch</span> (e) &#123;
+      <span class="built_in">print</span>(e);
+
+      setState(() &#123;
+        loading = <span class="keyword">false</span>;
+      &#125;);
+    &#125;
+  &#125;
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="keyword">return</span> Scaffold(
+      appBar: AppBar(title: <span class="keyword">const</span> Text(<span class="string">&#x27;Pinterest Demo&#x27;</span>)),
+
+      body: loading
+          ? <span class="keyword">const</span> Center(child: CircularProgressIndicator())
+          : pins.isEmpty
+          ? Center(
+              child: ElevatedButton(
+                onPressed: _getChannels,
+                child: <span class="keyword">const</span> Text(<span class="string">&#x27;获取数据&#x27;</span>),
+              ),
+            )
+          : PinGrid(
+              <span class="comment">// =========================</span>
+              <span class="comment">// 父传子</span>
+              <span class="comment">// =========================</span>
+              pins: pins,
+            ),
+    );
+  &#125;
+&#125;
+
+<span class="comment">// =========================</span>
+<span class="comment">// 子组件：图片网格</span>
+<span class="comment">// =========================</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">PinGrid</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;
+  <span class="keyword">final</span> <span class="built_in">List</span>&lt;PinData&gt; pins;
+
+  <span class="keyword">const</span> PinGrid(&#123;<span class="keyword">super</span>.key, <span class="keyword">required</span> <span class="keyword">this</span>.pins&#125;);
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="comment">// 获取当前窗口宽度</span>
+    <span class="built_in">double</span> width = MediaQuery.of(context).size.width;
+
+    <span class="comment">// 根据屏幕宽度决定列数</span>
+    <span class="built_in">int</span> columns;
+
+    <span class="keyword">if</span> (width &lt; <span class="number">600</span>) &#123;
+      columns = <span class="number">2</span>; <span class="comment">// 手机</span>
+    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (width &lt; <span class="number">900</span>) &#123;
+      columns = <span class="number">3</span>; <span class="comment">// 平板</span>
+    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (width &lt; <span class="number">1200</span>) &#123;
+      columns = <span class="number">4</span>; <span class="comment">// 小电脑</span>
+    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (width &lt; <span class="number">1600</span>) &#123;
+      columns = <span class="number">5</span>; <span class="comment">// 普通电脑</span>
+    &#125; <span class="keyword">else</span> &#123;
+      columns = <span class="number">6</span>; <span class="comment">// 大屏幕</span>
+    &#125;
+
+    <span class="keyword">return</span> GridView.builder(
+      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">16</span>),
+
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: columns,
+
+        <span class="comment">// 横向间距</span>
+        crossAxisSpacing: <span class="number">16</span>,
+
+        <span class="comment">// 纵向间距</span>
+        mainAxisSpacing: <span class="number">16</span>,
+
+        <span class="comment">// 卡片比例</span>
+        childAspectRatio: <span class="number">0.7</span>,
+      ),
+
+      itemCount: pins.length,
+
+      itemBuilder: (context, index) &#123;
+        <span class="keyword">return</span> PinCard(pin: pins[index]);
+      &#125;,
+    );
+  &#125;
+&#125;
+
+<span class="comment">// =========================</span>
+<span class="comment">// 子组件：一张图片卡片</span>
+<span class="comment">// =========================</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">PinCard</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;
+  <span class="keyword">final</span> PinData pin;
+
+  <span class="keyword">const</span> PinCard(&#123;<span class="keyword">super</span>.key, <span class="keyword">required</span> <span class="keyword">this</span>.pin&#125;);
+
+  <span class="meta">@override</span>
+  Widget build(BuildContext context) &#123;
+    <span class="keyword">return</span> Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        <span class="comment">// 图片</span>
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(<span class="number">16</span>),
+            child: Image.network(
+              pin.imageUrl,
+              width: <span class="built_in">double</span>.infinity,
+              fit: BoxFit.cover,
+
+              <span class="comment">// 加载失败</span>
+              errorBuilder: (context, error, stackTrace) &#123;
+                <span class="keyword">return</span> <span class="keyword">const</span> Center(child: Icon(Icons.error));
+              &#125;,
+            ),
+          ),
+        ),
+
+        <span class="keyword">const</span> SizedBox(height: <span class="number">6</span>),
+
+        <span class="comment">// 标题</span>
+        Text(
+          pin.title,
+          maxLines: <span class="number">2</span>,
+          overflow: TextOverflow.ellipsis,
+          style: <span class="keyword">const</span> TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  &#125;
+&#125;
+
+<span class="comment">// =========================</span>
+<span class="comment">// Dio 工具类</span>
+<span class="comment">// =========================</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">DioUtils</span> </span>&#123;
+  <span class="keyword">final</span> Dio _dio = Dio();
+
+  DioUtils() &#123;
+    _dio.options
+      ..baseUrl = <span class="string">&#x27;https://jsonplaceholder.typicode.com&#x27;</span>
+      ..connectTimeout = <span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">5</span>)
+      ..receiveTimeout = <span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">5</span>);
+
+    _addInterceptors();
+  &#125;
+
+  <span class="keyword">void</span> _addInterceptors() &#123;
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (context, handler) &#123;
+          handler.next(context);
+        &#125;,
+
+        onResponse: (context, handler) &#123;
+          <span class="keyword">if</span> (context.statusCode! &gt;= <span class="number">200</span> &amp;&amp; context.statusCode! &lt; <span class="number">300</span>) &#123;
+            handler.next(context);
+            <span class="keyword">return</span>;
+          &#125;
+
+          handler.reject(DioException(requestOptions: context.requestOptions));
+        &#125;,
+
+        onError: (context, handler) &#123;
+          handler.reject(context);
+        &#125;,
+      ),
+    );
+  &#125;
+
+  Future&lt;Response&lt;<span class="built_in">dynamic</span>&gt;&gt; <span class="keyword">get</span>(<span class="built_in">String</span> url, &#123;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">dynamic</span>&gt;? params&#125;) &#123;
+    <span class="keyword">return</span> _dio.<span class="keyword">get</span>(url, queryParameters: params);
+  &#125;
+&#125;</span><br></code></pre></div></div>
+
+<p>​	<style>.glxtflesvnaw{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903225959320.webp" class="glxtflesvnaw" alt="image-20260903225959320"></p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/05/17/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%8F%82%E5%8A%A0%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86%E4%B8%BE%E5%8A%9E%E7%9A%84%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%A4%A7%E8%B5%9B/"><span class="nav-label">← 上一篇</span><span class="nav-title">参加好游快爆举办的游戏开发大赛</span></a></div><div class="post-nav next"><a href="/2026/05/15/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E4%B9%9D%E5%A4%A9/"><span class="nav-label">下一篇 →</span><span class="nav-title">flutter第九天------组件通信</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=flutter-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82&amp;url=%2F2026%2F05%2F17%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%258D%2581%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F05%2F17%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%258D%2581%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F05%2F17%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%258D%2581%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F05%2F17%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%258D%2581%25E5%25A4%25A9%2F&amp;title=flutter-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F05%2F17%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%258D%2581%25E5%25A4%25A9%2F&amp;title=flutter-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
+  function initTwikoo() {
+    if (typeof twikoo === 'undefined') { setTimeout(initTwikoo, 200); return; }
+    twikoo.init({
+      envId: 'https://twikoo-five-ruby.vercel.app',
+      el: '#twikoo',
+      region: '',
+      path: 'window.location.pathname',
+      visitor: true,
+      onCommentLoaded: function () {
+        console.log('Twikoo评论加载成功');
+      }
+    });
+  }
+  function loadTwikoo() {
+    if (document.getElementById('twikoo-script')) { initTwikoo(); return; }
+    var s = document.createElement('script');
+    s.id = 'twikoo-script';
+    s.src = '/js/vendor/twikoo.all.min.js';
+    s.onload = initTwikoo;
+    s.onerror = function () { console.warn('Twikoo 本地脚本加载失败'); };
+    document.body.appendChild(s);
+  }
+  var target = document.getElementById('twikoo');
+  if ('IntersectionObserver' in window && target) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { io.disconnect(); loadTwikoo(); }
+      });
+    }, { rootMargin: '600px 0px' });
+    io.observe(target);
+  } else {
+    loadTwikoo();
+  }
+})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  /* ★ 层级:文章模态(1000)之后、正文之上,与落叶同层 */
+  z-index: 998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('/images/sakana/chisato.webp');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('/images/sakana/takina.webp');
+}
+.sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('/images/sakana/blue00f4.webp');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
+
+  const script = document.createElement('script');
+  script.src = '/js/effects/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  /* ★ 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
+     低于图片/表格/mermaid 全屏查看器(9999+)——全屏查看时桌宠
+     被遮在后面且鼠标无法与之交互;也低于页面上层的弹窗类组件 */
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+}
+
+/* ★ 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
+   父页面把桌宠临时沉到模态之下:iframe 内查看器的 z-index
+   困在 iframe 里,压不过父页面的桌宠,必须由父页面自己沉底 */
+#pet-root.behind-viewers {
+  z-index: 900;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+
+// ★ 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
+window.addEventListener('message', (e) => {
+  if (!e.data || e.data.type !== 'magzine-viewer') return;
+  const root = document.getElementById('pet-root');
+  if (root) root.classList.toggle('behind-viewers', !!e.data.open);
+  // 粒子(烟雾/汗水)挂 body,iframe 内查看器压不住,直接停止生成并淡出
+  if (window.PetLayers) {
+    if (e.data.open) window.PetLayers.muteParticles();
+    else window.PetLayers.unmuteParticles();
+  }
+});
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+window.PetLayers = PetLayers; // 供全屏查看器直链模式下静音粒子
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. 读者设置拦截:设置面板里关闭桌宠时,彻底不初始化。
+  //    烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
+  //    所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
+  if (window.__readerSettings && window.__readerSettings.pet === "off") {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 3. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+
+  // 3. 移动端拦截：根据 config.yml 决定是否在手机端加载
+  // 通过屏幕宽度和 User-Agent 双重检测移动端设备
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  // 获取 Hexo 注入的配置，如果未配置则默认按 false (不启用) 处理
+  const mobileEnabled = window.theme && window.theme.pet && window.theme.pet.mobile_enable;
+
+  if (isMobile && !mobileEnabled) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove(); // 销毁 DOM，防止残留不可见的空容器阻挡点击
+    return; // 终止初始化，不执行后续的重度 Canvas 与动画逻辑
+  }
+
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+  // ★ 性能修改:删除了原先 "visibility:hidden 直到 DOMContentLoaded" 的白屏锁。
+  //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
+  //   documentElement.classList 提前完成,不再需要整页隐藏。
+})();
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = (function () {
+  var base = {
+  image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.webp","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
+  author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
+  sakana: {"enable":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  just_read: {"enable":true},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+  };
+  // ★ 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
+  //   必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
+  window.__themeRaw = JSON.parse(JSON.stringify(base));
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script defer src="/js/features/ai.js"></script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script><script defer src="/js/core/lang-switch.js"></script></body></html>

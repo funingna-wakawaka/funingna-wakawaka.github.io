@@ -1,0 +1,1101 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>huyangpahuo</title>
+<script src="/js/core/reader-settings.js"></script>
+<script>(function() {
+  // 【修改点 1】头部脚本：如果本地存储为空(从未设置过)，默认开启暗色(true)
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+  
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/core/main.css">
+
+<link rel="stylesheet" href="/css/components/tags.css">
+
+<link rel="stylesheet" href="/css/pages/categories.css">
+
+<link rel="stylesheet" href="/css/pages/categories-accordion.css">
+
+<link rel="stylesheet" href="/css/pages/categories-explorer.css">
+
+<link rel="stylesheet" href="/css/components/highlight.css">
+
+<link rel="stylesheet" href="/css/components/toc.css">
+
+<link rel="stylesheet" href="/css/components/image-zoom.css">
+
+<link rel="stylesheet" href="/css/components/mermaid.css">
+
+<link rel="stylesheet" href="/css/components/share.css">
+
+<link rel="stylesheet" href="/css/components/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/components/search.css">
+
+<link rel="stylesheet" href="/css/core/scrollbar.css">
+
+<link rel="stylesheet" href="/css/components/timeline.css">
+
+<link rel="stylesheet" href="/css/components/ai-theme.css">
+
+<link rel="stylesheet" href="/css/components/loading-animation.css">
+
+<link rel="stylesheet" href="/css/components/article-modal.css">
+
+<link rel="stylesheet" href="/css/components/music-player.css">
+
+<link rel="stylesheet" href="/css/components/table.css">
+
+<link rel="stylesheet" href="/css/components/hero-effects.css">
+
+<link rel="stylesheet" href="/css/pages/about.css">
+
+<link rel="stylesheet" href="/css/pages/wall.css">
+
+<link rel="stylesheet" href="/css/pages/anime.css">
+
+<link rel="stylesheet" href="/css/pages/link.css">
+
+<link rel="stylesheet" href="/css/pages/murmur.css">
+
+<link rel="stylesheet" href="/css/pages/404.css">
+
+<link rel="stylesheet" href="/css/components/cursor.css">
+
+<link rel="stylesheet" href="/css/components/carousel.css">
+<style>:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #666666;
+  --accent-color: #00FFFF;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+  --tag-background-color: #ffffff;
+  --card-background-color: #ffffff;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 8.0.0"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+
+  // 读者在设置面板关掉了封面(reader-settings.js 在 <head> 先执行,此处可读到):
+  // 必须连同滚动锁定一起跳过,否则封面被隐藏后 body 仍处于 overflow:hidden,
+  // 页面没有滚动条也无法上下滚动。
+  var readerOff = window.__readerSettings && window.__readerSettings.cover === 'off';
+
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || readerOff || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content {
+  text-align: center; z-index: 10; pointer-events: none;
+  /* 标题/作者为装饰文字,拨动水波纹时禁止被选中 */
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+  const cover = document.getElementById('blog-cover');
+  if (cover && cover.style.display !== 'none') {
+    const startBtn = document.getElementById('start-journey');
+
+    // ★ 性能修改:THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
+    //   境内访问不稳定时封面会长时间黑屏等待)。
+    import('/js/vendor/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+
+    // ★ 性能修改:第二个 WebGL 实例延迟创建。
+    //   原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
+    //   但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
+    //   改为首次轮播切换前 1.5 秒才创建并加载图。
+    let app2 = null;
+    function getApp2() {
+      if (!app2) app2 = setupApp(canvas2);
+      return app2;
+    }
+
+    let currentSlide = 0;
+    let activeApp = 1;
+
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      setTimeout(() => {
+        // 封面已被关闭就不再创建第二个 WebGL 实例
+        if (cover.classList.contains('slide-up') || cover.style.display === 'none') return;
+        getApp2().loadImage(coverImages[1]);
+      }, 3500);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => getApp2().loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000);
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2 && app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到我的奇妙世界";
+  const configAuthor = "胡杨怕火";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/28.webp" alt="焦虑"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-09-14T11:56:35.000Z">2026-09-14</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>2.8k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>9</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">焦虑</h1><script>(function () {
+  try {
+    var __articleModalTitle = "焦虑";
+    if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
+      window.parent.postMessage(
+        { type: 'article-modal-title-update', title: __articleModalTitle },
+        window.location.origin
+      );
+    }
+  } catch (e) {}
+})();
+</script><div class="post-tags"><a class="tag" href="/tags/diary/"><i class="fas fa-tag" style="margin-right: 3px"> </i>diary</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="前两天我用Zcode做了一个wpf软件"><a href="#前两天我用Zcode做了一个wpf软件" class="headerlink" title="前两天我用Zcode做了一个wpf软件"></a>前两天我用Zcode做了一个wpf软件</h1><blockquote>
+<p>本文为个人进入大三后的一些日常中二琐念,望周知</p>
+</blockquote>
+<p>主要是我拍照时在想能不能做一个把图片风格化的软件,然后就说干就干了</p>
+<p>消耗token 约两亿,仅仅只用了两天…..而且效果还不错,但是bug也多,glm 5.3区区~太菜了</p>
+<p>要是用上高贵的gpt的astra大人就好了</p>
+<p>真的是极致生产力,不过我也累,主要是决策权在我这里</p>
+<p>如果一个人加上四五个agent,提需求+反复纠错+可持续维护的架构,可能不到一个星期就创造出来一个商业化标准的东西</p>
+<p>此时人的创造力可以极大地发挥,项目立马就能落地</p>
+<p>看QQ里大佬聊天可以知道,现在AI接Blender MCP已经可以建模了,而且还不赖,听他们说只用了一天就能制作出一个游戏3D场景,换以前至少5到6天甚至半个月</p>
+<p>这里就不聊这种了,其实不过是瓦特蒸汽机和手工纺织机的区别,对AI也没什么可焦虑的,当工具用呗</p>
+<p>不过有一点比较讽刺,想鹤立鸡群,就得变成像AI一样的人,然后大家都拥护祂,赞誉祂,学习祂,一辈子活在别人的评价</p>
+<p>估计这也是那些的诺贝尔奖的人或者著名政治人物的遭遇吧,也就是所谓的“他人即地狱”或者“人怕出名猪怕壮”</p>
+<p>他人注视下和没人注视下是两种截然不同的样子</p>
+<h2 id="迷茫"><a href="#迷茫" class="headerlink" title="迷茫"></a>迷茫</h2><p>唯一焦虑的是,我以后到底干什么</p>
+<p>考研? 我数学不是太好,我也不想一直被限制在学校,但我也不想立马就走出社会</p>
+<blockquote>
+<p>因为暑假我去打了一个月暑假工,然后打工期间去旅游,厂里完美印证了资本家的模样</p>
+<p>从来不把员工当人,而是可替代的螺丝钉,我估计互联网公司也大差不差</p>
+</blockquote>
+<p>毕竟AI代表的从来不是人与机器的竞争,而是人与人</p>
+<p>如果程序这玩意只是我自己学着玩的话,确实非常好玩,每天乐此不疲</p>
+<p>但如果必须靠这个东西吃饭,而且自己随时会被淘汰,整天两点一线,没日没夜的盯着屏幕,一坐坐一天,而且自己的全部心思都被工作内容占领</p>
+<p>我就对其产生了深深的厌恶,这就是所谓的终身学习?maybe</p>
+<p>这样其实有点太被动了,人的注意力是有限的,而且大家都是爱偷懒的</p>
+<p>就问有洗衣机,你还手洗吗?</p>
+<p>你可能说,手洗是每个人必备技能,确实没有问题,但我高中手洗了三年衣服老资历,洗衣机比手洗干净多了</p>
+<p>如果你想要学习或者创造,那就必须从一天总的注意力分出来这部分用来搞这些,剩下的用来吃饭娱乐睡觉</p>
+<p>当然也可以花一整天打游戏或者睡觉,但是注意力总量不变</p>
+<p>不过现实生活确实无聊透顶,群体社会生物比如蚁群蜂群猴群会表现出一个明显的必然趋势就是—–去除差异,优先同质</p>
+<p>吃相同的饭,刷相同的视频,打相同的游戏,去相同的地方,说相同的说辞,讲相同的故事……..</p>
+<p>so fucking boring,但也是无可奈何,你也不希望自己生病了吃药发现对自己没用吧,同质化有利于提高群体的生存几率</p>
+<p>包括娱乐也是,一些人消耗自己的注意力创造事物,另一些人而消耗自己的注意力消费事物,也就是经济世界的无形的大手,俗称<strong>利己也言他</strong></p>
+<p>记得乔布斯说“悲观者永远正确,乐观者永远前行”,大概就是如此吧</p>
+<h2 id="对金钱的思考"><a href="#对金钱的思考" class="headerlink" title="对金钱的思考"></a>对金钱的思考</h2><blockquote>
+<p>如果你对大人们说：“我看到一幢漂亮的红砖房子，窗户上有天竺葵，屋顶上有鸽子……”他们想象不出这幢房子是什么样子。</p>
+<p>你得对他们说：“我看到一幢价值十万法郎的房子。”</p>
+<p>他们就会惊呼：“那一定很漂亮！”</p>
+<p>——《小王子》</p>
+</blockquote>
+<p>钱的作用大概就是劳动价值交换,比如我今天想要吃东西,但是我不想做饭,然后楼下的小摊老板在卖煎饼,</p>
+<p>一个煎饼的价值大概6~7块,我省去了做饭的时间和精力甚至是学习做煎饼的过程获得了煎饼</p>
+<p>你主动接近某个人,一定是因为对方身上有你想要的东西,如金钱,权利,知识甚至是,你懂得<font color='#FFD700'>狗头狗头</font></p>
+<p>你主动雇佣某个人,一定是因为需要对方拥有你想要的某种能力或者想要支配某个人成为你的工具</p>
+<p>所以人是利己主义者,自私是写在DNA里代代相传的,可能是因为在自然选择中,拥有利己的基因的群体更容易生存? 这就无法考证了,但是明显团体合作的优势远远大于独自为营,这对每个人都有好处,所以从根本上还是利己主义噶</p>
+<p>而那些免费提供的事物,比如zcode或openai发免费token,然后大家趋之若鹜,然后对其产生莫名好感从而依赖,也就是免费的就是最贵的</p>
+<p>大家呼吁停止战争,是因为不希望战争发生到自己身上,</p>
+<p>不希望有人伤害未成年,是因为不希望自家小孩受害</p>
+<p>严厉打击贩毒诈骗,是因为不想自己或亲人受害</p>
+<p>想这些有的没的还不如玩一会我的世界和使命召唤……….不过就是停不住想这些,前几天大脑有点超频,每天晚上都睡不着,脑子一个小时想几百件事,头痛的要死</p>
+<p>今天中午睡觉时还做了一个梦,梦见我做了一个梦,然后我在梦里写下了这个梦,梦里是我在一个类似雅典神庙的特庄严的场景,周围全是士兵整整齐齐的站着,台子上站着一堆高官,一个士兵看到我了,向我走来,然后忘记了,</p>
+<p>诺兰的盗梦空间还是太权威了</p>
+<p>所以这种话题没有太大的意义,谈论的太多反而觉得现实残酷</p>
+<p>有的时候我觉得一个月4000就很好了,4000~6000可以每天都可以大吃大喝还能存点钱,但是如果代入房租,生病,求学巴拉巴拉,就会变成月光族还欠一堆债</p>
+<p>只是我们总是会接触到形形色色的人,遇到不同的人戴不同的面具,然后快速判断对方“有用”or ”无用”</p>
+<p>经典的营销号的“社金的手腕”“食人鼠”“人性的咪咪”</p>
+<p>如果你想要月薪3万,那想必你的雇佣者要从你身上获得至少6万的价值</p>
+<p>这个我玩小丑牌的时候深有所感,</p>
+<p>比方说<strong>木星同花牌</strong>是我最爱用的牌型</p>
+<p>如果一个牌能持续让我赢,我会优先使用它,一直使用它,狠狠使用它,直到它在某个场景没用比如“眼睛”或者“针”还有“公牛”等boss盲注情况下以及部分限制同花的牌组</p>
+<div class="hide-toggle">
+    <div class="hide-toggle-title">游戏截图</div>
+    <div class="hide-toggle-content"><p>​	<style>.brdctfpuyivc{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223023040.webp" class="brdctfpuyivc" alt="image-20260915223023040"></p>
+<p>​	<style>.mqkuwcfglhep{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223114044.webp" class="mqkuwcfglhep" alt="image-20260915223114044"></p>
+<p>​	<style>.xsnsorcecwms{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223148491.webp" class="xsnsorcecwms" alt="image-20260915223148491"></p>
+<p>​	<style>.ucenjymsxhnx{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223159268.webp" class="ucenjymsxhnx" alt="image-20260915223159268"></p>
+<p>​	<style>.cjopwbhtqnio{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223210833.webp" class="cjopwbhtqnio" alt="image-20260915223210833"></p>
+<p>​	<style>.xukruarjnxfy{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223230996.webp" class="xukruarjnxfy" alt="image-20260915223230996"></p>
+<p>​	<style>.cuhzlctuswpm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/image-20260915223242340.webp" class="cuhzlctuswpm" alt="image-20260915223242340"></p>
+</div>
+  </div>
+
+<p>不过LocalTrunk对赌博老虎机的机制真的发挥到了极致啊~我基本上玩上瘾了</p>
+<p>这也是为什么小丑牌能大卖的原因之一</p>
+<p>很多独立游戏制作者常常抱怨自己的游戏没人玩,但是说实话,他们自己大概率也不喜欢</p>
+<p>虽然游戏做多了就会丧失判断能力…..</p>
+<p>这就产生了一个思考:</p>
+<ul>
+<li>我喜欢的东西,别人大概率也喜欢</li>
+<li>我追求的玩意,别人大概率也追求</li>
+<li>我厌恶的事物,别人大概率也讨厌</li>
+</ul>
+<p>想起二次元,二次元大多数00后都喜欢,这玩意大概是在日本经济危机期间诞生,然后20年内兴起,到今天发展为完整的产业链,谷子,手办,cosplay,漫展乃至哔哩哔哩和nekoneko这些平台的诞生</p>
+<p>人见人爱,且象征着 完美,美好,永恒,强大,幸福,当然还有色欲,控制欲和强暴欲以及占有欲等原始本能</p>
+<p>大概就是人处于低谷期就容易胡思乱想,会倾向于逃避现实,然后创造虚拟内容的同时反过来影响现实,类似于生态系统中的负反馈循环</p>
+<p>不过这么想确实以偏概全,但还是刻板印象,之前看小钟jonny拍的非洲,菲律宾等地区的视频觉得,其实人类没什么区别,很多时候是傲慢与偏见导致的刻板印象</p>
+<p>上次去上海时在坐地铁时,一个小女孩问她的妈妈今年为什么不去日本玩了,然后妈妈解释巴拉巴拉</p>
+<p>相比大多数家庭这其实已经很好了,我爸妈除了河南哪也没去过,唯一的远行还是送我去大学</p>
+<p>突然想到什么是幸福? 好像这个问题中二且无解,不过幸福大概就是躺在床上睡到自然醒然后立马去吃饭,然后看看电视和书以及打游戏等这些其他人创造的价值,洗个澡继续睡——–我去,我怎么跟电锯人里的电次一样</p>
+<p>因为一直在提高标准,就永远达不到令自己满意的点,就永远在策马奔腾</p>
+<p>抑郁的人活在过去,焦虑的人活在未来两个,其实都挺极端的,因为两者都象征着死亡,都会激活大脑“我面临死亡”的区域,抑郁人常常想的是“我不拥有美好”,焦虑者常常想的是“我要失去美好”</p>
+<p>而我大概两边都沾一点吧,所以有点神经病,就好像脑子里有两个人格在chat,然后你可以看到我有强大的自言自语自娱自乐的行为…….</p>
+<p>不想那么多了,不知不觉废话文学了几千字,还不如刷刷视频打游戏,人生已经过了1&#x2F;4了,只是现在处于最好的年纪罢了,还是好好珍惜吧</p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "阿罗娜",
+        introduce: "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        version: "OpenAI GPT-4o",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/09/15/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E5%85%B3%E4%BA%8E%E7%BD%91%E7%AB%99%E5%8D%A1%E9%A1%BF/"><span class="nav-label">← 上一篇</span><span class="nav-title">关于网站卡顿</span></a></div><div class="post-nav next"><a href="/2026/09/14/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E8%AE%A9ai%E5%88%B6%E4%BD%9C%E4%BA%86%E4%B8%80%E4%B8%AAWindows%E9%BC%A0%E6%A0%87%E6%8C%87%E9%92%88%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%89%8D%E7%AB%AFskill/"><span class="nav-label">下一篇 →</span><span class="nav-title">让ai制作了一个Windows鼠标指针转换为前端skill.md</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E7%84%A6%E8%99%91&amp;url=%2F2026%2F09%2F14%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%2584%25A6%25E8%2599%2591%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F09%2F14%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%2584%25A6%25E8%2599%2591%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F09%2F14%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%2584%25A6%25E8%2599%2591%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F09%2F14%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%2584%25A6%25E8%2599%2591%2F&amp;title=%E7%84%A6%E8%99%91" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F09%2F14%2F%25E6%2597%25A5%25E8%25AE%25B0%25E7%259B%25B8%25E5%2585%25B3%2F%25E7%2584%25A6%25E8%2599%2591%2F&amp;title=%E7%84%A6%E8%99%91" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/09/14/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E7%84%A6%E8%99%91/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
+  function initTwikoo() {
+    if (typeof twikoo === 'undefined') { setTimeout(initTwikoo, 200); return; }
+    twikoo.init({
+      envId: 'https://twikoo-five-ruby.vercel.app',
+      el: '#twikoo',
+      region: '',
+      path: 'window.location.pathname',
+      visitor: true,
+      onCommentLoaded: function () {
+        console.log('Twikoo评论加载成功');
+      }
+    });
+  }
+  function loadTwikoo() {
+    if (document.getElementById('twikoo-script')) { initTwikoo(); return; }
+    var s = document.createElement('script');
+    s.id = 'twikoo-script';
+    s.src = '/js/vendor/twikoo.all.min.js';
+    s.onload = initTwikoo;
+    s.onerror = function () { console.warn('Twikoo 本地脚本加载失败'); };
+    document.body.appendChild(s);
+  }
+  var target = document.getElementById('twikoo');
+  if ('IntersectionObserver' in window && target) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { io.disconnect(); loadTwikoo(); }
+      });
+    }, { rootMargin: '600px 0px' });
+    io.observe(target);
+  } else {
+    loadTwikoo();
+  }
+})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+  position: fixed;
+  bottom: 40px; 
+  left: 30px; 
+  /* ★ 层级:文章模态(1000)之后、正文之上,与落叶同层 */
+  z-index: 998;
+  pointer-events: none;
+  transform: scale(0.3);
+  transform-origin: left bottom;
+}
+
+@media (max-width: 768px) {
+  #sakana-widget-wrapper { display: none !important; }
+}
+
+.sakana-switch-btn {
+  position: absolute;
+  bottom: 0px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color, #ff6b6b);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-size: 45px; 
+  font-weight: bold;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.sakana-switch-btn::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#sakana-widget-wrapper:hover .sakana-switch-btn {
+  opacity: 1;
+  bottom: -100px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sakana-switch-btn:hover {
+  filter: brightness(1.1);
+}
+
+.sakana-box {
+  width: 500px; height: 800px; position: relative;
+  transform-origin: 50% 100%; pointer-events: none;
+}
+.sakana-box canvas {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none;
+}
+.sakana-box .sakana-character {
+  width: 300px; height: 300px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 260px; cursor: pointer; pointer-events: auto;
+  transform-origin: 50% 400px; background: no-repeat 50% 50%; background-size: cover;
+}
+.sakana-box .sakana-character[data-character="chisato"] {
+  background-image: url('/images/sakana/chisato.webp');
+}
+.sakana-box .sakana-character[data-character="takina"] {
+  background-image: url('/images/sakana/takina.webp');
+}
+.sakana-bed {
+  width: 160px; height: 20px; position: absolute; left: 0; right: 0;
+  margin: 0 auto; bottom: 0; background: rgba(255,255,255,.5) no-repeat 50% 50%;
+  border-radius: 2px; cursor: pointer; pointer-events: auto;
+  background-image: url('/images/sakana/blue00f4.webp');
+  background-size: 20px 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+}
+
+/* 拖动小人期间,iframe 穿透鼠标事件(防止文章模态/视频 iframe 吞掉拖拽事件) */
+body.sakana-dragging iframe {
+  pointer-events: none !important;
+}
+</style><script>document.addEventListener('DOMContentLoaded', function() {
+  // 1. 移动端禁用
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
+  
+  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  if (window.self !== window.top) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper) wrapper.style.display = 'none';
+    return;
+  }
+
+  if (window.sakanaInitialized) return;
+  window.sakanaInitialized = true;
+
+  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  document.addEventListener('mousedown', function(e) {
+    var wrapper = document.getElementById('sakana-widget-wrapper');
+    if (wrapper && wrapper.contains(e.target)) {
+      document.body.classList.add('sakana-dragging');
+    }
+  }, true);
+  document.addEventListener('mouseup', function() {
+    document.body.classList.remove('sakana-dragging');
+  }, true);
+  window.addEventListener('blur', function() {
+    document.body.classList.remove('sakana-dragging');
+  });
+
+  const script = document.createElement('script');
+  script.src = '/js/effects/sakana.min.js';
+  script.async = true;
+  
+  script.onload = function() {
+    if (typeof Sakana !== 'undefined') {
+      const savedChar = localStorage.getItem('sakanaCharacter') || 'chisato';
+      const sakanaBox = document.getElementById('sakana-box-inner');
+      
+      const sakanaInstance = Sakana.init({
+        el: sakanaBox,
+        character: savedChar,
+        canSwitchCharacter: false
+      });
+      
+      Sakana.setMute(true);
+
+      const switchBtn = document.querySelector('.sakana-switch-btn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let current = sakanaBox.querySelector('.sakana-character').getAttribute('data-character');
+          let nextChar = current === 'chisato' ? 'takina' : 'chisato';
+          sakanaInstance.setCharacter(nextChar);
+          localStorage.setItem('sakanaCharacter', nextChar);
+        });
+      }
+    }
+  };
+  
+  document.body.appendChild(script);
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+#pet-root {
+  position: fixed;
+  /* ★ 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
+     低于图片/表格/mermaid 全屏查看器(9999+)——全屏查看时桌宠
+     被遮在后面且鼠标无法与之交互;也低于页面上层的弹窗类组件 */
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+}
+
+/* ★ 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
+   父页面把桌宠临时沉到模态之下:iframe 内查看器的 z-index
+   困在 iframe 里,压不过父页面的桌宠,必须由父页面自己沉底 */
+#pet-root.behind-viewers {
+  z-index: 900;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ===== 调试检测区域 ===== */
+#pet-debug-zone {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===== 内部容器 ===== */
+.pet-inner {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.pet-inner:active { cursor: grabbing; }
+
+/* ===== 精灵图 ===== */
+.pet-sprite {
+  position: absolute;
+  z-index: 40;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* ===== 头发画布 ===== */
+#pet-hair-canvas {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 光环 ===== */
+.pet-halo {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 影子 ===== */
+.pet-shadow {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* ===== 汗水容器 ===== */
+#pet-sweat-container {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 烟雾容器 ===== */
+#pet-smoke-container {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  width: 0; height: 0;
+}
+
+/* ===== 动画 ===== */
+@keyframes pet-sweat-anim {
+  0%   { opacity: 0.4; transform: translate(0, 0) scale(0.5); }
+  50%  { opacity: 0.4; transform: translate(var(--spread-x), var(--spread-y)) scale(1.2); }
+  100% { opacity: 0;   transform: translate(calc(var(--spread-x) * 1.5), calc(var(--spread-y) * 0.5)) scale(0.8); }
+}
+
+@keyframes pet-smoke-anim {
+  0%   { opacity: var(--smoke-alpha, 0.5); transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--smoke-dx), var(--smoke-dy)) scale(0.3); }
+}
+</style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
+
+// ★ 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
+window.addEventListener('message', (e) => {
+  if (!e.data || e.data.type !== 'magzine-viewer') return;
+  const root = document.getElementById('pet-root');
+  if (root) root.classList.toggle('behind-viewers', !!e.data.open);
+  // 粒子(烟雾/汗水)挂 body,iframe 内查看器压不住,直接停止生成并淡出
+  if (window.PetLayers) {
+    if (e.data.open) window.PetLayers.muteParticles();
+    else window.PetLayers.unmuteParticles();
+  }
+});
+import { PetStateMachine }    from '/js/pet/pet-state.js';
+import { PetHair }            from '/js/pet/pet-hair.js';
+import { PetLayers }          from '/js/pet/pet-layers.js';
+window.PetLayers = PetLayers; // 供全屏查看器直链模式下静音粒子
+import { PetSound }           from '/js/pet/pet-sound.js';
+import { PetOutline }         from '/js/pet/pet-outline.js';
+import { PetChat }            from '/js/pet/pet-chat.js';
+import { PetMusicPlayer }     from '/js/pet/pet-music.js';
+import { PetPretextInteraction } from '/js/pet/pet-pretext-interaction.js';
+
+function initDesktopPet() {
+  // 1. Iframe 拦截：如果是文章模态窗口，自杀并退出
+  if (window.self !== window.top) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 2. 读者设置拦截:设置面板里关闭桌宠时,彻底不初始化。
+  //    烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
+  //    所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
+  if (window.__readerSettings && window.__readerSettings.pet === "off") {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove();
+    return;
+  }
+
+  // 3. Pjax 拦截：桌宠只初始化一次，后续页面跳转保留原实例！
+  if (window.__PET_IS_RUNNING__) {
+    const roots = document.querySelectorAll('#pet-root');
+    // 删掉由 Pjax 新加载的第二个骨架，保留正在运行的第一个
+    if (roots.length > 1) {
+      roots[roots.length - 1].remove(); 
+    }
+    return; 
+  }
+
+  // 3. 移动端拦截：根据 config.yml 决定是否在手机端加载
+  // 通过屏幕宽度和 User-Agent 双重检测移动端设备
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  // 获取 Hexo 注入的配置，如果未配置则默认按 false (不启用) 处理
+  const mobileEnabled = window.theme && window.theme.pet && window.theme.pet.mobile_enable;
+
+  if (isMobile && !mobileEnabled) {
+    const root = document.getElementById('pet-root');
+    if (root) root.remove(); // 销毁 DOM，防止残留不可见的空容器阻挡点击
+    return; // 终止初始化，不执行后续的重度 Canvas 与动画逻辑
+  }
+
+  window.__PET_IS_RUNNING__ = true;
+
+  // ===== 常量与设置 =====
+  const IMG_PATH = '/images/pet/';
+  const VISUAL_SCALE = 0.3;
+  const BASE_SCALE   = 4;                    
+  const SCALE        = BASE_SCALE * VISUAL_SCALE; 
+  const RAW_W        = 32;
+  const RAW_H        = 32;
+  const W            = RAW_W * SCALE;         
+  const H            = RAW_H * SCALE;         
+  const MAX_SPEED    = 60;                    
+
+  // ===== DOM 获取与防刷保护 =====
+  const elRoot       = document.getElementById('pet-root');
+  // 【重要】将桌宠根节点挪到 body 最外层，防止它被 Pjax 切页时当成旧内容删掉！
+  if (elRoot && elRoot.parentNode !== document.body) {
+    document.body.appendChild(elRoot);
+  }
+
+  const elInner      = document.getElementById('pet-inner');
+  const elSprite     = document.getElementById('pet-sprite');
+  const elDebugZone  = document.getElementById('pet-debug-zone');
+  const elHalo       = document.getElementById('pet-halo');
+  const elShadow     = document.getElementById('pet-shadow');
+  const elSweat      = document.getElementById('pet-sweat-container');
+  const elSmoke      = document.getElementById('pet-smoke-container');
+  const elHairCanvas = document.getElementById('pet-hair-canvas');
+  const elChatBubble = document.getElementById('pet-chat-bubble'); 
+
+  // ===== 隐形护盾：防止 Iframe 吞噬拖拽事件 =====
+  const dragOverlay = document.createElement('div');
+  dragOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;display:none;';
+  document.body.appendChild(dragOverlay);
+
+  // ===== 布局 =====
+  elInner.style.width  = W + 'px';
+  elInner.style.height = H + 'px';
+  elInner.style.left   = (-W / 2) + 'px';
+  elInner.style.top    = (-H) + 'px';
+
+  const HAIR_CANVAS_SIZE = 384;
+  elHairCanvas.style.width  = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.height = HAIR_CANVAS_SIZE + 'px';
+  elHairCanvas.style.left   = (-(HAIR_CANVAS_SIZE - W) / 2) + 'px';
+  elHairCanvas.style.top    = (-(HAIR_CANVAS_SIZE - H) / 2) + 'px';
+  elChatBubble.style.top = (-H - 10) + 'px';
+
+  // ===== 模块实例化 =====
+  const sprite = new PetSprite(elSprite, IMG_PATH, 12);
+  
+  let isSMReady = false;
+  const stateMachine = new PetStateMachine({
+    rootEl:      elRoot,
+    innerEl:     elInner,
+    spriteEl:    elSprite,
+    debugZoneEl: elDebugZone,
+    sprite:      sprite,
+    spriteW:     W,
+    spriteH:     H,
+    onStateChange: () => {
+      if (!isSMReady) return;
+      // 【核心修复】如果桌宠被拎起来，开启全屏透明护盾，防止 iframe 吃掉鼠标事件
+      if (stateMachine.getState() === State.DRAGGING) {
+        dragOverlay.style.display = 'block';
+      } else {
+        dragOverlay.style.display = 'none';
+      }
+    },
+  });
+  isSMReady = true;
+
+  const hair = new PetHair(elHairCanvas, BASE_SCALE);
+  const layers = new PetLayers({ haloEl: elHalo, shadowEl: elShadow, sweatContainer: elSweat, smokeContainer: elSmoke }, IMG_PATH);
+  const sound = new PetSound(IMG_PATH + 'RunSounds.wav', elInner);
+  const outline = new PetOutline(elInner);
+  const chat = new PetChat(elChatBubble, document.getElementById('pet-chat-text'), elInner);
+  
+ const musicPlayer = new PetMusicPlayer(); // 参数已不需要
+  if (sound.menuEl) { musicPlayer.mountToMenu(sound.menuEl); }
+
+  // 实例化文字避让模块 (只在配置开启时)
+  let pretextInteraction = null;
+  if (window.theme && window.theme.pet && window.theme.pet.pretext_interaction && window.theme.pet.pretext_interaction.enable) {
+    pretextInteraction = new PetPretextInteraction({
+      repelRadius: window.theme.pet.pretext_interaction.repel_radius,
+      throttleMs: window.theme.pet.pretext_interaction.throttle_ms,
+      allowSelector: window.theme.pet.pretext_interaction.allow_selector || 'p, h1, h2, h3, h4, h5, h6, li, pre'
+    });
+  }
+
+  // ===== 主循环 =====
+  let lastTime = 0;
+  function mainLoop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    stateMachine.update(dt);
+    const state       = stateMachine.getState();
+    const pos         = stateMachine.getPos();
+    const velocity    = stateMachine.getVelocity();
+    const facingRight = stateMachine.isFacingRight();
+    const rotation    = stateMachine.getRotation();
+    const spriteOfsY  = stateMachine.getSpriteOffsetY();
+    const fallTargetY = stateMachine.getFallTargetY();
+
+    hair.update(dt, 0, -14 + spriteOfsY, velocity, MAX_SPEED, facingRight, rotation, timestamp);
+    layers.update({ dt, state, facingRight, posX: pos.x, posY: pos.y, spriteOffsetY: spriteOfsY, fallTargetY: fallTargetY, scale: SCALE });
+    sound.update(state);
+    chat.update(dt, state);
+
+     // ★ 在主循环中触发文字避让逻辑
+    if (pretextInteraction) {
+     pretextInteraction.update(pos.x, pos.y, timestamp);
+    }
+
+    requestAnimationFrame(mainLoop);
+  }
+
+  requestAnimationFrame(mainLoop);
+}
+
+// 启动桌宠
+initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+  // ★ 性能修改:删除了原先 "visibility:hidden 直到 DOMContentLoaded" 的白屏锁。
+  //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
+  //   documentElement.classList 提前完成,不再需要整页隐藏。
+})();
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
+
+
+</script><script>window.theme = (function () {
+  var base = {
+  image_viewer: {"desktop_thumbnails":true,"mobile_thumbnails":true,"desktop_switch_mode":"peek"},
+  reader_settings: {"enable":true,"items":{"music_player":true,"pet":true,"sakana":true,"navbar":true,"theme_color":true,"click_effect":true,"cover":true,"hero":true,"article_view":true,"pjax":true,"murmur_banner":true,"author_card":true,"image_viewer":true,"falling_leaves":true}},
+  music_player: {"enable":true,"style":"pill","pc_position":"header","autoplay":false,"default_cover":"/images/0.webp","opacity":0.8},
+  navbar: {"style":"bubble"},
+  color_picker: {"enable":true},
+  cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  pjax: {"enable":true},
+  murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
+  author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
+  sakana: {"enable":true},
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
+  article_list: {"card_size":"normal","view_mode":"modal"},
+  just_read: {"enable":true},
+  pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
+  anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
+  };
+  // ★ 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
+  //   必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
+  window.__themeRaw = JSON.parse(JSON.stringify(base));
+  // 深合并读者设置补丁(两级足够)
+  Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
+    if (
+      window.__readerThemePatch[k] &&
+      typeof window.__readerThemePatch[k] === "object" &&
+      typeof base[k] === "object" &&
+      base[k] !== null
+    ) {
+      base[k] = Object.assign({}, base[k], window.__readerThemePatch[k]);
+    } else {
+      base[k] = window.__readerThemePatch[k];
+    }
+  });
+  return base;
+})();
+</script><script defer src="/js/features/ai.js"></script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script><script defer src="/js/core/lang-switch.js"></script></body></html>
