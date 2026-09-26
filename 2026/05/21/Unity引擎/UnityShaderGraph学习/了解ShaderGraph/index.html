@@ -304,16 +304,23 @@
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
-  setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  const applyCoverTexts = () => {
+    if (!(window.i18n && window.i18n.get)) return;
+    const titleStr = window.i18n.get(configTitle);
+    const authorStr = window.i18n.get(configAuthor);
+    const btnStr = window.i18n.get(configBtn);
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
-  }, 100);
+  };
+
+  setTimeout(applyCoverTexts, 100);
+  document.addEventListener('langchange', applyCoverTexts);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -453,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/shadergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="shadergraph是unity提供的shader可视化"><a href="#shadergraph是unity提供的shader可视化" class="headerlink" title="shadergraph是unity提供的shader可视化"></a>shadergraph是unity提供的shader可视化</h1><p>​	<style>.gbaieneuorff{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522133437385.webp" class="gbaieneuorff" alt="image-20260522133437385"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/shadergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="shadergraph是unity提供的shader可视化"><a href="#shadergraph是unity提供的shader可视化" class="headerlink" title="shadergraph是unity提供的shader可视化"></a>shadergraph是unity提供的shader可视化</h1><p>​	<style>.ryefgljaxery{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522133437385.webp" class="ryefgljaxery" alt="image-20260522133437385"></p>
 <p>旧版本unity使用的是BuiltIn渲染管,新版本普遍使用URP(Universal Render Pipeline，通用渲染管线),因为这个支持多设备,当然要是制作纯PC端也可以使用HDRP</p>
 <h2 id="URP-Shader-Graph-的-7-种模板类型"><a href="#URP-Shader-Graph-的-7-种模板类型" class="headerlink" title="URP Shader Graph 的 7 种模板类型"></a>URP Shader Graph 的 7 种模板类型</h2><h3 id="1-Lit-Shader-Graph（光照着色器图）"><a href="#1-Lit-Shader-Graph（光照着色器图）" class="headerlink" title="1. Lit Shader Graph（光照着色器图）"></a>1. <strong>Lit Shader Graph（光照着色器图）</strong></h3><ul>
 <li><strong>用途</strong>：标准 PBR 材质，最常用的 3D 着色器</li>
@@ -580,19 +587,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </li>
 <li><strong>注意</strong>：这是 URP 12+（Unity 2021.2+）引入的，用于替代之前的后处理方式</li>
 </ul>
- <style>.bdirkqurjbyy{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135119433.webp" class="bdirkqurjbyy" alt="image-20260522135119433">
+ <style>.dynysgnzxelf{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135119433.webp" class="dynysgnzxelf" alt="image-20260522135119433">
 
 <p>保存资源并将材质添加到3d物体上</p>
 <p>这里我们可以在colorexample里制作颜色节点</p>
-<p>​	<style>.ewvnhrkcguak{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135542916.webp" class="ewvnhrkcguak" alt="image-20260522135542916"></p>
+<p>​	<style>.cwixopoojpkq{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135542916.webp" class="cwixopoojpkq" alt="image-20260522135542916"></p>
 <p>将这个与刚才的fragment相连并调整颜色并exposed暴露给inspector窗口</p>
- <style>.cdqcbfenoxlo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135742866.webp" class="cdqcbfenoxlo" alt="image-20260522135742866">
+ <style>.vumsofqpxmez{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522135742866.webp" class="vumsofqpxmez" alt="image-20260522135742866">
 
 <p>然后我们可以在这个shadergraph上创建材质的副本也就是Material</p>
-<p>​	<style>.bxnnbpxqkyfv{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140030711.webp" class="bxnnbpxqkyfv" alt="image-20260522140030711"></p>
+<p>​	<style>.jcdixysdnguh{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140030711.webp" class="jcdixysdnguh" alt="image-20260522140030711"></p>
 <p>在inspector里设置</p>
-<p>​	<style>.hghtuosmkxpo{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140111209.webp" class="hghtuosmkxpo" alt="image-20260522140111209"></p>
-<h1 id="纹理和UV坐标"><a href="#纹理和UV坐标" class="headerlink" title="纹理和UV坐标"></a>纹理和UV坐标</h1><p>​	<style>.horrdudfcuky{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140848527.webp" class="horrdudfcuky" alt="image-20260522140848527"></p>
+<p>​	<style>.gllrggehgwro{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140111209.webp" class="gllrggehgwro" alt="image-20260522140111209"></p>
+<h1 id="纹理和UV坐标"><a href="#纹理和UV坐标" class="headerlink" title="纹理和UV坐标"></a>纹理和UV坐标</h1><p>​	<style>.wpuwndvhodbt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522140848527.webp" class="wpuwndvhodbt" alt="image-20260522140848527"></p>
 <p>Texture纹理本质上是图片,所以我们可以去itch或者unity资源商店下载</p>
 <p>而UV就是 <strong>Texture Coordinates（纹理坐标）</strong>，用于告诉引擎<strong>如何把 2D 图片贴到 3D 模型表面</strong></p>
 <p>因为 3D 模型已经有 <strong>X、Y、Z</strong> 表示三维空间位置了，所以纹理坐标用 <strong>U、V</strong> 来区分：</p>
@@ -606,17 +613,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>unity不允许直接将纹理节点连到BaseColor输出,因为要求必须明确指定用于纹理采样的UV坐标</p>
 <p>这里需要使用到SampleTexture2D采样节点,往节点图中添加节点有两种方式:</p>
 <p>①直接右键菜单选择节点并输入sampletexture2d找到并回车</p>
-<p>​	<style>.gloahxtcybsj{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142207325.webp" class="gloahxtcybsj" alt="image-20260522142207325"></p>
+<p>​	<style>.duzdjkdudxwj{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142207325.webp" class="duzdjkdudxwj" alt="image-20260522142207325"></p>
 <p>② 按空格键调出节点创建面板并输入sampletexture2d找到并回车</p>
-<p>​	<style>.sphtmkgjieyu{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142432822.webp" class="sphtmkgjieyu" alt="image-20260522142432822"></p>
+<p>​	<style>.cmktepwwvydo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142432822.webp" class="cmktepwwvydo" alt="image-20260522142432822"></p>
 <p> 然后得到这个东西</p>
-<p>​	<style>.kscnyfchupfu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142622067.webp" class="kscnyfchupfu" alt="image-20260522142622067"></p>
+<p>​	<style>.wriqtmhnqmgy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142622067.webp" class="wriqtmhnqmgy" alt="image-20260522142622067"></p>
 <p>左侧接口用于接收纹理输入</p>
 <p>对于图片模糊的可以设置为point no filter并apply</p>
- <style>.mefdyjmphrtk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142920299.webp" class="mefdyjmphrtk" alt="image-20260522142920299">
+ <style>.atxltcklwegu{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522142920299.webp" class="atxltcklwegu" alt="image-20260522142920299">
 
 <p>此时就非常清晰了</p>
-<p>​	<style>.iivdvrbevujd{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522143326824.webp" class="iivdvrbevujd" alt="image-20260522143326824"></p>
+<p>​	<style>.bkegqmcvpuml{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522143326824.webp" class="bkegqmcvpuml" alt="image-20260522143326824"></p>
 <p>​	Unity 中 Texture 的 <strong>Filter Mode（过滤模式）</strong> 决定了当纹理被放大或缩小时，引擎如何采样像素颜色。三种模式如下：</p>
 <hr>
 <h2 id="三种-Filter-Mode"><a href="#三种-Filter-Mode" class="headerlink" title="三种 Filter Mode"></a>三种 Filter Mode</h2><h3 id="1-Point（点过滤-最近邻）"><a href="#1-Point（点过滤-最近邻）" class="headerlink" title="1. Point（点过滤 &#x2F; 最近邻）"></a>1. <strong>Point（点过滤 &#x2F; 最近邻）</strong></h3><ul>
@@ -665,41 +672,41 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>其余的R,G,B,A分别指的是红色,绿色,蓝色,和阿尔法透明通道</p>
 <h2 id="将纹理和基础色相混合"><a href="#将纹理和基础色相混合" class="headerlink" title="将纹理和基础色相混合"></a>将纹理和基础色相混合</h2><p>这个可以使用乘法节点器</p>
 <p>这个会将左侧的两个红色通道的值相乘</p>
-<p>​	<style>.ovnhwnmqxlvj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144244046.webp" class="ovnhwnmqxlvj" alt="image-20260522144244046"></p>
+<p>​	<style>.putycgmuquqq{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144244046.webp" class="putycgmuquqq" alt="image-20260522144244046"></p>
 <p>大概这个样子</p>
-<p>​	<style>.ooybgmqzngnw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144507211.webp" class="ooybgmqzngnw" alt="image-20260522144507211"></p>
+<p>​	<style>.gofxeobqxfue{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144507211.webp" class="gofxeobqxfue" alt="image-20260522144507211"></p>
 <p>然后你就会看到我们的箱子实现了,这就是所谓的游戏贴图</p>
-<p>​	<style>.ikbyrwbyueld{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144918734.webp" class="ikbyrwbyueld" alt="image-20260522144918734"></p>
-<h2 id="控制滚动方向"><a href="#控制滚动方向" class="headerlink" title="控制滚动方向"></a>控制滚动方向</h2><p>​	<style>.xfvtybupkgth{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145143923.webp" class="xfvtybupkgth" alt="image-20260522145143923"></p>
+<p>​	<style>.slqxithdktin{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522144918734.webp" class="slqxithdktin" alt="image-20260522144918734"></p>
+<h2 id="控制滚动方向"><a href="#控制滚动方向" class="headerlink" title="控制滚动方向"></a>控制滚动方向</h2><p>​	<style>.tgvcpotbqdfs{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145143923.webp" class="tgvcpotbqdfs" alt="image-20260522145143923"></p>
 <p>拖入刚才创建的vector2节点,将默认值改为(1,0),并加入Time节点</p>
-<p>​	<style>.xobvzyfjmxlq{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145407847.webp" class="xobvzyfjmxlq" alt="image-20260522145407847"></p>
+<p>​	<style>.ipnhquwtcfif{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145407847.webp" class="ipnhquwtcfif" alt="image-20260522145407847"></p>
 <p>time节点在着色器动画制作中很实用,可以提供多个不同的时间参数,最常用的就是Time参数,该数值表示场景加载后经过的秒数</p>
 <p>将滚动速度scrollvelocity和时间Time相乘后最终会得到一个随时间推移持续朝同一方向增长的向量,初始滚动速度越大,其增长速度就越快</p>
-<p>​	<style>.bhhdtusfvmuc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145916584.webp" class="bhhdtusfvmuc" alt="image-20260522145916584"></p>
+<p>​	<style>.ovhyvwiextbe{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522145916584.webp" class="ovhyvwiextbe" alt="image-20260522145916584"></p>
 <p>这个偏移向量将被应用于网格的默认UV坐标</p>
 <p>我们需要添加一个叫做Tiling And Offset(平铺与偏移)来实现偏移向量的应用</p>
-<p>​	<style>.yqxslhvqnnov{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522150746404.webp" class="yqxslhvqnnov" alt="image-20260522150746404"></p>
+<p>​	<style>.fhxlkjawogcj{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522150746404.webp" class="fhxlkjawogcj" alt="image-20260522150746404"></p>
 <p>此时就会实现贴图的滚动,此时启动游戏就可以看到材质的滚动了</p>
-<p>​	<style>.mycrlanfuhlk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522151146892.webp" class="mycrlanfuhlk" alt="image-20260522151146892"></p>
+<p>​	<style>.xwghiqipmvpu{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522151146892.webp" class="xwghiqipmvpu" alt="image-20260522151146892"></p>
 <h1 id="透明度和Alpha通道"><a href="#透明度和Alpha通道" class="headerlink" title="透明度和Alpha通道"></a>透明度和Alpha通道</h1><p>透明物体的渲染逻辑和不透明物体存在本质差异</p>
 <p>出于渲染性能unity在渲染不透明物体时,通常采用<strong>从近到远</strong>的绘制顺序,近物遮挡机制可以有效提升提升渲染效率</p>
 <p>对于透明物体需要根据Alpha值与背景物体进行颜色混合即Alpha混合透明机制,首先必须完成所有不透明物体的渲染才能进行后续的颜色计算,对于shader需要手动设置渲染优先级,数值越小渲染优先级越高,而shadergraph会自动处理顺序,采用<strong>从远到近</strong>的渲染顺序,距离最远的物体会优先绘制,而靠近摄像机的物体则后绘制</p>
-<p>​	<style>.ihtzleozqynm{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522152723034.webp" class="ihtzleozqynm" alt="image-20260522152723034"></p>
+<p>​	<style>.qhlotbswlhro{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522152723034.webp" class="qhlotbswlhro" alt="image-20260522152723034"></p>
 <p>由于节点图采用的是不透明渲染模式,我们需要做一些调整</p>
 <p>将Fragment的surface type表面类型改为transparent透明</p>
-<p>​	<style>.jmwuquixxfgy{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522153226862.webp" class="jmwuquixxfgy" alt="image-20260522153226862"></p>
+<p>​	<style>.tmowessmrzjo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522153226862.webp" class="tmowessmrzjo" alt="image-20260522153226862"></p>
 <p>由于输出的有multiply输出的有四个值,光学三原色和阿尔法透明值,我们的base color只接受了三原色,此时需要split组件将输出结果分离并提取出来alpha值</p>
-<p>​	<style>.dkuplaexfbiw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522153541210.webp" class="dkuplaexfbiw" alt="image-20260522153541210"></p>
+<p>​	<style>.seuskjtzqcre{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522153541210.webp" class="seuskjtzqcre" alt="image-20260522153541210"></p>
 <p>我们然后创建材质并修改阿尔法值</p>
-<p>​	<style>.dublzkpuqxgz{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522154354937.webp" class="dublzkpuqxgz" alt="image-20260522154354937"></p>
+<p>​	<style>.teqrybfgwgmm{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522154354937.webp" class="teqrybfgwgmm" alt="image-20260522154354937"></p>
 <h1 id="Alpha裁剪"><a href="#Alpha裁剪" class="headerlink" title="Alpha裁剪"></a>Alpha裁剪</h1><p>这里首先换一张类似的贴图,然后打开alpha clipping阿尔法裁剪</p>
-<p>​	<style>.tjxtjhvuddue{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522170848852.webp" class="tjxtjhvuddue" alt="image-20260522170848852"></p>
+<p>​	<style>.olwciwqzhgvg{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522170848852.webp" class="olwciwqzhgvg" alt="image-20260522170848852"></p>
 <p>然后制作material,修改阿尔法值并附加到cube上得到</p>
-<p>​	<style>.ebpuofkagnhr{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171122042.webp" class="ebpuofkagnhr" alt="image-20260522171122042"></p>
+<p>​	<style>.klwdzeckwcxj{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171122042.webp" class="klwdzeckwcxj" alt="image-20260522171122042"></p>
 <p>然后添加一个浮点类型节点</p>
-<p>​	<style>.mvkcamowwirr{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171246685.webp" class="mvkcamowwirr" alt="image-20260522171246685"></p>
-<p>​	<style>.nsjswojudpoc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171657427.webp" class="nsjswojudpoc" alt="image-20260522171657427"></p>
-<p>​	<style>.jrttwptfyzho{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171902519.webp" class="jrttwptfyzho" alt="image-20260522171902519"></p>
+<p>​	<style>.efakypxndiki{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171246685.webp" class="efakypxndiki" alt="image-20260522171246685"></p>
+<p>​	<style>.rmpcejfjuket{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171657427.webp" class="rmpcejfjuket" alt="image-20260522171657427"></p>
+<p>​	<style>.vsymqiginrtt{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522171902519.webp" class="vsymqiginrtt" alt="image-20260522171902519"></p>
 <h1 id="Dither抖动纹理"><a href="#Dither抖动纹理" class="headerlink" title="Dither抖动纹理"></a>Dither抖动纹理</h1><p>添加dither节点,因为如果我们直接用脚本控制一个物体逐渐消失会出现色块不均匀消失的情况</p>
 <p>Unity Shader Graph 的 <strong>Dither（抖动）节点</strong> 用于在屏幕空间应用<strong>有序抖动（Ordered Dithering）</strong>，核心作用是通过引入可控噪声来<strong>随机化量化误差</strong>，从而避免色带（Color Banding）等大面积图案问题</p>
 <table>
@@ -730,11 +737,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <td align="left">抖动后的输出值</td>
 </tr>
 </tbody></table>
-<p>​	<style>.yvoqjslkpsqw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174312941.webp" class="yvoqjslkpsqw" alt="image-20260522174312941"></p>
+<p>​	<style>.kqtlmcjvcyfm{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174312941.webp" class="kqtlmcjvcyfm" alt="image-20260522174312941"></p>
 <p>这样我们改变透明度的时候就会有那种点状消失的效果</p>
-<p>​	<style>.hrwpvigcqrpf{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174004488.webp" class="hrwpvigcqrpf" alt="image-20260522174004488"></p>
+<p>​	<style>.tadxluetiutn{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174004488.webp" class="tadxluetiutn" alt="image-20260522174004488"></p>
 <p>这个不太明显,换一个纹理就很直观了</p>
-<p>​	<style>.kmnykbsvrnok{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174632318.webp" class="kmnykbsvrnok" alt="image-20260522174632318"></p>
+<p>​	<style>.mfcwmrjrkdxi{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/21/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E4%BA%86%E8%A7%A3ShaderGraph/image-20260522174632318.webp" class="mfcwmrjrkdxi" alt="image-20260522174632318"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1245,7 +1252,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1257,7 +1264,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},

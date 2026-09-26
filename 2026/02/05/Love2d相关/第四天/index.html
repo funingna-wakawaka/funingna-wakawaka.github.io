@@ -304,16 +304,23 @@
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
-  setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  const applyCoverTexts = () => {
+    if (!(window.i18n && window.i18n.get)) return;
+    const titleStr = window.i18n.get(configTitle);
+    const authorStr = window.i18n.get(configAuthor);
+    const btnStr = window.i18n.get(configBtn);
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
-  }, 100);
+  };
+
+  setTimeout(applyCoverTexts, 100);
+  document.addEventListener('langchange', applyCoverTexts);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -498,7 +505,7 @@ hello(<span class="string">&quot;%d\n&quot;</span>, <span class="number">911</sp
 <li><strong>select(n, …)</strong> 用于返回从起点 <strong>n</strong> 开始到结束位置的所有参数列表</li>
 </ul>
 </blockquote>
-<p>​	<style>.recsjxtzwenm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205233440605.webp" class="recsjxtzwenm" alt="image-20260205233440605"></p>
+<p>​	<style>.hxxttrkuhqdk{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205233440605.webp" class="hxxttrkuhqdk" alt="image-20260205233440605"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span>
     <span class="keyword">local</span> sum = <span class="number">0</span>;
     <span class="keyword">local</span> args = &#123; ... &#125;;
@@ -511,7 +518,7 @@ hello(<span class="string">&quot;%d\n&quot;</span>, <span class="number">911</sp
 <span class="built_in">print</span>(<span class="string">&quot;参数个数为&quot;</span> .. count .. <span class="string">&quot;，总和为&quot;</span> .. total) <span class="comment">-- 输出 参数个数为3，总和为6</span></span><br></code></pre></div></div>
 
 <h3 id="select-“-”-…-或select-‘-’-…-统计传入参数总数"><a href="#select-“-”-…-或select-‘-’-…-统计传入参数总数" class="headerlink" title="select(“#”,…)或select(‘#’,…)统计传入参数总数"></a>select(“#”,…)或select(‘#’,…)统计传入参数总数</h3><p>这时候我们可以使用<code>select(&quot;#&quot;,...)</code>或者<code>select(&#39;#&#39;,...)</code>,就可以返回可变参数的真实数量了包括nil</p>
-<p>​	<style>.oighusmthgwo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205234158826.webp" class="oighusmthgwo" alt="image-20260205234158826"></p>
+<p>​	<style>.oldtdgezvpbl{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205234158826.webp" class="oldtdgezvpbl" alt="image-20260205234158826"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">numberAdd</span><span class="params">(...)</span></span>
     <span class="keyword">local</span> sum = <span class="number">0</span>;
     <span class="keyword">local</span> args = &#123; ... &#125;;
@@ -555,7 +562,7 @@ args2(<span class="string">&quot;终末地&quot;</span>, <span class="string">&q
 
 args3(<span class="string">&quot;终末地&quot;</span>, <span class="string">&quot;原神&quot;</span>, <span class="string">&quot;鸣潮&quot;</span>)</span><br></code></pre></div></div>
 
-<p>​	<style>.ofkfrlyykmmy{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205235452574.webp" class="ofkfrlyykmmy" alt="image-20260205235452574"></p>
+<p>​	<style>.gsrjdcxhnjlz{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260205235452574.webp" class="gsrjdcxhnjlz" alt="image-20260205235452574"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> t = &#123;<span class="built_in">select</span>(<span class="number">1</span>, ...)&#125;
 </span><br></code></pre></div></div>
 
@@ -715,13 +722,13 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 <p>Lua 中,要计算字符串的长度(即字符串中字符的个数),可以使用 <strong>string.len</strong> 函数或 <strong>utf8.len</strong> 函数</p>
 <p>计算包含中文的字符串一般用 <strong>utf8.len</strong>,</p>
 <p>计算只包含 ASCII 字符串的长度用 <strong>string.len</strong>,UTF-8 中文 &#x3D; 3字节</p>
-<p>​	 <style>.kkdbghvuzblq{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207171744032.webp" class="kkdbghvuzblq" alt="image-20260207171744032"></p>
+<p>​	 <style>.pqqgtbxmlmvh{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207171744032.webp" class="pqqgtbxmlmvh" alt="image-20260207171744032"></p>
 <p>可以看出string.len是按照字节数计算的,而utf8.len是按照字符的个数计算的</p>
 <h3 id="②-字符串英文大小写转换"><a href="#②-字符串英文大小写转换" class="headerlink" title="② 字符串英文大小写转换"></a>② 字符串英文大小写转换</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">upper</span>() 小写转大写
 
 <span class="built_in">string</span>.<span class="built_in">lower</span>() 大写转小写</span><br></code></pre></div></div>
 
-<p>​	<style>.dovmnaykrgbr{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207173754106.webp" class="dovmnaykrgbr" alt="image-20260207173754106"></p>
+<p>​	<style>.iejbitluwett{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207173754106.webp" class="iejbitluwett" alt="image-20260207173754106"></p>
 <h3 id="③-替换字符串里的元素"><a href="#③-替换字符串里的元素" class="headerlink" title="③ 替换字符串里的元素"></a>③ 替换字符串里的元素</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">gsub</span>(main, <span class="built_in">find</span>, replace, num)</span><br></code></pre></div></div>
 
 <blockquote>
@@ -734,15 +741,15 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 </ul>
 </blockquote>
 <p>这么说你们可能看不懂</p>
-<p>​	<style>.xmupfaqjledm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205302321.webp" class="xmupfaqjledm" alt="image-20260207205302321"></p>
+<p>​	<style>.lpmdcjlkfypi{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205302321.webp" class="lpmdcjlkfypi" alt="image-20260207205302321"></p>
 <p>这下你们理解了吧,可以看到返回值有两个</p>
 <blockquote>
 <p>返回值1：新字符串</p>
 <p>返回值2：替换次数</p>
 </blockquote>
-<p>​	<style>.ofmasxjwmvbd{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205732441.webp" class="ofmasxjwmvbd" alt="image-20260207205732441"></p>
+<p>​	<style>.vwkvyxyurtry{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207205732441.webp" class="vwkvyxyurtry" alt="image-20260207205732441"></p>
 <p>我们还可以这么玩,就是利用模式匹配,%d为数字</p>
-<p>​	<style>.ymkpycbfixxn{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207210200583.webp" class="ymkpycbfixxn" alt="image-20260207210200583"> </p>
+<p>​	<style>.qnykgqtkwqbc{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207210200583.webp" class="qnykgqtkwqbc" alt="image-20260207210200583"> </p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;2026-02-10&quot;</span>, <span class="string">&quot;(%d+)%-(%d+)%-(%d+)&quot;</span>, <span class="string">&quot;%3/%2/%1&quot;</span>)
 <span class="comment">-- &quot;10/02/2026&quot;</span>
 
@@ -767,7 +774,7 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 </li>
 </ul>
 </blockquote>
-<p>​	<style>.shrdrphdlusy{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207212128549.webp" class="shrdrphdlusy" alt="image-20260207212128549"></p>
+<p>​	<style>.jnrusrjonndh{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260207212128549.webp" class="jnrusrjonndh" alt="image-20260207212128549"></p>
 <blockquote>
 <p>返回值1: 要查找的字符串在原字符串中的开始位置</p>
 <p>返回值2:要查找的字符串在原字符串中的结束位置</p>
@@ -779,11 +786,11 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 
 <h3 id="⑤-字符串反转-只支持ASCII符号"><a href="#⑤-字符串反转-只支持ASCII符号" class="headerlink" title="⑤  字符串反转(只支持ASCII符号)"></a>⑤  字符串反转(只支持ASCII符号)</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">reverse</span>()    </span><br></code></pre></div></div>
 
-<p>​	<style>.dtgfppmngtul{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208141648374.webp" class="dtgfppmngtul" alt="image-20260208141648374"></p>
+<p>​	<style>.spsmtzyvacdr{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208141648374.webp" class="spsmtzyvacdr" alt="image-20260208141648374"></p>
 <h3 id="⑥-字符串格式化"><a href="#⑥-字符串格式化" class="headerlink" title="⑥ 字符串格式化"></a>⑥ 字符串格式化</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">format</span>()</span><br></code></pre></div></div>
 
 <p>这个之前说过了,和C语言printf类似,就不细说了</p>
-<p>​	<style>.tquimjxmyron{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208145712219.webp" class="tquimjxmyron" alt="image-20260208145712219"></p>
+<p>​	<style>.erhedphmowng{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208145712219.webp" class="erhedphmowng" alt="image-20260208145712219"></p>
 <p>常用格式符：</p>
 <table>
 <thead>
@@ -888,20 +895,20 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 <span class="comment">-- &quot;  Hel&quot;</span></span><br></code></pre></div></div>
 
 <p>我们可以用来打印角色信息</p>
-<p>​	<style>.dkifqeyikfgg{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001053002.webp" class="dkifqeyikfgg" alt="image-20260209001053002"></p>
+<p>​	<style>.iteiizwbukoq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001053002.webp" class="iteiizwbukoq" alt="image-20260209001053002"></p>
 <p>也可以输出游戏时间和评分</p>
-<p>​	<style>.dakykvjbmpjx{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001513906.webp" class="dakykvjbmpjx" alt="image-20260209001513906"></p>
+<p>​	<style>.iloljwbgojpb{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260209001513906.webp" class="iloljwbgojpb" alt="image-20260209001513906"></p>
 <h3 id="⑦-数字和字符转换"><a href="#⑦-数字和字符转换" class="headerlink" title="⑦  数字和字符转换"></a>⑦  数字和字符转换</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">char</span>() <span class="comment">--数字 → 字符（ASCII/UTF8编码）</span>
 
 <span class="built_in">string</span>.<span class="built_in">byte</span>(s, [i])  <span class="comment">--字符 → 数字编码 ,第二个参数是索引值</span></span><br></code></pre></div></div>
 
 <p>char 将整型数字转成字符并连接， byte 转换字符为整数值(可以指定某个字符，默认第一个字符)</p>
- <style>.vneuxfomsvoo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151409611.webp" class="vneuxfomsvoo" alt="image-20260208151409611">
+ <style>.svdnwdfevpke{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151409611.webp" class="svdnwdfevpke" alt="image-20260208151409611">
 
-<p>​		<style>.buwnfatnjuhd{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151746772.webp" class="buwnfatnjuhd" alt="image-20260208151746772"></p>
+<p>​		<style>.tcqunwhrqelq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208151746772.webp" class="tcqunwhrqelq" alt="image-20260208151746772"></p>
 <h3 id="⑧-重复字符串"><a href="#⑧-重复字符串" class="headerlink" title="⑧ 重复字符串"></a>⑧ 重复字符串</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">rep</span>(<span class="built_in">string</span>, n)</span><br></code></pre></div></div>
 
-<p>​	<style>.nirxislnpnod{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208234817461.webp" class="nirxislnpnod" alt="image-20260208234817461"></p>
+<p>​	<style>.sxjyiydrhohn{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260208234817461.webp" class="sxjyiydrhohn" alt="image-20260208234817461"></p>
 <h3 id="⑨-字符串截取"><a href="#⑨-字符串截取" class="headerlink" title="⑨ 字符串截取"></a>⑨ 字符串截取</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">sub</span>(s, i, j)</span><br></code></pre></div></div>
 
 <blockquote>
@@ -981,7 +988,7 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
     <span class="built_in">print</span>(<span class="string">&quot;space:&quot;</span>, s)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.wktszjtwmrlp{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210160644931.webp" class="wktszjtwmrlp" alt="image-20260210160644931"></p>
+<p>​	<style>.ggqgpdmxrtif{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210160644931.webp" class="ggqgpdmxrtif" alt="image-20260210160644931"></p>
 <h3 id="⑪-首次匹配-单次扫描"><a href="#⑪-首次匹配-单次扫描" class="headerlink" title="⑪ 首次匹配 (单次扫描)"></a>⑪ 首次匹配 (单次扫描)</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-lua"><span class="built_in">string</span>.<span class="built_in">match</span>(str, pattern, init)</span><br></code></pre></div></div>
 
 <blockquote>
@@ -1098,7 +1105,7 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 <span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;abc 1234&quot;</span>, <span class="string">&quot;%a+%s+%d+&quot;</span>))
 <span class="comment">-- &quot;abc 1234&quot;</span></span><br></code></pre></div></div>
 
-<p>​	<style>.bnskwuwgxtyu{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210170230710.webp" class="bnskwuwgxtyu" alt="image-20260210170230710"></p>
+<p>​	<style>.frnqymcghjqx{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210170230710.webp" class="frnqymcghjqx" alt="image-20260210170230710"></p>
 <h4 id="2-取反（大写字母）"><a href="#2-取反（大写字母）" class="headerlink" title="(2)取反（大写字母）"></a>(2)取反（大写字母）</h4><table>
 <thead>
 <tr>
@@ -1204,7 +1211,7 @@ utf8.<span class="built_in">len</span>()  UTF8计算</span><br></code></pre></di
 <p><code>*</code> &#x3D; 贪婪<br><code>-</code> &#x3D; 非贪婪</p>
 <h4 id="5-字符集合"><a href="#5-字符集合" class="headerlink" title="(5)字符集合 [ ]"></a>(5)字符集合 <code>[ ]</code></h4><p>类似正则的字符集</p>
 <p>例如[abc] 表示a 或 b 或 c,那么[ ^ abc ]表示除了abc以外的的字符</p>
-<p>​	<style>.rhtukslzujgq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210162649514.webp" class="rhtukslzujgq" alt="image-20260210162649514"></p>
+<p>​	<style>.ebjwjvkxrcwr{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/02/05/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260210162649514.webp" class="ebjwjvkxrcwr" alt="image-20260210162649514"></p>
 <blockquote>
 <p>范围为 </p>
 <ul>
@@ -2498,7 +2505,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -2510,7 +2517,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},

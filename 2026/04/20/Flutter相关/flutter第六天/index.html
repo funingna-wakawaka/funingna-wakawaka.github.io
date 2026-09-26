@@ -304,16 +304,23 @@
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
-  setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  const applyCoverTexts = () => {
+    if (!(window.i18n && window.i18n.get)) return;
+    const titleStr = window.i18n.get(configTitle);
+    const authorStr = window.i18n.get(configAuthor);
+    const btnStr = window.i18n.get(configBtn);
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
-  }, 100);
+  };
+
+  setTimeout(applyCoverTexts, 100);
+  document.addEventListener('langchange', applyCoverTexts);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -466,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
 &#125;</span><br></code></pre></div></div>
 
 <p>上一篇我们学到的这个里有个Scaffold组件</p>
-<p>​	<style>.bjxucbqsmorf{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420132350772.webp" class="bjxucbqsmorf" alt="image-20260420132350772"></p>
+<p>​	<style>.fmhgkjqcxloi{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420132350772.webp" class="fmhgkjqcxloi" alt="image-20260420132350772"></p>
 <p>这里我们</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -489,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
   );
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.rijxhxonsnrp{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420135410738.webp" class="rijxhxonsnrp" alt="image-20260420135410738"></p>
+<p>​	<style>.dyxacgooqgwd{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420135410738.webp" class="dyxacgooqgwd" alt="image-20260420135410738"></p>
 <blockquote>
 <ul>
 <li><code>MaterialApp</code>包裹整个应用形成统一的<code>Material Design</code>风格</li>
@@ -498,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><code>Text</code>是用来显示文本的组件</li>
 </ul>
 </blockquote>
-<h2 id="自定义组件-Customwidget"><a href="#自定义组件-Customwidget" class="headerlink" title="自定义组件(Customwidget)"></a>自定义组件(Customwidget)</h2><p>​	<style>.rxbujnehoyxw{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420142055618.webp" class="rxbujnehoyxw" alt="image-20260420142055618"></p>
+<h2 id="自定义组件-Customwidget"><a href="#自定义组件-Customwidget" class="headerlink" title="自定义组件(Customwidget)"></a>自定义组件(Customwidget)</h2><p>​	<style>.vcmscwnouqry{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420142055618.webp" class="vcmscwnouqry" alt="image-20260420142055618"></p>
 <p>其实</p>
 <ul>
 <li><strong>StatelessWidget</strong> &#x3D; 静态组件（数据显示后自己不会变）</li>
@@ -533,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.hcicbgsqnhly{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420145629323.webp" class="hcicbgsqnhly" alt="image-20260420145629323"></p>
+<p>​	<style>.qbtmcbfnvjrk{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420145629323.webp" class="qbtmcbfnvjrk" alt="image-20260420145629323"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-dart"><span class="class"><span class="keyword">class</span> <span class="title">Chatpage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span></span>&#123;
   <span class="meta">@override</span>
   Widget build(BuildContext context) &#123;
@@ -591,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.vfxkoxfpclsw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420150951795.webp" class="vfxkoxfpclsw" alt="image-20260420150951795"></p>
+<p>​	<style>.lnsuohufrhac{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260420150951795.webp" class="lnsuohufrhac" alt="image-20260420150951795"></p>
 <h3 id="有状态组件-StatefulWidget"><a href="#有状态组件-StatefulWidget" class="headerlink" title="有状态组件(StatefulWidget)"></a>有状态组件(StatefulWidget)</h3><blockquote>
 <p>有状态组件是构建动态交互界面的核心,能够管理变化的内部状态,当状态改变时,逐渐会更新显示内容</p>
 </blockquote>
@@ -606,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p><code>class MainPage extends StatefulWidget </code>继承 StatelfulWidget,即定义了一个组件 <code>Chatpage</code></p>
 <p><code>Widget build(BuildContext context)</code>必须重写 build(),这个的作用是返回要显示的UI,Flutter 会在<code> runApp();</code>调用这个函数画界面</p>
 <p>而<code>return .....;</code>返回值是Widget类型,因为在flutter里面所有的组件都是widget类型</p>
-<p>​	<style>.iydjlmeudvjx{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425122640439.webp" class="iydjlmeudvjx" alt="image-20260425122640439"></p>
+<p>​	<style>.sbdqakhvzljg{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425122640439.webp" class="sbdqakhvzljg" alt="image-20260425122640439"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -638,9 +645,9 @@ document.addEventListener('DOMContentLoaded', function() {
 &#125;</span><br></code></pre></div></div>
 
 <h3 id="快速创建无状态组件和有状态组件的方法"><a href="#快速创建无状态组件和有状态组件的方法" class="headerlink" title="快速创建无状态组件和有状态组件的方法"></a>快速创建无状态组件和有状态组件的方法</h3><p>首先下载这仨插件</p>
-<p>​	<style>.fkvhlnwafxve{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425123143670.webp" class="fkvhlnwafxve" alt="image-20260425123143670"></p>
+<p>​	<style>.ezskghypuikl{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425123143670.webp" class="ezskghypuikl" alt="image-20260425123143670"></p>
 <p>然后我们在VScode中使用<code>statelessW</code> 和<code>statefulW</code>按回车就可以快速创建</p>
-<p>​	<style>.qfnrktjkddla{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425123543708.webp" class="qfnrktjkddla" alt="image-20260425123543708"></p>
+<p>​	<style>.mnuuvuskjxwu{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425123543708.webp" class="mnuuvuskjxwu" alt="image-20260425123543708"></p>
 <blockquote>
 <p>这里补充一个知识,在VScode中批量变量名或者方法名的方式有以下几种</p>
 <table>
@@ -736,8 +743,8 @@ Widget build(BuildContext context) &#123;
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h3 id="组件生命周期-有状态组件"><a href="#组件生命周期-有状态组件" class="headerlink" title="组件生命周期-有状态组件"></a>组件生命周期-有状态组件</h3><p>​	<style>.utwdiygojiom{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425132140323.webp" class="utwdiygojiom" alt="image-20260425132140323"></p>
-<p>​	<style>.nrqmgkjbnrqw{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425132230255.webp" class="nrqmgkjbnrqw" alt="image-20260425132230255"></p>
+<h3 id="组件生命周期-有状态组件"><a href="#组件生命周期-有状态组件" class="headerlink" title="组件生命周期-有状态组件"></a>组件生命周期-有状态组件</h3><p>​	<style>.lqaqloicedni{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425132140323.webp" class="lqaqloicedni" alt="image-20260425132140323"></p>
+<p>​	<style>.jhufqfredcyr{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425132230255.webp" class="jhufqfredcyr" alt="image-20260425132230255"></p>
 <p>有状态组件 &#x3D; 可以随时间改变 UI 的组件</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart"><span class="class"><span class="keyword">class</span> <span class="title">MyWidget</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span></span></span><br></code></pre></div></div>
 
@@ -808,7 +815,7 @@ Widget build(BuildContext context) &#123;
 <p><strong>点击事件</strong>：当点击某个元素触发的动作</p>
 <p><strong>常规方案</strong>：GestureDetector是Flutter中最常用、功能最丰富的手势检测组件</p>
 <p><strong>用法</strong>：使用GestureDetector包裹被点击的元素，传入onTap方法</p>
-<p>​	<style>.xkorilayauom{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425140015128.webp" class="xkorilayauom" alt="image-20260425140015128"></p>
+<p>​	<style>.ljijabirpdbg{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425140015128.webp" class="ljijabirpdbg" alt="image-20260425140015128"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -886,8 +893,8 @@ Widget build(BuildContext context) &#123;
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h2 id="事件-组件点击事件"><a href="#事件-组件点击事件" class="headerlink" title="事件-组件点击事件"></a>事件-组件点击事件</h2><p>​	<style>.rznworkoaxui{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425140944928.webp" class="rznworkoaxui" alt="image-20260425140944928"></p>
-<p>​	<style>.jvqhbqnenaad{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425141623743.webp" class="jvqhbqnenaad" alt="image-20260425141623743"></p>
+<h2 id="事件-组件点击事件"><a href="#事件-组件点击事件" class="headerlink" title="事件-组件点击事件"></a>事件-组件点击事件</h2><p>​	<style>.phtfuhqnhlxg{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425140944928.webp" class="phtfuhqnhlxg" alt="image-20260425140944928"></p>
+<p>​	<style>.pthdviohqeqj{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425141623743.webp" class="pthdviohqeqj" alt="image-20260425141623743"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -1091,7 +1098,7 @@ Widget build(BuildContext context) &#123;
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.wmzyuqrbxjih{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425144108495.webp" class="wmzyuqrbxjih" alt="image-20260425144108495"></p>
+<p>​	<style>.skgebmklqiwi{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/20/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AD%E5%A4%A9/image-20260425144108495.webp" class="skgebmklqiwi" alt="image-20260425144108495"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1602,7 +1609,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1614,7 +1621,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},

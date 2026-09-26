@@ -304,16 +304,23 @@
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
-  setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  const applyCoverTexts = () => {
+    if (!(window.i18n && window.i18n.get)) return;
+    const titleStr = window.i18n.get(configTitle);
+    const authorStr = window.i18n.get(configAuthor);
+    const btnStr = window.i18n.get(configBtn);
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
-  }, 100);
+  };
+
+  setTimeout(applyCoverTexts, 100);
+  document.addEventListener('langchange', applyCoverTexts);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -533,9 +540,9 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-  <style>.xnackkreqpbs{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260517163247875.webp" class="xnackkreqpbs" alt="image-20260517163247875">
+  <style>.hkrfxnfrnvij{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260517163247875.webp" class="hkrfxnfrnvij" alt="image-20260517163247875">
 
-<h2 id="封装Dio工具"><a href="#封装Dio工具" class="headerlink" title="封装Dio工具"></a>封装Dio工具</h2><p>​	<style>.ducyykvrwxnr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260614195619480.webp" class="ducyykvrwxnr" alt="image-20260614195619480"></p>
+<h2 id="封装Dio工具"><a href="#封装Dio工具" class="headerlink" title="封装Dio工具"></a>封装Dio工具</h2><p>​	<style>.slentrvdhkhx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260614195619480.webp" class="slentrvdhkhx" alt="image-20260614195619480"></p>
 <blockquote>
 <p>建立连接 → 发送数据 → 等待服务器返回<br>    ↑           ↑             ↑<br>connect     send        receive</p>
 </blockquote>
@@ -969,9 +976,9 @@ onError()</span><br></code></pre></div></div>
 <td>&#x2F;posts&#x2F;1</td>
 </tr>
 </tbody></table>
-<p>​	<style>.gfgctosyuxyl{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170625979.webp" class="gfgctosyuxyl" alt="image-20260718170625979"></p>
+<p>​	<style>.cfyifqixujln{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170625979.webp" class="cfyifqixujln" alt="image-20260718170625979"></p>
 <p>对比一下网站内容,完全一致</p>
-<p>​	<style>.gbpujepormtz{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170658143.webp" class="gbpujepormtz" alt="image-20260718170658143"></p>
+<p>​	<style>.bslvdcrsyrpq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260718170658143.webp" class="bslvdcrsyrpq" alt="image-20260718170658143"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:dio/dio.dart&#x27;</span>;
 <span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -1087,7 +1094,7 @@ onError()</span><br></code></pre></div></div>
 
 <h2 id="web端跨域问题"><a href="#web端跨域问题" class="headerlink" title="web端跨域问题"></a>web端跨域问题</h2><p>默认情况下,flutter运行 web 端加载网络资源会报跨域可能提示错误,解决方法是:</p>
 <p>首先在flutter&#x2F;packages&#x2F;flutter_tools&#x2F;lib&#x2F;src&#x2F;web&#x2F;chrome.dart里添加’–disable-web-security’,</p>
-<p>​	<style>.avndzrikldok{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903222328495.webp" class="avndzrikldok" alt="image-20260903222328495"></p>
+<p>​	<style>.vcotzdfbqbtk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903222328495.webp" class="vcotzdfbqbtk" alt="image-20260903222328495"></p>
 <p>然后删除flutter&#x2F;bin&#x2F;cache&#x2F;下的 <strong>flutter_tools.snaphot</strong>和<strong>flutter_tools.stamp</strong>缓存文件</p>
 <p>最后执行 flutter doctor -v </p>
 <p>然后重新运行项目</p>
@@ -1330,7 +1337,7 @@ onError()</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.cobhnrqnvjfj{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903225959320.webp" class="cobhnrqnvjfj" alt="image-20260903225959320"></p>
+<p>​	<style>.nxxmhvvenalw{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/17/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%8D%81%E5%A4%A9/image-20260903225959320.webp" class="nxxmhvvenalw" alt="image-20260903225959320"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1841,7 +1848,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1853,7 +1860,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},

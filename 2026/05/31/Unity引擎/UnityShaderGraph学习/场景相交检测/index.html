@@ -304,16 +304,23 @@
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
-  setTimeout(() => {
-    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
-    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
-    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  const applyCoverTexts = () => {
+    if (!(window.i18n && window.i18n.get)) return;
+    const titleStr = window.i18n.get(configTitle);
+    const authorStr = window.i18n.get(configAuthor);
+    const btnStr = window.i18n.get(configBtn);
 
     document.getElementById('start-journey-text').textContent = btnStr;
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
-  }, 100);
+  };
+
+  setTimeout(applyCoverTexts, 100);
+  document.addEventListener('langchange', applyCoverTexts);
 }</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
@@ -454,15 +461,15 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 </script><div class="post-tags"><a class="tag" href="/tags/shadergraph/"><i class="fas fa-tag" style="margin-right: 3px"> </i>shadergraph</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天我们来学习场景相交检测"><a href="#今天我们来学习场景相交检测" class="headerlink" title="今天我们来学习场景相交检测"></a>今天我们来学习场景相交检测</h1><p>现实中的物体如果发生相交就会在两者的接触面会有阴影,例如你的手机放在桌面上可以看到手机和桌面的黑色阴影接触线,这个在unity中同样也是可以实现的</p>
- <style>.aoqvuweaomvv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531143806992.webp" class="aoqvuweaomvv" alt="image-20260531143806992">
+ <style>.nmvsgjtnfhhr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531143806992.webp" class="nmvsgjtnfhhr" alt="image-20260531143806992">
 
 <p>当着色器运行时它只能直接访问当前正在渲染的像素信息包括其在世界空间中的位置,我们想将该位置与在这个物体后面渲染的对象的位置进行比较,如果两点之间的距离小于我们指定的阈值,就检测到了一个交点</p>
 <p>unity仅在之后将深度缓冲区的状态保存到深度纹理中,会先渲染所有不透明物体,再渲染所有透明物体,而着色器无法检测到任意两个透明物体之间的交叉</p>
 <p>之前我们讲深度纹理的时候,提到过这个游戏场景是怎么渲染到摄像机的,也就是裁剪空间</p>
-<p>​	<style>.ikzplqasemil{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531144817077.webp" class="ikzplqasemil" alt="image-20260531144817077"></p>
+<p>​	<style>.mkaxwtgmpawi{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531144817077.webp" class="mkaxwtgmpawi" alt="image-20260531144817077"></p>
 <p>unity随后通过根据相机的参数将一些裁剪空间坐标转换为屏幕空间坐标</p>
-<p>​	<style>.edjfbbhizpqe{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531144850095.webp" class="edjfbbhizpqe" alt="image-20260531144850095"></p>
-<p>​	<style>.jyneuokmqwcg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531145519427.webp" class="jyneuokmqwcg" alt="image-20260531145519427"></p>
+<p>​	<style>.qbuadtgizqss{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531144850095.webp" class="qbuadtgizqss" alt="image-20260531144850095"></p>
+<p>​	<style>.ncqnnwqnfnbq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531145519427.webp" class="ncqnnwqnfnbq" alt="image-20260531145519427"></p>
 <p>而这个向量第四个分量等于相机与被渲染顶点之间的距离</p>
 <p>然后就是其次坐标的概念(我也没看懂这个东西,这玩意就是大一的时候没学明白的线性代数的知识)</p>
 <h2 id="其次坐标"><a href="#其次坐标" class="headerlink" title="其次坐标"></a>其次坐标</h2><div class="hide-toggle">
@@ -565,7 +572,7 @@ NDC 空间: (-1~1, -1~1, 0~1)</span><br></code></pre></div></div>
 
 
 <p>我们添加一个scene depth节点来获取相机和物体之间的距离,并设置为eye模式来获取精确值,</p>
-  <style>.ssfshfhkhjlf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603151708188.webp" class="ssfshfhkhjlf" alt="image-20260603151708188">
+  <style>.jitkubhaoixm{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603151708188.webp" class="jitkubhaoixm" alt="image-20260603151708188">
 
 <p>Scene Depth 从深度纹理中读取当前屏幕位置记录的深度值,表示：</p>
 <p><strong>沿着当前像素对应的视线方向，场景中已经写入深度缓冲区的表面距离摄像机有多远</strong></p>
@@ -654,7 +661,7 @@ NDC 空间: (-1~1, -1~1, 0~1)</span><br></code></pre></div></div>
 </tbody></table>
 <p>然后用split节点分出第四个分量w</p>
 <p>还记得之前的这个图吗</p>
-<p>​	<style>.bpakwsfjrypc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531143806992.webp" class="bpakwsfjrypc" alt="image-20260531143806992"></p>
+<p>​	<style>.bznrfpbmqoig{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531143806992.webp" class="bznrfpbmqoig" alt="image-20260531143806992"></p>
 <pre class="mermaid">graph LR
 
 Camera["📷 Camera"]
@@ -674,7 +681,7 @@ Sphere -->|"Depth Difference = 10 - 8 = 2"| Result["Intersection Depth"]</pre>
 <p>不过刚才的那几个节点我们要重复使用,我们可以使用子图来实现,类似于一个函数,只暴露输入口和输出口</p>
 <h2 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h2><div class="hide-toggle">
     <div class="hide-toggle-title">子图</div>
-    <div class="hide-toggle-content"><p>​	<style>.gtuhqwvimgxo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531150723716.webp" class="gtuhqwvimgxo" alt="image-20260531150723716"></p>
+    <div class="hide-toggle-content"><p>​	<style>.hbbbxmkjimzb{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260531150723716.webp" class="hbbbxmkjimzb" alt="image-20260531150723716"></p>
 <p>我们可以使用子图,这里理解一下子图的概念</p>
 <p>Unity Shader Graph 的子图（Sub Graph）是一种模块化的着色器构建方式，允许你将一组节点封装成可复用的资产，然后在主 Shader Graph 或其他子图中调用它。这类似于编程中的函数或类，能显著提升复杂着色器的可维护性和复用性</p>
 <p>子图是一个独立的 <code>.shadersubgraph</code> 资产，包含：</p>
@@ -691,24 +698,24 @@ Sphere -->|"Depth Difference = 10 - 8 = 2"| Result["Intersection Depth"]</pre>
 </div>
   </div>
 
-<p>​	<style>.cdgzsrixxcbw{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154023234.webp" class="cdgzsrixxcbw" alt="image-20260603154023234"></p>
+<p>​	<style>.somwrwsqekvp{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154023234.webp" class="somwrwsqekvp" alt="image-20260603154023234"></p>
 <p>我们选中这些节点然后将这几个合并为子图,放在项目的任意位置</p>
 <p>如图我们已经创建成功</p>
-<p>​	<style>.wfywldjiqyhc{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154307311.webp" class="wfywldjiqyhc" alt="image-20260603154307311"></p>
+<p>​	<style>.ubmprnvoybwo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154307311.webp" class="ubmprnvoybwo" alt="image-20260603154307311"></p>
 <h2 id="添加控制器"><a href="#添加控制器" class="headerlink" title="添加控制器"></a>添加控制器</h2><p>双击就可以进入子图</p>
-<p>​	<style>.gjjhbchinwnt{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154331947.webp" class="gjjhbchinwnt" alt="image-20260603154331947"></p>
+<p>​	<style>.twuunxbhfgmc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154331947.webp" class="twuunxbhfgmc" alt="image-20260603154331947"></p>
 <p>由于这个子图没有输入,但是必须输出,所以我们可以创建一个浮点输出类型取名为out</p>
-<p>​	<style>.rvklxniscfcb{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154756669.webp" class="rvklxniscfcb" alt="image-20260603154756669"></p>
+<p>​	<style>.hllwiqlsvbig{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603154756669.webp" class="hllwiqlsvbig" alt="image-20260603154756669"></p>
 <p>然后我们将模式设置transparent透明,然后将子图连接到基础色上</p>
-<p>​	<style>.nwjiupvolwea{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603160253743.webp" class="nwjiupvolwea" alt="image-20260603160253743"></p>
+<p>​	<style>.yqypqmtpbzws{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603160253743.webp" class="yqypqmtpbzws" alt="image-20260603160253743"></p>
 <p>将其运用到小球上,可以注意到交界处有黑色阴影</p>
-<p>​	<style>.xhfkgeovpptt{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603160443462.webp" class="xhfkgeovpptt" alt="image-20260603160443462"></p>
+<p>​	<style>.cybtbukbnkco{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603160443462.webp" class="cybtbukbnkco" alt="image-20260603160443462"></p>
 <p>此时说明已经可以检测交叉处状态了,但是我们需要当球体远离交叉处时阴影逐渐降低</p>
 <p>我们添加One minus节点(这个我们之前用过)来实现远离时值的降低,但是由于远离的时候的值会变成负数,所以我们需要这个Saturate节点来将负数值设置为0,超过1的值设为1</p>
 <p>然后我们需要控制这个渐变值 首先添加一个intersection power的float类型用来控制,然后将其变成默认值为1 范围0.01~25的slider滑块,0会完全遮挡,但是25的遮挡效果非常微弱</p>
 <p>为了更方便的调整遮挡效果的明暗度,我们添加一个Occlusion strength值来控制明暗度,这样要控制明暗度就可以直接控制这个occlusion就可以了</p>
 <p>然后用lerp 节点线性插值来控制颜色和强度,T槽导入颜色的强度,A槽为设置的基础色的颜色,B槽添加一个float节点设置为0代表黑色,这样就可以让颜色混合更自然</p>
-<p>​	<style>.dolwqoogfnbm{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603162910443.webp" class="dolwqoogfnbm" alt="image-20260603162910443"></p>
+<p>​	<style>.lgxoosryloam{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603162910443.webp" class="lgxoosryloam" alt="image-20260603162910443"></p>
 <p>这里温习一下这几个节点</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">节点相关</div>
@@ -859,11 +866,11 @@ x &gt; 1  → 输出 1</span><br></code></pre></div></div>
   </div>
 
 <p>这里是**普通材质(左)<strong>和我们</strong>场景相交材质(右)**的区别,可以看到右侧的融合的更自然,而且很有原神这些二游那味</p>
-<p>​	<style>.yxcdpurpswme{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603162438341.webp" class="yxcdpurpswme" alt="image-20260603162438341"></p>
+<p>​	<style>.kbydoqcncrll{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603162438341.webp" class="kbydoqcncrll" alt="image-20260603162438341"></p>
 <p>比如我们的小球现在只漏出来一点点</p>
-<p>​	<style>.vgiolokoykim{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603195615167.webp" class="vgiolokoykim" alt="image-20260603195615167"></p>
+<p>​	<style>.rrenvuycvgys{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603195615167.webp" class="rrenvuycvgys" alt="image-20260603195615167"></p>
 <p>然后露出来很多</p>
-<p>​	<style>.lxzgsbmwjvdh{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603195644722.webp" class="lxzgsbmwjvdh" alt="image-20260603195644722"></p>
+<p>​	<style>.urhphdfqqzbs{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/05/31/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E5%9C%BA%E6%99%AF%E7%9B%B8%E4%BA%A4%E6%A3%80%E6%B5%8B/image-20260603195644722.webp" class="urhphdfqqzbs" alt="image-20260603195644722"></p>
 <p>这样就很直观了</p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
@@ -1375,7 +1382,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1387,7 +1394,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.jpg","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":100,"delete_speed":50,"pause_duration":2000,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
