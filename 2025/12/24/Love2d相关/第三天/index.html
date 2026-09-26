@@ -68,6 +68,8 @@
 <link rel="stylesheet" href="/css/components/cursor.css">
 
 <link rel="stylesheet" href="/css/components/carousel.css">
+
+<link rel="stylesheet" href="/css/components/post-stats.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -312,7 +314,7 @@
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -440,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/12.webp" alt="love2d学习第三天--学习lua循环和if else语句"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2025-12-24T15:00:00.000Z">2025-12-24</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.1k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>13</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title" data-i18n-zh="love2d学习第三天--学习lua循环和if else语句">love2d学习第三天--学习lua循环和if else语句</h1><script>(function () {
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/12.webp" alt="love2d学习第三天--学习lua循环和if else语句"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2025-12-24T15:00:00.000Z">2025-12-24</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>3.1k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>13</span><span style="margin-left: 3px">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/8f8750be"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="love2d学习第三天--学习lua循环和if else语句">love2d学习第三天--学习lua循环和if else语句</h1><script>(function () {
   try {
     var __t = {"zh":"love2d学习第三天--学习lua循环和if else语句","en":""};
     if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
@@ -458,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>循环是程序中用于<strong>重复执行</strong>某段代码（循环体）的控制结构，它包含一个<strong>条件判断</strong>和要重复执行的<strong>循环体</strong>，直到条件不再满足时终止。</p>
 <p>一组被重复执行的语句称之为<strong>循环体</strong></p>
 <p>我们可以画一个图</p>
-<p>​	<style>.lykkeunlwdtt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224112935808.webp" class="lykkeunlwdtt" alt="image-20251224112935808"></p>
+<p>​	<style>.ujdlqnhiyhcg{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224112935808.webp" class="ujdlqnhiyhcg" alt="image-20251224112935808"></p>
 <h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><p>格式:</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">while</span> 判断条件 <span class="keyword">do</span>
    循环体
@@ -505,17 +507,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <span class="built_in">print</span>(<span class="string">&quot;罐子空了，爱丽丝溜了！&quot;</span>)</span><br></code></pre></div></div>
 
-<p>​	<style>.pepnbhkcdjtp{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224114117462.webp" class="pepnbhkcdjtp" alt="image-20251224114117462"></p>
+<p>​	<style>.uivqonygnvot{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224114117462.webp" class="uivqonygnvot" alt="image-20251224114117462"></p>
 <p>对了,while还可以制造无限循环</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">while</span>( <span class="literal">true</span> )
 <span class="keyword">do</span>
    <span class="built_in">print</span>(<span class="string">&quot;爱丽丝一直偷吃饼干&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.epeoxxoiceqk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224185015296.webp" class="epeoxxoiceqk" alt="image-20251224185015296"></p>
+<p>​	<style>.kmejlthorbkr{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224185015296.webp" class="kmejlthorbkr" alt="image-20251224185015296"></p>
 <p>什么,你说while无限循环除了让电脑死机还有什么用,请看Unity的Update和FixedUpdate方法的本质:</p>
-<p>​	<style>.zqchuxtloopl{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224192211585.webp" class="zqchuxtloopl" alt="image-20251224192211585"></p>
-<p>​	<style>.enricbyirjee{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224192529730.webp" class="enricbyirjee" alt="image-20251224192529730"></p>
+<p>​	<style>.bfoqtsprvynt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224192211585.webp" class="bfoqtsprvynt" alt="image-20251224192211585"></p>
+<p>​	<style>.xpchwticxpky{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224192529730.webp" class="xpchwticxpky" alt="image-20251224192529730"></p>
 <p>可以看到,这两个unity脚本离不开的核心函数都是无限调用,估计  love2d 中也有类似的函数</p>
 <h2 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h2><p> for 循环语句可以重复执行指定语句，重复次数可在 for 语句中控制,刚才的while循环的循环次数是不受控制的,只有不满足条件时才会跳出循环</p>
 <p>对了,lua里面没有a++,++a,a–,–a这种写法,  或者a+&#x3D;1 a-&#x3D;1这种写法,  只能写成a&#x3D;a+1  或者a&#x3D;a-1</p>
@@ -547,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(<span class="string">&quot;罐子空了,爱丽丝溜了,小桃小绿回来后很生气!!!&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.lqonknzuucia{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224200846230.webp" class="lqonknzuucia" alt="image-20251224200846230"></p>
+<p>​	<style>.ehuoxmyufnwm{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224200846230.webp" class="ehuoxmyufnwm" alt="image-20251224200846230"></p>
 <p>我们可以改一下条件</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> cookies = <span class="number">20</span>
 <span class="comment">--条件为 i = 6, cookies</span>
@@ -563,7 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(<span class="string">&quot;罐子空了,爱丽丝溜了,小桃小绿回来后很生气!!!&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.djcwxajpilie{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224201338756.webp" class="djcwxajpilie" alt="image-20251224201338756"></p>
+<p>​	<style>.aemvrqbjxdgd{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224201338756.webp" class="aemvrqbjxdgd" alt="image-20251224201338756"></p>
 <p>我们还可以验证一下循环步长的作用,这个不写的话默认为  <font color='Red'>1</font></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> cookies = <span class="number">20</span>
 <span class="comment">--条件我们设置为i = 1, cookies, 2  循环步长为 2</span>
@@ -579,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(<span class="string">&quot;罐子空了,爱丽丝溜了,小桃小绿回来后很生气!!!&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.wvoktdwhdccs{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224202536414.webp" class="wvoktdwhdccs" alt="image-20251224202536414"></p>
+<p>​	<style>.pdgtwqsqkkip{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224202536414.webp" class="pdgtwqsqkkip" alt="image-20251224202536414"></p>
 <p>​	还可以将饼干减少的逻辑封装到函数里</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> cookies = <span class="number">20</span>
 
@@ -599,7 +601,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(<span class="string">&quot;罐子空了,爱丽丝溜了,小桃小绿回来后很生气!!!&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.vjbkhwhwgdjz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224204337238.webp" class="vjbkhwhwgdjz" alt="image-20251224204337238"></p>
+<p>​	<style>.cduhtuflixej{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224204337238.webp" class="cduhtuflixej" alt="image-20251224204337238"></p>
 <p>好了,接下来把之前挖的坑填上———表的遍历学过其他语言的数组的小伙伴通常会用for循环来遍历数组,我们lua也是一般使用for循环      </p>
 <h3 id="这里的lua的遍历分为三种"><a href="#这里的lua的遍历分为三种" class="headerlink" title="这里的lua的遍历分为三种:"></a>这里的lua的遍历分为三种:</h3><h4 id="ipairs遍历"><a href="#ipairs遍历" class="headerlink" title="ipairs遍历"></a>ipairs遍历</h4><p><strong>第一种:</strong> &#96;&#96;ipairs<code> —— 顺序数组遍历</code></p>
 <p>格式(缩写版,推荐):</p>
@@ -637,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(i .. v)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.okuosorygtgl{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224234616575.webp" class="okuosorygtgl" alt="image-20251224234616575"></p>
+<p>​	<style>.uktcwbqplycd{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251224234616575.webp" class="uktcwbqplycd" alt="image-20251224234616575"></p>
 <h4 id="pairs遍历"><a href="#pairs遍历" class="headerlink" title="pairs遍历"></a>pairs遍历</h4><p><strong>第二种:</strong> &#96;&#96;pairs<code> —— 通用遍历</code></p>
 <p>这个格式和 ipairs一样:</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> 表名 = &#123;....&#125;
@@ -654,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
 <p>这种可以遍历 <strong>table 中所有键值对</strong>（无论是数组还是字典）,但是遍历的顺序是无序的,而且不同于ipairs的是,pairs遇到nil时不会停止,而是直接跳过索引对应的空值</p>
-<p>​	<style>.bgeldlspdqgq{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229201435729.webp" class="bgeldlspdqgq" alt="image-20251229201435729"></p>
+<p>​	<style>.wozteemtkjry{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229201435729.webp" class="wozteemtkjry" alt="image-20251229201435729"></p>
 <p>可以看到这是没有顺序的遍历</p>
 <h4 id="for循环遍历"><a href="#for循环遍历" class="headerlink" title="for循环遍历"></a>for循环遍历</h4><p>这个其实也可以采用原生的for循环遍历,不过这个for循环只支持数组,不支持字典</p>
 <p>和其他语言中用for遍历数组的方式是差不多的</p>
@@ -688,7 +690,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="built_in">print</span>(i, cookies.data[key])
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.bqnifhfdoeeh{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229202822255.webp" class="bqnifhfdoeeh" alt="image-20251229202822255"></p>
+<p>​	<style>.sywlmjxnattg{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229202822255.webp" class="sywlmjxnattg" alt="image-20251229202822255"></p>
 <h2 id="repeat-…-until-循环"><a href="#repeat-…-until-循环" class="headerlink" title="repeat … until 循环"></a>repeat … until 循环</h2><p>这个非常有意思</p>
 <p>学过其他语言比如C C++ C#这些绝对知道  do … while循环</p>
 <p>但是我们可以看一下 do … while循环的特性</p>
@@ -720,7 +722,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="keyword">end</span>
 <span class="keyword">until</span> (cookies &lt;= <span class="number">0</span>)</span><br></code></pre></div></div>
 
-<p>​	<style>.cfevlgkymzlo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229230525588.webp" class="cfevlgkymzlo" alt="image-20251229230525588"></p>
+<p>​	<style>.ldtnpodjalwy{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229230525588.webp" class="ldtnpodjalwy" alt="image-20251229230525588"></p>
 <p>我们修改一下条件语句</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> cookies = <span class="number">10</span>
 
@@ -733,7 +735,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="keyword">end</span>
 <span class="keyword">until</span> (cookies &lt;= <span class="number">0</span>)</span><br></code></pre></div></div>
 
-<p>​	<style>.hmlmrhknmlpu{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229230749486.webp" class="hmlmrhknmlpu" alt="image-20251229230749486"></p>
+<p>​	<style>.bvohaklpkvxj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20251229230749486.webp" class="bvohaklpkvxj" alt="image-20251229230749486"></p>
 <h2 id="循环嵌套"><a href="#循环嵌套" class="headerlink" title="循环嵌套"></a>循环嵌套</h2><p>哦,对了,和其他语言一样,循环是可以嵌套的,一些学过其他语言的小伙伴估计已经掌握了冒泡排序,插入排序这些了….吧?</p>
 <p>这里就随便讲讲几种方式吧</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">3</span> <span class="keyword">do</span>
@@ -742,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="keyword">end</span>
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.kzhlxhoqgsnq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128222809112.webp" class="kzhlxhoqgsnq" alt="image-20260128222809112"></p>
+<p>​	<style>.mnijjwhtgiyk{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128222809112.webp" class="mnijjwhtgiyk" alt="image-20260128222809112"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> i = <span class="number">1</span>
 
 <span class="keyword">while</span> i &lt;= <span class="number">3</span> <span class="keyword">do</span>
@@ -755,7 +757,7 @@ document.addEventListener('DOMContentLoaded', function() {
     i = i + <span class="number">1</span>
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.tdixxeejxrks{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128223129902.webp" class="tdixxeejxrks" alt="image-20260128223129902"></p>
+<p>​	<style>.djvqognxdmer{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128223129902.webp" class="djvqognxdmer" alt="image-20260128223129902"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">3</span> <span class="keyword">do</span>
     <span class="keyword">local</span> j = <span class="number">1</span>
     <span class="keyword">while</span> j &lt;= <span class="number">2</span> <span class="keyword">do</span>
@@ -764,7 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <span class="keyword">end</span>
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.tzxykbmvheml{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128223500029.webp" class="tzxykbmvheml" alt="image-20260128223500029"></p>
+<p>​	<style>.xqebxgtsschv{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260128223500029.webp" class="xqebxgtsschv" alt="image-20260128223500029"></p>
 <p>当然还有repeat 的嵌套,不过这里不讲太多了,以后具体场景用到再说,包括那些排序算法什么的也是,现在学这些东西反正也用不上而且你们估计和我一样睡一觉起来大脑格式化了  <font color='#FFD700'>狗头</font></p>
 <h2 id="break关键字"><a href="#break关键字" class="headerlink" title="break关键字"></a>break关键字</h2><p>这个和其他语言里的break一模一样,<code>break</code> 用于<strong>立即终止当前循环</strong>,跳到循环后面的代码继续执行</p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10</span> <span class="keyword">do</span>
@@ -781,7 +783,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 goto label  -- 跳转到标签位置</span><br></code></pre></div></div>
 
-<p>​	<style>.xhagfkhnrqjh{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260203164601539.webp" class="xhagfkhnrqjh" alt="image-20260203164601539"></p>
+<p>​	<style>.nycjrrlvcage{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260203164601539.webp" class="nycjrrlvcage" alt="image-20260203164601539"></p>
 <div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> a = <span class="number">1</span>
 ::label::
 <span class="built_in">print</span>(<span class="string">&quot;都给我玩终末地去,咕咕嘎嘎!&quot;</span>)
@@ -821,7 +823,7 @@ a = a + <span class="number">1</span>
     <span class="keyword">end</span>
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
-<p>​	<style>.jvicffidqwyc{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260203171152901.webp" class="jvicffidqwyc" alt="image-20260203171152901"></p>
+<p>​	<style>.nhvfbimoyuyk{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260203171152901.webp" class="nhvfbimoyuyk" alt="image-20260203171152901"></p>
 <p>lua里面没有c语言里的那种continue,但是可以通过模拟来实现</p>
 <p>我们都知道continue的作用是跳出当前的过程不执行,但是继续该过程以后的过程</p>
 <p>比如</p>
@@ -860,7 +862,7 @@ a = a + <span class="number">1</span>
     <span class="built_in">print</span>(<span class="string">&quot;没钱? 孩子,你还是去玩三角洲去吧&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
- <style>.lgkrdkkdywhl{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204173944116.webp" class="lgkrdkkdywhl" alt="image-20260204173944116">
+ <style>.azhpfwteopxo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204173944116.webp" class="azhpfwteopxo" alt="image-20260204173944116">
 
 <h3 id="③-if-elseif-else"><a href="#③-if-elseif-else" class="headerlink" title="③ if + elseif + else"></a>③ if + elseif + else</h3><div class="codecard" data-lang="lua"><div class="codecard-header"><span class="codecard-lang">LUA</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div><pre class="codecard-pre"><code class="language-lua"><span class="keyword">local</span> money = <span class="number">50</span>
 
@@ -872,11 +874,11 @@ a = a + <span class="number">1</span>
     <span class="built_in">print</span>(<span class="string">&quot;没钱? 孩子,你还是去玩三角洲去吧&quot;</span>)
 <span class="keyword">end</span></span><br></code></pre></div></div>
 
- <style>.vnykmjnywjio{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204174459317.webp" class="vnykmjnywjio" alt="image-20260204174459317">
+ <style>.tqsxxqsaukqp{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204174459317.webp" class="tqsxxqsaukqp" alt="image-20260204174459317">
 
 <p>对了,lua里的if里的这个条件可以带括号也可以不带,一般不带,不过带了可读性更高</p>
 <p>⚠️ 但是提醒一下,for循环不可以给条件语句带括号.否则会报错,但是其他循环可以</p>
-<p>​	<style>.enpwonfesqey{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204174857146.webp" class="enpwonfesqey" alt="image-20260204174857146"></p>
+<p>​	<style>.tpdamrlstcbz{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2025/12/24/Love2d%E7%9B%B8%E5%85%B3/%E7%AC%AC%E4%B8%89%E5%A4%A9/image-20260204174857146.webp" class="tpdamrlstcbz" alt="image-20260204174857146"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -1387,7 +1389,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1406,10 +1408,11 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   just_read: {"enable":true},
+  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev/","cache_ttl":300000,"mock":false},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };

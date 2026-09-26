@@ -68,6 +68,8 @@
 <link rel="stylesheet" href="/css/components/cursor.css">
 
 <link rel="stylesheet" href="/css/components/carousel.css">
+
+<link rel="stylesheet" href="/css/components/post-stats.css">
 <style>:root {
   --primary-color: #1a1a1a;
   --secondary-color: #666666;
@@ -312,7 +314,7 @@
     splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
     splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
   }, 100);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -440,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/11.png" alt="赛博相册"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-01-27T13:12:25.000Z">2026-01-27</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>876</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>3</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title" data-i18n-zh="赛博相册">赛博相册</h1><script>(function () {
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/11.png" alt="赛博相册"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%97%A5%E8%AE%B0/">日记</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-01-27T13:12:25.000Z">2026-01-27</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>876</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>3</span><span style="margin-left: 3px">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/2aacb61c"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="赛博相册">赛博相册</h1><script>(function () {
   try {
     var __t = {"zh":"赛博相册","en":""};
     if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
@@ -456,35 +458,35 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="①-高考前离校"><a href="#①-高考前离校" class="headerlink" title="① 高考前离校"></a>① 高考前离校</h2><p>和当时一些玩的好的同学还有老师的合影</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.eevlyloldfbj{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/01.webp" class="eevlyloldfbj" alt="01">
+    <div class="hide-toggle-content"><style>.ixqxsktrrapn{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/01.webp" class="ixqxsktrrapn" alt="01">
 
-<style>.teskfupigwwg{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917404736.webp" class="teskfupigwwg" alt="mmexport1717917404736">
+<style>.fdnvebkjedbw{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917404736.webp" class="fdnvebkjedbw" alt="mmexport1717917404736">
 
-<style>.oowjtjfdiyod{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917408024.webp" class="oowjtjfdiyod" alt="mmexport1717917408024">
+<style>.pooksvavncsi{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917408024.webp" class="pooksvavncsi" alt="mmexport1717917408024">
 
-<style>.foplvwclytiz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917412848.webp" class="foplvwclytiz" alt="mmexport1717917412848">
+<style>.rmjybhhkhqhz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917412848.webp" class="rmjybhhkhqhz" alt="mmexport1717917412848">
 
-<style>.tfwblhymghjt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917415441.webp" class="tfwblhymghjt" alt="mmexport1717917415441">
+<style>.rvrxqxywkquc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917415441.webp" class="rvrxqxywkquc" alt="mmexport1717917415441">
 
-<style>.onccepusumzc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917418810.webp" class="onccepusumzc" alt="mmexport1717917418810">
+<style>.rbuhsxlqgbss{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917418810.webp" class="rbuhsxlqgbss" alt="mmexport1717917418810">
 
-<style>.mjrmusnvbslv{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917422002.webp" class="mjrmusnvbslv" alt="mmexport1717917422002">
+<style>.nnwzndcliuem{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917422002.webp" class="nnwzndcliuem" alt="mmexport1717917422002">
 
-<style>.nryugxvymqci{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917426034.webp" class="nryugxvymqci" alt="mmexport1717917426034">
+<style>.hpcoyuoogwsb{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917426034.webp" class="hpcoyuoogwsb" alt="mmexport1717917426034">
 
-<style>.ydtwoykorlfj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917429389.webp" class="ydtwoykorlfj" alt="mmexport1717917429389">
+<style>.cknxqmfoikso{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917429389.webp" class="cknxqmfoikso" alt="mmexport1717917429389">
 </div>
   </div>
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.akpvfeucbduk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917432991.webp" class="akpvfeucbduk" alt="mmexport1717917432991">
+    <div class="hide-toggle-content"><style>.ytksmyibvnyq{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917432991.webp" class="ytksmyibvnyq" alt="mmexport1717917432991">
 
-<style>.qdbkvfryeqoj{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917352338.webp" class="qdbkvfryeqoj" alt="mmexport1717917352338">
+<style>.ggoelkplxfwl{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917352338.webp" class="ggoelkplxfwl" alt="mmexport1717917352338">
 
-<style>.pwssjhnlqrlz{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917393706.webp" class="pwssjhnlqrlz" alt="mmexport1717917393706">
+<style>.avsmbwjyengc{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917393706.webp" class="avsmbwjyengc" alt="mmexport1717917393706">
 
-<style>.dlbjrmbaubty{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917400421.webp" class="dlbjrmbaubty" alt="mmexport1717917400421">
+<style>.rmyjqbbbmwud{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/mmexport1717917400421.webp" class="rmyjqbbbmwud" alt="mmexport1717917400421">
 </div>
   </div>
 
@@ -492,17 +494,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>也和同学出去玩之类的,大家此时还保持着联系</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"> <style>.nsholcnvmcxo{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/03-17761468557871.webp" class="nsholcnvmcxo" alt="03">
+    <div class="hide-toggle-content"> <style>.gptdxkbrxyev{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/03-17761468557871.webp" class="gptdxkbrxyev" alt="03">
 
- <style>.fusmbwbdkfoq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/04.webp" class="fusmbwbdkfoq" alt="04">
+ <style>.pxlyymjttokg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/04.webp" class="pxlyymjttokg" alt="04">
 
- <style>.gqqvwdydyrxu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/02.webp" class="gqqvwdydyrxu" alt="02">
+ <style>.vvimlnboktfy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/02.webp" class="vvimlnboktfy" alt="02">
 
-<style>.jlpbqdrvhfpf{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240713_114519.webp" class="jlpbqdrvhfpf" alt="IMG_20240713_114519"> 
+<style>.ucixhoayjesc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240713_114519.webp" class="ucixhoayjesc" alt="IMG_20240713_114519"> 
 
- <style>.mxgxalurngvb{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241003_134717.webp" class="mxgxalurngvb" alt="IMG_20241003_134717">
+ <style>.evjynyhpwcag{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241003_134717.webp" class="evjynyhpwcag" alt="IMG_20241003_134717">
 
- <style>.tuhhcfawdrzs{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240713_121441.webp" class="tuhhcfawdrzs" alt="IMG_20240713_121441">
+ <style>.nowyipqfihfz{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240713_121441.webp" class="nowyipqfihfz" alt="IMG_20240713_121441">
 </div>
   </div>
 
@@ -510,181 +512,181 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>后来尝试了吉他</p>
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"> <style>.pbuhtfwqhtrp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240716_185006.webp" class="pbuhtfwqhtrp" alt="IMG_20240716_185006">
+    <div class="hide-toggle-content"> <style>.uquieumcflru{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240716_185006.webp" class="uquieumcflru" alt="IMG_20240716_185006">
 
- <style>.zbvlrewuqsdf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/05.webp" class="zbvlrewuqsdf" alt="05">
+ <style>.cfgolsopfpkn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/05.webp" class="cfgolsopfpkn" alt="05">
 
 <p>也把本地的景点逛了几圈</p>
- <style>.wnivueiwhcoj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240629_154447.webp" class="wnivueiwhcoj" alt="IMG_20240629_154447">
+ <style>.hmkuwxbxxlce{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240629_154447.webp" class="hmkuwxbxxlce" alt="IMG_20240629_154447">
 
- <style>.bpxtjtybhuqo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090008.webp" class="bpxtjtybhuqo" alt="IMG_20240707_090008">
+ <style>.boehoxndeymw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090008.webp" class="boehoxndeymw" alt="IMG_20240707_090008">
 
- <style>.mqwnrdosuihg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090418.webp" class="mqwnrdosuihg" alt="IMG_20240707_090418">
+ <style>.tyurptlmwccl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090418.webp" class="tyurptlmwccl" alt="IMG_20240707_090418">
 
- <style>.tojeqnedynui{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090504.webp" class="tojeqnedynui" alt="IMG_20240707_090504">
+ <style>.nrkicwvfbujp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_090504.webp" class="nrkicwvfbujp" alt="IMG_20240707_090504">
 
- <style>.nsebdrxzrdhv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_094403.webp" class="nsebdrxzrdhv" alt="IMG_20240707_094403">
+ <style>.rhkxwpqctlfc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240707_094403.webp" class="rhkxwpqctlfc" alt="IMG_20240707_094403">
 
- <style>.ageruindzqac{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240629_152354.webp" class="ageruindzqac" alt="IMG_20240629_152354">
+ <style>.qyvhvbcopdjg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240629_152354.webp" class="qyvhvbcopdjg" alt="IMG_20240629_152354">
 </div>
   </div>
 
 <h2 id="③-大学军训期间"><a href="#③-大学军训期间" class="headerlink" title="③ 大学军训期间"></a>③ 大学军训期间</h2> <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.pkdpytnfeemv{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/07.webp" class="pkdpytnfeemv" alt="07">
+    <div class="hide-toggle-content"><style>.bgdjswqogbeg{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/07.webp" class="bgdjswqogbeg" alt="07">
 
-<style>.tkohyytllfrp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241001_080116.webp" class="tkohyytllfrp" alt="IMG_20241001_080116">
+<style>.zqwlybxmoknv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241001_080116.webp" class="zqwlybxmoknv" alt="IMG_20241001_080116">
 
-<style>.wykoxtrlsbou{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/06.webp" class="wykoxtrlsbou" alt="06">
+<style>.javuveexjmnx{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/06.webp" class="javuveexjmnx" alt="06">
 
-<style>.fnviujuokvtn{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240926_183904.webp" class="fnviujuokvtn" alt="IMG_20240926_183904">
+<style>.wocofeqmwcrh{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240926_183904.webp" class="wocofeqmwcrh" alt="IMG_20240926_183904">
 
-<style>.yvugpwrykied{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241001_064914.webp" class="yvugpwrykied" alt="IMG_20241001_064914">
+<style>.ohuhqjdgvqou{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241001_064914.webp" class="ohuhqjdgvqou" alt="IMG_20241001_064914">
 </div>
   </div>
 
 <h2 id="④-大一寒假"><a href="#④-大一寒假" class="headerlink" title="④ 大一寒假"></a>④ 大一寒假</h2><p>此时我变成了嘉豪,一天到晚有事没事自拍</p>
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.aqinhjpkvjrp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250114_155456.webp" class="aqinhjpkvjrp" alt="IMG_20250114_155456"> <style>.bocnwlvwmzix{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/1739111468523.webp" class="bocnwlvwmzix" alt="1739111468523">
+    <div class="hide-toggle-content"><style>.lligstjcuhsp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250114_155456.webp" class="lligstjcuhsp" alt="IMG_20250114_155456"> <style>.ntumxwlsgldk{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/1739111468523.webp" class="ntumxwlsgldk" alt="1739111468523">
 
- <style>.zvhfhhgyyzpx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250114_155338.webp" class="zvhfhhgyyzpx" alt="IMG_20250114_155338">
+ <style>.cgrfyurhsrdj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250114_155338.webp" class="cgrfyurhsrdj" alt="IMG_20250114_155338">
 
- <style>.zbgeyglyoqfr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250115_001428.webp" class="zbgeyglyoqfr" alt="IMG_20250115_001428">
+ <style>.qucsacksskix{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250115_001428.webp" class="qucsacksskix" alt="IMG_20250115_001428">
 
- <style>.vouwsppvmggk{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250115_001504.webp" class="vouwsppvmggk" alt="IMG_20250115_001504">
+ <style>.hiejdxtqxlmh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250115_001504.webp" class="hiejdxtqxlmh" alt="IMG_20250115_001504">
 </div>
   </div>
 
 <h2 id="⑤-大一暑假"><a href="#⑤-大一暑假" class="headerlink" title="⑤ 大一暑假"></a>⑤ 大一暑假</h2><p>回老家一趟</p>
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"> <style>.nlkiuqtqogxg{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240721_175717.webp" class="nlkiuqtqogxg" alt="IMG_20240721_175717">
+    <div class="hide-toggle-content"> <style>.jtsvoogxhsdz{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240721_175717.webp" class="jtsvoogxhsdz" alt="IMG_20240721_175717">
 
- <style>.wxacotxntrek{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240824_114429.webp" class="wxacotxntrek" alt="IMG_20240824_114429">
+ <style>.jmqxtplpwakx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240824_114429.webp" class="jmqxtplpwakx" alt="IMG_20240824_114429">
 
 <p>这是我妹,不过现在已经长大了(以前一不高兴就号啕大哭快烦死我了)</p>
- <style>.hldksloltofh{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240623_100010.webp" class="hldksloltofh" alt="IMG_20240623_100010">
+ <style>.ptqvbpvwmitn{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240623_100010.webp" class="ptqvbpvwmitn" alt="IMG_20240623_100010">
 
- <style>.lfsstznltgcd{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240623_180022.webp" class="lfsstznltgcd" alt="IMG_20240623_180022">
+ <style>.tgxysxvdrlnj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240623_180022.webp" class="tgxysxvdrlnj" alt="IMG_20240623_180022">
 
-<style>.rmqzmbtewnvd{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_133100.webp" class="rmqzmbtewnvd" alt="IMG_20250518_133100"> 
+<style>.dzmgwcwqypdm{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_133100.webp" class="dzmgwcwqypdm" alt="IMG_20250518_133100"> 
 
- <style>.buncbcecrmee{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240721_170203.webp" class="buncbcecrmee" alt="IMG_20240721_170203">
+ <style>.vtgkhvxfcebb{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240721_170203.webp" class="vtgkhvxfcebb" alt="IMG_20240721_170203">
 
- <style>.xbxyvknpursq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_181318.webp" class="xbxyvknpursq" alt="IMG_20250406_181318">
+ <style>.egcvlxnsjgfx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_181318.webp" class="egcvlxnsjgfx" alt="IMG_20250406_181318">
 
- <style>.csegcemvhxfn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_125640.webp" class="csegcemvhxfn" alt="IMG_20250518_125640">
+ <style>.tphiqkyctihb{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_125640.webp" class="tphiqkyctihb" alt="IMG_20250518_125640">
 
- <style>.nhufhqzylizr{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_125655.webp" class="nhufhqzylizr" alt="IMG_20250518_125655">
+ <style>.vpaexsywxiuv{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250518_125655.webp" class="vpaexsywxiuv" alt="IMG_20250518_125655">
 </div>
   </div>
 
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
     <div class="hide-toggle-content"><p>洛阳博物馆和景点</p>
- <style>.njevgmxcgqzt{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240914_152317.webp" class="njevgmxcgqzt" alt="IMG_20240914_152317">
+ <style>.geqoetcnfdua{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240914_152317.webp" class="geqoetcnfdua" alt="IMG_20240914_152317">
 
- <style>.vjgtfrqjmqcg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240914_145308.webp" class="vjgtfrqjmqcg" alt="IMG_20240914_145308">
+ <style>.gxuosscbjpjf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20240914_145308.webp" class="gxuosscbjpjf" alt="IMG_20240914_145308">
 
- <style>.zyvndrjgvthh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_151603.webp" class="zyvndrjgvthh" alt="IMG_20250704_151603">
+ <style>.ruiaimbqtbbr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_151603.webp" class="ruiaimbqtbbr" alt="IMG_20250704_151603">
 
- <style>.utxwlnkfxwnb{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_153829.webp" class="utxwlnkfxwnb" alt="IMG_20250704_153829">
+ <style>.oipqxkbkfrgw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_153829.webp" class="oipqxkbkfrgw" alt="IMG_20250704_153829">
 </div>
   </div>
 
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.jtfhfhtbihpf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_211051.webp" class="jtfhfhtbihpf" alt="IMG_20250704_211051">
+    <div class="hide-toggle-content"><style>.ndcfinlyauou{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_211051.webp" class="ndcfinlyauou" alt="IMG_20250704_211051">
 
-<style>.wwcrzucuheqc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_212439.webp" class="wwcrzucuheqc" alt="IMG_20250704_212439">
+<style>.ffmtrniugtsr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_212439.webp" class="ffmtrniugtsr" alt="IMG_20250704_212439">
 
-<style>.gusvddvhewhs{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_181329.webp" class="gusvddvhewhs" alt="IMG_20250705_181329">
+<style>.pfqrjebnmxwl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_181329.webp" class="pfqrjebnmxwl" alt="IMG_20250705_181329">
 
-<style>.qwbmlskhvtsl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_183054.webp" class="qwbmlskhvtsl" alt="IMG_20250705_183054">
+<style>.vetotqyevzug{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_183054.webp" class="vetotqyevzug" alt="IMG_20250705_183054">
 
-<style>.nrihfhysfnil{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_205740.webp" class="nrihfhysfnil" alt="IMG_20250705_205740">
+<style>.vypmroramijv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250705_205740.webp" class="vypmroramijv" alt="IMG_20250705_205740">
 
-<style>.dghyixcxdiqn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_131849.webp" class="dghyixcxdiqn" alt="IMG_20250704_131849">
+<style>.nmppktgrhlrl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_131849.webp" class="nmppktgrhlrl" alt="IMG_20250704_131849">
 
-<style>.qggwstnqvkrv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_144832.webp" class="qggwstnqvkrv" alt="IMG_20250704_144832">
+<style>.cifyhqyjvdpp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250704_144832.webp" class="cifyhqyjvdpp" alt="IMG_20250704_144832">
 </div>
   </div>
 
  <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
     <div class="hide-toggle-content"><p>考了个驾照,当时炫耀了好几天,虽然我还是不会开自动挡的车只会开手动挡</p>
- <style>.sedoelwbfheo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250904_155413.webp" class="sedoelwbfheo" alt="IMG_20250904_155413">
+ <style>.pfjpbypejlae{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250904_155413.webp" class="pfjpbypejlae" alt="IMG_20250904_155413">
 
 <p>后来去了郑州的一个5000人的大漫展,一次玩到爽然后对漫展丧失了兴趣从此以后再也没去过任何漫展了</p>
- <style>.gcppdozveens{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_135702.webp" class="gcppdozveens" alt="IMG_20241102_135702">
+ <style>.kscluguswtzl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_135702.webp" class="kscluguswtzl" alt="IMG_20241102_135702">
 
- <style>.lwhqhquswkku{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_143249.webp" class="lwhqhquswkku" alt="IMG_20241102_143249">
+ <style>.byfromjflpof{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_143249.webp" class="byfromjflpof" alt="IMG_20241102_143249">
 
- <style>.rmrocwioftgg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_150827.webp" class="rmrocwioftgg" alt="IMG_20241102_150827">
+ <style>.suvcehgersdu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_150827.webp" class="suvcehgersdu" alt="IMG_20241102_150827">
 
- <style>.ldtrfwpmpwhu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_133921.webp" class="ldtrfwpmpwhu" alt="IMG_20241102_133921">
+ <style>.gtszsheuykad{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241102_133921.webp" class="gtszsheuykad" alt="IMG_20241102_133921">
 
 <p>另一个同学复读升学宴喊我们几个吃饭,于是我们几个千里迢迢旧友重逢了</p>
- <style>.juzkomdbpcji{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/Image_1756656877355.webp" class="juzkomdbpcji" alt="Image_1756656877355">
+ <style>.uuwyprfxeele{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/Image_1756656877355.webp" class="uuwyprfxeele" alt="Image_1756656877355">
 </div>
   </div>
 
 <h2 id="⑥-大二秋天"><a href="#⑥-大二秋天" class="headerlink" title="⑥ 大二秋天"></a>⑥ 大二秋天</h2> <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"> <style>.ygclricmluit{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241219_165001.webp" class="ygclricmluit" alt="IMG_20241219_165001">
+    <div class="hide-toggle-content"> <style>.gyhoxqlswrlj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241219_165001.webp" class="gyhoxqlswrlj" alt="IMG_20241219_165001">
 
- <style>.uraltitydkel{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_180620.webp" class="uraltitydkel" alt="IMG_20250406_180620">
+ <style>.fubrbxypxcju{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_180620.webp" class="fubrbxypxcju" alt="IMG_20250406_180620">
 
- <style>.yarqshlnxkfc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_181045.webp" class="yarqshlnxkfc" alt="IMG_20250406_181045">
+ <style>.twywybflbdqq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20250406_181045.webp" class="twywybflbdqq" alt="IMG_20250406_181045">
 
- <style>.cqvewqhtltul{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241127_115633(1).webp" class="cqvewqhtltul" alt="IMG_20241127_115633(1)">
+ <style>.vkybqvgipsmg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241127_115633(1).webp" class="vkybqvgipsmg" alt="IMG_20241127_115633(1)">
 
- <style>.mixotjcpowhs{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241128_093449.webp" class="mixotjcpowhs" alt="IMG_20241128_093449">
+ <style>.rmssukksbzev{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241128_093449.webp" class="rmssukksbzev" alt="IMG_20241128_093449">
 
- <style>.dlkxvezgiimk{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241128_093506.webp" class="dlkxvezgiimk" alt="IMG_20241128_093506">
+ <style>.rnburjtleogk{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241128_093506.webp" class="rnburjtleogk" alt="IMG_20241128_093506">
 
- <style>.qwffeljttnag{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_110416.webp" class="qwffeljttnag" alt="IMG_20251102_110416">
+ <style>.hmfgfsdlwuwm{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_110416.webp" class="hmfgfsdlwuwm" alt="IMG_20251102_110416">
 
-<style>.pwwrhrtkoetu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241219_164934.webp" class="pwwrhrtkoetu" alt="IMG_20241219_164934"> 
+<style>.fgurocbuzkqw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20241219_164934.webp" class="fgurocbuzkqw" alt="IMG_20241219_164934"> 
 </div>
   </div>
 
 <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
-    <div class="hide-toggle-content"><style>.dcyflliyvieq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_111809.webp" class="dcyflliyvieq" alt="IMG_20251102_111809">
+    <div class="hide-toggle-content"><style>.sxhiqmyqpfnc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_111809.webp" class="sxhiqmyqpfnc" alt="IMG_20251102_111809">
 
-<style>.ezxffrrkpkjl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_112008.webp" class="ezxffrrkpkjl" alt="IMG_20251102_112008">
+<style>.aovyubiygnof{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_112008.webp" class="aovyubiygnof" alt="IMG_20251102_112008">
 
-<style>.rcggxtfbehhb{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_112036.webp" class="rcggxtfbehhb" alt="IMG_20251102_112036">
+<style>.cldbdqqiwtef{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_112036.webp" class="cldbdqqiwtef" alt="IMG_20251102_112036">
 
-<style>.hxcugnmcuxys{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103702.webp" class="hxcugnmcuxys" alt="IMG_20251102_103702">
+<style>.jcttulrciolv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103702.webp" class="jcttulrciolv" alt="IMG_20251102_103702">
 
-<style>.rjuwperokssg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103811.webp" class="rjuwperokssg" alt="IMG_20251102_103811">
+<style>.ipajclkiawih{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103811.webp" class="ipajclkiawih" alt="IMG_20251102_103811">
 
-<style>.wekkydmxpest{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103848.webp" class="wekkydmxpest" alt="IMG_20251102_103848">
+<style>.rsaxnitkhovx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_103848.webp" class="rsaxnitkhovx" alt="IMG_20251102_103848">
 
-<style>.bhtpvgsphwjo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_104509.webp" class="bhtpvgsphwjo" alt="IMG_20251102_104509">
+<style>.cnkcydnmyxwb{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_104509.webp" class="cnkcydnmyxwb" alt="IMG_20251102_104509">
 
-<style>.psehmrfllrdh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_104556.webp" class="psehmrfllrdh" alt="IMG_20251102_104556">
+<style>.mtimyqkffesl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_104556.webp" class="mtimyqkffesl" alt="IMG_20251102_104556">
 
-<style>.ibzjyootodcj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_105027.webp" class="ibzjyootodcj" alt="IMG_20251102_105027">
+<style>.pulpnjucqpay{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20251102_105027.webp" class="pulpnjucqpay" alt="IMG_20251102_105027">
 </div>
   </div>
 
 <h2 id="⑦-大二冬天"><a href="#⑦-大二冬天" class="headerlink" title="⑦ 大二冬天"></a>⑦ 大二冬天</h2> <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
     <div class="hide-toggle-content"><p>当时几个月都没剪头发跟女生一样,我爱当嘉豪这一点是一点都没有变</p>
- <style>.cdbpxztudnal{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260115_101457.webp" class="cdbpxztudnal" alt="IMG_20260115_101457">
+ <style>.uvngyoiqghjc{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260115_101457.webp" class="uvngyoiqghjc" alt="IMG_20260115_101457">
 
- <style>.cpshfcmmgjsq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260115_101200.webp" class="cpshfcmmgjsq" alt="IMG_20260115_101200">
+ <style>.soujvfkahttp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260115_101200.webp" class="soujvfkahttp" alt="IMG_20260115_101200">
 </div>
   </div>
 
 <h2 id="⑧-大二寒假-现在"><a href="#⑧-大二寒假-现在" class="headerlink" title="⑧ 大二寒假(现在)"></a>⑧ 大二寒假(现在)</h2> <div class="hide-toggle">
     <div class="hide-toggle-title">图片</div>
     <div class="hide-toggle-content"><p>这个我现在就临时补一张吧哈哈哈,找一个最佳角度,反正今天也会成为过去的</p>
- <style>.cyqyswgmbycr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260127_210049.webp" class="cyqyswgmbycr" alt="IMG_20260127_210049">
+ <style>.nuudlouchedi{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/27/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E8%B5%9B%E5%8D%9A%E7%9B%B8%E5%86%8C/IMG_20260127_210049.webp" class="nuudlouchedi" alt="IMG_20260127_210049">
 </div>
   </div>
 
@@ -1199,7 +1201,7 @@ initDesktopPet();</script></div><!-- 悬浮音乐播放器--><div class="music-p
   //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
   //   documentElement.classList 提前完成,不再需要整页隐藏。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/just-read.js"></script><script defer src="/js/features/visitor-stats.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1218,10 +1220,11 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   sakana: {"enable":true},
   features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
   code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  ai_summary: {"enable":true,"api_url":"https://deepseek.3930088367.workers.dev/","summary_directly":false,"ai_name":"阿罗娜","ai_introduce":"老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊","ai_version":"OpenAI GPT-4o","buttons":["介绍自己","来点灵感","生成AI简介"]},
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   just_read: {"enable":true},
+  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev/","cache_ttl":300000,"mock":false},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };
