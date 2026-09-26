@@ -458,10 +458,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>但是shadergraph具有一定的局限性,比如同样的shadergraph换一个引擎就不能用了,以及部分效果无法用节点实现</p>
 <p>如果你对脚本版本的shader感兴趣可以学一下方便理解节点(不过我数学不好,看不懂)</p>
 <p>我们复用之前学习<strong>自定义光照</strong>时的celshaded的shadergraph</p>
-<p>​	<style>.ywilapdsjepy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608152354178.webp" class="ywilapdsjepy" alt="image-20260608152354178"></p>
+<p>​	<style>.qgqwhtysnvsq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608152354178.webp" class="qgqwhtysnvsq" alt="image-20260608152354178"></p>
 <p>我们首先创建自定义节点</p>
 <p>然后自己在VScode或者VS或Rider里创建一个hlsl文件</p>
-<p>​	<style>.qcrxtopveiwm{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608162239276.webp" class="qcrxtopveiwm" alt="image-20260608162239276"></p>
+<p>​	<style>.agbspjkxwuqw{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608162239276.webp" class="agbspjkxwuqw" alt="image-20260608162239276"></p>
 <p>在 Unity Shader Graph 中，<strong>Precision（精度）</strong> 指的是节点和整个 Shader 计算时使用的数值精度类型。它主要影响 <strong>GPU 性能</strong>、<strong>内存占用</strong> 和 <strong>渲染质量</strong> </p>
 <table>
 <thead>
@@ -597,7 +597,7 @@ void AllAdditionalLights_half(half3 WorldPos, half3 WorldNormal, half2 CutoffThr
 
 #endif // ADDITIONAL_LIGHT_INCLUDED</span><br></code></pre></div></div>
 
-<p>​	<style>.gnzcshwelpit{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608224240547.webp" class="gnzcshwelpit" alt="image-20260608224240547"></p>
+<p>​	<style>.vapyvgxpgkzc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608224240547.webp" class="vapyvgxpgkzc" alt="image-20260608224240547"></p>
 <p>我们这个脚本运用到刚才的自定义函数 Mainlight节点上,并设置输入 vector3类型的worldpos(世界坐标) 输入 和 vector3类型direction(方向) 和 Color (颜色)以及 浮点类型的Attenuation(虚弱) 输出 </p>
 <p>此时不再使用之前的 main light direction主光源节点和 negate取反节点</p>
 <p>先实现主要的参数</p>
@@ -636,11 +636,11 @@ void MainLight_half(half3 WorldPos, out half3 Direction, out half3 Color, out ha
 
 #endif // ADDITIONAL_LIGHT_INCLUDED</span><br></code></pre></div></div>
 
-<p>​	<style>.sztydftpjdir{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608231557905.webp" class="sztydftpjdir" alt="image-20260608231557905"></p>
+<p>​	<style>.kbldeggyrbus{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608231557905.webp" class="kbldeggyrbus" alt="image-20260608231557905"></p>
 <p>先给自定义的这个节点输入position world 位置节点</p>
 <p>我们需要考虑衰减因素,获取环境光插值节点 lerp,然后乘以光源亮度后再和衰减值相乘后与基础色相乘</p>
 <p>此时已经可以通过调整灯光控制材质颜色了</p>
-<p>​	<style>.ecnwflsfkayo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608231933106.webp" class="ecnwflsfkayo" alt="image-20260608231933106"></p>
+<p>​	<style>.glwyvvthwagp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260608231933106.webp" class="glwyvvthwagp" alt="image-20260608231933106"></p>
 <p>由于这是主光源的情况,而如果在物体旁边添加其他的点光源则需要额外的自定义函数</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span></div><pre class="codecard-pre"><code class="language-plaintext">//这个是单精度
 void AdditionalLight_float(float3 WorldPos, int lightID, out float3 Direction, out float3 Color, out float Attenuation)
@@ -681,17 +681,17 @@ void AdditionalLight_half(half3 WorldPos, int lightID, out half3 Direction, out 
 &#125;</span><br></code></pre></div></div>
 
 <p>同样的加入自定义函数并按照HLSL脚本导入输入和输出</p>
-<p>​	<style>.cshllztvwspe{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609164236349.webp" class="cshllztvwspe" alt="image-20260609164236349"></p>
+<p>​	<style>.dzwbvpdpheyi{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609164236349.webp" class="dzwbvpdpheyi" alt="image-20260609164236349"></p>
 <p>由于shader无法使用像for循环那样的遍历场景里的每一个光源,这就导致不仅要复制附加光源节点还要对每个光源进行计算,而且无法动态监测实际存在的光源的数量,所以现在是假设场景里是有4个光源</p>
-<p>​	<style>.ildjjjxcyhnp{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609163938172.webp" class="ildjjjxcyhnp" alt="image-20260609163938172"></p>
+<p>​	<style>.lzdcbrqilybh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609163938172.webp" class="lzdcbrqilybh" alt="image-20260609163938172"></p>
 <p>可以看到现在节点实在是太多了,我们可以使用之前学的子图sub来简化,把特定的功能封装进子图只暴露输入输出接口</p>
-<p>​	<style>.cuskhyipefnp{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609163903536.webp" class="cuskhyipefnp" alt="image-20260609163903536"></p>
-<p>​	<style>.xsijivbudhcr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609165111783.webp" class="xsijivbudhcr" alt="image-20260609165111783"></p>
+<p>​	<style>.smicwvytnhoj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609163903536.webp" class="smicwvytnhoj" alt="image-20260609163903536"></p>
+<p>​	<style>.ddrsvoanupfh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609165111783.webp" class="ddrsvoanupfh" alt="image-20260609165111783"></p>
 <p>包括前面的position节点也要包含在内,不然编辑器会报错空引用</p>
 <p>子图添加light ID float属性,将输出值改为vector3类型的lightColor</p>
-<p>​	<style>.xvjdqnxvzijc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609170702840.webp" class="xvjdqnxvzijc" alt="image-20260609170702840"></p>
+<p>​	<style>.cbjhrqgushjb{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609170702840.webp" class="cbjhrqgushjb" alt="image-20260609170702840"></p>
 <p>然后在主图里需要复制四个子图并赋值给Light ID为1</p>
-<p>​	<style>.xsdeepwbmlfy{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609171133640.webp" class="xsdeepwbmlfy" alt="image-20260609171133640"></p>
+<p>​	<style>.oyvtdufgpwhb{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609171133640.webp" class="oyvtdufgpwhb" alt="image-20260609171133640"></p>
 <p>但是这种方法相比你也发现了,如果场景里超过四盏灯就不行了,第五个灯光将不会被检测,而且需要添加一大堆节点</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span></div><pre class="codecard-pre"><code class="language-plaintext">void AllAdditionalLights_float(float3 WorldPos, float3 WorldNormal, float2 CutoffThresholds, out float3 LightColor)
 &#123;
@@ -735,9 +735,9 @@ void AllAdditionalLights_half(half3 WorldPos, half3 WorldNormal, half2 CutoffThr
 #endif
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.geumjmtryobi{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609172551549.webp" class="geumjmtryobi" alt="image-20260609172551549"></p>
+<p>​	<style>.jvqbrycdsgba{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609172551549.webp" class="jvqbrycdsgba" alt="image-20260609172551549"></p>
 <p>我们使用一个新的自定义函数节点,此时只需要一个节点便可以解决,但是仍然只能处理8个光源</p>
-<p>​	<style>.vgwyexzcucwg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609173407202.webp" class="vgwyexzcucwg" alt="image-20260609173407202"></p>
+<p>​	<style>.ohwmqdsiifyy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/06/08/Unity%E5%BC%95%E6%93%8E/UnityShaderGraph%E5%AD%A6%E4%B9%A0/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/image-20260609173407202.webp" class="ohwmqdsiifyy" alt="image-20260609173407202"></p>
 <p>如图,我们的圈出来的这个红色光源没有渲染出来,是因为这是小球材质上的第9个光源</p>
 <p>这个是因为unity默认每个物体最多可以接收8个除了主光源以外的额外光源的光来节约性能,因为光源太多会加重GPU的负担</p>
 <p>所以我们明白了一件事就是节点不是万能的,有的时候需要自己写HLSL</p>
@@ -1274,7 +1274,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   just_read: {"enable":true},
-  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev/","cache_ttl":300000,"mock":false},
+  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev","cache_ttl":300000,"mock":false},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };

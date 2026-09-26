@@ -453,15 +453,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天我们来学Dart中的异步编程和Future"><a href="#今天我们来学Dart中的异步编程和Future" class="headerlink" title="今天我们来学Dart中的异步编程和Future"></a>今天我们来学Dart中的异步编程和Future</h1><h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h2><p>​	<style>.peejfhhycnve{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418103656415.webp" class="peejfhhycnve" alt="image-20260418103656415"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天我们来学Dart中的异步编程和Future"><a href="#今天我们来学Dart中的异步编程和Future" class="headerlink" title="今天我们来学Dart中的异步编程和Future"></a>今天我们来学Dart中的异步编程和Future</h1><h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h2><p>​	<style>.hinxbkeastls{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418103656415.webp" class="hinxbkeastls" alt="image-20260418103656415"></p>
 <p>这里我们简单描述一下进程和线程</p>
 <div class="hide-toggle">
     <div class="hide-toggle-title">进程和线程</div>
     <div class="hide-toggle-content"><p>进程就是正在运行中的程序,因为电脑上的软件是存在在磁盘上的,即以文件的形式存储的,也就是我们熟悉的文件夹,包括手机平板也是同样的,当我们点开一个软件时,首先这个软件会被加载到内存并获得系统资源,然后开始执行</p>
 <p>你使用ctrl + alt +del 打开你的资源管理器就明白了(话说我后台怎么这么多程序,难道是开机自启动? 难怪每次开机这么慢)</p>
-<p>​	<style>.fvjzoyjchkpr{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418104835840.webp" class="fvjzoyjchkpr" alt="image-20260418104835840"></p>
+<p>​	<style>.vjhcjbrszaai{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418104835840.webp" class="vjhcjbrszaai" alt="image-20260418104835840"></p>
 <p>程序运行会占用内存,每个进程之间内存隔离互不影响,比如你终止了哔哩哔哩的进程,不会影响其他软件的使用</p>
-<p>​	<style>.nsuifngrriyi{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418121642703.webp" class="nsuifngrriyi" alt="image-20260418121642703"></p>
+<p>​	<style>.ggeoodlbkfqo{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418121642703.webp" class="ggeoodlbkfqo" alt="image-20260418121642703"></p>
 <p>至于线程,就是程序内部的执行路线,单个进程里有至少一个线程,以浏览器为例</p>
 <p>Chrome（进程）</p>
 <p> ├── 线程1：渲染页面</p>
@@ -473,9 +473,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
   </div>
 
-<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>​	<style>.vajuyifvkpvs{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418163623676.webp" class="vajuyifvkpvs" alt="image-20260418163623676"></p>
+<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>​	<style>.riedjnnkscfu{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418163623676.webp" class="riedjnnkscfu" alt="image-20260418163623676"></p>
 <p>正常情况下是这样的,这里用了回调函数</p>
-<p>​	<style>.tpgqecjrulka{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418164722903.webp" class="tpgqecjrulka" alt="image-20260418164722903"></p>
+<p>​	<style>.xnwrbllrkfoy{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418164722903.webp" class="xnwrbllrkfoy" alt="image-20260418164722903"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; args) &#123;
   Future f = Future(() &#123;
     <span class="keyword">return</span> <span class="string">&quot;baka&quot;</span>;
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
 &#125;</span><br></code></pre></div></div>
 
 <p>异常情况下是这样的</p>
-<p>​	<style>.fiqeneptqlck{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418164823601.webp" class="fiqeneptqlck" alt="image-20260418164823601"></p>
+<p>​	<style>.zgkpynufvoxj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418164823601.webp" class="zgkpynufvoxj" alt="image-20260418164823601"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; args) &#123;
   Future f = Future(() &#123;
     <span class="comment">//return &quot;baka&quot;;</span>
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
       &#125;);
 &#125;</span><br></code></pre></div></div>
 
-<h3 id="async和await"><a href="#async和await" class="headerlink" title="async和await"></a>async和await</h3><p>​	<style>.qbbatcdjntqa{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418181659653.webp" class="qbbatcdjntqa" alt="image-20260418181659653"></p>
+<h3 id="async和await"><a href="#async和await" class="headerlink" title="async和await"></a>async和await</h3><p>​	<style>.tsqpnpflvxxo{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418181659653.webp" class="tsqpnpflvxxo" alt="image-20260418181659653"></p>
 <p>你可以发现在函数的参数括号后面有<code>async </code>指的是 <code>asynchronous（异步)</code>,代表当前函数是异步的</p>
 <table>
 <thead>
@@ -680,7 +680,7 @@ Future&lt;<span class="built_in">String</span>&gt; getDetail(<span class="built_
 &#125;</span><br></code></pre></div></div>
 
 <p>例如刚才的这个例子返回值是  <code>IntegerDivisionByZeroException</code></p>
-<p>​	<style>.qkhfuifvyaby{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418210253654.webp" class="qkhfuifvyaby" alt="image-20260418210253654"></p>
+<p>​	<style>.uonzdohmivec{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418210253654.webp" class="uonzdohmivec" alt="image-20260418210253654"></p>
 <p>而我们只提取这一个问题并输出就行了</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">void</span> main() &#123;
   <span class="keyword">try</span> &#123;
@@ -692,7 +692,7 @@ Future&lt;<span class="built_in">String</span>&gt; getDetail(<span class="built_
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.axunldedfsap{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418210401742.webp" class="axunldedfsap" alt="image-20260418210401742"></p>
+<p>​	<style>.cmjyrnhdykhw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/18/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%9B%9B%E5%A4%A9/image-20260418210401742.webp" class="cmjyrnhdykhw" alt="image-20260418210401742"></p>
 <p>甚至还能这样玩</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">void</span> main() &#123;
   <span class="keyword">try</span> &#123;
@@ -1295,7 +1295,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true,"explorer":true},
   article_list: {"card_size":"normal","view_mode":"modal"},
   just_read: {"enable":true},
-  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev/","cache_ttl":300000,"mock":false},
+  post_stats: {"enable":true,"api_base":"https://blue-fire-418f.3930088367.workers.dev","cache_ttl":300000,"mock":false},
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };
