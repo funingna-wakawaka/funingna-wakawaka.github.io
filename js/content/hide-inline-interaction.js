@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 我们尝试调用全局的翻译对象，如果不存在则返回原文本
   function t(text) {
     if (window.i18n && typeof window.i18n.get === "function") {
-      return window.i18n.get(text);
+      return window.i18n.text ? window.i18n.text(text) : text;
     }
     return text;
   }
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const hiddenContent = this.getAttribute("data-hidden-content");
         // 获取默认显示文本，通常是 "点击查看"
         const displayText =
-          this.getAttribute("data-display-text") || "点击查看";
+          this.getAttribute("data-display-text") || "点击查看"; // i18n:allow(值通道/内容,有意保留的中文)
 
         // 保存原始样式
         const originalBgColor = this.style.backgroundColor;
@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
         this.style.color = "inherit";
         this.style.borderBottom = "none";
         this.style.cursor = "default";
-        // ★ 标记展开状态:悬停时不再浮出"点击查看"提示(仅隐藏态显示)
+        // 标记展开状态:悬停时不再浮出"点击查看"提示(仅隐藏态显示)
         this.classList.add("revealed");
         isRevealed = true;
 
         // 添加一个小的提示，表明可以点击恢复
         const restoreHint = document.createElement("span");
 
-        // ★★★ 核心修改 1：翻译 "(点击恢复)" ★★★
+        // 核心修改 1：翻译 "(点击恢复)"
         // 注意：这里是带空格的，确保你的 lang-switch.js 字典里有 " (点击恢复)"
         restoreHint.textContent = t(" (点击恢复)");
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         restoreHint.addEventListener("click", function (e) {
           e.stopPropagation();
 
-          // ★★★ 核心修改 2：翻译恢复后的文本 ★★★
+          // 核心修改 2：翻译恢复后的文本
           // 如果 displayText 是 "点击查看"，t() 会把它变成 "Click to view"
           element.textContent = t(displayText);
 

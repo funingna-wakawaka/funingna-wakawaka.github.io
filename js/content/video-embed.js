@@ -17,7 +17,7 @@
   function facadeInnerHtml() {
     return (
       '<span class="video-facade-btn" aria-hidden="true"></span>' +
-      '<span class="video-facade-tip">点击加载 · 不自动播放</span>'
+      '<span class="video-facade-tip" data-i18n-key="video.facade_tip">' + (window.i18n && window.i18n.text ? window.i18n.text("video.facade_tip") : "点击加载 · 不自动播放") + '</span>'
     );
   }
 
@@ -26,7 +26,7 @@
     if (!src) return;
     var frame = document.createElement("iframe");
     frame.src = src;
-    frame.title = "嵌入视频";
+    frame.title = window.i18n && window.i18n.text ? window.i18n.text("video.embed_title") : "嵌入视频";
     frame.setAttribute("frameborder", "0");
     // 虎牙页面自身内容可能比 iframe 高,禁掉它的内部滚动条
     frame.setAttribute("scrolling", "no");
@@ -40,7 +40,7 @@
       "position:absolute;top:0;left:0;width:100%;height:100%;border:0;";
     container.innerHTML = "";
     container.appendChild(frame);
-    // ★ 已加载视频的占位卡纳入视口观察:滚出 150% 余量后自动收回
+    // 已加载视频的占位卡纳入视口观察:滚出 150% 余量后自动收回
     if (videoIO) videoIO.observe(container);
   }
 
@@ -134,7 +134,7 @@
 
   function scanVideoIframes() {
     if (!videoIO) return;
-    // ★ 所有文章内视频初始一律隐藏为占位卡,点击后才加载
+    // 所有文章内视频初始一律隐藏为占位卡,点击后才加载
     document
       .querySelectorAll(".post-content iframe, .article-content iframe")
       .forEach(function (f) {

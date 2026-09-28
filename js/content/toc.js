@@ -4,7 +4,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ★ 读者设置:隐藏目录时不初始化
+  // 读者设置:隐藏目录时不初始化
   if (window.__readerSettings && window.__readerSettings.toc === "hide") return;
 
   // 获取文章内容区域
@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 如果文章内容区域不存在，则不执行后续操作
   if (!postContent) {
-    // ★ pjax 回到非文章页时,移除遗留的移动端目录按钮/面板/遮罩
-    //   (它们挂在 body 和 button-container 上,不会随内容区一起被换掉)
+    // pjax 回到非文章页时,移除遗留的移动端目录按钮/面板/遮罩
+    // (它们挂在 body 和 button-container 上,不会随内容区一起被换掉)
     [
       ".mobile-toc-toggle",
       ".mobile-toc-panel",
@@ -64,18 +64,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // 显示"无目录"提示
         const tocTitle = tocSidebar.querySelector(".toc-title");
         if (tocTitle) {
-          tocTitle.textContent = "无目录";
+          tocTitle.setAttribute("data-i18n-key", "toc.empty");
+          tocTitle.textContent = window.i18n && window.i18n.text ? window.i18n.text("toc.empty") : "无目录";
         }
       }
     }
     return;
   }
 
-  // ★ 2026-09:目录改为"嵌套可折叠树"(参考 Astro 博客):
-  //   - 按标题层级嵌套 <ul>,有子级的项带折叠按钮(手风琴);
-  //   - 标题过长用省略号截断(悬停不再弹出 title 提示,按需求已取消);
-  //   - 滚动高亮时自动展开当前标题所在的层级路径;
-  //   - 移动端面板克隆同一棵树,折叠按钮用事件委托,克隆后依然可用。
+  // 2026-09:目录改为"嵌套可折叠树"(参考 Astro 博客):
+  // - 按标题层级嵌套 <ul>,有子级的项带折叠按钮(手风琴);
+  // - 标题过长用省略号截断(悬停不再弹出 title 提示,按需求已取消);
+  // - 滚动高亮时自动展开当前标题所在的层级路径;
+  // - 移动端面板克隆同一棵树,折叠按钮用事件委托,克隆后依然可用。
   // 构建嵌套树
   const tocList = buildTocTree(headings);
 
@@ -95,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 初始化活动目录项
   updateActiveTocItem();
 
-  // ★ 记住上一次的活动标题:自动展开只在"活动标题变化"时执行一次。
-  //   否则每次滚动都会把用户手动折叠的层级重新展开,导致"无法折叠"。
+  // 记住上一次的活动标题:自动展开只在"活动标题变化"时执行一次。
+  // 否则每次滚动都会把用户手动折叠的层级重新展开,导致"无法折叠"。
   let lastActiveHeading = null;
 
   // 监听滚动事件，更新活动目录项
@@ -251,7 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const caret = document.createElement("button");
             caret.type = "button";
             caret.className = "toc-caret";
-            caret.setAttribute("aria-label", "折叠/展开");
+            caret.setAttribute("data-i18n-key-aria-label", "toc.toggle");
+            caret.setAttribute("aria-label", window.i18n && window.i18n.text ? window.i18n.text("toc.toggle") : "折叠/展开");
             parentRow.insertBefore(caret, parentRow.firstChild);
           }
         }
@@ -279,8 +281,8 @@ document.addEventListener("DOMContentLoaded", function () {
    * 创建移动端目录按钮和面板
    */
   function createMobileToc() {
-    // ★ pjax 在文章间跳转时会再次进入本函数:先清掉上一篇文章遗留的
-    //   按钮/面板/遮罩,否则 ☰ 按钮会越积越多(出现两个列表按钮)
+    // pjax 在文章间跳转时会再次进入本函数:先清掉上一篇文章遗留的
+    // 按钮/面板/遮罩,否则 ☰ 按钮会越积越多(出现两个列表按钮)
     [
       ".mobile-toc-toggle",
       ".mobile-toc-panel",
@@ -322,7 +324,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // 创建移动端目录标题
     const mobileTocTitle = document.createElement("div");
     mobileTocTitle.className = "toc-title";
-    mobileTocTitle.textContent = "目录";
+    mobileTocTitle.setAttribute("data-i18n-key", "toc.title");
+    mobileTocTitle.textContent = window.i18n && window.i18n.text ? window.i18n.text("toc.title") : "目录";
 
     // 创建移动端目录内容
     const mobileTocContent = document.createElement("div");

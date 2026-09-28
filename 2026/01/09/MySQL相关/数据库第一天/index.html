@@ -11,8 +11,30 @@
 })();
 </script><script>if (window.parent !== window) {
   document.documentElement.classList.add('is-iframe');
+}</script><style>html.is-iframe .header,
+html.is-iframe header,
+html.is-iframe .navbar,
+html.is-iframe .footer,
+html.is-iframe footer,
+html.is-iframe .music-player,
+html.is-iframe .theme-color-picker-container,
+html.is-iframe #waves-container,
+html.is-iframe #pet-root,
+html.is-iframe #sakana-widget-wrapper,
+html.is-iframe .author-card-section,
+html.is-iframe .hero-section {
+  display: none !important;
 }
-</script><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
+html.is-iframe .post-wrapper,
+html.is-iframe .article-container,
+html.is-iframe main {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+html.is-iframe body {
+  overflow-x: hidden !important;
+}
+</style><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
 <link rel="stylesheet" href="/css/core/main.css">
 
 <link rel="stylesheet" href="/css/components/tags.css">
@@ -137,7 +159,7 @@
   60% { transform: translateY(-7px); }
 }
 
-/* ★★★ 手机端适配修改 ★★★ */
+/* 手机端适配修改 */
 @media (max-width: 768px) {
   .cover-title { font-size: 2rem; letter-spacing: 2px; }
   .cover-author { font-size: 1.2rem; margin-top: 15px; }
@@ -154,12 +176,12 @@
   if (cover && cover.style.display !== 'none') {
     const startBtn = document.getElementById('start-journey');
 
-    // ★ 性能修改:THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
-    //   境内访问不稳定时封面会长时间黑屏等待)。
+    // THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
+    // 境内访问不稳定时封面会长时间黑屏等待)。
     import('/js/vendor/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
 
-    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    // 动态读取配置文件中的轮播图数组，如果没配提供默认图
     const coverImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
@@ -176,10 +198,10 @@
 
     const app1 = setupApp(canvas1);
 
-    // ★ 性能修改:第二个 WebGL 实例延迟创建。
-    //   原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
-    //   但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
-    //   改为首次轮播切换前 1.5 秒才创建并加载图。
+    // 第二个 WebGL 实例延迟创建。
+    // 原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
+    // 但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
+    // 改为首次轮播切换前 1.5 秒才创建并加载图。
     let app2 = null;
     function getApp2() {
       if (!app2) app2 = setupApp(canvas2);
@@ -240,7 +262,7 @@
   });
 
   // =======================
-  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // 向全局 lang-switch 请求数据
   // =======================
   const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
     container.innerHTML = ''; // 清空内容
@@ -265,15 +287,15 @@
     });
   };
 
-  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  // 封面文案来自配置,经 i18n.get 值索引按当前界面语言翻译
   const configTitle = "欢迎来到我的奇妙世界";
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
-  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
-  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
-  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  // 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  // 加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  // 中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  // 广播),就绪后(重新)按当前语言渲染,不再出现中文残留
   const applyCoverTexts = () => {
     if (!(window.i18n && window.i18n.get)) return;
     const titleStr = window.i18n.get(configTitle);
@@ -287,7 +309,7 @@
 
   setTimeout(applyCoverTexts, 100);
   document.addEventListener('langchange', applyCoverTexts);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_left"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/" data-i18n-value="首页">首页</a><a class="nav-item" href="/about/" data-i18n-value="关于">关于</a><a class="nav-item" href="/link/" data-i18n-value="友链">友链</a><a class="nav-item" href="/anime/" data-i18n-value="追番">追番</a><a class="nav-item" href="/wall/" data-i18n-value="照片墙">照片墙</a><a class="nav-item" href="/murmur/" data-i18n-value="万花筒">万花筒</a><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="文章">文章</span><div class="submenu"><a class="submenu-item" href="/archives/" data-i18n-value="归档">归档</a><a class="submenu-item" href="/categories/" data-i18n-value="分类">分类</a><a class="submenu-item" href="/tags/" data-i18n-value="标签">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="更多">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/" data-i18n-value="我的另一个网站">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/" data-i18n-value="我的另二个网站(狗头)">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka" data-i18n-value="我的Github小号">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo" data-i18n-value="我的Gitee">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog" data-i18n-value="我的CDSN">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_right"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色" data-i18n-key-data-title="palette.custom_color"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -318,7 +340,7 @@
   position: relative; /* 为 tooltip 提供定位参照 */
 }
 
-/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+/* 调色板提示框 (Tooltip) 向左弹出 */
 .theme-color-picker-container label::after {
   content: attr(data-title);
   position: absolute;
@@ -390,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
     
-    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    // 在 iframe 模态框中改色时,实时同步给主窗口(父界面)
     if (window.self !== window.top) {
       try {
         window.top.document.documentElement.style.setProperty('--accent-color', newColor);
@@ -408,14 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('custom-accent-color', newColor);
   });
 
-  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  // 监听 localStorage 变化:主页改色后通知所有已打开的模态框 iframe 与其他标签页
   window.addEventListener('storage', function(e) {
     if (e.key === 'custom-accent-color' && e.newValue) {
       root.style.setProperty('--accent-color', e.newValue);
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/15.webp" alt="数据库第一天---了解数据库和SQL的DDL"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/">计算机语言</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-01-09T11:25:59.000Z">2026-01-09</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>7</span><span style="margin-left: 3px">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/3c2a66a"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="数据库第一天---了解数据库和SQL的DDL">数据库第一天---了解数据库和SQL的DDL</h1><script>(function () {
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..." data-i18n-key-placeholder="search.placeholder"/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title" data-i18n-key="toc.title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/15.webp" alt="数据库第一天---了解数据库和SQL的DDL"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/">计算机语言</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-01-09T11:25:59.000Z">2026-01-09</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px" data-i18n-key="post.words">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>7</span><span style="margin-left: 3px" data-i18n-key="post.minutes">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/3c2a66a"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="数据库第一天---了解数据库和SQL的DDL">数据库第一天---了解数据库和SQL的DDL</h1><script>(function () {
   try {
     var __t = {"zh":"数据库第一天---了解数据库和SQL的DDL","en":""};
     if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
@@ -468,107 +490,107 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="MsSQL的启动和停止方式"><a href="#MsSQL的启动和停止方式" class="headerlink" title="MsSQL的启动和停止方式"></a>MsSQL的启动和停止方式</h2><h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>首先我们输入 <font color='Turquoise'>Win +R </font> 并在窗口输入 services.msc</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">services.msc</span><br></code></pre></div></div>
 
-<p>​	<style>.syxxiuaxcasf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134356762.webp" class="syxxiuaxcasf" alt="image-20260109134356762"></p>
-<p>​	<style>.kbsgfokkamfe{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134449166.webp" class="kbsgfokkamfe" alt="image-20260109134449166"></p>
+<p>​	<style>.odmmbvwcroep{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134356762.webp" class="odmmbvwcroep" alt="image-20260109134356762"></p>
+<p>​	<style>.sibelnlpsnlh{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134449166.webp" class="sibelnlpsnlh" alt="image-20260109134449166"></p>
 <p>此时可以看到MySQL默认是启动了,也可以手动关掉</p>
-<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>​	<style>.xutxbzpypfdn{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134644478.webp" class="xutxbzpypfdn" alt="image-20260109134644478"></p>
+<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>​	<style>.czvgjjijwciy{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134644478.webp" class="czvgjjijwciy" alt="image-20260109134644478"></p>
 <p>直接在命令行(以管理员身份运行)输入指令</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">net start mysql80    //启动</span><br></code></pre></div></div>
 
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">net stop mysql80      //停止</span><br></code></pre></div></div>
 
-<p>​	<style>.ccsxsdxwjvzt{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134940182.webp" class="ccsxsdxwjvzt" alt="image-20260109134940182"></p>
+<p>​	<style>.dongldqehypf{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109134940182.webp" class="dongldqehypf" alt="image-20260109134940182"></p>
 <h2 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h2><p>同样的也是有两种方式</p>
 <h3 id="方式一-1"><a href="#方式一-1" class="headerlink" title="方式一"></a>方式一</h3><p>用这个东西,也就是一个控制台</p>
-<p>​	<style>.onmgirfchygm{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135216876.webp" class="onmgirfchygm" alt="image-20260109135216876"></p>
+<p>​	<style>.joqisvxoiqvc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135216876.webp" class="joqisvxoiqvc" alt="image-20260109135216876"></p>
 <p>进入后输入密码(就是你下载MySQL自己设置的那个密码)</p>
-<p>​	<style>.xwofevibqwjs{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135328086.webp" class="xwofevibqwjs" alt="image-20260109135328086"></p>
-<h3 id="方式二-1"><a href="#方式二-1" class="headerlink" title="方式二"></a>方式二</h3><p>​	<style>.wjeffefojeqd{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135552291.webp" class="wjeffefojeqd" alt="image-20260109135552291"></p>
+<p>​	<style>.urwbbywmhsrn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135328086.webp" class="urwbbywmhsrn" alt="image-20260109135328086"></p>
+<h3 id="方式二-1"><a href="#方式二-1" class="headerlink" title="方式二"></a>方式二</h3><p>​	<style>.gauhdcfounrl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135552291.webp" class="gauhdcfounrl" alt="image-20260109135552291"></p>
 <p>但是这个有要求—–需要配置  Path路径</p>
-<p>​	<style>.hrzftxhxdcyv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135653067.webp" class="hrzftxhxdcyv" alt="image-20260109135653067"></p>
+<p>​	<style>.ooizfhejutnj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135653067.webp" class="ooizfhejutnj" alt="image-20260109135653067"></p>
 <p>首先我们输入 <font color='Turquoise'>Win +R</font>  输入 sysdm.cpl</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">sysdm.cpl</span><br></code></pre></div></div>
 
-<p>​	<style>.ivruvitjlcdl{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135924219.webp" class="ivruvitjlcdl" alt="image-20260109135924219"></p>
+<p>​	<style>.llleyfwaujqv{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109135924219.webp" class="llleyfwaujqv" alt="image-20260109135924219"></p>
 <p>在    <font color='Turquoise'>高级</font>  里打开  <font color='Turquoise'>环境变量 </font></p>
-<p>​	<style>.wpxoxxwgcote{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140050531.webp" class="wpxoxxwgcote" alt="image-20260109140050531"></p>
+<p>​	<style>.hjsovvmzgrif{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140050531.webp" class="hjsovvmzgrif" alt="image-20260109140050531"></p>
 <p>然后找到path</p>
-<p>​	<style>.vgydxocfkcuu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140231482.webp" class="vgydxocfkcuu" alt="image-20260109140231482"></p>
+<p>​	<style>.vpliisxmysmw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140231482.webp" class="vpliisxmysmw" alt="image-20260109140231482"></p>
 <p>然后就是点击 <font color='Turquoise'>新建</font>  把  MySQL server的路径放进去(吐槽一下,不知道为什么这个默认在C盘,直接让我C盘红了)</p>
-<p>​	<style>.lbdkckoolbwo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140322713.webp" class="lbdkckoolbwo" alt="image-20260109140322713"></p>
-<p>​	<style>.hgedkuktlbco{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140455495.webp" class="hgedkuktlbco" alt="image-20260109140455495"></p>
+<p>​	<style>.nkpddhkwswlq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140322713.webp" class="nkpddhkwswlq" alt="image-20260109140322713"></p>
+<p>​	<style>.osvzaugbtptc{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140455495.webp" class="osvzaugbtptc" alt="image-20260109140455495"></p>
 <p>完成后需要一路点击<font color='Turquoise'>确定</font>来保存</p>
 <p>然后我们 进入  CMD 窗口</p>
 <p><font color='Turquoise'>Win + R</font>输入<font color='Turquoise'> cmd</font></p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">cmd</span><br></code></pre></div></div>
 
-<p>​	<style>.qfxuydoyeyuv{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140958492.webp" class="qfxuydoyeyuv" alt="image-20260109140958492"></p>
+<p>​	<style>.eputjgoxqppa{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109140958492.webp" class="eputjgoxqppa" alt="image-20260109140958492"></p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-plaintext">mysql -u root -p</span><br></code></pre></div></div>
 
-<p>​	<style>.ntmkiyzgtule{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141118911.webp" class="ntmkiyzgtule" alt="image-20260109141118911"></p>
+<p>​	<style>.gjiwyvascezj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141118911.webp" class="gjiwyvascezj" alt="image-20260109141118911"></p>
 <p>可以看到打开了</p>
-<h2 id="MySQL数据模型"><a href="#MySQL数据模型" class="headerlink" title="MySQL数据模型"></a>MySQL数据模型</h2><p>​	<style>.ubfxivjfofob{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141401064.webp" class="ubfxivjfofob" alt="image-20260109141401064"></p>
-<p>​	<style>.elnvkwwodyme{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141726045.webp" class="elnvkwwodyme" alt="image-20260109141726045"></p>
+<h2 id="MySQL数据模型"><a href="#MySQL数据模型" class="headerlink" title="MySQL数据模型"></a>MySQL数据模型</h2><p>​	<style>.rzmopqucpmvv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141401064.webp" class="rzmopqucpmvv" alt="image-20260109141401064"></p>
+<p>​	<style>.cvfpuuhopppq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109141726045.webp" class="cvfpuuhopppq" alt="image-20260109141726045"></p>
 <p>在一个数据库中可以创建多个服务器,在一个服务器中又可以创建多张表</p>
-<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><h3 id="Sql的分类"><a href="#Sql的分类" class="headerlink" title="Sql的分类"></a>Sql的分类</h3><p>​	<style>.gctswopmzfbr{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142250339.webp" class="gctswopmzfbr" alt="image-20260109142250339"></p>
-<p>​	<style>.owzdwumtgqkh{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142356738.webp" class="owzdwumtgqkh" alt="image-20260109142356738"></p>
-<h3 id="SQL的图形化界面软件"><a href="#SQL的图形化界面软件" class="headerlink" title="SQL的图形化界面软件"></a>SQL的图形化界面软件</h3> <style>.mtmnqytvqkrm{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112222421259.webp" class="mtmnqytvqkrm" alt="image-20260112222421259">
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><h3 id="Sql的分类"><a href="#Sql的分类" class="headerlink" title="Sql的分类"></a>Sql的分类</h3><p>​	<style>.pmrivpvsbgyg{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142250339.webp" class="pmrivpvsbgyg" alt="image-20260109142250339"></p>
+<p>​	<style>.iqdqsiqxeqwi{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142356738.webp" class="iqdqsiqxeqwi" alt="image-20260109142356738"></p>
+<h3 id="SQL的图形化界面软件"><a href="#SQL的图形化界面软件" class="headerlink" title="SQL的图形化界面软件"></a>SQL的图形化界面软件</h3> <style>.inarkckymafj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112222421259.webp" class="inarkckymafj" alt="image-20260112222421259">
 
-<p>​	<style>.bwxqyqttisnp{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112223619816.webp" class="bwxqyqttisnp" alt="image-20260112223619816"></p>
-<p>​	<style>.rphfiswqdctu{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112223331268.webp" class="rphfiswqdctu" alt="image-20260112223331268"></p>
+<p>​	<style>.fcbhiplbhbmr{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112223619816.webp" class="fcbhiplbhbmr" alt="image-20260112223619816"></p>
+<p>​	<style>.nvfhcuntswtk{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112223331268.webp" class="nvfhcuntswtk" alt="image-20260112223331268"></p>
 <p>如你所见,这两个工具可以让所有操作轻而易举,真的  也不需要敲什么命令行了  全都是自动化的</p>
 <p>学校也不知道怎么回事,老师只知道教学生使用命令行,还有课本上的古董伪代码,真的是严重脱离实际,关键是还要求什么手写代码,根本没有上机练习,不知道有什么意义,真的是无语死了</p>
-<h3 id="一-DDL"><a href="#一-DDL" class="headerlink" title="一 :     DDL"></a>一 :     DDL</h3><p>​	<style>.teiytlufdaio{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142759904.webp" class="teiytlufdaio" alt="image-20260109142759904"></p>
+<h3 id="一-DDL"><a href="#一-DDL" class="headerlink" title="一 :     DDL"></a>一 :     DDL</h3><p>​	<style>.fpdtklgmrxpx{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109142759904.webp" class="fpdtklgmrxpx" alt="image-20260109142759904"></p>
 <h4 id="①-数据库操作"><a href="#①-数据库操作" class="headerlink" title="① 数据库操作"></a>① 数据库操作</h4><h5 id="①-显示所有数据库："><a href="#①-显示所有数据库：" class="headerlink" title="① 显示所有数据库："></a>① 显示所有数据库：</h5><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">SHOW</span> DATABASES;</span><br></code></pre></div></div>
 
 <p>我们先使用第一个命令看看</p>
-<p>​	<style>.hsudmwvtoscr{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109144646350.webp" class="hsudmwvtoscr" alt="image-20260109144646350"></p>
+<p>​	<style>.jhvletmxugoz{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109144646350.webp" class="jhvletmxugoz" alt="image-20260109144646350"></p>
 <h5 id="②-查询当前数据库："><a href="#②-查询当前数据库：" class="headerlink" title="② 查询当前数据库："></a>② 查询当前数据库：</h5><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">SELECT</span> DATABASE();</span><br></code></pre></div></div>
 
 <p>记住在使用查询功能先要使用数据库</p>
-<style>.fhbepnduksnt{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109153145749.webp" class="fhbepnduksnt" alt="image-20260109153145749">
+<style>.xwgzkjofibcv{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109153145749.webp" class="xwgzkjofibcv" alt="image-20260109153145749">
 
 <h5 id="③-创建数据库："><a href="#③-创建数据库：" class="headerlink" title="③ 创建数据库："></a>③ 创建数据库：</h5><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">CREATE</span> DATABASE [ IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> ] 数据库名 [ <span class="keyword">DEFAULT</span> CHARSET 字符集] [<span class="keyword">COLLATE</span> 排序规则 ];</span><br></code></pre></div></div>
 
 <p>我们也可以新建一个</p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">CREATE</span> DATABASE itcast;</span><br></code></pre></div></div>
 
-<p>​	<style>.rjhvpbjpptke{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145017489.webp" class="rjhvpbjpptke" alt="image-20260109145017489"></p>
+<p>​	<style>.qkcrxkrnuoqr{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145017489.webp" class="qkcrxkrnuoqr" alt="image-20260109145017489"></p>
 <p>但是假如我们再次创建相同名字的数据库会不会覆盖原来的呢——–答案是,不会,MySQL会直接报错</p>
-<p>​	<style>.lkcfhctkgrqc{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145227525.webp" class="lkcfhctkgrqc" alt="image-20260109145227525"></p>
+<p>​	<style>.uhptqkrtjlih{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145227525.webp" class="uhptqkrtjlih" alt="image-20260109145227525"></p>
 <p>我们可以这么干,判断当前是否存在,不存在就创建,存在就不创建</p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">CREATE</span> DATABASE if <span class="keyword">not</span> <span class="keyword">exists</span> itcast;</span><br></code></pre></div></div>
 
-<p>​	<style>.nwgdwokbignz{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145450344.webp" class="nwgdwokbignz" alt="image-20260109145450344"></p>
+<p>​	<style>.xpywmpxxkzrq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109145450344.webp" class="xpywmpxxkzrq" alt="image-20260109145450344"></p>
 <p>或者也可以指定数据库字符的编码格式</p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">create</span> database huyang <span class="keyword">default</span> charset utf8mb4;</span><br></code></pre></div></div>
 
-<p>​	<style>.isjmlevmbujv{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109151701582.webp" class="isjmlevmbujv" alt="image-20260109151701582"></p>
+<p>​	<style>.vsmtbewsdcby{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109151701582.webp" class="vsmtbewsdcby" alt="image-20260109151701582"></p>
 <p>注意:</p>
 <blockquote>
 <p>UTF8字符集长度为3字节，有些符号占4字节，所以推荐用utf8mb4字符集</p>
 </blockquote>
 <h5 id="④-删除数据库："><a href="#④-删除数据库：" class="headerlink" title="④ 删除数据库："></a>④ 删除数据库：</h5><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">DROP</span> DATABASE [ IF <span class="keyword">EXISTS</span> ] 数据库名;</span><br></code></pre></div></div>
 
-<p>​	<style>.jpelxsydgmtg{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152049014.webp" class="jpelxsydgmtg" alt="image-20260109152049014"></p>
+<p>​	<style>.kekebhekkmxf{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152049014.webp" class="kekebhekkmxf" alt="image-20260109152049014"></p>
 <p>和创建是一样的,可以增加判断条件</p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">drop</span> database if <span class="keyword">exists</span> itcast;</span><br></code></pre></div></div>
 
-<p>​	<style>.goeudiqxrxam{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152423489.webp" class="goeudiqxrxam" alt="image-20260109152423489"></p>
+<p>​	<style>.hyrzodkdhetx{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152423489.webp" class="hyrzodkdhetx" alt="image-20260109152423489"></p>
 <h5 id="⑤-使用数据库："><a href="#⑤-使用数据库：" class="headerlink" title="⑤ 使用数据库："></a>⑤ 使用数据库：</h5><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql">USE 数据库名;</span><br></code></pre></div></div>
 
-<p>​	<style>.czqemubchube{}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152859939.webp" class="czqemubchube" alt="image-20260109152859939"></p>
-<h4 id="②-表操作"><a href="#②-表操作" class="headerlink" title="② 表操作"></a>② 表操作</h4><h5 id="①-查询"><a href="#①-查询" class="headerlink" title="① 查询"></a>① 查询</h5><p>​	<style>.vblctyaxuaaw{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109153529843.webp" class="vblctyaxuaaw" alt="image-20260109153529843"></p>
+<p>​	<style>.dkbwuzdgmdxw{}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109152859939.webp" class="dkbwuzdgmdxw" alt="image-20260109152859939"></p>
+<h4 id="②-表操作"><a href="#②-表操作" class="headerlink" title="② 表操作"></a>② 表操作</h4><h5 id="①-查询"><a href="#①-查询" class="headerlink" title="① 查询"></a>① 查询</h5><p>​	<style>.uguxweliuwla{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109153529843.webp" class="uguxweliuwla" alt="image-20260109153529843"></p>
 <h6 id="①-查询当前数据库所有表："><a href="#①-查询当前数据库所有表：" class="headerlink" title="① 查询当前数据库所有表："></a>① 查询当前数据库所有表：</h6><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">SHOW</span> TABLES;</span><br></code></pre></div></div>
 
-<p>​	<style>.cblxezbzmpcp{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109154105342.webp" class="cblxezbzmpcp" alt="image-20260109154105342"></p>
+<p>​	<style>.aupmlgmajwwl{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109154105342.webp" class="aupmlgmajwwl" alt="image-20260109154105342"></p>
 <p>因为是才创建的所以是空表</p>
 <h6 id="②-查询表结构："><a href="#②-查询表结构：" class="headerlink" title="② 查询表结构："></a>② 查询表结构：</h6><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">DESC</span> 表名;</span><br></code></pre></div></div>
 
 <h6 id="③-查询指定表的建表语句："><a href="#③-查询指定表的建表语句：" class="headerlink" title="③ 查询指定表的建表语句："></a>③ 查询指定表的建表语句：</h6><div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">SHOW</span> <span class="keyword">CREATE TABLE</span> 表名;</span><br></code></pre></div></div>
 
 <p>这两个指令暂时不讲等会说</p>
-<h5 id="②-创建"><a href="#②-创建" class="headerlink" title="② 创建"></a>② 创建</h5><p>​	<style>.ffshjqvvhvdk{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109154515286.webp" class="ffshjqvvhvdk" alt="image-20260109154515286"></p>
+<h5 id="②-创建"><a href="#②-创建" class="headerlink" title="② 创建"></a>② 创建</h5><p>​	<style>.fiftvknyrvrd{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109154515286.webp" class="fiftvknyrvrd" alt="image-20260109154515286"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">CREATE TABLE</span> 表名(
 	字段<span class="number">1</span> 字段<span class="number">1</span>类型 [COMMENT 字段<span class="number">1</span>注释],
 	字段<span class="number">2</span> 字段<span class="number">2</span>类型 [COMMENT 字段<span class="number">2</span>注释],
@@ -578,23 +600,23 @@ document.addEventListener('DOMContentLoaded', function() {
 )[ COMMENT 表注释 ];</span><br></code></pre></div></div>
 
 <p>注意这个最后一个字段没有逗号(别问我怎么知道的)</p>
-<p>​	<style>.bdwtrrveoyxg{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160000403.webp" class="bdwtrrveoyxg" alt="image-20260109160000403"></p>
+<p>​	<style>.biekusfowbgv{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160000403.webp" class="biekusfowbgv" alt="image-20260109160000403"></p>
 <p>ok创建完了,我们使用刚才的两个命令了(即 <font color='Turquoise'>  DESC 表名;  </font>  和  <font color='Turquoise'>SHOW CREATE TABLE 表名; </font>)</p>
-<p>​	<style>.uljttxdtbdbw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160402528.webp" class="uljttxdtbdbw" alt="image-20260109160402528"></p>
-<p>​	<style>.yefkywirbpeg{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160556619.webp" class="yefkywirbpeg" alt="image-20260109160556619"></p>
+<p>​	<style>.slncmirhuxon{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160402528.webp" class="slncmirhuxon" alt="image-20260109160402528"></p>
+<p>​	<style>.mbnvtqqzddgx{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109160556619.webp" class="mbnvtqqzddgx" alt="image-20260109160556619"></p>
 <p> ENGINE&#x3D;InnoDB  表示存储引擎   </p>
 <p>DEFAULT CHARSET&#x3D;utf8mb4  表示存储编码格式</p>
 <p>COLLATE&#x3D;utf8mb4_0900_ai_ci表示排序规则</p>
 <p> 这几个都是默认的</p>
-<h5 id="③-修改"><a href="#③-修改" class="headerlink" title="③ 修改"></a>③ 修改</h5><h6 id="①-添加字段"><a href="#①-添加字段" class="headerlink" title="① 添加字段"></a>① 添加字段</h6><p>​	<style>.elcljevtllvp{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112213906522.webp" class="elcljevtllvp" alt="image-20260112213906522"></p>
+<h5 id="③-修改"><a href="#③-修改" class="headerlink" title="③ 修改"></a>③ 修改</h5><h6 id="①-添加字段"><a href="#①-添加字段" class="headerlink" title="① 添加字段"></a>① 添加字段</h6><p>​	<style>.tpjqexbvcdtx{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112213906522.webp" class="tpjqexbvcdtx" alt="image-20260112213906522"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">ALTER TABLE</span> 表名 <span class="keyword">ADD</span> 字段名 类型(长度) [COMMENT 注释] [约束];`
 
 例：<span class="keyword">ALTER TABLE</span> emp <span class="keyword">ADD</span> nickname <span class="type">varchar</span>(<span class="number">20</span>) COMMENT <span class="string">&#x27;昵称&#x27;</span>;</span><br></code></pre></div></div>
 
-<p>​	<style>.nrtqghifwxrs{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112214833929.webp" class="nrtqghifwxrs" alt="image-20260112214833929"></p>
+<p>​	<style>.kpmkvmdoifkn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112214833929.webp" class="kpmkvmdoifkn" alt="image-20260112214833929"></p>
 <p>​	修改后</p>
-<p>​	<style>.bkrmjfbcjihy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112214945737.webp" class="bkrmjfbcjihy" alt="image-20260112214945737"></p>
-<h6 id="②-修改数据类型和修改字段名和字段类型"><a href="#②-修改数据类型和修改字段名和字段类型" class="headerlink" title="② 修改数据类型和修改字段名和字段类型"></a>② 修改数据类型和修改字段名和字段类型</h6><p>​	<style>.bnayczitbqne{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215043405.webp" class="bnayczitbqne" alt="image-20260112215043405"></p>
+<p>​	<style>.ndfoyeyanpix{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112214945737.webp" class="ndfoyeyanpix" alt="image-20260112214945737"></p>
+<h6 id="②-修改数据类型和修改字段名和字段类型"><a href="#②-修改数据类型和修改字段名和字段类型" class="headerlink" title="② 修改数据类型和修改字段名和字段类型"></a>② 修改数据类型和修改字段名和字段类型</h6><p>​	<style>.fvhsqmhlrlmy{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215043405.webp" class="fvhsqmhlrlmy" alt="image-20260112215043405"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div><pre class="codecard-pre"><code class="language-sql">修改数据类型：
 <span class="keyword">ALTER TABLE</span> 表名 MODIFY 字段名 新数据类型(长度);
 
@@ -604,35 +626,35 @@ document.addEventListener('DOMContentLoaded', function() {
 例：将emp表的nickname字段修改为username，类型为<span class="type">varchar</span>(<span class="number">30</span>)
 <span class="keyword">ALTER TABLE</span> emp CHANGE nickname username <span class="type">varchar</span>(<span class="number">30</span>) COMMENT <span class="string">&#x27;昵称&#x27;</span>;</span><br></code></pre></div></div>
 
-<p>​	<style>.ypjhrxxfxvsy{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215701655.webp" class="ypjhrxxfxvsy" alt="image-20260112215701655"></p>
-<p>​	<style>.skwnrputvgsn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215601744.webp" class="skwnrputvgsn" alt="image-20260112215601744"></p>
-<h6 id="③-删除字段"><a href="#③-删除字段" class="headerlink" title="③ 删除字段"></a>③ 删除字段</h6><p>​	<style>.lqrjvvnjqbxh{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215818712.webp" class="lqrjvvnjqbxh" alt="image-20260112215818712"></p>
+<p>​	<style>.buuykzygxbwa{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215701655.webp" class="buuykzygxbwa" alt="image-20260112215701655"></p>
+<p>​	<style>.raneforueecj{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215601744.webp" class="raneforueecj" alt="image-20260112215601744"></p>
+<h6 id="③-删除字段"><a href="#③-删除字段" class="headerlink" title="③ 删除字段"></a>③ 删除字段</h6><p>​	<style>.xzvcqqrvctds{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112215818712.webp" class="xzvcqqrvctds" alt="image-20260112215818712"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span></div><pre class="codecard-pre"><code class="language-sql">删除字段：
 <span class="keyword">ALTER TABLE</span> 表名 <span class="keyword">DROP</span> 字段名;</span><br></code></pre></div></div>
 
-<p>​	<style>.wwaiyrgmqxfy{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220059574.webp" class="wwaiyrgmqxfy" alt="image-20260112220059574"></p>
-<h6 id="④-修改表名"><a href="#④-修改表名" class="headerlink" title="④ 修改表名"></a>④ 修改表名</h6><p>​	<style>.qiyfewwwkrzd{zoom:50%;}</style><img loading="lazy" decoding="async" src="/qiyfewwwkrzd" class="" title="&#x2F;2026&#x2F;01&#x2F;09&#x2F;MySQL%E7%9B%B8%E5%85%B3&#x2F;%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9&#x2F;image-20260112220244542.png &quot;&quot;&quot;image-20260112220244542&quot;"></p>
+<p>​	<style>.ychxtdeovqce{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220059574.webp" class="ychxtdeovqce" alt="image-20260112220059574"></p>
+<h6 id="④-修改表名"><a href="#④-修改表名" class="headerlink" title="④ 修改表名"></a>④ 修改表名</h6><p>​	<style>.rmrwyflwupgl{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220244542.webp" class="rmrwyflwupgl" alt="image-20260112220244542"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span></div><pre class="codecard-pre"><code class="language-sql">修改表名：
 <span class="keyword">ALTER TABLE</span> 表名 RENAME <span class="keyword">TO</span> 新表名</span><br></code></pre></div></div>
 
-<p>​	<style>.jifoegxbkbru{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220525695.webp" class="jifoegxbkbru" alt="image-20260112220525695"></p>
-<h6 id="⑤-删除表"><a href="#⑤-删除表" class="headerlink" title="⑤ 删除表"></a>⑤ 删除表</h6><p>​	<style>.mttlhykchqdm{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220833927.webp" class="mttlhykchqdm" alt="image-20260112220833927"></p>
+<p>​	<style>.tiysjhxqbmab{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220525695.webp" class="tiysjhxqbmab" alt="image-20260112220525695"></p>
+<h6 id="⑤-删除表"><a href="#⑤-删除表" class="headerlink" title="⑤ 删除表"></a>⑤ 删除表</h6><p>​	<style>.qusdvgwdveke{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112220833927.webp" class="qusdvgwdveke" alt="image-20260112220833927"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><pre class="codecard-pre"><code class="language-sql">删除表：
 <span class="keyword">DROP</span> <span class="keyword">TABLE</span> [IF <span class="keyword">EXISTS</span>] 表名;
 
 删除表，并重新创建该表：
 <span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> 表名;</span><br></code></pre></div></div>
 
-<p>​	<style>.zqqmqcvgcyqn{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112221140748.webp" class="zqqmqcvgcyqn" alt="image-20260112221140748"></p>
-<p>​	<style>.nmocglzicesd{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112221420200.webp" class="nmocglzicesd" alt="image-20260112221420200"></p>
+<p>​	<style>.wmijqftmgyih{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112221140748.webp" class="wmijqftmgyih" alt="image-20260112221140748"></p>
+<p>​	<style>.qloltnafrcok{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112221420200.webp" class="qloltnafrcok" alt="image-20260112221420200"></p>
 <blockquote>
 <p>注意,这两种删除方式无论是哪种方式都会将表中的数据全部删除</p>
 </blockquote>
-<h4 id="③-数据类型"><a href="#③-数据类型" class="headerlink" title="③ 数据类型"></a>③ 数据类型</h4><p>​	<style>.psesdhdvnozt{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109163843708.webp" class="psesdhdvnozt" alt="image-20260109163843708"></p>
+<h4 id="③-数据类型"><a href="#③-数据类型" class="headerlink" title="③ 数据类型"></a>③ 数据类型</h4><p>​	<style>.ogauoqussghr{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109163843708.webp" class="ogauoqussghr" alt="image-20260109163843708"></p>
 <p>​	</p>
-<h5 id="①-数值类型"><a href="#①-数值类型" class="headerlink" title="① 数值类型"></a>① 数值类型</h5><style>.ypihsfjjhhxq{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109161850172.webp" class="ypihsfjjhhxq" alt="image-20260109161850172">
+<h5 id="①-数值类型"><a href="#①-数值类型" class="headerlink" title="① 数值类型"></a>① 数值类型</h5><style>.crbvoovtysdk{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109161850172.webp" class="crbvoovtysdk" alt="image-20260109161850172">
 
-<h5 id="②-字符串类型"><a href="#②-字符串类型" class="headerlink" title="② 字符串类型"></a>② 字符串类型</h5><p>​	<style>.sksjjwpyneld{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109162406026.webp" class="sksjjwpyneld" alt="image-20260109162406026"></p>
+<h5 id="②-字符串类型"><a href="#②-字符串类型" class="headerlink" title="② 字符串类型"></a>② 字符串类型</h5><p>​	<style>.cttmbxnsrwni{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109162406026.webp" class="cttmbxnsrwni" alt="image-20260109162406026"></p>
 <p>char和varchar的区别:</p>
 <ul>
 <li>char:  例如char[10]  即使存储一个字符,也会占用10个字符的空间,因为其他空间会使用空格占用,</li>
@@ -640,11 +662,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>相比varchar来说char的性能更好,因为varchar需要根据内容来计算所需的内存空间,消耗物理计算资源</li>
 <li>对于用户名来说用varchar更好一些,对于性别这种char更好一些</li>
 </ul>
-<h5 id="③-日期时间类型"><a href="#③-日期时间类型" class="headerlink" title="③ 日期时间类型"></a>③ 日期时间类型</h5> <style>.ejbvmqpxvzcz{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109164102830.webp" class="ejbvmqpxvzcz" alt="image-20260109164102830">
+<h5 id="③-日期时间类型"><a href="#③-日期时间类型" class="headerlink" title="③ 日期时间类型"></a>③ 日期时间类型</h5> <style>.lwpurubrhjht{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260109164102830.webp" class="lwpurubrhjht" alt="image-20260109164102830">
 
 <p>一般来说DATE  TIME  DATETIME 用的比较多一些</p>
 <p>生日用date更好一些</p>
-<h5 id="④-案例"><a href="#④-案例" class="headerlink" title="④ 案例"></a>④ 案例</h5><p>​	<style>.wclisopoiunr{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260111234410580.webp" class="wclisopoiunr" alt="image-20260111234410580"></p>
+<h5 id="④-案例"><a href="#④-案例" class="headerlink" title="④ 案例"></a>④ 案例</h5><p>​	<style>.pabnozfyesuc{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260111234410580.webp" class="pabnozfyesuc" alt="image-20260111234410580"></p>
 <div class="codecard" data-lang="sql"><div class="codecard-header"><span class="codecard-lang">SQL</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div><pre class="codecard-pre"><code class="language-sql"><span class="keyword">create table</span> emp(
     id <span class="type">int</span> COMMENT <span class="string">&#x27;编号&#x27;</span>,
     workno <span class="type">varchar</span>(<span class="number">10</span>) COMMENT <span class="string">&#x27;工号&#x27;</span>,
@@ -655,8 +677,8 @@ document.addEventListener('DOMContentLoaded', function() {
     entrydate <span class="type">date</span> COMMENT <span class="string">&#x27;入职日期&#x27;</span>
 ) COMMENT <span class="string">&#x27;员工表&#x27;</span>;</span><br></code></pre></div></div>
 
-<p>​	<style>.rzfbdmlubopn{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260111235603314.webp" class="rzfbdmlubopn" alt="image-20260111235603314"></p>
-<p>​	<style>.mymgvuolgjep{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112222129260.webp" class="mymgvuolgjep" alt="image-20260112222129260"></p>
+<p>​	<style>.xwmlbxfdpnyg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260111235603314.webp" class="xwmlbxfdpnyg" alt="image-20260111235603314"></p>
+<p>​	<style>.xecoofkqdnyu{zoom:80%;}</style><img loading="lazy" decoding="async" src="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/image-20260112222129260.webp" class="xecoofkqdnyu" alt="image-20260112222129260"></p>
 </div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
   if (typeof ChucklePostAI !== 'undefined') {
     // 获取按钮文本，如果未定义则使用默认值
@@ -683,7 +705,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.tocConfig = {
   empty_toc_behavior: "placeholder"
 };
-</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/01/11/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%80%AA%E7%89%A9%E6%AD%8C%E8%AF%8D/"><span class="nav-label">← 上一篇</span><span class="nav-title" data-i18n-zh="怪物歌词">怪物歌词</span></a></div><div class="post-nav next"><a href="/2026/01/08/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"><span class="nav-label">下一篇 →</span><span class="nav-title" data-i18n-zh="之前用C语言设计的学生管理系统">之前用C语言设计的学生管理系统</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL&amp;url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/01/11/%E6%97%A5%E8%AE%B0%E7%9B%B8%E5%85%B3/%E6%80%AA%E7%89%A9%E6%AD%8C%E8%AF%8D/"><span class="nav-label" data-i18n-key="post.prev">← 上一篇</span><span class="nav-title" data-i18n-zh="怪物歌词">怪物歌词</span></a></div><div class="post-nav next"><a href="/2026/01/08/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"><span class="nav-label" data-i18n-key="post.next">下一篇 →</span><span class="nav-title" data-i18n-zh="之前用C语言设计的学生管理系统">之前用C语言设计的学生管理系统</span></a></div></div><div class="post-share"><h3 class="share-title" data-i18n-key="share.title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL&amp;url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.twitter">推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.facebook">脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.linkedin">领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span data-i18n-key="share.wechat">微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F01%2F09%2FMySQL%25E7%259B%25B8%25E5%2585%25B3%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%25E7%25AC%25AC%25E4%25B8%2580%25E5%25A4%25A9%2F&amp;title=%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9---%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CSQL%E7%9A%84DDL" target="_blank" rel="noopener"><span data-i18n-key="share.weibo">微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/01/09/MySQL%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%AC%E4%B8%80%E5%A4%A9/"><span data-i18n-key="share.copy_link">点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title" data-i18n-key="comments.title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
   function initTwikoo() {
     if (typeof twikoo === 'undefined') { setTimeout(initTwikoo, 200); return; }
     twikoo.init({
@@ -717,11 +739,11 @@ window.tocConfig = {
   } else {
     loadTwikoo();
   }
-})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn" data-i18n-key="sakana.switch_character">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
-  /* ★ 层级:文章模态(1000)之后、正文之上,与落叶同层 */
+  /* 层级:文章模态(1000)之后、正文之上,与落叶同层 */
   z-index: 998;
   pointer-events: none;
   transform: scale(0.3);
@@ -806,7 +828,7 @@ body.sakana-dragging iframe {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
   
-  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  // 2. 如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana
   if (window.self !== window.top) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper) wrapper.style.display = 'none';
@@ -816,9 +838,9 @@ body.sakana-dragging iframe {
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
 
-  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
-  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
-  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  // 文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  // 导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  // 抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
   document.addEventListener('mousedown', function(e) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper && wrapper.contains(e.target)) {
@@ -844,7 +866,13 @@ body.sakana-dragging iframe {
       const sakanaInstance = Sakana.init({
         el: sakanaBox,
         character: savedChar,
-        canSwitchCharacter: false
+        canSwitchCharacter: false,
+        // 平抑物理参数:默认 r=60(入场大倾角)+ decay=0.99(几乎无阻尼)
+        // 会让摆动越晃越烈以至于拉伸变形;降低惯性、加强阻尼、
+        // 减小初始倾角后,入场只有轻微摆动并快速回正
+        inertia: 0.02,
+        decay: 0.9,
+        r: 10
       });
       
       Sakana.setMute(true);
@@ -863,10 +891,10 @@ body.sakana-dragging iframe {
   };
   
   document.body.appendChild(script);
-});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright"><span data-i18n-value="© 2025 胡杨怕火. 保留所有权利.">© 2025 胡杨怕火. 保留所有权利.</span></div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
 #pet-root {
   position: fixed;
-  /* ★ 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
+  /* 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
      低于图片/表格/mermaid 全屏查看器(9999+)——全屏查看时桌宠
      被遮在后面且鼠标无法与之交互;也低于页面上层的弹窗类组件 */
   z-index: 2000;
@@ -877,7 +905,7 @@ body.sakana-dragging iframe {
   transition: opacity 0.25s ease;
 }
 
-/* ★ 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
+/* 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
    父页面把桌宠临时沉到模态之下:iframe 内查看器的 z-index
    困在 iframe 里,压不过父页面的桌宠,必须由父页面自己沉底 */
 #pet-root.behind-viewers {
@@ -972,7 +1000,7 @@ body.sakana-dragging iframe {
 }
 </style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
 
-// ★ 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
+// 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
 window.addEventListener('message', (e) => {
   if (!e.data || e.data.type !== 'magzine-viewer') return;
   const root = document.getElementById('pet-root');
@@ -1002,8 +1030,8 @@ function initDesktopPet() {
   }
 
   // 2. 读者设置拦截:设置面板里关闭桌宠时,彻底不初始化。
-  //    烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
-  //    所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
+  // 烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
+  // 所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
   if (window.__readerSettings && window.__readerSettings.pet === "off") {
     const root = document.getElementById('pet-root');
     if (root) root.remove();
@@ -1144,7 +1172,7 @@ function initDesktopPet() {
     sound.update(state);
     chat.update(dt, state);
 
-     // ★ 在主循环中触发文字避让逻辑
+    // 在主循环中触发文字避让逻辑
     if (pretextInteraction) {
      pretextInteraction.update(pos.x, pos.y, timestamp);
     }
@@ -1156,24 +1184,22 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-// ★ 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
-//   主要来源之一),不与首屏渲染抢主线程
+// 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
+// 主要来源之一),不与首屏渲染抢主线程
 if ("requestIdleCallback" in window) {
   requestIdleCallback(initDesktopPet, { timeout: 3000 });
 } else {
   setTimeout(initDesktopPet, 1500);
-}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器" data-i18n-key-data-title="music.expand"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
 
   if (shouldBeDark) {
     document.body.classList.add('dark-mode');
   }
-  // ★ 性能修改:删除了原先 "visibility:hidden 直到 DOMContentLoaded" 的白屏锁。
-  //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
-  //   documentElement.classList 提前完成,不再需要整页隐藏。
+  // 暗色防闪由 <head> 的内联脚本提前完成,无需整页隐藏的白屏锁。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/features/music-wave.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/effects/hero-waterwave.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1185,7 +1211,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true},"waterwave":{"enable":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
@@ -1200,8 +1226,8 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };
-  // ★ 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
-  //   必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
+  // 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
+  // 必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
   window.__themeRaw = JSON.parse(JSON.stringify(base));
   // 深合并读者设置补丁(两级足够)
   Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
@@ -1218,4 +1244,4 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   });
   return base;
 })();
-</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script></body></html>
+</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script></body></html>

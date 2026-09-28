@@ -36,7 +36,7 @@ export class PetMusicPlayer {
     }
   }
 
-  // ★ 核心修复：获取当前正在使用的播放器容器（卡片 or 圆条）
+  // 核心修复：获取当前正在使用的播放器容器（卡片 or 圆条）
   _getActiveMini() {
     if (!this.globalPlayer) return null;
     const isPill = this.globalPlayer.classList.contains("style-pill");
@@ -92,8 +92,8 @@ export class PetMusicPlayer {
   toggleLoop() {
     const btn = this._getActiveMini()?.querySelector(".music-player-loop");
     if (btn) btn.click();
-    // ★ 同步桌宠面板上的循环按钮图标:此前只转发点击、不更新自身,
-    //   导致切换列表/单曲循环时面板 UI 毫无变化
+    // 同步桌宠面板上的循环按钮图标:此前只转发点击、不更新自身,
+    // 导致切换列表/单曲循环时面板 UI 毫无变化
     if (this._menuLoopBtn && btn) {
       this._menuLoopBtn.innerHTML = btn.innerHTML;
       this._menuLoopBtn.setAttribute(
@@ -116,9 +116,18 @@ export class PetMusicPlayer {
 
     const wrap = document.createElement("div");
 
+    // 界面文案走 language/*.yml 词条(中文模式解析 zh.yml)
+    const petT = (key) =>
+      window.i18n && typeof window.i18n.text === "function"
+        ? window.i18n.text(key)
+        : key;
+
     const musicLabel = document.createElement("div");
     musicLabel.className = "pet-menu-label";
-    musicLabel.innerHTML = `<i class="fas fa-music"></i> 全局音乐控制`;
+    musicLabel.innerHTML =
+      '<i class="fas fa-music"></i> <span data-i18n-key="pet_settings.music_control">' +
+      petT("pet_settings.music_control") +
+      "</span>";
 
     const head = document.createElement("div");
     head.style.cssText = `display:flex; align-items:center; gap:10px; margin-bottom:12px;`;
@@ -144,7 +153,8 @@ export class PetMusicPlayer {
       white-space: nowrap;
       max-width: 130px;
     `;
-    title.textContent = "未加载音乐";
+    title.setAttribute("data-i18n-key", "pet_settings.no_music");
+    title.textContent = petT("pet_settings.no_music");
 
     head.appendChild(coverBtn);
     head.appendChild(title);

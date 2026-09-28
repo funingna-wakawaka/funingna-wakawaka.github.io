@@ -11,8 +11,30 @@
 })();
 </script><script>if (window.parent !== window) {
   document.documentElement.classList.add('is-iframe');
+}</script><style>html.is-iframe .header,
+html.is-iframe header,
+html.is-iframe .navbar,
+html.is-iframe .footer,
+html.is-iframe footer,
+html.is-iframe .music-player,
+html.is-iframe .theme-color-picker-container,
+html.is-iframe #waves-container,
+html.is-iframe #pet-root,
+html.is-iframe #sakana-widget-wrapper,
+html.is-iframe .author-card-section,
+html.is-iframe .hero-section {
+  display: none !important;
 }
-</script><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
+html.is-iframe .post-wrapper,
+html.is-iframe .article-container,
+html.is-iframe main {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+html.is-iframe body {
+  overflow-x: hidden !important;
+}
+</style><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
 <link rel="stylesheet" href="/css/core/main.css">
 
 <link rel="stylesheet" href="/css/components/tags.css">
@@ -137,7 +159,7 @@
   60% { transform: translateY(-7px); }
 }
 
-/* ★★★ 手机端适配修改 ★★★ */
+/* 手机端适配修改 */
 @media (max-width: 768px) {
   .cover-title { font-size: 2rem; letter-spacing: 2px; }
   .cover-author { font-size: 1.2rem; margin-top: 15px; }
@@ -154,12 +176,12 @@
   if (cover && cover.style.display !== 'none') {
     const startBtn = document.getElementById('start-journey');
 
-    // ★ 性能修改:THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
-    //   境内访问不稳定时封面会长时间黑屏等待)。
+    // THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
+    // 境内访问不稳定时封面会长时间黑屏等待)。
     import('/js/vendor/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
 
-    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    // 动态读取配置文件中的轮播图数组，如果没配提供默认图
     const coverImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
@@ -176,10 +198,10 @@
 
     const app1 = setupApp(canvas1);
 
-    // ★ 性能修改:第二个 WebGL 实例延迟创建。
-    //   原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
-    //   但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
-    //   改为首次轮播切换前 1.5 秒才创建并加载图。
+    // 第二个 WebGL 实例延迟创建。
+    // 原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
+    // 但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
+    // 改为首次轮播切换前 1.5 秒才创建并加载图。
     let app2 = null;
     function getApp2() {
       if (!app2) app2 = setupApp(canvas2);
@@ -240,7 +262,7 @@
   });
 
   // =======================
-  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // 向全局 lang-switch 请求数据
   // =======================
   const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
     container.innerHTML = ''; // 清空内容
@@ -265,15 +287,15 @@
     });
   };
 
-  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  // 封面文案来自配置,经 i18n.get 值索引按当前界面语言翻译
   const configTitle = "欢迎来到我的奇妙世界";
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
-  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
-  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
-  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  // 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  // 加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  // 中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  // 广播),就绪后(重新)按当前语言渲染,不再出现中文残留
   const applyCoverTexts = () => {
     if (!(window.i18n && window.i18n.get)) return;
     const titleStr = window.i18n.get(configTitle);
@@ -287,7 +309,7 @@
 
   setTimeout(applyCoverTexts, 100);
   document.addEventListener('langchange', applyCoverTexts);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_left"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/" data-i18n-value="首页">首页</a><a class="nav-item" href="/about/" data-i18n-value="关于">关于</a><a class="nav-item" href="/link/" data-i18n-value="友链">友链</a><a class="nav-item" href="/anime/" data-i18n-value="追番">追番</a><a class="nav-item" href="/wall/" data-i18n-value="照片墙">照片墙</a><a class="nav-item" href="/murmur/" data-i18n-value="万花筒">万花筒</a><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="文章">文章</span><div class="submenu"><a class="submenu-item" href="/archives/" data-i18n-value="归档">归档</a><a class="submenu-item" href="/categories/" data-i18n-value="分类">分类</a><a class="submenu-item" href="/tags/" data-i18n-value="标签">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="更多">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/" data-i18n-value="我的另一个网站">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/" data-i18n-value="我的另二个网站(狗头)">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka" data-i18n-value="我的Github小号">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo" data-i18n-value="我的Gitee">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog" data-i18n-value="我的CDSN">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_right"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色" data-i18n-key-data-title="palette.custom_color"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -318,7 +340,7 @@
   position: relative; /* 为 tooltip 提供定位参照 */
 }
 
-/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+/* 调色板提示框 (Tooltip) 向左弹出 */
 .theme-color-picker-container label::after {
   content: attr(data-title);
   position: absolute;
@@ -390,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
     
-    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    // 在 iframe 模态框中改色时,实时同步给主窗口(父界面)
     if (window.self !== window.top) {
       try {
         window.top.document.documentElement.style.setProperty('--accent-color', newColor);
@@ -408,14 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('custom-accent-color', newColor);
   });
 
-  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  // 监听 localStorage 变化:主页改色后通知所有已打开的模态框 iframe 与其他标签页
   window.addEventListener('storage', function(e) {
     if (e.key === 'custom-accent-color' && e.newValue) {
       root.style.setProperty('--accent-color', e.newValue);
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/18.webp" alt="flutter第八天--更多组件"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-27T02:26:20.000Z">2026-04-27</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>11.2k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>52</span><span style="margin-left: 3px">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/ac6d48c1"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="flutter第八天--更多组件">flutter第八天--更多组件</h1><script>(function () {
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..." data-i18n-key-placeholder="search.placeholder"/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title" data-i18n-key="toc.title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/18.webp" alt="flutter第八天--更多组件"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/flutter/">flutter</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-04-27T02:26:20.000Z">2026-04-27</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>11.2k</span><span style="margin-left: 3px" data-i18n-key="post.words">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>52</span><span style="margin-left: 3px" data-i18n-key="post.minutes">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/ac6d48c1"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="flutter第八天--更多组件">flutter第八天--更多组件</h1><script>(function () {
   try {
     var __t = {"zh":"flutter第八天--更多组件","en":""};
     if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
@@ -426,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来学学更多的flutter的组件"><a href="#今天来学学更多的flutter的组件" class="headerlink" title="今天来学学更多的flutter的组件"></a>今天来学学更多的flutter的组件</h1><h2 id="弹性布局-Flex"><a href="#弹性布局-Flex" class="headerlink" title="弹性布局-Flex"></a>弹性布局-Flex</h2><p>​	<style>.opgnpndhhrnx{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427103207193.webp" class="opgnpndhhrnx" alt="image-20260427103207193"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/flutter/"><i class="fas fa-tag" style="margin-right: 3px"> </i>flutter</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来学学更多的flutter的组件"><a href="#今天来学学更多的flutter的组件" class="headerlink" title="今天来学学更多的flutter的组件"></a>今天来学学更多的flutter的组件</h1><h2 id="弹性布局-Flex"><a href="#弹性布局-Flex" class="headerlink" title="弹性布局-Flex"></a>弹性布局-Flex</h2><p>​	<style>.lofwnfbiipjd{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427103207193.webp" class="lofwnfbiipjd" alt="image-20260427103207193"></p>
 <h3 id="Expanded"><a href="#Expanded" class="headerlink" title="Expanded"></a>Expanded</h3><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -480,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.ticyloqpwyne{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427105320683.webp" class="ticyloqpwyne" alt="image-20260427105320683"></p>
+<p>​	<style>.kxfmqxihznij{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427105320683.webp" class="kxfmqxihznij" alt="image-20260427105320683"></p>
 <h3 id="Flexible"><a href="#Flexible" class="headerlink" title="Flexible"></a>Flexible</h3><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -534,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.ihfkhfgqfuyv{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427110008830.webp" class="ihfkhfgqfuyv" alt="image-20260427110008830"></p>
+<p>​	<style>.kyvujdsxnkxy{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427110008830.webp" class="kyvujdsxnkxy" alt="image-20260427110008830"></p>
 <blockquote>
 <p>Flex布局受其父组件传递的约束影响。确保父组件提供了适当的布局约束</p>
 <p>Expanded与Flexible的区别：</p>
@@ -585,8 +607,8 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.rdprnlrnkvqf{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111112801.webp" class="rdprnlrnkvqf" alt="image-20260427111112801"></p>
-<h2 id="流式布局-Wrap"><a href="#流式布局-Wrap" class="headerlink" title="流式布局-Wrap"></a>流式布局-Wrap</h2><p>​	<style>.kbbkmiowcbbt{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111509237.webp" class="kbbkmiowcbbt" alt="image-20260427111509237"></p>
+<p>​	<style>.smmovuueqyqt{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111112801.webp" class="smmovuueqyqt" alt="image-20260427111112801"></p>
+<h2 id="流式布局-Wrap"><a href="#流式布局-Wrap" class="headerlink" title="流式布局-Wrap"></a>流式布局-Wrap</h2><p>​	<style>.jignxqcrnlrq{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427111509237.webp" class="jignxqcrnlrq" alt="image-20260427111509237"></p>
 <blockquote>
 <p>当子组件内容是根据数据动态生成时，使用wrap可以确保布局始终适配</p>
 </blockquote>
@@ -635,15 +657,15 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.vvwqhorpzbxs{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427113827205.webp" class="vvwqhorpzbxs" alt="image-20260427113827205"></p>
+<p>​	<style>.upygdsuivhyr{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427113827205.webp" class="upygdsuivhyr" alt="image-20260427113827205"></p>
 <blockquote>
 <p>List.generate是一个构造器，用于快速创建长度固定且每个元素可以通过索引号确定的列表语法：</p>
 <p>List.generate(int count, E generator(int index), {bool growable: false})</p>
 </blockquote>
-<h2 id="层叠布局-Stack-Positioned"><a href="#层叠布局-Stack-Positioned" class="headerlink" title="层叠布局-Stack&#x2F;Positioned"></a>层叠布局-Stack&#x2F;Positioned</h2><p>​	<style>.astxjrsmuqha{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427152644733.webp" class="astxjrsmuqha" alt="image-20260427152644733"></p>
-<p>​	<style>.kngbipicdzhh{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160646763.webp" class="kngbipicdzhh" alt="image-20260427160646763"></p>
+<h2 id="层叠布局-Stack-Positioned"><a href="#层叠布局-Stack-Positioned" class="headerlink" title="层叠布局-Stack&#x2F;Positioned"></a>层叠布局-Stack&#x2F;Positioned</h2><p>​	<style>.xzeyefbctnhy{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427152644733.webp" class="xzeyefbctnhy" alt="image-20260427152644733"></p>
+<p>​	<style>.mndmdpnmmbdt{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160646763.webp" class="mndmdpnmmbdt" alt="image-20260427160646763"></p>
 <p>可以看出这个是层叠式的,一层叠一层</p>
-<p>​	<style>.tsphujjdefwc{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427154016318.webp" class="tsphujjdefwc" alt="image-20260427154016318"></p>
+<p>​	<style>.owekwesmxxmk{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427154016318.webp" class="owekwesmxxmk" alt="image-20260427154016318"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -739,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.qeinfiwqisdo{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155308373.webp" class="qeinfiwqisdo" alt="image-20260427155308373"></p>
+<p>​	<style>.trosccgybdux{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155308373.webp" class="trosccgybdux" alt="image-20260427155308373"></p>
 <p>还有一个很奇葩的玩法就是,我们在之前学习的padding这里可以用positioned来代替效果</p>
 <p>首先先了解positioned的一个特性,如果我们同时输入上下左右四个方向</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-plaintext">Positioned(
@@ -751,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function() {
 ),</span><br></code></pre></div></div>
 
 <p>此时代码不会报错,而是子组件往四个方向延伸来覆盖容器</p>
-<p>​	<style>.comruuxkitcv{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155905606.webp" class="comruuxkitcv" alt="image-20260427155905606"></p>
+<p>​	<style>.jxdhbqjckvoe{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427155905606.webp" class="jxdhbqjckvoe" alt="image-20260427155905606"></p>
 <p>而且取值为0的时候甚至全部覆盖body</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><pre class="codecard-pre"><code class="language-plaintext">Positioned(
 	right: 0,
@@ -761,7 +783,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	child: Container(width: 50, height: 50, color: Colors.yellow),
 ),</span><br></code></pre></div></div>
 
-<p>​	<style>.akorimgbeibo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160250154.webp" class="akorimgbeibo" alt="image-20260427160250154"></p>
+<p>​	<style>.wgqbsouurvou{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160250154.webp" class="wgqbsouurvou" alt="image-20260427160250154"></p>
 <p>同理,我们也可以制造单方向延伸的条</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div><pre class="codecard-pre"><code class="language-dart">Positioned(
 	right: <span class="number">0</span>,
@@ -770,9 +792,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	child: Container(width: <span class="number">50</span>, height: <span class="number">50</span>, color: Colors.yellow),
 ),</span><br></code></pre></div></div>
 
-<p>​	<style>.ctsrpbnnezfs{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160510691.webp" class="ctsrpbnnezfs" alt="image-20260427160510691"></p>
-<h2 id="文本组件-Text"><a href="#文本组件-Text" class="headerlink" title="文本组件-Text"></a>文本组件-Text</h2><p>​	<style>.xlxckxcbkiee{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160906913.webp" class="xlxckxcbkiee" alt="image-20260427160906913"></p>
-<p>​	<style>.pdqxgpflwjuf{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427192614139.webp" class="pdqxgpflwjuf" alt="image-20260427192614139"></p>
+<p>​	<style>.nwiconegrwon{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160510691.webp" class="nwiconegrwon" alt="image-20260427160510691"></p>
+<h2 id="文本组件-Text"><a href="#文本组件-Text" class="headerlink" title="文本组件-Text"></a>文本组件-Text</h2><p>​	<style>.pxvegpkpxrfo{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427160906913.webp" class="pxvegpkpxrfo" alt="image-20260427160906913"></p>
+<p>​	<style>.ecyxxxqwvect{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427192614139.webp" class="ecyxxxqwvect" alt="image-20260427192614139"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -822,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function() {
 &#125;</span><br></code></pre></div></div>
 
 <p>我们普通的文字排列是默认的换行</p>
-<p>​	<style>.ceejlmhggrcc{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193608648.webp" class="ceejlmhggrcc" alt="image-20260427193608648"></p>
+<p>​	<style>.iyfibqtjenws{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193608648.webp" class="iyfibqtjenws" alt="image-20260427193608648"></p>
 <p>但是我们也可以指定显示的行号</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -874,9 +896,9 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.lngretgyfteg{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193807845.webp" class="lngretgyfteg" alt="image-20260427193807845"></p>
+<p>​	<style>.fxjvkmgcrdqm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427193807845.webp" class="fxjvkmgcrdqm" alt="image-20260427193807845"></p>
 <h3 id="TextSpan"><a href="#TextSpan" class="headerlink" title="TextSpan"></a>TextSpan</h3><p>如果需要在同一段本中显示不同样式，可用Text.rich构造函数配合TextSpan来实现</p>
-<p>​	<style>.nslkhftbegsl{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195400407.webp" class="nslkhftbegsl" alt="image-20260427195400407"></p>
+<p>​	<style>.ufvutzooogaq{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195400407.webp" class="ufvutzooogaq" alt="image-20260427195400407"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -932,9 +954,9 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.apdqlnnhlkbq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195655702.webp" class="apdqlnnhlkbq" alt="image-20260427195655702"></p>
-<h2 id="图片组件-image"><a href="#图片组件-image" class="headerlink" title="图片组件-image"></a>图片组件-image</h2><p>​	<style>.zqsoyuokfxev{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200101988.webp" class="zqsoyuokfxev" alt="image-20260427200101988"></p>
-<p>​	<style>.tyjbexbvceks{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427211656998.webp" class="tyjbexbvceks" alt="image-20260427211656998"></p>
+<p>​	<style>.ndhljgtpstib{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427195655702.webp" class="ndhljgtpstib" alt="image-20260427195655702"></p>
+<h2 id="图片组件-image"><a href="#图片组件-image" class="headerlink" title="图片组件-image"></a>图片组件-image</h2><p>​	<style>.nztwvufdchju{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200101988.webp" class="nztwvufdchju" alt="image-20260427200101988"></p>
+<p>​	<style>.hvwqrkbuvacj{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427211656998.webp" class="hvwqrkbuvacj" alt="image-20260427211656998"></p>
 <h3 id="image-asset-本地资源"><a href="#image-asset-本地资源" class="headerlink" title="image.asset(本地资源)"></a>image.asset(本地资源)</h3><p>pubspec.yaml启用图片文件夹</p>
 <p>将资源assets功能启用</p>
 <div class="codecard" data-lang="plaintext"><div class="codecard-header"><span class="codecard-lang"></span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div><pre class="codecard-pre"><code class="language-plaintext">assets:
@@ -942,9 +964,9 @@ document.addEventListener('DOMContentLoaded', function() {
     - images/a_dot_ham.jpeg</span><br></code></pre></div></div>
 
 <p>这个需要一些配置</p>
-<p>​	<style>.snprrzrtxera{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200736889.webp" class="snprrzrtxera" alt="image-20260427200736889"></p>
+<p>​	<style>.jxtsjuuaplyg{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427200736889.webp" class="jxtsjuuaplyg" alt="image-20260427200736889"></p>
 <p>例如我们将图片放到这个images文件夹</p>
-<p>​	<style>.jrfjbnpqivoa{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427201351231.webp" class="jrfjbnpqivoa" alt="image-20260427201351231"></p>
+<p>​	<style>.tjtlzlykqspo{zoom: 33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427201351231.webp" class="tjtlzlykqspo" alt="image-20260427201351231"></p>
 <p>然后在main.dart中启用资源,同时重新run执行</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -977,7 +999,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.ecvyvprmgajq{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427202244242.webp" class="ecvyvprmgajq" alt="image-20260427202244242"></p>
+<p>​	<style>.sjcklmowtqks{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427202244242.webp" class="sjcklmowtqks" alt="image-20260427202244242"></p>
 <p>当然也可以使用width和hight来控制图片的大小</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart">child: Image.asset(<span class="string">&quot;lib/images/01.png&quot;</span>, width: <span class="number">500</span>, fit: BoxFit.contain),</span><br></code></pre></div></div>
 
@@ -1050,10 +1072,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <p>但是问题是,这个东西需要联网,否则图片会显示不出来, 除此之外, Android&#x2F;HarmonyOS&#x2F;iOS使用Image.network需要配置网络权限</p>
 <p>而且如果图片的源头断了也不会显示出来</p>
-<h2 id="文本输入组件-TextField"><a href="#文本输入组件-TextField" class="headerlink" title="文本输入组件-TextField"></a>文本输入组件-TextField</h2><p>​	<style>.tuuknubjlpcv{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427212237017.webp" class="tuuknubjlpcv" alt="image-20260427212237017"></p>
-<p>​	<style>.iwryngojxzer{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224300913.webp" class="iwryngojxzer" alt="image-20260427224300913"></p>
+<h2 id="文本输入组件-TextField"><a href="#文本输入组件-TextField" class="headerlink" title="文本输入组件-TextField"></a>文本输入组件-TextField</h2><p>​	<style>.cbsrscflujfh{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427212237017.webp" class="cbsrscflujfh" alt="image-20260427212237017"></p>
+<p>​	<style>.ycmhwryhqdcu{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224300913.webp" class="ycmhwryhqdcu" alt="image-20260427224300913"></p>
 <p>这里我们可以写一个登录界面,使用<strong>有状态组件StatefulWidget</strong>(因为这个是动态刷新的)</p>
-<p>​	<style>.iqpomyhygbzo{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427222355749.webp" class="iqpomyhygbzo" alt="image-20260427222355749"></p>
+<p>​	<style>.pefdgnnufgdl{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427222355749.webp" class="pefdgnnufgdl" alt="image-20260427222355749"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -1159,8 +1181,8 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h2 id="常用滚动组件"><a href="#常用滚动组件" class="headerlink" title="常用滚动组件"></a>常用滚动组件</h2><p>​	<style>.qnnubgclfptu{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224457489.webp" class="qnnubgclfptu" alt="image-20260427224457489"></p>
-<h3 id="SingleChildScrollView"><a href="#SingleChildScrollView" class="headerlink" title="SingleChildScrollView"></a>SingleChildScrollView</h3><p>​	<style>.sfehpomngevg{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428131617737.webp" class="sfehpomngevg" alt="image-20260428131617737"></p>
+<h2 id="常用滚动组件"><a href="#常用滚动组件" class="headerlink" title="常用滚动组件"></a>常用滚动组件</h2><p>​	<style>.utvgqgebbmuc{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260427224457489.webp" class="utvgqgebbmuc" alt="image-20260427224457489"></p>
+<h3 id="SingleChildScrollView"><a href="#SingleChildScrollView" class="headerlink" title="SingleChildScrollView"></a>SingleChildScrollView</h3><p>​	<style>.xowcntqmgeea{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428131617737.webp" class="xowcntqmgeea" alt="image-20260428131617737"></p>
 <p>包裹个组件，让单个组件具备滚动能</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -1350,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function() {
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.qerkwruoiswf{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428093647708.webp" class="qerkwruoiswf" alt="image-20260428093647708"></p>
+<p>​	<style>.aiciplbwihoq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260428093647708.webp" class="aiciplbwihoq" alt="image-20260428093647708"></p>
 <p>其中这里面涉及的两个方法—jumpTo和animateTo这里细说一下</p>
 <h4 id="jumpTo-直接跳转"><a href="#jumpTo-直接跳转" class="headerlink" title="jumpTo(直接跳转)"></a>jumpTo(直接跳转)</h4><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-dart">_scrollController.jumpTo(<span class="number">0</span>);</span><br></code></pre></div></div>
 
@@ -1475,7 +1497,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
 <td>弹簧效果</td>
 </tr>
 </tbody></table>
-<h3 id="ListView"><a href="#ListView" class="headerlink" title="ListView"></a>ListView</h3><p>​	<style>.ptsdgaektayk{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260430163411866.webp" class="ptsdgaektayk" alt="image-20260430163411866"></p>
+<h3 id="ListView"><a href="#ListView" class="headerlink" title="ListView"></a>ListView</h3><p>​	<style>.xjfysgoluccl{zoom:67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260430163411866.webp" class="xjfysgoluccl" alt="image-20260430163411866"></p>
 <h4 id="children-模式"><a href="#children-模式" class="headerlink" title="children 模式"></a>children 模式</h4><p>这个也是最普通的模式</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -1670,7 +1692,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h3 id="GridView"><a href="#GridView" class="headerlink" title="GridView"></a>GridView</h3><p>​	<style>.zlglrlbqranw{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508215625050.webp" class="zlglrlbqranw" alt="image-20260508215625050"></p>
+<h3 id="GridView"><a href="#GridView" class="headerlink" title="GridView"></a>GridView</h3><p>​	<style>.jvpcqjgexkpk{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508215625050.webp" class="jvpcqjgexkpk" alt="image-20260508215625050"></p>
 <h4 id="GridView-count"><a href="#GridView-count" class="headerlink" title="GridView.count"></a>GridView.count</h4><p>作用: 使用GridView.count创建固定列数网络</p>
 <p>使用方式为 <code> GridView.count(crossAxisCount: crossAxisCount)</code></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
@@ -1721,10 +1743,10 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<p>​	<style>.bijqqipbqpjq{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508221510749.webp" class="bijqqipbqpjq" alt="image-20260508221510749"></p>
+<p>​	<style>.ncdwmxxpvuni{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508221510749.webp" class="ncdwmxxpvuni" alt="image-20260508221510749"></p>
 <p>想想这个可以用来干什么? 没错! 可以制作相册!你打开你的手机相册看看是不是差不多的</p>
 <p>还可以这么干</p>
-<p>​	<style>.cxnhpcctqrur{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508221838081.webp" class="cxnhpcctqrur" alt="image-20260508221838081"></p>
+<p>​	<style>.drieuoieqnjb{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508221838081.webp" class="drieuoieqnjb" alt="image-20260508221838081"></p>
 <p>我们这个默认情况下是竖直向下滚动的也就是<code>crollDirection: Axis.vertical</code></p>
 <p>还可以这样实现横向滚动翻阅</p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
@@ -1782,7 +1804,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
 </blockquote>
 <h4 id="GridView-extent"><a href="#GridView-extent" class="headerlink" title="GridView.extent"></a>GridView.extent</h4><p>这个很有意思,因为这个拖动改变窗口大小的时候,组件会自适应位置,就像模态窗口一样</p>
 <p>依旧这个默认的是<code> scrollDirection: Axis.vertical</code>模式</p>
-<p>​	<style>.uoqwihbxlbca{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508224903338.webp" class="uoqwihbxlbca" alt="image-20260508224903338"></p>
+<p>​	<style>.otuyrhahqyfk{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508224903338.webp" class="otuyrhahqyfk" alt="image-20260508224903338"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -1943,10 +1965,10 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
 
 <p>对了,关于子组件怎么调整大小呢,可以使用这个<code>childAspectRatio</code>属性</p>
 <p>你看右边的界面像不像pinterest的界面(Pinterest就是一个插画平台,上面不仅有画师分享的作品还有设计师)</p>
-<p>​	<style>.nhfoutcfuheq{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508231808395.webp" class="nhfoutcfuheq" alt="image-20260508231808395"></p>
+<p>​	<style>.oaydfvlvunci{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508231808395.webp" class="oaydfvlvunci" alt="image-20260508231808395"></p>
 <h3 id="CustomScrollView"><a href="#CustomScrollView" class="headerlink" title="CustomScrollView"></a>CustomScrollView</h3><p><code>CustomScrollView</code> 的 <code>slivers</code> 属性<strong>只接受 Sliver 系列的组件</strong>。普通 Widget（如 <code>Container</code>、<code>Column</code>）不能直接放入，必须通过 <code>SliverToBoxAdapter</code> 包装转换。</p>
-<p>​	<style>.lffcducetigp{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508232450154.webp" class="lffcducetigp" alt="image-20260508232450154"></p>
- <style>.lhdvuqnccycu{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515144533508.webp" class="lhdvuqnccycu" alt="image-20260515144533508">
+<p>​	<style>.bbfbzsfccjvi{zoom: 50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260508232450154.webp" class="bbfbzsfccjvi" alt="image-20260508232450154"></p>
+ <style>.povqrlnojrys{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515144533508.webp" class="povqrlnojrys" alt="image-20260515144533508">
 
 <table>
 <thead>
@@ -2051,10 +2073,10 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
 &#125;
 </span><br></code></pre></div></div>
 
- <style>.oierwxlvmnnr{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515145853214.webp" class="oierwxlvmnnr" alt="image-20260515145853214">
+ <style>.fdwjpsgwymty{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515145853214.webp" class="fdwjpsgwymty" alt="image-20260515145853214">
 
 <h4 id="SliverpersistentHeader粘性吸顶分类"><a href="#SliverpersistentHeader粘性吸顶分类" class="headerlink" title="SliverpersistentHeader粘性吸顶分类"></a>SliverpersistentHeader粘性吸顶分类</h4><p><strong>作用</strong>：让<strong>任意 Widget</strong> 在滚动到顶部时吸顶固定，比 <code>SliverAppBar</code> 更灵活。常用于分类筛选栏、频道 Tab。</p>
- <style>.zctjlqpvsfiw{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515150905873.webp" class="zctjlqpvsfiw" alt="image-20260515150905873">
+ <style>.qqyyhmpsrdvu{zoom: 67%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515150905873.webp" class="qqyyhmpsrdvu" alt="image-20260515150905873">
 
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -2123,7 +2145,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
               delegate: _StickyCategory(), <span class="comment">//实现吸顶效果的delegate</span>
             ),</span><br></code></pre></div></div>
 
-  <style>.wisluwxdhcep{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515170337436.webp" class="wisluwxdhcep" alt="image-20260515170337436">
+  <style>.zhyetoqxxbkj{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515170337436.webp" class="zhyetoqxxbkj" alt="image-20260515170337436">
 
 <p><strong>必须自定义 <code>SliverPersistentHeaderDelegate</code></strong>，核心参数：</p>
 <ul>
@@ -2160,7 +2182,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h4 id="SliverList列表"><a href="#SliverList列表" class="headerlink" title="SliverList列表"></a>SliverList列表</h4> <style>.bbbovmpfeylz{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515164940382.webp" class="bbbovmpfeylz" alt="image-20260515164940382">
+<h4 id="SliverList列表"><a href="#SliverList列表" class="headerlink" title="SliverList列表"></a>SliverList列表</h4> <style>.pvvpeabfdvcz{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515164940382.webp" class="pvvpeabfdvcz" alt="image-20260515164940382">
 
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span><span>113</span><span>114</span><span>115</span><span>116</span><span>117</span><span>118</span><span>119</span><span>120</span><span>121</span><span>122</span><span>123</span><span>124</span><span>125</span><span>126</span><span>127</span><span>128</span><span>129</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -2292,7 +2314,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h4 id="SliverGrid宫格"><a href="#SliverGrid宫格" class="headerlink" title="SliverGrid宫格"></a>SliverGrid宫格</h4><p>​	<style>.rbkeejoduimh{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515170009435.webp" class="rbkeejoduimh" alt="image-20260515170009435"></p>
+<h4 id="SliverGrid宫格"><a href="#SliverGrid宫格" class="headerlink" title="SliverGrid宫格"></a>SliverGrid宫格</h4><p>​	<style>.urwhtozvialf{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515170009435.webp" class="urwhtozvialf" alt="image-20260515170009435"></p>
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span><span>113</span><span>114</span><span>115</span><span>116</span><span>117</span><span>118</span><span>119</span><span>120</span><span>121</span><span>122</span><span>123</span><span>124</span><span>125</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
 <span class="keyword">void</span> main() &#123;
@@ -2579,7 +2601,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
-<h4 id="PageView跳转控制"><a href="#PageView跳转控制" class="headerlink" title="PageView跳转控制"></a>PageView跳转控制</h4> <style>.tmqkyguxaloj{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515193015231.webp" class="tmqkyguxaloj" alt="image-20260515193015231">
+<h4 id="PageView跳转控制"><a href="#PageView跳转控制" class="headerlink" title="PageView跳转控制"></a>PageView跳转控制</h4> <style>.lsuslacwplfd{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515193015231.webp" class="lsuslacwplfd" alt="image-20260515193015231">
 
 <div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span><span>113</span><span>114</span><span>115</span><span>116</span><span>117</span><span>118</span><span>119</span><span>120</span><span>121</span><span>122</span><span>123</span><span>124</span><span>125</span><span>126</span><span>127</span><span>128</span><span>129</span><span>130</span><span>131</span><span>132</span><span>133</span><span>134</span><span>135</span><span>136</span><span>137</span><span>138</span><span>139</span><span>140</span><span>141</span><span>142</span><span>143</span><span>144</span><span>145</span><span>146</span><span>147</span><span>148</span><span>149</span><span>150</span><span>151</span><span>152</span><span>153</span><span>154</span><span>155</span><span>156</span><span>157</span><span>158</span><span>159</span><span>160</span><span>161</span><span>162</span><span>163</span><span>164</span><span>165</span><span>166</span><span>167</span><span>168</span><span>169</span><span>170</span><span>171</span><span>172</span><span>173</span><span>174</span><span>175</span><span>176</span><span>177</span><span>178</span><span>179</span><span>180</span><span>181</span><span>182</span><span>183</span><span>184</span><span>185</span><span>186</span><span>187</span><span>188</span><span>189</span><span>190</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -2772,7 +2794,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
   &#125;
 &#125;</span><br></code></pre></div></div>
 
- <style>.ofqodwjywfgs{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515200953223.webp" class="ofqodwjywfgs" alt="image-20260515200953223">
+ <style>.hwdsdyoucrdw{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/image-20260515200953223.webp" class="hwdsdyoucrdw" alt="image-20260515200953223">
 
 <h4 id="卡片层叠效果（viewportFraction）"><a href="#卡片层叠效果（viewportFraction）" class="headerlink" title="卡片层叠效果（viewportFraction）"></a>卡片层叠效果（viewportFraction）</h4><div class="codecard" data-lang="dart"><div class="codecard-header"><span class="codecard-lang">DART</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span><span>42</span><span>43</span><span>44</span><span>45</span><span>46</span><span>47</span><span>48</span><span>49</span><span>50</span><span>51</span><span>52</span><span>53</span><span>54</span><span>55</span><span>56</span><span>57</span><span>58</span><span>59</span><span>60</span><span>61</span><span>62</span><span>63</span><span>64</span><span>65</span><span>66</span><span>67</span><span>68</span><span>69</span><span>70</span><span>71</span><span>72</span><span>73</span><span>74</span><span>75</span><span>76</span><span>77</span><span>78</span><span>79</span><span>80</span><span>81</span><span>82</span><span>83</span><span>84</span><span>85</span><span>86</span><span>87</span><span>88</span><span>89</span><span>90</span><span>91</span><span>92</span><span>93</span><span>94</span><span>95</span><span>96</span><span>97</span><span>98</span><span>99</span><span>100</span><span>101</span><span>102</span><span>103</span><span>104</span><span>105</span><span>106</span><span>107</span><span>108</span><span>109</span><span>110</span><span>111</span><span>112</span><span>113</span><span>114</span><span>115</span><span>116</span><span>117</span><span>118</span><span>119</span><span>120</span><span>121</span><span>122</span><span>123</span><span>124</span><span>125</span><span>126</span><span>127</span><span>128</span><span>129</span><span>130</span><span>131</span><span>132</span><span>133</span><span>134</span><span>135</span><span>136</span><span>137</span><span>138</span><span>139</span><span>140</span><span>141</span><span>142</span><span>143</span><span>144</span><span>145</span><span>146</span></div><pre class="codecard-pre"><code class="language-dart"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;
 
@@ -2947,7 +2969,7 @@ Duration(seconds: 2)</span><br></code></pre></div></div>
 window.tocConfig = {
   empty_toc_behavior: "placeholder"
 };
-</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/ClaudeCode%E9%85%8D%E7%BD%AEDeepSeek/"><span class="nav-label">← 上一篇</span><span class="nav-title" data-i18n-zh="ClaudeCode配置DeepSeek">ClaudeCode配置DeepSeek</span></a></div><div class="post-nav next"><a href="/2026/04/26/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%BB%99Blog%E5%A2%9E%E5%8A%A0AI%E6%80%BB%E7%BB%93%E5%8A%9F%E8%83%BD/"><span class="nav-label">下一篇 →</span><span class="nav-title" data-i18n-zh="给Blog增加AI总结功能">给Blog增加AI总结功能</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6&amp;url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/04/28/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/ClaudeCode%E9%85%8D%E7%BD%AEDeepSeek/"><span class="nav-label" data-i18n-key="post.prev">← 上一篇</span><span class="nav-title" data-i18n-zh="ClaudeCode配置DeepSeek">ClaudeCode配置DeepSeek</span></a></div><div class="post-nav next"><a href="/2026/04/26/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E7%BB%99Blog%E5%A2%9E%E5%8A%A0AI%E6%80%BB%E7%BB%93%E5%8A%9F%E8%83%BD/"><span class="nav-label" data-i18n-key="post.next">下一篇 →</span><span class="nav-title" data-i18n-zh="给Blog增加AI总结功能">给Blog增加AI总结功能</span></a></div></div><div class="post-share"><h3 class="share-title" data-i18n-key="share.title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6&amp;url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.twitter">推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.facebook">脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F" target="_blank" rel="noopener"><span data-i18n-key="share.linkedin">领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span data-i18n-key="share.wechat">微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F04%2F27%2FFlutter%25E7%259B%25B8%25E5%2585%25B3%2Fflutter%25E7%25AC%25AC%25E5%2585%25AB%25E5%25A4%25A9%2F&amp;title=flutter%E7%AC%AC%E5%85%AB%E5%A4%A9--%E6%9B%B4%E5%A4%9A%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener"><span data-i18n-key="share.weibo">微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/04/27/Flutter%E7%9B%B8%E5%85%B3/flutter%E7%AC%AC%E5%85%AB%E5%A4%A9/"><span data-i18n-key="share.copy_link">点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title" data-i18n-key="comments.title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
   function initTwikoo() {
     if (typeof twikoo === 'undefined') { setTimeout(initTwikoo, 200); return; }
     twikoo.init({
@@ -2981,11 +3003,11 @@ window.tocConfig = {
   } else {
     loadTwikoo();
   }
-})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn" data-i18n-key="sakana.switch_character">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
-  /* ★ 层级:文章模态(1000)之后、正文之上,与落叶同层 */
+  /* 层级:文章模态(1000)之后、正文之上,与落叶同层 */
   z-index: 998;
   pointer-events: none;
   transform: scale(0.3);
@@ -3070,7 +3092,7 @@ body.sakana-dragging iframe {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
   
-  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  // 2. 如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana
   if (window.self !== window.top) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper) wrapper.style.display = 'none';
@@ -3080,9 +3102,9 @@ body.sakana-dragging iframe {
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
 
-  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
-  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
-  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  // 文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  // 导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  // 抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
   document.addEventListener('mousedown', function(e) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper && wrapper.contains(e.target)) {
@@ -3108,7 +3130,13 @@ body.sakana-dragging iframe {
       const sakanaInstance = Sakana.init({
         el: sakanaBox,
         character: savedChar,
-        canSwitchCharacter: false
+        canSwitchCharacter: false,
+        // 平抑物理参数:默认 r=60(入场大倾角)+ decay=0.99(几乎无阻尼)
+        // 会让摆动越晃越烈以至于拉伸变形;降低惯性、加强阻尼、
+        // 减小初始倾角后,入场只有轻微摆动并快速回正
+        inertia: 0.02,
+        decay: 0.9,
+        r: 10
       });
       
       Sakana.setMute(true);
@@ -3127,10 +3155,10 @@ body.sakana-dragging iframe {
   };
   
   document.body.appendChild(script);
-});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright"><span data-i18n-value="© 2025 胡杨怕火. 保留所有权利.">© 2025 胡杨怕火. 保留所有权利.</span></div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
 #pet-root {
   position: fixed;
-  /* ★ 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
+  /* 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
      低于图片/表格/mermaid 全屏查看器(9999+)——全屏查看时桌宠
      被遮在后面且鼠标无法与之交互;也低于页面上层的弹窗类组件 */
   z-index: 2000;
@@ -3141,7 +3169,7 @@ body.sakana-dragging iframe {
   transition: opacity 0.25s ease;
 }
 
-/* ★ 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
+/* 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
    父页面把桌宠临时沉到模态之下:iframe 内查看器的 z-index
    困在 iframe 里,压不过父页面的桌宠,必须由父页面自己沉底 */
 #pet-root.behind-viewers {
@@ -3236,7 +3264,7 @@ body.sakana-dragging iframe {
 }
 </style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
 
-// ★ 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
+// 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
 window.addEventListener('message', (e) => {
   if (!e.data || e.data.type !== 'magzine-viewer') return;
   const root = document.getElementById('pet-root');
@@ -3266,8 +3294,8 @@ function initDesktopPet() {
   }
 
   // 2. 读者设置拦截:设置面板里关闭桌宠时,彻底不初始化。
-  //    烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
-  //    所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
+  // 烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
+  // 所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
   if (window.__readerSettings && window.__readerSettings.pet === "off") {
     const root = document.getElementById('pet-root');
     if (root) root.remove();
@@ -3408,7 +3436,7 @@ function initDesktopPet() {
     sound.update(state);
     chat.update(dt, state);
 
-     // ★ 在主循环中触发文字避让逻辑
+    // 在主循环中触发文字避让逻辑
     if (pretextInteraction) {
      pretextInteraction.update(pos.x, pos.y, timestamp);
     }
@@ -3420,24 +3448,22 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-// ★ 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
-//   主要来源之一),不与首屏渲染抢主线程
+// 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
+// 主要来源之一),不与首屏渲染抢主线程
 if ("requestIdleCallback" in window) {
   requestIdleCallback(initDesktopPet, { timeout: 3000 });
 } else {
   setTimeout(initDesktopPet, 1500);
-}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器" data-i18n-key-data-title="music.expand"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
 
   if (shouldBeDark) {
     document.body.classList.add('dark-mode');
   }
-  // ★ 性能修改:删除了原先 "visibility:hidden 直到 DOMContentLoaded" 的白屏锁。
-  //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
-  //   documentElement.classList 提前完成,不再需要整页隐藏。
+  // 暗色防闪由 <head> 的内联脚本提前完成,无需整页隐藏的白屏锁。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/features/music-wave.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/effects/hero-waterwave.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -3449,7 +3475,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true},"waterwave":{"enable":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
@@ -3464,8 +3490,8 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };
-  // ★ 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
-  //   必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
+  // 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
+  // 必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
   window.__themeRaw = JSON.parse(JSON.stringify(base));
   // 深合并读者设置补丁(两级足够)
   Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
@@ -3482,4 +3508,4 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   });
   return base;
 })();
-</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script></body></html>
+</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script></body></html>

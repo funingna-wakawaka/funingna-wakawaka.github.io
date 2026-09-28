@@ -18,23 +18,25 @@ export class PetChat {
 
     this.idleTime = 0;
     this.bubbleTimer = null;
-    this.dragSayTimer = null; // ★ 新增：拖拽对话延迟定时器
+    this.dragSayTimer = null; // 拖拽对话延迟定时器
     this.isSpeaking = false;
     this.lastState = State.IDLE;
 
+    // 台词是"中文值 → pet.* 词条"的值通道配置:i18n.get(台词) 按字典翻译,
+    // 因此这里必须与 language/zh.yml 的 pet.* 保持一字不差
     this.dialogues = {
-      drag: ["放开我!!!", "救命啊!!!", "我讨厌你~呜呜"],
-      click: ["不要老是戳我呀", "真讨厌!", "你又点我了!"],
-      rightClick: ["不要右键点我听到没有", "干什么啊"],
-      fall: ["哼", "哎呀"],
+      drag: ["放开我!!!", "救命啊!!!", "我讨厌你~呜呜"], // i18n:allow
+      click: ["不要老是戳我呀", "真讨厌!", "你又点我了!"], // i18n:allow
+      rightClick: ["不要右键点我听到没有", "干什么啊"], // i18n:allow
+      fall: ["哼", "哎呀"], // i18n:allow
       idle: [
-        "你怎么不理我了",
-        "快点和我说话",
-        "我好无聊啊",
-        "老师我想听歌",
-        "我好困啊",
-        "可以放首歌吗我想听歌!!!",
-        "不要右键戳我",
+        "你怎么不理我了", // i18n:allow
+        "快点和我说话", // i18n:allow
+        "我好无聊啊", // i18n:allow
+        "老师我想听歌", // i18n:allow
+        "我好困啊", // i18n:allow
+        "可以放首歌吗我想听歌!!!", // i18n:allow
+        "不要右键戳我", // i18n:allow
       ],
     };
 
@@ -42,7 +44,7 @@ export class PetChat {
   }
 
   _bindEvents() {
-    // ★ 核心修改：移除原生的 click 监听，防覆盖。左键点击对话全权由状态机触发！
+    // 移除原生的 click 监听，防覆盖。左键点击对话全权由状态机触发！
 
     // 仅保留右键的监听
     this.innerEl.addEventListener("contextmenu", () => {
@@ -87,8 +89,8 @@ export class PetChat {
   say(text, duration = 3000) {
     if (!this.bubbleEl || !this.textEl) return;
 
-    // ★ 显示前先按当前语言渲染:此前靠 lang-switch 的观察器事后翻译,
-    //   气泡会先闪一下中文再变成译文,观感很差
+    // 显示前先按当前语言渲染:此前靠 lang-switch 的观察器事后翻译,
+    // 气泡会先闪一下中文再变成译文,观感很差
     const translated =
       window.i18n && typeof window.i18n.get === "function"
         ? window.i18n.get(text)

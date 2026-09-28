@@ -1,6 +1,6 @@
 if (!window.hasOwnProperty("aiExecuted")) {
   console.log(
-    `%cPost-Summary-AI 文章摘要AI生成工具,魔改自：%chttps://github.com/qxchuckle/Post-Summary-AI%c`,
+    `%cPost-Summary-AI 文章摘要AI生成工具,魔改自：%chttps://github.com/qxchuckle/Post-Summary-AI%c`, // i18n:allow(值通道/内容,有意保留的中文)
     "border:1px #888 solid;border-right:0;border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#4976f5;margin:10px 0",
     "border:1px #888 solid;border-left:0;border-radius:0 5px 5px 0;padding: 5px 10px;",
     "",
@@ -67,18 +67,18 @@ function ChucklePostAI(AI_option) {
 
     const interface = {
       // 兜底默认值:正常由主题 _config.yml 的 ai_summary 传入覆盖(见 post.pug)
-      name: "阿罗娜",
+      name: "阿罗娜", // i18n:allow(值通道/内容,有意保留的中文)
       introduce:
-        "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊",
+        "老师好, 我是阿罗娜, 一个基于OpenAI GPT-4o的强大语言模型, 今天有什么可以帮到您? 😊", // i18n:allow(值通道/内容,有意保留的中文)
       version: "OpenAI GPT-4o",
-      button: ["介绍自己😎", "来点灵感💡", "生成AI简介🤖"],
+      button: ["介绍自己😎", "来点灵感💡", "生成AI简介🤖"], // i18n:allow(值通道/内容,有意保留的中文)
       ...AI_option.interface,
     };
 
     // ===========================================
     // 国际化辅助:文案与提示词都写在 language/*.yml 里
-    //   t(text)          —— 词条直查(字符串本身就是字典键)
-    //   tf(tpl, vars)    —— 带 {占位符} 的模板,按当前语言取译文再填值
+    // t(text)          —— 词条直查(字符串本身就是字典键)
+    // tf(tpl, vars)    —— 带 {占位符} 的模板,按当前语言取译文再填值
     // 两者都在 i18n 尚未就绪时原样返回中文,不会报错或留空。
     // 提示词也走这里,所以 AI 的回复语言自动跟随界面语言(俄语界面→俄语回答)。
     // ===========================================
@@ -318,8 +318,8 @@ function ChucklePostAI(AI_option) {
       controller = new AbortController();
       signal = controller.signal;
 
-      // ★ 后端 Worker 地址可配置:读 config.yml 的 ai_summary.api_url
-      //   (经 layout.pug 挂到 window.theme);留空则不发任何请求
+      // 后端 Worker 地址可配置:读 config.yml 的 ai_summary.api_url
+      // (经 layout.pug 挂到 window.theme);留空则不发任何请求
       const apiUrl =
         (window.theme &&
           window.theme.ai_summary &&
@@ -339,8 +339,8 @@ function ChucklePostAI(AI_option) {
           headers: {
             "Content-Type": "application/json",
           },
-          // ★ model 不在前端配置:Worker 端会用 CONFIG.TARGET_MODEL 强制覆盖
-          //   请求体里的 model,写在这里只是冗余(改模型去 Worker 里改)
+          // model 不在前端配置:Worker 端会用 CONFIG.TARGET_MODEL 强制覆盖
+          // 请求体里的 model,写在这里只是冗余(改模型去 Worker 里改)
           body: JSON.stringify({
             messages: [{ role: "user", content: prompt }],
           }),

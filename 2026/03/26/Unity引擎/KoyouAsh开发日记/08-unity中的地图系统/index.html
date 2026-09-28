@@ -11,8 +11,30 @@
 })();
 </script><script>if (window.parent !== window) {
   document.documentElement.classList.add('is-iframe');
+}</script><style>html.is-iframe .header,
+html.is-iframe header,
+html.is-iframe .navbar,
+html.is-iframe .footer,
+html.is-iframe footer,
+html.is-iframe .music-player,
+html.is-iframe .theme-color-picker-container,
+html.is-iframe #waves-container,
+html.is-iframe #pet-root,
+html.is-iframe #sakana-widget-wrapper,
+html.is-iframe .author-card-section,
+html.is-iframe .hero-section {
+  display: none !important;
 }
-</script><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
+html.is-iframe .post-wrapper,
+html.is-iframe .article-container,
+html.is-iframe main {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+html.is-iframe body {
+  overflow-x: hidden !important;
+}
+</style><link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/lib/font-awesome/all.min.css"><link rel="alternate" href="/atom.xml" title="huyangpahuo" type="application/atom+xml"><link rel="icon" href="/images/favicon.ico"><link rel="preload" as="image" href="/images/24.webp" fetchpriority="high"><link rel="preload" as="image" href="/images/1.webp" fetchpriority="high">
 <link rel="stylesheet" href="/css/core/main.css">
 
 <link rel="stylesheet" href="/css/components/tags.css">
@@ -137,7 +159,7 @@
   60% { transform: translateY(-7px); }
 }
 
-/* ★★★ 手机端适配修改 ★★★ */
+/* 手机端适配修改 */
 @media (max-width: 768px) {
   .cover-title { font-size: 2rem; letter-spacing: 2px; }
   .cover-author { font-size: 1.2rem; margin-top: 15px; }
@@ -154,12 +176,12 @@
   if (cover && cover.style.display !== 'none') {
     const startBtn = document.getElementById('start-journey');
 
-    // ★ 性能修改:THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
-    //   境内访问不稳定时封面会长时间黑屏等待)。
+    // THREE 液体背景模块本地化(原从 cdn.jsdelivr.net 动态 import,
+    // 境内访问不稳定时封面会长时间黑屏等待)。
     import('/js/vendor/liquid1.min.js').then((module) => {
     const LiquidBackground = module.default;
 
-    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    // 动态读取配置文件中的轮播图数组，如果没配提供默认图
     const coverImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
     
     const canvas1 = document.getElementById('refraction-canvas-1');
@@ -176,10 +198,10 @@
 
     const app1 = setupApp(canvas1);
 
-    // ★ 性能修改:第二个 WebGL 实例延迟创建。
-    //   原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
-    //   但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
-    //   改为首次轮播切换前 1.5 秒才创建并加载图。
+    // 第二个 WebGL 实例延迟创建。
+    // 原先开屏同时渲染两套液体模拟(为轮播交叉淡化做准备),
+    // 但多数访客几秒内就会点"开始旅行"离开,第二套纯属浪费;
+    // 改为首次轮播切换前 1.5 秒才创建并加载图。
     let app2 = null;
     function getApp2() {
       if (!app2) app2 = setupApp(canvas2);
@@ -240,7 +262,7 @@
   });
 
   // =======================
-  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // 向全局 lang-switch 请求数据
   // =======================
   const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
     container.innerHTML = ''; // 清空内容
@@ -265,15 +287,15 @@
     });
   };
 
-  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  // 封面文案来自配置,经 i18n.get 值索引按当前界面语言翻译
   const configTitle = "欢迎来到我的奇妙世界";
   const configAuthor = "胡杨怕火";
   const configBtn = "开始你的旅行";
 
-  // ★ 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
-  //   加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
-  //   中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
-  //   广播),就绪后(重新)按当前语言渲染,不再出现中文残留
+  // 修复"非中文语言下二次进站 cover 仍是中文":lang-switch 经 inject
+  // 加载,时机晚于本模块,原先固定 100ms 后取一次译文,取早了就一直是
+  // 中文。改为:立即尝试 + 监听 langchange(初始化完成与手动切换都会
+  // 广播),就绪后(重新)按当前语言渲染,不再出现中文残留
   const applyCoverTexts = () => {
     if (!(window.i18n && window.i18n.get)) return;
     const titleStr = window.i18n.get(configTitle);
@@ -287,7 +309,7 @@
 
   setTimeout(applyCoverTexts, 100);
   document.addEventListener('langchange', applyCoverTexts);
-}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/anime/">追番</a><a class="nav-item" href="/wall/">照片墙</a><a class="nav-item" href="/murmur/">万花筒</a><div class="nav-item has-submenu"><span class="nav-link">文章</span><div class="submenu"><a class="submenu-item" href="/archives/">归档</a><a class="submenu-item" href="/categories/">分类</a><a class="submenu-item" href="/tags/">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">huyangpahuo</span></a></div><div class="nav-menu"><button class="nav-strip-arrow prev" type="button" aria-label="向左滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_left"><i class="fas fa-chevron-left"></i></button><div class="nav-strip"><a class="nav-item" href="/" data-i18n-value="首页">首页</a><a class="nav-item" href="/about/" data-i18n-value="关于">关于</a><a class="nav-item" href="/link/" data-i18n-value="友链">友链</a><a class="nav-item" href="/anime/" data-i18n-value="追番">追番</a><a class="nav-item" href="/wall/" data-i18n-value="照片墙">照片墙</a><a class="nav-item" href="/murmur/" data-i18n-value="万花筒">万花筒</a><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="文章">文章</span><div class="submenu"><a class="submenu-item" href="/archives/" data-i18n-value="归档">归档</a><a class="submenu-item" href="/categories/" data-i18n-value="分类">分类</a><a class="submenu-item" href="/tags/" data-i18n-value="标签">标签</a></div></div><div class="nav-item has-submenu"><span class="nav-link" data-i18n-value="更多">更多</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.github.io/" data-i18n-value="我的另一个网站">我的另一个网站</a><a class="submenu-item" target="_blank" rel="noopener" href="https://huyangpahuo.vercel.app/" data-i18n-value="我的另二个网站(狗头)">我的另二个网站(狗头)</a><a class="submenu-item" target="_blank" rel="noopener" href="https://github.com/funingna-wakawaka" data-i18n-value="我的Github小号">我的Github小号</a><a class="submenu-item" target="_blank" rel="noopener" href="https://gitee.com/huyangpahuo" data-i18n-value="我的Gitee">我的Gitee</a><a class="submenu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/yjj009049?type=blog" data-i18n-value="我的CDSN">我的CDSN</a></div></div></div><button class="nav-strip-arrow next" type="button" aria-label="向右滚动菜单" hidden="hidden" data-i18n-key-aria-label="nav.scroll_right"><i class="fas fa-chevron-right"></i></button></div><div class="nav-right"><div class="search-toggle"><i class="fas fa-search"></i></div><a class="nav-item nav-lang-btn" href="#lang-switch">Language</a></div><!-- 手机端顶栏:语言国旗(放大镜左侧) + 搜索按钮 + 汉堡--><a class="lang-toggle-mobile" data-lang-switch-btn="data-lang-switch-btn">🇨🇳</a><div class="search-toggle search-toggle-mobile"><i class="fas fa-search"></i></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色" data-i18n-key-data-title="palette.custom_color"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#00FFFF"/></div><style>.theme-color-picker-container {
   position: fixed;
   top: 85px; /* 位于导航栏下方 */
   right: 20px;
@@ -318,7 +340,7 @@
   position: relative; /* 为 tooltip 提供定位参照 */
 }
 
-/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+/* 调色板提示框 (Tooltip) 向左弹出 */
 .theme-color-picker-container label::after {
   content: attr(data-title);
   position: absolute;
@@ -390,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newColor = e.target.value;
     root.style.setProperty('--accent-color', newColor);
     
-    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    // 在 iframe 模态框中改色时,实时同步给主窗口(父界面)
     if (window.self !== window.top) {
       try {
         window.top.document.documentElement.style.setProperty('--accent-color', newColor);
@@ -408,14 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('custom-accent-color', newColor);
   });
 
-  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  // 监听 localStorage 变化:主页改色后通知所有已打开的模态框 iframe 与其他标签页
   window.addEventListener('storage', function(e) {
     if (e.key === 'custom-accent-color' && e.newValue) {
       root.style.setProperty('--accent-color', e.newValue);
       if (colorPicker) colorPicker.value = e.newValue;
     }
   });
-});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/1.webp" alt="unity中的地图系统"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-03-26T03:22:33.000Z">2026-03-26</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>6</span><span style="margin-left: 3px">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/cd0525a3"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="unity中的地图系统">unity中的地图系统</h1><script>(function () {
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..." data-i18n-key-placeholder="search.placeholder"/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper" data-post-page="true"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title" data-i18n-key="toc.title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img loading="lazy" decoding="async" src="/images/1.webp" alt="unity中的地图系统"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-03-26T03:22:33.000Z">2026-03-26</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>huyangpahuo</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>1.8k</span><span style="margin-left: 3px" data-i18n-key="post.words">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>6</span><span style="margin-left: 3px" data-i18n-key="post.minutes">分钟</span></div><div class="post-stat" data-stats-page="true" data-stats-path="/posts/cd0525a3"><i class="fas fa-eye" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-pv">-</span><i class="fas fa-user" style="margin-right: 4px"></i><span class="post-stat-num" data-stats="article-uv">-</span></div></div><h1 class="post-title" data-i18n-zh="unity中的地图系统">unity中的地图系统</h1><script>(function () {
   try {
     var __t = {"zh":"unity中的地图系统","en":""};
     if (window.self !== window.top && window.parent && typeof window.parent.postMessage === 'function') {
@@ -426,58 +448,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch (e) {}
 })();
-</script><div class="post-tags"><a class="tag" href="/tags/Unity/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Unity</a><a class="tag" href="/tags/koyouAsh/"><i class="fas fa-tag" style="margin-right: 3px"> </i>koyouAsh</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来了解一下地图系统-这个相对简单"><a href="#今天来了解一下地图系统-这个相对简单" class="headerlink" title="今天来了解一下地图系统,这个相对简单"></a>今天来了解一下地图系统,这个相对简单</h1><p>​	<style>.mpnzvumpfawc{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112434254.webp" class="mpnzvumpfawc" alt="image-20260326112434254"></p>
+</script><div class="post-tags"><a class="tag" href="/tags/Unity/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Unity</a><a class="tag" href="/tags/koyouAsh/"><i class="fas fa-tag" style="margin-right: 3px"> </i>koyouAsh</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h1 id="今天来了解一下地图系统-这个相对简单"><a href="#今天来了解一下地图系统-这个相对简单" class="headerlink" title="今天来了解一下地图系统,这个相对简单"></a>今天来了解一下地图系统,这个相对简单</h1><p>​	<style>.uvonfhrvhxdw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112434254.webp" class="uvonfhrvhxdw" alt="image-20260326112434254"></p>
 <p>首先我们在Hierarchy(层级)窗口里右键</p>
 <p>然后2D object(二维对象)-&gt;tilemap(瓦片地图)-&gt;rectangular(矩形瓦片)</p>
 <p>这里我们管2D游戏里的地图统称tilemap即瓦片,这个在其他游戏引擎里也是相同的定义,瓦片就是附着在游戏地图上的“贴图”</p>
 <p>创建完成之后就会看到层级窗口出现了这个东西,不管你选择什么类型的瓦片都是以Grid(网格) 作为父对象的</p>
-<p>​	<style>.iiyolwufxkxw{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112939546.webp" class="iiyolwufxkxw" alt="image-20260326112939546"></p>
+<p>​	<style>.dqmsevbkkiau{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326112939546.webp" class="dqmsevbkkiau" alt="image-20260326112939546"></p>
 <p>但是有什么用呢?这时候就需要一个东西了—–那就是瓦片面板 tile palette</p>
-<p>​	<style>.qwxeyrkfmvkq{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113100791.webp" class="qwxeyrkfmvkq" alt="image-20260326113100791"></p>
+<p>​	<style>.nsqtjvqffnmw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113100791.webp" class="nsqtjvqffnmw" alt="image-20260326113100791"></p>
 <p>众所周知,在游戏引擎中,如果场景中充满了不同资源,那么将会占用非常巨大的内存(很多大厂的游戏动辄100G  200G就是因为里面充满了美术和建模资源),然而如果场景中都是相同的资源,比如NPC小怪都是一样的,采用的都是相同的贴图资源,那么其实所有小怪贴图占用的存储空间其实只有一张贴图的存储空间,这里就体现地图系统的优点了—–在场景中轻而易举的复用贴图资源而非一张一张的手动调整</p>
 <p>首先第一步,选中一张贴图</p>
-<p>​	<style>.itushiultmau{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113922955.webp" class="itushiultmau" alt="image-20260326113922955"></p>
+<p>​	<style>.jachjmascfov{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326113922955.webp" class="jachjmascfov" alt="image-20260326113922955"></p>
 <p>然后左键长按拖到右边面板中</p>
-<p>​	<style>.weerollgbbmr{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114008462.webp" class="weerollgbbmr" alt="image-20260326114008462"></p>
+<p>​	<style>.hbcsragtbcvl{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114008462.webp" class="hbcsragtbcvl" alt="image-20260326114008462"></p>
 <p>然后你就可以看到右边的面板出现了这个贴图</p>
 <p>然后我们就可以像使用油画盘蘸颜料一样在Scene场景中使用这些贴图</p>
 <p>当我们选中一张贴图时,就可以看到上面自动切换到这个画笔模式</p>
-<p>​	<style>.mjdcvsjgnhze{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114400352.webp" class="mjdcvsjgnhze" alt="image-20260326114400352"></p>
+<p>​	<style>.bermyfdpedas{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114400352.webp" class="bermyfdpedas" alt="image-20260326114400352"></p>
 <p>然后在scene场景里按住左键画几笔就会发现,贴图就像颜料一样附着在游戏场景中</p>
-<p>​	<style>.etpfyhgrbyek{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114552239.webp" class="etpfyhgrbyek" alt="image-20260326114552239"></p>
+<p>​	<style>.heufeixthenk{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114552239.webp" class="heufeixthenk" alt="image-20260326114552239"></p>
 <p>这里还可以批量框选填充</p>
 <p>就是选择画笔形状旁边的那个fill填充模式</p>
-<p>​	<style>.wwfuwmoxztir{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114702852.webp" class="wwfuwmoxztir" alt="image-20260326114702852"></p>
+<p>​	<style>.soysukxzxdem{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326114702852.webp" class="soysukxzxdem" alt="image-20260326114702852"></p>
 <p>以此类推,我们就画好地图了</p>
-<p>​	<style>.diypsneamjaw{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326115222320.webp" class="diypsneamjaw" alt="image-20260326115222320"></p>
+<p>​	<style>.tkirccifiwpm{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326115222320.webp" class="tkirccifiwpm" alt="image-20260326115222320"></p>
 <p>然而现实没有这么“轻而易举”,这种确实很适合制作传说之下星露谷物语这种类型的游戏,但是玩家更喜欢地图是变化的,可破坏的,或者卷轴滚动的,就先不说这个了</p>
 <p>哦对了,忘记说怎么制作瓦片地图了,这个也很简单,不过在此之前我们学一下怎么删除不小心放进入的多余的瓦片</p>
 <p>首先在tile palette中选择这个多余的瓦片,然后查看右侧的inspector检查器窗口</p>
-<p>​	<style>.ghfhfijewfyz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120846757.webp" class="ghfhfijewfyz" alt="image-20260326120846757"></p>
+<p>​	<style>.kcyyfdvdwovl{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120846757.webp" class="kcyyfdvdwovl" alt="image-20260326120846757"></p>
 <p>可以看到已经删掉了</p>
-<p>​	<style>.gtbigfspmrjv{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120701704.webp" class="gtbigfspmrjv" alt="image-20260326120701704"></p>
+<p>​	<style>.dfhnjmncrlts{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326120701704.webp" class="dfhnjmncrlts" alt="image-20260326120701704"></p>
 <p>瓦片的制作分为两种,第一种就是不切割整个放进去适合小瓦片,例如我们刚才放的人物</p>
 <p>​	这种直接把png图片拖入unity的asset文件夹里,然后拖到tile palette即可</p>
 <p>​	但是这种不适合大图片,不然就会创造出巨大无比的瓦片</p>
-<p>​	<style>.gmyzobihntpw{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121501537.webp" class="gmyzobihntpw" alt="image-20260326121501537"></p>
+<p>​	<style>.sqxhklvmrabo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121501537.webp" class="sqxhklvmrabo" alt="image-20260326121501537"></p>
 <p>所以我们需要切割瓦片</p>
 <p>首先选中图片,然后在inspector里注意选择这两个选项—–sprite mode选择多张图mulyiple,为我们切割图片做准备</p>
 <p>filter mode 选择 point(no filter)邻点差值采样,不然放进入的图片糊的一批</p>
-<p>​	<style>.qudwlsjsoonr{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121844173.webp" class="qudwlsjsoonr" alt="image-20260326121844173"></p>
+<p>​	<style>.qgixrrwolrfg{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326121844173.webp" class="qgixrrwolrfg" alt="image-20260326121844173"></p>
 <p>然后点击apply 应用设置,并点击sprite editor精灵图编辑器</p>
-<p>​	<style>.iquecbudhbvx{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122451764.webp" class="iquecbudhbvx" alt="image-20260326122451764"></p>
+<p>​	<style>.jekboslgkqje{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122451764.webp" class="jekboslgkqje" alt="image-20260326122451764"></p>
 <p>好的,我们刚才的瓦片地图的大小是16×16的,所以切割时可以选择16×16</p>
-<p>​	<style>.dotqeurnmykg{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122756124.webp" class="dotqeurnmykg" alt="image-20260326122756124"></p>
+<p>​	<style>.wrdbaazxkjai{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122756124.webp" class="wrdbaazxkjai" alt="image-20260326122756124"></p>
 <p>这里我们选择64×64吧</p>
-<p>​	<style>.qdnxmeffujnx{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122941128.webp" class="qdnxmeffujnx" alt="image-20260326122941128"></p>
+<p>​	<style>.eoeirrrovutw{zoom: 25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326122941128.webp" class="eoeirrrovutw" alt="image-20260326122941128"></p>
 <p>然后就会看到蓝发娘被我们“碎尸”了</p>
-<p>​	<style>.bglmsadjcpxb{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123120700.webp" class="bglmsadjcpxb" alt="image-20260326123120700"></p>
+<p>​	<style>.lpotxcvklfqe{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123120700.webp" class="lpotxcvklfqe" alt="image-20260326123120700"></p>
 <p>使用的话可以按住shift加选(而按住ctrl是减选)</p>
-<p>​	<style>.znvnbflhhrut{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123406515.webp" class="znvnbflhhrut" alt="image-20260326123406515"></p>
+<p>​	<style>.afpnjtwxmncm{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326123406515.webp" class="afpnjtwxmncm" alt="image-20260326123406515"></p>
 <p>然后就可以看到</p>
-<p>​	<style>.vcuufrvltpuq{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326131854826.webp" class="vcuufrvltpuq" alt="image-20260326131854826"></p>
+<p>​	<style>.mfpqpvyghghv{zoom:25%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326131854826.webp" class="mfpqpvyghghv" alt="image-20260326131854826"></p>
 <p>当然为了避免素材之间出现鱼龙混杂的情况,我们可以对于每一个场景都创建一个瓦片面板</p>
-<p>​	<style>.mzsioiqiydey{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326132808554.webp" class="mzsioiqiydey" alt="image-20260326132808554"></p>
+<p>​	<style>.gpulrykdikeq{zoom:50%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326132808554.webp" class="gpulrykdikeq" alt="image-20260326132808554"></p>
 <p>好地图讲完了,其实还有一个东西就是地图碰撞体组件,也就是地图空气墙,这里由于用不上就不说了</p>
 <p>然后就是完善我们的人物,上次我说了这是跟着教程做的半成品,这次来完善角色的枪械发射功能\</p>
 <h2 id="角色枪械发射功能"><a href="#角色枪械发射功能" class="headerlink" title="角色枪械发射功能"></a>角色枪械发射功能</h2><p>上次我们的角色的脚本是这个</p>
@@ -584,12 +606,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </blockquote>
 <p>因为是面向对象,则与对象相关的所有内容需要放到对象相关的类中</p>
 <p>后面会涉及面向对象的继承,不过我们先把精力全部放到单个武器上(为什么需要继承? 因为狙击枪,霰弹枪,手枪都属于枪,如果给每一个枪都写一个独立脚本浪费资源,但让所有枪都继承“枪”这个脚本就会节省代码量还便于管理)</p>
-<p>​	<style>.fryqqpundvqy{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135108071.webp" class="fryqqpundvqy" alt="image-20260326135108071"></p>
+<p>​	<style>.ckqiuujewqvi{zoom: 80%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135108071.webp" class="ckqiuujewqvi" alt="image-20260326135108071"></p>
 <p>对了,你可能不知道这个蓝色的条是什么,这个其实就是当预制体配置发生改变时就会出现</p>
 <p>只需要在inspector检查器窗口里覆盖实现更改就行</p>
-<p>​	<style>.gglgjgesrjns{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135311665.webp" class="gglgjgesrjns" alt="image-20260326135311665"></p>
+<p>​	<style>.nndhpsuamnxo{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135311665.webp" class="nndhpsuamnxo" alt="image-20260326135311665"></p>
 <p>不过也可以斩断这个对象与文件夹中的预制体的联系,通过unpack解除联系,这样对这个对象的修改就不会影响到预制体了</p>
-<p>​	<style>.yjtrlofpxlni{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135416682.webp" class="yjtrlofpxlni" alt="image-20260326135416682"></p>
+<p>​	<style>.mhgfbnjtuekz{zoom:33%;}</style><img loading="lazy" decoding="async" src="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/image-20260326135416682.webp" class="mhgfbnjtuekz" alt="image-20260326135416682"></p>
 <p>这里是pistol手枪的脚本</p>
 <div class="codecard" data-lang="c#"><div class="codecard-header"><span class="codecard-lang">C#</span><span class="codecard-notice" aria-live="polite">已复制</span><button class="codecard-copy" type="button" aria-label="复制代码"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></div><div class="codecard-body"><div class="codecard-gutter" aria-hidden="true"><span>1</span></div><pre class="codecard-pre"><code class="language-c#"></span><br></code></pre></div></div>
 
@@ -619,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.tocConfig = {
   empty_toc_behavior: "placeholder"
 };
-</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/03/26/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/"><span class="nav-label">← 上一篇</span><span class="nav-title" data-i18n-zh="一些实用的网站">一些实用的网站</span></a></div><div class="post-nav next"><a href="/2026/03/25/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/07-%E4%B8%A4%E4%B8%AA%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C/"><span class="nav-label">下一篇 →</span><span class="nav-title" data-i18n-zh="两个脚本效果">两个脚本效果</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F&amp;url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
+</script><div class="post-navigation"><div class="post-nav prev"><a href="/2026/03/26/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/"><span class="nav-label" data-i18n-key="post.prev">← 上一篇</span><span class="nav-title" data-i18n-zh="一些实用的网站">一些实用的网站</span></a></div><div class="post-nav next"><a href="/2026/03/25/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/07-%E4%B8%A4%E4%B8%AA%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C/"><span class="nav-label" data-i18n-key="post.next">下一篇 →</span><span class="nav-title" data-i18n-zh="两个脚本效果">两个脚本效果</span></a></div></div><div class="post-share"><h3 class="share-title" data-i18n-key="share.title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F&amp;url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span data-i18n-key="share.twitter">推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span data-i18n-key="share.facebook">脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F" target="_blank" rel="noopener"><span data-i18n-key="share.linkedin">领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span data-i18n-key="share.wechat">微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F03%2F26%2FUnity%25E5%25BC%2595%25E6%2593%258E%2FKoyouAsh%25E5%25BC%2580%25E5%258F%2591%25E6%2597%25A5%25E8%25AE%25B0%2F08-unity%25E4%25B8%25AD%25E7%259A%2584%25E5%259C%25B0%25E5%259B%25BE%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"><span data-i18n-key="share.weibo">微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/03/26/Unity%E5%BC%95%E6%93%8E/KoyouAsh%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0/08-unity%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E7%B3%BB%E7%BB%9F/"><span data-i18n-key="share.copy_link">点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title" data-i18n-key="comments.title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script>(function () {
   function initTwikoo() {
     if (typeof twikoo === 'undefined') { setTimeout(initTwikoo, 200); return; }
     twikoo.init({
@@ -653,11 +675,11 @@ window.tocConfig = {
   } else {
     loadTwikoo();
   }
-})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
+})();</script></div></div></section></main><div id="sakana-widget-wrapper"><div class="sakana-switch-btn" data-i18n-key="sakana.switch_character">切换角色</div><div class="sakana-box" id="sakana-box-inner"></div></div><style>#sakana-widget-wrapper {
   position: fixed;
   bottom: 40px; 
   left: 30px; 
-  /* ★ 层级:文章模态(1000)之后、正文之上,与落叶同层 */
+  /* 层级:文章模态(1000)之后、正文之上,与落叶同层 */
   z-index: 998;
   pointer-events: none;
   transform: scale(0.3);
@@ -742,7 +764,7 @@ body.sakana-dragging iframe {
   // 1. 移动端禁用
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return;
   
-  // 2. ★★★ 关键修复：如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana ★★★
+  // 2. 如果处于 iframe（文章模态窗口）中，直接销毁，不加载第二个 Sakana
   if (window.self !== window.top) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper) wrapper.style.display = 'none';
@@ -752,9 +774,9 @@ body.sakana-dragging iframe {
   if (window.sakanaInitialized) return;
   window.sakanaInitialized = true;
 
-  // ★ 拖拽修复:文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
-  //   导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
-  //   抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
+  // 文章模态窗口/视频 iframe 会吞掉 mousemove/mouseup,
+  // 导致拖动小人时"卡住"(鼠标一离开小人区域,父页面就收不到事件)。
+  // 抓住小人期间让所有 iframe 穿透鼠标事件,松手恢复。
   document.addEventListener('mousedown', function(e) {
     var wrapper = document.getElementById('sakana-widget-wrapper');
     if (wrapper && wrapper.contains(e.target)) {
@@ -780,7 +802,13 @@ body.sakana-dragging iframe {
       const sakanaInstance = Sakana.init({
         el: sakanaBox,
         character: savedChar,
-        canSwitchCharacter: false
+        canSwitchCharacter: false,
+        // 平抑物理参数:默认 r=60(入场大倾角)+ decay=0.99(几乎无阻尼)
+        // 会让摆动越晃越烈以至于拉伸变形;降低惯性、加强阻尼、
+        // 减小初始倾角后,入场只有轻微摆动并快速回正
+        inertia: 0.02,
+        decay: 0.9,
+        r: 10
       });
       
       Sakana.setMute(true);
@@ -799,10 +827,10 @@ body.sakana-dragging iframe {
   };
   
   document.body.appendChild(script);
-});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 胡杨怕火. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
+});</script><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright"><span data-i18n-value="© 2025 胡杨怕火. 保留所有权利.">© 2025 胡杨怕火. 保留所有权利.</span></div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://bluearchive-cn.com/" target="_blank" rel="noopener noreferrer"><img loading="lazy" decoding="async" src="https://github.com/funingna-wakawaka/picx-images-hosting/raw/master/碧蓝档案.3yew7g3xtc.webp" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div></div></footer><style>/* ===== 根容器 ===== */
 #pet-root {
   position: fixed;
-  /* ★ 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
+  /* 层级设计:高于文章模态(1000,桌宠要在模态上跑动),
      低于图片/表格/mermaid 全屏查看器(9999+)——全屏查看时桌宠
      被遮在后面且鼠标无法与之交互;也低于页面上层的弹窗类组件 */
   z-index: 2000;
@@ -813,7 +841,7 @@ body.sakana-dragging iframe {
   transition: opacity 0.25s ease;
 }
 
-/* ★ 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
+/* 模态 iframe 内打开了全屏查看器(图片/表格/mermaid)时,
    父页面把桌宠临时沉到模态之下:iframe 内查看器的 z-index
    困在 iframe 里,压不过父页面的桌宠,必须由父页面自己沉底 */
 #pet-root.behind-viewers {
@@ -908,7 +936,7 @@ body.sakana-dragging iframe {
 }
 </style><div id="pet-root"><div id="pet-debug-zone"></div><div class="pet-shadow" id="pet-shadow"></div><div id="pet-smoke-container"></div><div id="pet-chat-bubble" style="display:none; position:absolute; left:0; transform:translate(-50%, -100%); background:rgba(255,255,255,0.9); color:#333; padding:6px 10px; border-radius:8px; font-size:12px; white-space:nowrap; pointer-events:none; z-index:50; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition: opacity 0.3s;"><span id="pet-chat-text"></span><div style="position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid rgba(255,255,255,0.9);"></div></div><div class="pet-inner" id="pet-inner"><div class="pet-halo" id="pet-halo"></div><canvas id="pet-hair-canvas"></canvas><div class="pet-sprite" id="pet-sprite"></div></div><div id="pet-sweat-container"></div></div><script type="module">import { PetSprite, State }   from '/js/pet/pet-sprite.js';
 
-// ★ 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
+// 模态 iframe 内全屏查看器开/关通知:桌宠临时沉底/恢复
 window.addEventListener('message', (e) => {
   if (!e.data || e.data.type !== 'magzine-viewer') return;
   const root = document.getElementById('pet-root');
@@ -938,8 +966,8 @@ function initDesktopPet() {
   }
 
   // 2. 读者设置拦截:设置面板里关闭桌宠时,彻底不初始化。
-  //    烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
-  //    所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
+  // 烟雾粒子是直接挂在 body 上的(#pet-root 隐藏挡不住它们),
+  // 所以必须在这里从源头终止,否则会出现"桌宠关了粒子还在走"。
   if (window.__readerSettings && window.__readerSettings.pet === "off") {
     const root = document.getElementById('pet-root');
     if (root) root.remove();
@@ -1080,7 +1108,7 @@ function initDesktopPet() {
     sound.update(state);
     chat.update(dt, state);
 
-     // ★ 在主循环中触发文字避让逻辑
+    // 在主循环中触发文字避让逻辑
     if (pretextInteraction) {
      pretextInteraction.update(pos.x, pos.y, timestamp);
     }
@@ -1092,24 +1120,22 @@ function initDesktopPet() {
 }
 
 // 启动桌宠
-// ★ 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
-//   主要来源之一),不与首屏渲染抢主线程
+// 延迟到浏览器空闲:桌宠脚本评估耗时约 1 秒(GTmetrix 主线程阻断的
+// 主要来源之一),不与首屏渲染抢主线程
 if ("requestIdleCallback" in window) {
   requestIdleCallback(initDesktopPet, { timeout: 3000 });
 } else {
   setTimeout(initDesktopPet, 1500);
-}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+}</script></div><!-- 悬浮音乐播放器--><div class="music-player style-pill" data-autoplay="false" data-songs="[{&quot;title&quot;:&quot;Monsieur Melody&quot;,&quot;artist&quot;:&quot;Vintage Sunshine&quot;,&quot;src&quot;:&quot;/music/Monsieur%20Melody.mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/deep-east-music/8262885-01.webp?width=416&quot;},{&quot;title&quot;:&quot;Suger&quot;,&quot;artist&quot;:&quot;Maroon 5&quot;,&quot;src&quot;:&quot;/music/Sugar%20-%20Maroon%205%20(Audio).mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b273df8c14c6ac24390cffd9fea4&quot;},{&quot;title&quot;:&quot;Sold Out&quot;,&quot;artist&quot;:&quot;Hawk Nelson&quot;,&quot;src&quot;:&quot;/music/Sold%20Out.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2731025fe6e557f173cf2a365ee&quot;},{&quot;title&quot;:&quot;unravel&quot;,&quot;artist&quot;:&quot;GARNiDELiA&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=1&quot;},{&quot;title&quot;:&quot;Only My Railgun&quot;,&quot;artist&quot;:&quot;fripSide&quot;,&quot;src&quot;:&quot;https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Algorithms.mp3&quot;,&quot;cover&quot;:&quot;https://picsum.photos/100/100?random=2&quot;},{&quot;title&quot;:&quot;怪物&quot;,&quot;artist&quot;:&quot;YOASOBI&quot;,&quot;src&quot;:&quot;/music/%E6%80%AA%E7%89%A9%20(Monster).mp3&quot;,&quot;cover&quot;:&quot;https://i.audiomack.com/drakewyattyler/7757ed65c2.webp?width=416&quot;},{&quot;title&quot;:&quot;A Little Story&quot;,&quot;artist&quot;:&quot;Valentin&quot;,&quot;src&quot;:&quot;/music/A%20Little%20Story.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab6765630000ba8a771bd30967481191e8b0d216&quot;},{&quot;title&quot;:&quot;I Love You So&quot;,&quot;artist&quot;:&quot;The Walters&quot;,&quot;src&quot;:&quot;/music/The%20Walters%20--%20I%20Love%20You%20So.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a9ab24f62c01f4bd4a08571e&quot;},{&quot;title&quot;:&quot;恋愛サーキュレーション&quot;,&quot;artist&quot;:&quot;花泽香菜&quot;,&quot;src&quot;:&quot;/music/%E6%81%8B%E6%84%9B%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02168da2035a75e56b2f53c0d3&quot;},{&quot;title&quot;:&quot;Waiting For Love&quot;,&quot;artist&quot;:&quot;Avicii&quot;,&quot;src&quot;:&quot;/music/Waiting%20For%20Love.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025393c5d3cac806092a9bc468&quot;},{&quot;title&quot;:&quot;The way I still love you&quot;,&quot;artist&quot;:&quot;Reynard Silva&quot;,&quot;src&quot;:&quot;/music/The%20way%20I%20still%20love%20you.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e020e9e76dd81b7e23925e66cce&quot;},{&quot;title&quot;:&quot;color-X&quot;,&quot;artist&quot;:&quot;徐梦圆&quot;,&quot;src&quot;:&quot;/music/color-X.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e026bb210e89f8f0a58d993ace1&quot;},{&quot;title&quot;:&quot;可愛くてごめん&quot;,&quot;artist&quot;:&quot;HoneyWorks&quot;,&quot;src&quot;:&quot;/music/%E5%8F%AF%E6%84%9B%E3%81%8F%E3%81%A6%E3%81%94%E3%82%81%E3%82%93.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e025ab8edf3cacc736fd4a62c63&quot;},{&quot;title&quot;:&quot;SOUVENIR&quot;,&quot;artist&quot;:&quot;Spy x Family&quot;,&quot;src&quot;:&quot;/music/SOUVENIR.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e0274f9c0770826b41f876a0b94&quot;},{&quot;title&quot;:&quot;I Can't Wait&quot;,&quot;artist&quot;:&quot;d0tc0mmie&quot;,&quot;src&quot;:&quot;/music/I%20Can't%20Wait.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a7b4bca0b4ae1f2be97ab557&quot;},{&quot;title&quot;:&quot;Tek It&quot;,&quot;artist&quot;:&quot;Cafuné&quot;,&quot;src&quot;:&quot;/music/Tek%20It.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02fe6a76d5f75d1a8b83bd9317&quot;},{&quot;title&quot;:&quot;Wet Hands&quot;,&quot;artist&quot;:&quot;C418&quot;,&quot;src&quot;:&quot;/music/Wet%20Hands.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e02a6f6056c9ded5242ca245c56&quot;},{&quot;title&quot;:&quot;愛♡スクリ～ム!&quot;,&quot;artist&quot;:&quot;AiScReam&quot;,&quot;src&quot;:&quot;/music/%E6%84%9B%E3%82%B9%E3%82%AF%E3%83%AA%EF%BD%9E%E3%83%A0.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d00001e022590b046b72d6ce5d6703ee7&quot;},{&quot;title&quot;:&quot;Trip&quot;,&quot;artist&quot;:&quot;Axero&quot;,&quot;src&quot;:&quot;/music/Trip.mp3&quot;,&quot;cover&quot;:&quot;https://i.scdn.co/image/ab67616d0000b2736f044fae5568a72f7dfcd522&quot;}]" data-style="pill" data-mobile-style="card" data-pc-position="header" style="--player-opacity: 0.8"><button class="music-player-toggle" data-title="展开播放器" data-i18n-key-data-title="music.expand"><i class="fas fa-music"></i></button><!-- 卡片型播放器--><div class="music-player-mini music-player-card"><div class="music-player-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-info"><div class="music-player-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-artist">-</div></div><div class="music-player-controls"><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button><button class="music-player-btn music-player-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button></div></div><!-- 圆条型播放器--><div class="music-player-mini music-player-pill"><div class="music-player-pill-inner"><button class="music-player-btn music-player-pill-collapse" data-title="收起播放器" data-i18n-key-data-title="music.collapse"><i class="fas fa-chevron-left"></i></button><div class="music-player-pill-cover"><img loading="lazy" decoding="async" src="/images/0.webp" alt="Cover"/></div><div class="music-player-pill-info"><div class="music-player-pill-title" data-i18n-key="music.not_playing">未在播放</div><div class="music-player-pill-artist">-</div></div><div class="music-player-pill-divider"></div><button class="music-player-btn music-player-prev" data-title="上一首" data-i18n-key-data-title="music.prev"><i class="fas fa-step-backward"></i></button><button class="music-player-btn music-player-play" data-title="播放/暂停" data-i18n-key-data-title="music.play_pause"><i class="fas fa-play"></i></button><button class="music-player-btn music-player-next" data-title="下一首" data-i18n-key-data-title="music.next"><i class="fas fa-step-forward"></i></button><button class="music-player-btn music-player-loop" data-title="列表循环" data-i18n-key-data-title="music.loop_list"><i class="fas fa-retweet"></i></button></div></div></div><audio class="music-player-audio" preload="metadata"></audio><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
 
   if (shouldBeDark) {
     document.body.classList.add('dark-mode');
   }
-  // ★ 性能修改:删除了原先 "visibility:hidden 直到 DOMContentLoaded" 的白屏锁。
-  //   它会把所有阻塞资源的耗时叠加成整页白屏;暗色防闪已由 <head> 里的
-  //   documentElement.classList 提前完成,不再需要整页隐藏。
+  // 暗色防闪由 <head> 的内联脚本提前完成,无需整页隐藏的白屏锁。
 })();
-</script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
+</script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script><script defer src="/js/core/main.js"></script><script defer src="/js/content/content-lazy.js"></script><script defer src="/js/content/tags.js"></script><script defer src="/js/pages/categories-accordion.js"></script><script defer src="/js/pages/categories-explorer.js"></script><script defer src="/js/content/highlight.js"></script><script defer src="/js/core/load-more.js"></script><script defer src="/js/core/header-scroll.js"></script><script defer src="/js/content/toc.js"></script><script defer src="/js/content/image-zoom.js"></script><script defer src="/js/content/mermaid.js"></script><script defer src="/js/content/share.js"></script><script defer src="/js/features/search.js"></script><script defer src="/js/content/hide-inline-interaction.js"></script><script defer src="/js/content/hide-toggle-interaction.js"></script><script defer src="/js/core/dark-mode-sync.js"></script><script defer src="/js/features/ai-theme.js"></script><script defer src="/js/core/loading-animation.js"></script><script defer src="/js/features/article-modal.js"></script><script defer src="/js/features/music-player.js"></script><script defer src="/js/features/music-wave.js"></script><script defer src="/js/pages/wall.js"></script><script defer src="/js/pages/anime.js"></script><script defer src="/js/pages/about.js"></script><script defer src="/js/pages/link.js"></script><script defer src="/js/pages/shake-shuffle.js"></script><script defer src="/js/pages/random-cards.js"></script><script defer src="/js/content/table.js"></script><script defer src="/js/content/video-embed.js"></script><script defer src="/js/core/mobile-scale.js"></script><script defer src="/js/core/nav-strip.js"></script><script defer src="/js/pages/carousel.js"></script><script defer src="/cursors/anya/data.js"></script><script defer src="/js/effects/anya-cursor.js"></script><script defer src="/js/effects/hero-panel.js"></script><script defer src="/js/effects/hero-fluid.js"></script><script defer src="/js/effects/hero-watercolor.js"></script><script defer src="/js/effects/hero-waterwave.js"></script><script defer src="/js/core/pjax-init.js"></script><script defer src="/js/features/visitor-stats.js"></script><script defer src="/js/features/just-read.js"></script><!-- 传递图片配置给 JS--><script>window.photoWallImages = ["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"];
 window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
 
 
@@ -1121,7 +1147,7 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   navbar: {"style":"bubble"},
   color_picker: {"enable":true},
   cover: {"enable":true,"title":"欢迎来到我的奇妙世界","author":"胡杨怕火","btn_text":"开始你的旅行","images":["/images/1.webp","/images/2.webp","/images/4.webp","/images/5.webp","/images/6.webp","/images/7.webp","/images/8.webp","/images/9.webp","/images/10.webp","/images/11.png","/images/12.webp","/images/14.webp","/images/15.webp","/images/16.webp","/images/18.webp","/images/20.webp","/images/21.webp"]},
-  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true}}},
+  hero: {"enable":true,"background_image":"/images/24.webp","typing_text":"有志者事竟成多么美好的世界呀","typing_speed":55,"delete_speed":28,"pause_duration":1100,"scroll_hint":"向下滚动探索更多","effects":{"enable":true,"panel_enable":true,"mobile_enable":false,"fluid":{"enable":true,"color_source":"image","quality":"high","curl":30,"splat_radius":0.25,"density_dissipation":1,"velocity_dissipation":0.2,"hover":true,"hold_on_hover":true,"idle_splat":false,"bloom":false},"watercolor":{"enable":true,"speed":0.45,"intensity":0.55,"hover":true},"waterwave":{"enable":true}}},
   pjax: {"enable":true},
   murmur: {"banner":{"enable":true,"background_image":"/images/21.webp"}},
   author_card: {"enable":true,"avatar":"/images/0.webp","name":"胡杨怕火","bio":"传递笑容魔法的Ciallo～(∠・ω< )⌒☆","button_text":"关于我","button_link":"/about/","background_image":"/images/23.webp","width":"large","intro_banner":"/images/1.webp","background_animation":{"enable":true,"type":"geometric","color_scheme":"auto","interactive":true,"density":"high"}},
@@ -1136,8 +1162,8 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   pet: {"enable":true,"mobile_enable":false,"pretext_interaction":{"enable":true,"repel_radius":60,"throttle_ms":50,"allow_selector":"p, h1, h2, h3, h4, h5, h6, li, pre"}},
   anime: {"player_api":"https://player.bilibili.com/player.html?bvid=","history":true}
   };
-  // ★ 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
-  //   必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
+  // 原始配置快照(未合并读者设置):设置面板的"选项是否显示"
+  // 必须以主题原始配置为准,否则读者关掉某项后选项会自己消失
   window.__themeRaw = JSON.parse(JSON.stringify(base));
   // 深合并读者设置补丁(两级足够)
   Object.keys(window.__readerThemePatch || {}).forEach(function (k) {
@@ -1154,4 +1180,4 @@ window.twikooEnvId = 'https://twikoo-five-ruby.vercel.app';
   });
   return base;
 })();
-</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script><script defer src="/js/core/lang-dict.js"></script><script defer src="/js/core/lang-switch.js"></script></body></html>
+</script><script defer src="/js/features/postai.js"></script><script defer src="/js/content/math-support.js"></script><script defer src="/js/effects/click-heart.js"></script><script defer src="/js/effects/click-fireworks.js"></script><script defer src="/js/effects/falling-leaves.js"></script></body></html>
